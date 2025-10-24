@@ -553,7 +553,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca7de3aefa901374ba29464584a3109a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineDecollider
-  CameraRadius: 0.6
+  CameraRadius: 2
   Decollision:
     Enabled: 1
     ObstacleLayers:
@@ -562,10 +562,10 @@ MonoBehaviour:
     UseFollowTarget:
       Enabled: 1
       YOffset: 1
-    Damping: 0.2
-    SmoothingTime: 0.1
+    Damping: 0
+    SmoothingTime: 0
   TerrainResolution:
-    Enabled: 1
+    Enabled: 0
     TerrainLayers:
       serializedVersion: 2
       m_Bits: 1
