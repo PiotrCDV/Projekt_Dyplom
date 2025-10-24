@@ -78,13 +78,9 @@ public class PlayerMovement : MonoBehaviour
     // --- ZMIANA DLA TESTU "BEZ STRAFE" ---
     private void HandleMovementAndAnimation()
     {
-        // 1. Oblicz wektor ruchu (tak jak w twoim starym skrypcie)
         Vector3 move = camForward * moveInput.y + camRight * moveInput.x;
-
-        // 2. Zastosuj ruch (tak jak w twoim starym skrypcie)
         controller.Move(move * moveSpeed * Time.deltaTime);
 
-        // 3. Rotacja
         if (isLocked && currentTarget != null)
         {
             // --- TRYB LOCK-ON ---
@@ -97,7 +93,6 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             // --- TRYB FREELOOK ---
-            // Postaæ obraca siê w kierunku ruchu (tak jak w twoim starym skrypcie)
             if (move.magnitude > 0.1f)
             {
                 Quaternion targetRotation = Quaternion.LookRotation(move.normalized);
@@ -105,13 +100,12 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        // 4. Animacja (tak jak w twoim starym skrypcie)
         // Dzia³a tak samo w obu trybach - u¿ywa parametru "Speed"
         if (animator != null)
             animator.SetFloat("Speed", move.magnitude);
     }
 
-    // --- LOGIKA LOCK-ON (Bez zmian) ---
+    // --- LOGIKA LOCK-ON ---
 
     private void ToggleLockOn()
     {
@@ -184,7 +178,6 @@ public class PlayerMovement : MonoBehaviour
         animator.SetBool("isLockedOn", false);
     }
 
-    // Twój stary kod konsoli - zostaje bez zmian
     [Command("setspeed", "speed")]
     public void SetSpeed(float newSpeed)
     {
