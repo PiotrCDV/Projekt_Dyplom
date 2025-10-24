@@ -1,3 +1,4 @@
+using Commands;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -37,6 +38,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
+        CommandManager.Instance.RegisterInstance(this);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
@@ -74,5 +76,11 @@ public class PlayerMovement : MonoBehaviour
 
         if (animator != null)
             animator.SetFloat("Speed", move.magnitude);
+    }
+
+    [Command("setspeed", "speed")]
+    public void SetSpeed(float newSpeed)
+    {
+        moveSpeed = Mathf.Max(0f, newSpeed);
     }
 }
