@@ -14,6 +14,10 @@ public class PlayerMovement : MonoBehaviour
 
     private InputSystem_Actions inputActions;
 
+    private Transform camTransform;
+    private Vector3 camForward;
+    private Vector3 camRight;
+
     private void Awake()
     {
         inputActions = new InputSystem_Actions();
@@ -39,7 +43,26 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        Vector3 move = new Vector3(moveInput.x, 0, moveInput.y);
+        HandleCamera();
+        HandleMovementAndAnimation();
+    }
+
+    private void HandleCamera()
+    {
+        camTransform = Camera.main.transform;
+
+        camForward = camTransform.forward;
+        camRight = camTransform.right;
+
+        camForward.y = 0;
+        camRight.y = 0;
+        camForward.Normalize();
+        camRight.Normalize();
+    }
+
+    private void HandleMovementAndAnimation()
+    {
+        Vector3 move = camForward * moveInput.y + camRight * moveInput.x;
 
         if (move.magnitude > 0.1f)
         {
