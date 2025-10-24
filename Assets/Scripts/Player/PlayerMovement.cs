@@ -31,6 +31,12 @@ public class PlayerMovement : MonoBehaviour
         inputActions.Disable();
     }
 
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
     void Update()
     {
         Vector3 move = new Vector3(moveInput.x, 0, moveInput.y);
