@@ -446,6 +446,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   moveSpeed: 5
   controller: {fileID: 253076976}
+  vcamFreeLook: {fileID: 389838305}
   animator: {fileID: 5866666021793110141}
 --- !u!143 &253076976
 CharacterController:

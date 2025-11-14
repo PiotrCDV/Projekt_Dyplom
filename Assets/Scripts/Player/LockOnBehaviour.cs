@@ -1,5 +1,6 @@
 using Unity.Cinemachine;
 using UnityEngine;
+using System;
 
 public class LockOnBehaviour : MonoBehaviour
 {
@@ -11,10 +12,26 @@ public class LockOnBehaviour : MonoBehaviour
     private Transform currentTarget;
     private Camera mainCamera;
     public bool IsLocked { get; private set; }
+    public bool JustSwitched { get; private set; }
+
+    private float switchTimer = 0f;
+    private const float switchCooldown = 0.2f;
+
+    public event Action OnUnlock;
 
     private void Awake()
     {
         mainCamera = Camera.main;
+    }
+
+    private void Update()
+    {
+        if (JustSwitched)
+        {
+            switchTimer -= Time.deltaTime;
+            if (switchTimer <= 0f)
+                JustSwitched = false;
+        }
     }
 
     public void ToggleLockOn()
@@ -23,6 +40,9 @@ public class LockOnBehaviour : MonoBehaviour
             UnlockTarget();
         else
             TryLockOnTarget();
+
+        JustSwitched = true;
+        switchTimer = switchCooldown;
     }
 
     public void HandleLockOnState(Vector3 playerPosition)
@@ -79,5 +99,8 @@ public class LockOnBehaviour : MonoBehaviour
             vcamLockOn.LookAt = null;
         if (animator != null)
             animator.SetBool("isLockedOn", false);
+
+        // Powiadom PlayerMovement o odblokowaniu lock-on
+        OnUnlock?.Invoke();
     }
 }
