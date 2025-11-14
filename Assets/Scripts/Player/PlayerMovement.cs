@@ -12,12 +12,6 @@ public class PlayerMovement : MonoBehaviour
     [Header("Animation")]
     public Animator animator;
 
-    [Header("Lock-On System")]
-    // Przeci¹gnij tu swoj¹ kamerê vcam_LockOn z Hierarchii
-    public CinemachineCamera vcamLockOn;
-    public float maxLockOnDistance = 20f;
-    public LayerMask enemyLayer;
-
     // Zmienne prywatne
     private Vector2 moveInput;
     private InputSystem_Actions inputActions;
@@ -25,16 +19,16 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 camForward;
     private Vector3 camRight;
 
-    private Transform currentTarget;
-    private bool isLocked = false;
+    private LockOnBehaviour lockOnBehaviour;
 
     private void Awake()
     {
         inputActions = new InputSystem_Actions();
-
         inputActions.Player.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
         inputActions.Player.Move.canceled += ctx => moveInput = Vector2.zero;
-        inputActions.Player.LockOn.performed += ctx => ToggleLockOn();
+
+        lockOnBehaviour = GetComponent<LockOnBehaviour>();
+        inputActions.Player.LockOn.performed += ctx => lockOnBehaviour.ToggleLockOn();
     }
 
     private void OnEnable()
@@ -58,7 +52,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         HandleCamera();
-        HandleLockOnState();
+        lockOnBehaviour.HandleLockOnState(transform.position);
         HandleMovementAndAnimation(); // G³ówna logika ruchu
     }
 
@@ -81,11 +75,10 @@ public class PlayerMovement : MonoBehaviour
         Vector3 move = camForward * moveInput.y + camRight * moveInput.x;
         controller.Move(move * moveSpeed * Time.deltaTime);
 
-        if (isLocked && currentTarget != null)
+        if (lockOnBehaviour.IsLocked && lockOnBehaviour.GetCurrentTarget() != null)
         {
             // --- TRYB LOCK-ON ---
-            // Postaæ zawsze patrzy na cel
-            Vector3 lookDir = currentTarget.position - transform.position;
+            Vector3 lookDir = lockOnBehaviour.GetCurrentTarget().position - transform.position;
             lookDir.y = 0;
             Quaternion targetRotation = Quaternion.LookRotation(lookDir.normalized);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 10f * Time.deltaTime);
@@ -100,82 +93,8 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        // Dzia³a tak samo w obu trybach - u¿ywa parametru "Speed"
         if (animator != null)
             animator.SetFloat("Speed", move.magnitude);
-    }
-
-    // --- LOGIKA LOCK-ON ---
-
-    private void ToggleLockOn()
-    {
-        Debug.Log("ToggleLockOn WYWO£ANE!");
-        if (isLocked)
-        {
-            UnlockTarget();
-        }
-        else
-        {
-            TryLockOnTarget();
-        }
-    }
-
-    private void HandleLockOnState()
-    {
-        if (isLocked && currentTarget != null)
-        {
-            float distance = Vector3.Distance(transform.position, currentTarget.position);
-
-            if (distance > maxLockOnDistance || !currentTarget.gameObject.activeInHierarchy)
-            {
-                UnlockTarget();
-            }
-        }
-    }
-
-    private void TryLockOnTarget()
-    {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, maxLockOnDistance, enemyLayer);
-        Transform bestTarget = null;
-        float minDistanceToScreenCenter = float.MaxValue;
-
-        foreach (Collider collider in colliders)
-        {
-            Vector3 screenPoint = mainCamera.WorldToViewportPoint(collider.transform.position);
-
-            if (screenPoint.z > 0 && screenPoint.x > 0 && screenPoint.x < 1 && screenPoint.y > 0 && screenPoint.y < 1)
-            {
-                float distanceToCenter = Vector2.Distance(new Vector2(screenPoint.x, screenPoint.y), new Vector2(0.5f, 0.5f));
-                if (distanceToCenter < minDistanceToScreenCenter)
-                {
-                    minDistanceToScreenCenter = distanceToCenter;
-                    bestTarget = collider.transform;
-                }
-            }
-        }
-
-        if (bestTarget != null)
-        {
-            LockOn(bestTarget);
-        }
-    }
-
-    private void LockOn(Transform target)
-    {
-        currentTarget = target;
-        isLocked = true;
-
-        vcamLockOn.LookAt = currentTarget;
-        animator.SetBool("isLockedOn", true);
-    }
-
-    private void UnlockTarget()
-    {
-        currentTarget = null;
-        isLocked = false;
-
-        vcamLockOn.LookAt = null;
-        animator.SetBool("isLockedOn", false);
     }
 
     [Command("setspeed", "speed")]
