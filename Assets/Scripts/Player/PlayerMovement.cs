@@ -8,15 +8,10 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement")]
     public float moveSpeed = 5f;
     public CharacterController controller;
+    public CinemachineCamera vcamFreeLook;
 
     [Header("Animation")]
     public Animator animator;
-
-    [Header("Lock-On System")]
-    // Przeci¹gnij tu swoj¹ kamerê vcam_LockOn z Hierarchii
-    public CinemachineCamera vcamLockOn;
-    public float maxLockOnDistance = 20f;
-    public LayerMask enemyLayer;
 
     // Zmienne prywatne
     private Vector2 moveInput;
@@ -25,16 +20,40 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 camForward;
     private Vector3 camRight;
 
-    private Transform currentTarget;
-    private bool isLocked = false;
+    private LockOnBehaviour lockOnBehaviour;
+    private CinemachineOrbitalFollow orbitalFollow;
+
+    // Flagi do opóŸnienia przejœcia z lock-on na freelook
+    private bool keepLockOnRotation = false;
+    private float keepLockOnTimer = 0f;
+    private const float keepLockOnDuration = 0.4f; // czas opóŸnienia w sekundach
 
     private void Awake()
     {
         inputActions = new InputSystem_Actions();
-
         inputActions.Player.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
         inputActions.Player.Move.canceled += ctx => moveInput = Vector2.zero;
-        inputActions.Player.LockOn.performed += ctx => ToggleLockOn();
+        orbitalFollow = vcamFreeLook.GetComponent<CinemachineOrbitalFollow>();
+
+        lockOnBehaviour = GetComponent<LockOnBehaviour>();
+        inputActions.Player.LockOn.performed += ctx =>
+        {
+            bool wasLocked = lockOnBehaviour.IsLocked;
+            lockOnBehaviour.ToggleLockOn();
+            // OpóŸnienie przy rêcznym wy³¹czeniu
+            if (wasLocked && !lockOnBehaviour.IsLocked)
+            {
+                keepLockOnRotation = true;
+                keepLockOnTimer = keepLockOnDuration;
+            }
+        };
+
+        // OpóŸnienie przy automatycznym wy³¹czeniu (np. wyjœcie z zasiêgu)
+        lockOnBehaviour.OnUnlock += () =>
+        {
+            keepLockOnRotation = true;
+            keepLockOnTimer = keepLockOnDuration;
+        };
     }
 
     private void OnEnable()
@@ -58,8 +77,36 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         HandleCamera();
-        HandleLockOnState();
-        HandleMovementAndAnimation(); // G³ówna logika ruchu
+        lockOnBehaviour.HandleLockOnState(transform.position);
+
+        // Obs³uga opóŸnienia rotacji po wy³¹czeniu lock-on
+        if (keepLockOnRotation)
+        {
+            keepLockOnTimer -= Time.deltaTime;
+            if (keepLockOnTimer <= 0f)
+            {
+                keepLockOnRotation = false;
+            }
+        }
+
+        HandleMovementAndAnimation();
+    }
+
+    private void LateUpdate()
+    {
+        var lockOn = lockOnBehaviour.vcamLockOn;
+
+        if (lockOnBehaviour.IsLocked && lockOn != null && orbitalFollow != null)
+        {
+            float targetYaw = lockOn.transform.eulerAngles.y;
+            orbitalFollow.HorizontalAxis.Value = targetYaw;
+
+            Vector3 camDir = (lockOn.transform.position - controller.transform.position).normalized;
+            float targetPitch = Mathf.Asin(camDir.y) * Mathf.Rad2Deg + 10f;
+            targetPitch = Mathf.Clamp(targetPitch, -10f, 45f);
+            orbitalFollow.VerticalAxis.Value = Mathf.InverseLerp(-10f, 45f, targetPitch);
+        }
+
     }
 
     private void HandleCamera()
@@ -75,24 +122,25 @@ public class PlayerMovement : MonoBehaviour
         camRight.Normalize();
     }
 
-    // --- ZMIANA DLA TESTU "BEZ STRAFE" ---
     private void HandleMovementAndAnimation()
     {
         Vector3 move = camForward * moveInput.y + camRight * moveInput.x;
         controller.Move(move * moveSpeed * Time.deltaTime);
 
-        if (isLocked && currentTarget != null)
+        if ((lockOnBehaviour.IsLocked && lockOnBehaviour.GetCurrentTarget() != null) || keepLockOnRotation)
         {
-            // --- TRYB LOCK-ON ---
-            // Postaæ zawsze patrzy na cel
-            Vector3 lookDir = currentTarget.position - transform.position;
-            lookDir.y = 0;
-            Quaternion targetRotation = Quaternion.LookRotation(lookDir.normalized);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 10f * Time.deltaTime);
+            // --- TRYB LOCK-ON lub opóŸnienie po wy³¹czeniu ---
+            Transform target = lockOnBehaviour.GetCurrentTarget();
+            if (target != null)
+            {
+                Vector3 lookDir = target.position - transform.position;
+                lookDir.y = 0;
+                Quaternion targetRotation = Quaternion.LookRotation(lookDir.normalized);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 10f * Time.deltaTime);
+            }
         }
         else
         {
-            // --- TRYB FREELOOK ---
             if (move.magnitude > 0.1f)
             {
                 Quaternion targetRotation = Quaternion.LookRotation(move.normalized);
@@ -100,82 +148,8 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        // Dzia³a tak samo w obu trybach - u¿ywa parametru "Speed"
         if (animator != null)
             animator.SetFloat("Speed", move.magnitude);
-    }
-
-    // --- LOGIKA LOCK-ON ---
-
-    private void ToggleLockOn()
-    {
-        Debug.Log("ToggleLockOn WYWO£ANE!");
-        if (isLocked)
-        {
-            UnlockTarget();
-        }
-        else
-        {
-            TryLockOnTarget();
-        }
-    }
-
-    private void HandleLockOnState()
-    {
-        if (isLocked && currentTarget != null)
-        {
-            float distance = Vector3.Distance(transform.position, currentTarget.position);
-
-            if (distance > maxLockOnDistance || !currentTarget.gameObject.activeInHierarchy)
-            {
-                UnlockTarget();
-            }
-        }
-    }
-
-    private void TryLockOnTarget()
-    {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, maxLockOnDistance, enemyLayer);
-        Transform bestTarget = null;
-        float minDistanceToScreenCenter = float.MaxValue;
-
-        foreach (Collider collider in colliders)
-        {
-            Vector3 screenPoint = mainCamera.WorldToViewportPoint(collider.transform.position);
-
-            if (screenPoint.z > 0 && screenPoint.x > 0 && screenPoint.x < 1 && screenPoint.y > 0 && screenPoint.y < 1)
-            {
-                float distanceToCenter = Vector2.Distance(new Vector2(screenPoint.x, screenPoint.y), new Vector2(0.5f, 0.5f));
-                if (distanceToCenter < minDistanceToScreenCenter)
-                {
-                    minDistanceToScreenCenter = distanceToCenter;
-                    bestTarget = collider.transform;
-                }
-            }
-        }
-
-        if (bestTarget != null)
-        {
-            LockOn(bestTarget);
-        }
-    }
-
-    private void LockOn(Transform target)
-    {
-        currentTarget = target;
-        isLocked = true;
-
-        vcamLockOn.LookAt = currentTarget;
-        animator.SetBool("isLockedOn", true);
-    }
-
-    private void UnlockTarget()
-    {
-        currentTarget = null;
-        isLocked = false;
-
-        vcamLockOn.LookAt = null;
-        animator.SetBool("isLockedOn", false);
     }
 
     [Command("setspeed", "speed")]
