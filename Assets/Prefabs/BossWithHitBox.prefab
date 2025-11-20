@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2899474519240355212}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ORG-palm.04.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8537049502817376084}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-forearm.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1673123725651633710}
   - component: {fileID: 677025442191127845}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: retopo.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -275,7 +275,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7496592514522618877}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-spine.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -307,7 +307,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4093398732032592919}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: spine_fk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -340,7 +340,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1293227312606942154}
   - component: {fileID: 895223799266511582}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-thigh.L.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -395,7 +395,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8430665970819858689}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MCH-spine.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -428,7 +428,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7207873675872679512}
   - component: {fileID: 666155820037648464}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane.019
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -630,7 +630,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5093678489449735719}
   - component: {fileID: 7938695085172717480}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-toe.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -684,7 +684,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1088108852298718808}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ORG-palm.04.R.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -717,7 +717,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6005452521286050918}
   - component: {fileID: 4092362541187966257}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane.017
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -918,7 +918,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5886109933648874916}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-f_pinky.03.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -950,7 +950,7 @@ GameObject:
   m_Component:
   - component: {fileID: 953967566349410412}
   - component: {fileID: 2690217443316908249}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-upper_arm.L.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1005,7 +1005,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5749739665955951022}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ORG-palm.04.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1037,7 +1037,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8221621723813847925}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-Jaw_03.l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1068,7 +1068,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1908462081955646005}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ORG-palm.04.L.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1100,7 +1100,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2609855444583455697}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-tail.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1133,7 +1133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8929137701317483695}
   - component: {fileID: 8483728655488593004}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1335,7 +1335,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5512069675502343224}
   - component: {fileID: 1883526827503490292}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane.013
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1536,7 +1536,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6986794816976738851}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: tweak_spine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1568,7 +1568,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2312519705749319486}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-neck.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1600,7 +1600,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2179602008147479279}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-f_pinky.02.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1633,7 +1633,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2033476985586799889}
   - component: {fileID: 5886697665868194081}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube.007
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1834,7 +1834,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5292156974031579478}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-f_pinky.03.R.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1865,7 +1865,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3450442971229545872}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-shin.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1897,7 +1897,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1073833088452037128}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-f_pinky.02.R.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1930,7 +1930,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6465758263305558688}
   - component: {fileID: 125296723557425734}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane.011
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2132,7 +2132,10 @@ GameObject:
   m_Component:
   - component: {fileID: 988059150404663337}
   - component: {fileID: 7705909762184961867}
-  m_Layer: 0
+  - component: {fileID: 6814543300484262438}
+  - component: {fileID: 6257530152200430688}
+  - component: {fileID: 5447000322733232737}
+  m_Layer: 6
   m_Name: BossWithHitBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2208,6 +2211,105 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6814543300484262438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1743110705916499409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f0b1705fe4563c42a2cc63488aa3366, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BossHealth
+  animator: {fileID: 0}
+  behaviourTree: {fileID: 0}
+  healthFillImage: {fileID: 0}
+  takenDamageFill: {fileID: 0}
+  maxHP: 100
+  trailDelayTime: 0.5
+  trailDrainSpeed: 1.5
+--- !u!114 &6257530152200430688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1743110705916499409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0038c16c34866b4f9e25c9c0dc0f7e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Behavior::Unity.Behavior.BehaviorGraphAgent
+  m_Graph: {fileID: -744192508035651274, guid: c71f98182fa54e64c8cfef6ef9d2ea71, type: 2}
+  m_BlackboardVariableOverridesList:
+  - rid: 4651023333483348054
+  - rid: 4651023333483348055
+  - rid: 4651023333483348056
+  - rid: 4651023333483348081
+  m_IsInitialised: 0
+  m_IsStarted: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 4651023333483348054
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 1
+          m_Value1: 0
+        Name: Self
+        m_Value: {fileID: 0}
+    - rid: 4651023333483348055
+      type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 6076721366680935146
+          m_Value1: 18038588672476402706
+        Name: DetectionRange
+        m_Value: 10
+    - rid: 4651023333483348056
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 2112950652199896957
+          m_Value1: 8066634654442575023
+        Name: Player
+        m_Value: {fileID: 0}
+    - rid: 4651023333483348081
+      type: {class: 'BlackboardVariable`1[[System.Collections.Generic.List`1[[UnityEngine.GameObject, UnityEngine.CoreModule]], mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 10771117611991064614
+          m_Value1: 17475818836780027058
+        Name: Waypoints
+        m_Value:
+        - {fileID: 0}
+        - {fileID: 0}
+        - {fileID: 0}
+--- !u!195 &5447000322733232737
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1743110705916499409}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2.2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &1796675848365252075
 GameObject:
   m_ObjectHideFlags: 0
@@ -2218,7 +2320,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1121314622552011917}
   - component: {fileID: 3332602362930897624}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-upper_arm.R.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2274,7 +2376,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6735502838232337701}
   - component: {fileID: 781072006908461538}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane.016
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2476,7 +2578,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9038525848898855983}
   - component: {fileID: 5941308500441040224}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2677,7 +2779,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2151233178737287440}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-f_pinky.01.R.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2710,7 +2812,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1688176696666538218}
   - component: {fileID: 7210056599010733575}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane.007
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2911,7 +3013,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 56874318847998233}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: spine_fk.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2944,7 +3046,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6148655067263551604}
   - component: {fileID: 640623494208373025}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-foot.L.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2999,7 +3101,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7256995952120920815}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-hip.l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3031,7 +3133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7822946955387263933}
   - component: {fileID: 2889329746411312096}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3233,7 +3335,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4724396850881959297}
   - component: {fileID: 3680754147765144486}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3434,7 +3536,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5200846377838744845}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-f_pinky.02.R.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3466,7 +3568,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2733534020822674250}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-tail.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3498,7 +3600,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3957997922255603699}
   - component: {fileID: 2952305287705041153}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3699,7 +3801,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7671771708349403954}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ORG-spine.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3735,7 +3837,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4754186030144166740}
   - component: {fileID: 7507477597269980899}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3936,7 +4038,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5433158777904923598}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-f_pinky.01.R.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3968,7 +4070,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3151076000475859431}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: spine_fk.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4000,7 +4102,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6484302791138589639}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-f_pinky.01.R.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4032,7 +4134,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6843564087931762409}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-neck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4064,7 +4166,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5790524283312802295}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ORG-palm.04.L.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4096,7 +4198,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7794916636241191347}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-f_pinky.01.L.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4128,7 +4230,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1401068604128736574}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MCH-spine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4160,7 +4262,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7073029762513079356}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ORG-spine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4194,7 +4296,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4503018983670243788}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ORG-upper_arm.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4226,7 +4328,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8750580510413428706}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-tail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4259,7 +4361,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7654492202606065053}
   - component: {fileID: 8971984405815119120}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane.014
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4460,7 +4562,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4329392006827231772}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ORG-palm.04.L.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4492,7 +4594,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6753312290633851617}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-Jaw_03.r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4523,7 +4625,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6158161143286043720}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: spine_fk.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4556,7 +4658,7 @@ GameObject:
   m_Component:
   - component: {fileID: 839228330340292852}
   - component: {fileID: 7428029188609502260}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: retopo_sculpt_multires
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4757,7 +4859,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 878998726346985605}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MCH-spine.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4790,7 +4892,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1819920131899389250}
   - component: {fileID: 3038409598713140060}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane.015
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4992,7 +5094,7 @@ GameObject:
   m_Component:
   - component: {fileID: 961682934712665989}
   - component: {fileID: 1472890901211711084}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane.009
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5193,7 +5295,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8310244667852741456}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-f_pinky.02.R.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5225,7 +5327,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6748663381607238460}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ORG-hip.r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5258,7 +5360,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3090639150956925514}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RIG-Armature
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5291,7 +5393,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6494001592414102662}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-f_pinky.01.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5323,7 +5425,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4947968998000304590}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ORG-forearm.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5356,7 +5458,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4407407940781687325}
   - component: {fileID: 9126117925213069840}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube.009
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5557,7 +5659,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8639284448329661912}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-f_pinky.02.L.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5590,7 +5692,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3080021483665886824}
   - component: {fileID: 3772654490969959488}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-toe.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5645,7 +5747,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4439937378245523366}
   - component: {fileID: 6631983838419002011}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5847,7 +5949,7 @@ GameObject:
   m_Component:
   - component: {fileID: 842441201892403816}
   - component: {fileID: 3547382394614141524}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane.008
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6048,7 +6150,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4578920960011935850}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-f_pinky.01.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6080,7 +6182,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9132153606707350251}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-upper_arm.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6112,7 +6214,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7928620374740842289}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ORG-shoulder.r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6146,7 +6248,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1037870529839945552}
   - component: {fileID: 2651408872698734903}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-forearm.L.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6201,7 +6303,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4165190699786669156}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ORG-upper_arm.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6233,7 +6335,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4300321352053294159}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-f_pinky.01.L.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6266,7 +6368,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8383834839482137218}
   - component: {fileID: 7483343834604277136}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane.012
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6467,7 +6569,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4758390909909680649}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-f_pinky.02.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6499,7 +6601,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1688063378178530789}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-forearm.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6531,7 +6633,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5289855054590786679}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: torso
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6565,7 +6667,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3364701150881521666}
   - component: {fileID: 1020348908924644931}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane.010
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6766,7 +6868,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 351133471551344908}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ORG-hand.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6802,7 +6904,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8199090478626920430}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-upper_arm.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6835,7 +6937,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8752242824876710705}
   - component: {fileID: 7687042794787179910}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7037,7 +7139,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3523348121376325936}
   - component: {fileID: 4553287964651186855}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-thigh.R.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7092,7 +7194,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6827681922937452192}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-f_pinky.03.R.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7123,7 +7225,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7200924399113241126}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ORG-hand.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7159,7 +7261,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1551805702004351722}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ORG-shoulder.l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7193,7 +7295,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1068369168106243221}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ORG-palm.04.R.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7225,7 +7327,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3307566734901456988}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-f_pinky.03.R.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7256,7 +7358,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8235582636342813848}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-hip.r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7287,7 +7389,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1920054393659553992}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ORG-palm.04.R.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7319,7 +7421,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3144456496114585449}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-shoulder.l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7351,7 +7453,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5287317590498974641}
   - component: {fileID: 136408414515336630}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube.008
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7553,7 +7655,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7957020450327508553}
   - component: {fileID: 5887642534784911872}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-shin.R.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7608,7 +7710,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 918340109769224874}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ORG-neck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7640,7 +7742,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1235007834025094874}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-f_pinky.03.L.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7671,7 +7773,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8036923481916471713}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-f_pinky.03.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7702,7 +7804,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7112152914324054732}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-Jaw_01.r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7735,7 +7837,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1241363578431351711}
   - component: {fileID: 4923824039530932082}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane.006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7937,7 +8039,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9037966083885027215}
   - component: {fileID: 4540339597196864606}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-hand.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7991,7 +8093,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3795630494597450312}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-spine.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8022,7 +8124,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6896089349845652688}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: tweak_spine.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8055,7 +8157,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8436974884440210330}
   - component: {fileID: 2612578758270009277}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8256,7 +8358,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9032521660301876495}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-f_pinky.02.L.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8288,7 +8390,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4394848697861803068}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-spine.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8321,7 +8423,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5025096095949821281}
   - component: {fileID: 3114775005109925954}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-forearm.R.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8376,7 +8478,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 659325008728379407}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ORG-hip.l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8409,7 +8511,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 397206941527807254}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-f_pinky.02.R.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8442,7 +8544,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2826607187673258319}
   - component: {fileID: 8089394524261433850}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-hand.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8496,7 +8598,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4515948840463292817}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8528,7 +8630,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4227740485766247068}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-f_pinky.02.L.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8560,7 +8662,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3865522260028416787}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-shin.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8592,7 +8694,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3460806804473114062}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-Jaw_02.l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8624,7 +8726,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1770348973722450975}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-f_pinky.03.L.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8656,7 +8758,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2733730832777524759}
   - component: {fileID: 5373801261897584763}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane.018
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8857,7 +8959,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5937971442107766821}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-f_pinky.01.R.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8889,7 +8991,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9073532296939903097}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ORG-neck.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8921,7 +9023,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4036091672531390517}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ORG-forearm.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8954,7 +9056,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5506525591688133180}
   - component: {fileID: 2677770731346419251}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-shin.L.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9009,7 +9111,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5956630020387231364}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-f_pinky.02.L.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9041,7 +9143,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2532847163761663739}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ORG-palm.04.R.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9073,7 +9175,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 687109378157291695}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MCH-torso.parent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9105,7 +9207,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5164566197435666627}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9136,7 +9238,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4487026533049217783}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ORG-palm.04.L.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9169,7 +9271,7 @@ GameObject:
   m_Component:
   - component: {fileID: 553648518425742551}
   - component: {fileID: 6459826143127957519}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-foot.R.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9224,7 +9326,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2592381967180447529}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-thigh.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9256,7 +9358,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 737844146826758110}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-Jaw_02.r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9288,7 +9390,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1456349353787729393}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-f_pinky.03.L.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9320,7 +9422,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7257724243535311233}
   - component: {fileID: 7400628591348366294}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ORG-head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9376,7 +9478,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4353750238333648760}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-f_pinky.03.R.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9407,7 +9509,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4239282436056533104}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-spine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9439,7 +9541,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 556913398002865618}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-thigh.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9472,7 +9574,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4384623589832924293}
   - component: {fileID: 8276643807134511108}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube.010
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9674,7 +9776,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7858558745338408920}
   - component: {fileID: 281303403664591052}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MCH-spine.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9729,7 +9831,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4527492025655248238}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-f_pinky.01.L.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9761,7 +9863,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 148309450593998364}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-foot.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9793,7 +9895,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8049986289899973618}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-f_pinky.03.L.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9825,7 +9927,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5337333281680443566}
   - component: {fileID: 7716608454705379155}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10026,7 +10128,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5772862214026073680}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-foot.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10059,7 +10161,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5900836692712975802}
   - component: {fileID: 5057198296062616462}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube.006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10260,7 +10362,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6994090603107688999}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-Jaw_01.l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10292,7 +10394,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5410178937120125835}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DEF-f_pinky.01.L.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
