@@ -13,7 +13,7 @@ public class LockOnBehaviour : MonoBehaviour
     [Header("UI Celu")]
     public RectTransform targetDotUI;
     [Range(1f, 50f)]
-    public float uiSmoothSpeed = 20f;
+    public float uiSmoothSpeed = 20f; // do wywalenia potem
 
     [Header("Skalowanie UI")]
     public bool useScale = true;
@@ -58,7 +58,7 @@ public class LockOnBehaviour : MonoBehaviour
                 if (!targetDotUI.gameObject.activeSelf)
                     targetDotUI.gameObject.SetActive(true);
 
-                targetDotUI.position = Vector3.Lerp(targetDotUI.position, targetScreenPos, Time.deltaTime * uiSmoothSpeed);
+                targetDotUI.position = Vector3.Lerp(targetDotUI.position, targetScreenPos, 1);
 
                 if (useScale)
                 {
