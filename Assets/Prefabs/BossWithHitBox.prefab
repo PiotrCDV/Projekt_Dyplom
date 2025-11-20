@@ -2135,6 +2135,7 @@ GameObject:
   - component: {fileID: 6814543300484262438}
   - component: {fileID: 6257530152200430688}
   - component: {fileID: 5447000322733232737}
+  - component: {fileID: 3689259177455113354}
   m_Layer: 6
   m_Name: BossWithHitBox
   m_TagString: Untagged
@@ -2310,6 +2311,19 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &3689259177455113354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1743110705916499409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44cced3ea12fc794297638a0999080c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LockOnTarget
+  lookAtPoint: {fileID: 8430665970819858689}
 --- !u!1 &1796675848365252075
 GameObject:
   m_ObjectHideFlags: 0

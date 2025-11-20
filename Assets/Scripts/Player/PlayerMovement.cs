@@ -101,12 +101,8 @@ public class PlayerMovement : MonoBehaviour
             float targetYaw = lockOn.transform.eulerAngles.y;
             orbitalFollow.HorizontalAxis.Value = targetYaw;
 
-            Vector3 camDir = (lockOn.transform.position - controller.transform.position).normalized;
-            float targetPitch = Mathf.Asin(camDir.y) * Mathf.Rad2Deg + 10f;
-            targetPitch = Mathf.Clamp(targetPitch, -10f, 45f);
-            orbitalFollow.VerticalAxis.Value = Mathf.InverseLerp(-10f, 45f, targetPitch);
+            orbitalFollow.VerticalAxis.Value = Mathf.Clamp(10f, -10f, 45f);
         }
-
     }
 
     private void HandleCamera()
