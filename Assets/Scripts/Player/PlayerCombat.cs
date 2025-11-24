@@ -5,43 +5,33 @@ public class PlayerCombat : MonoBehaviour
 {
     [Header("References")]
     public Animator animator;
-    public PlayerMovement playerMovement; 
+    public PlayerMovement playerMovement;
+    public LockOnBehaviour lockOnBehaviour;
+
+    public SwordDamage weaponScript;
 
     [Header("Combat Settings")]
-    public float attackCooldown = 0.5f; 
+    public float attackCooldown = 0.5f;
     private float lastAttackTime = -Mathf.Infinity;
 
     private InputSystem_Actions inputActions;
-    private LockOnBehaviour lockOnBehaviour; 
 
     private void Awake()
     {
         inputActions = new InputSystem_Actions();
-
         inputActions.Player.Attack.performed += ctx => PerformAttack();
 
-        if (lockOnBehaviour == null) 
-        {
-            lockOnBehaviour = GetComponent<LockOnBehaviour>();
-        }
+        if (lockOnBehaviour == null) lockOnBehaviour = GetComponent<LockOnBehaviour>();
+
+        if (weaponScript == null) weaponScript = GetComponentInChildren<SwordDamage>();
     }
 
-    private void OnEnable()
-    {
-        inputActions.Enable();
-    }
-
-    private void OnDisable()
-    {
-        inputActions.Disable();
-    }
+    private void OnEnable() => inputActions.Enable();
+    private void OnDisable() => inputActions.Disable();
 
     private void PerformAttack()
     {
-        if (lockOnBehaviour == null || !lockOnBehaviour.IsLocked) 
-        {
-            return;
-        }
+        if (lockOnBehaviour == null || !lockOnBehaviour.IsLocked) return;
 
         if (Time.time >= lastAttackTime + attackCooldown)
         {
@@ -58,5 +48,17 @@ public class PlayerCombat : MonoBehaviour
     public void OnAttackEnd()
     {
         if (playerMovement != null) playerMovement.SetMovementEnabled(true);
+        DisableWeaponHitbox();
+    }
+
+
+    public void EnableWeaponHitbox()
+    {
+        if (weaponScript != null) weaponScript.EnableDamage();
+    }
+
+    public void DisableWeaponHitbox()
+    {
+        if (weaponScript != null) weaponScript.DisableDamage();
     }
 }

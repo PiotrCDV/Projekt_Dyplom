@@ -118,16 +118,21 @@ public class PlayerMovement : MonoBehaviour
         camForward.Normalize();
         camRight.Normalize();
     }
-    public void SetMovementEnabled(bool state) 
+
+    public void SetMovementEnabled(bool state)
     {
         canMove = state;
         if (!canMove)
         {
-            moveInput = Vector2.zero; 
-            if (animator != null) animator.SetFloat("Speed", 0f);
+
+            if (animator != null)
+            {
+                animator.SetFloat("Speed", 0f);
+                animator.SetFloat("MoveX", 0f);
+                animator.SetFloat("MoveY", 0f);
+            }
         }
     }
-
     private void HandleMovementAndAnimation()
     {
         if (!canMove) return;

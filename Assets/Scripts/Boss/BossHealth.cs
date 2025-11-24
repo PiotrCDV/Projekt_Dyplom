@@ -36,7 +36,7 @@ public class BossHealth : MonoBehaviour, IDamageable
     {
         if (Input.GetMouseButtonDown(0))       
         {
-            TakeDamage(20f);
+        //    TakeDamage(20f);
         }
     }
 

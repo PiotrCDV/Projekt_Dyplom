@@ -2136,6 +2136,7 @@ GameObject:
   - component: {fileID: 6257530152200430688}
   - component: {fileID: 5447000322733232737}
   - component: {fileID: 3689259177455113354}
+  - component: {fileID: 3670894399045433361}
   m_Layer: 6
   m_Name: BossWithHitBox
   m_TagString: Untagged
@@ -2324,6 +2325,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LockOnTarget
   lookAtPoint: {fileID: 8430665970819858689}
+--- !u!136 &3670894399045433361
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1743110705916499409}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2.3
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.19, z: 0}
 --- !u!1 &1796675848365252075
 GameObject:
   m_ObjectHideFlags: 0
