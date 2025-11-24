@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     private Camera mainCamera;
     private Vector3 camForward;
     private Vector3 camRight;
+    private bool canMove = true;
 
     private LockOnBehaviour lockOnBehaviour;
     private CinemachineOrbitalFollow orbitalFollow;
@@ -117,22 +118,38 @@ public class PlayerMovement : MonoBehaviour
         camForward.Normalize();
         camRight.Normalize();
     }
+    public void SetMovementEnabled(bool state) 
+    {
+        canMove = state;
+        if (!canMove)
+        {
+            moveInput = Vector2.zero; 
+            if (animator != null) animator.SetFloat("Speed", 0f);
+        }
+    }
 
     private void HandleMovementAndAnimation()
     {
+        if (!canMove) return;
+
         Vector3 move = camForward * moveInput.y + camRight * moveInput.x;
+
         controller.Move(move * moveSpeed * Time.deltaTime);
 
-        if ((lockOnBehaviour.IsLocked && lockOnBehaviour.GetCurrentTarget() != null) || keepLockOnRotation)
+        bool isLocked = lockOnBehaviour.IsLocked && lockOnBehaviour.GetCurrentTarget() != null;
+
+        if (isLocked || keepLockOnRotation)
         {
-            // --- TRYB LOCK-ON lub opóŸnienie po wy³¹czeniu ---
             Transform target = lockOnBehaviour.GetCurrentTarget();
             if (target != null)
             {
                 Vector3 lookDir = target.position - transform.position;
                 lookDir.y = 0;
-                Quaternion targetRotation = Quaternion.LookRotation(lookDir.normalized);
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 10f * Time.deltaTime);
+                if (lookDir != Vector3.zero)
+                {
+                    Quaternion targetRotation = Quaternion.LookRotation(lookDir.normalized);
+                    transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 15f * Time.deltaTime);
+                }
             }
         }
         else
@@ -145,9 +162,28 @@ public class PlayerMovement : MonoBehaviour
         }
 
         if (animator != null)
-            animator.SetFloat("Speed", move.magnitude);
-    }
+        {
+            animator.SetBool("IsLocked", isLocked);
 
+            if (isLocked)
+            {
+    
+                Vector3 localMove = transform.InverseTransformDirection(move);
+
+                float strafeSpeed = moveSpeed > 0 ? moveSpeed : 1f;
+
+                animator.SetFloat("MoveX", localMove.x, 0.1f, Time.deltaTime);
+                animator.SetFloat("MoveY", localMove.z, 0.1f, Time.deltaTime); 
+            }
+            else
+            {
+                animator.SetFloat("Speed", move.magnitude, 0.1f, Time.deltaTime);
+
+                animator.SetFloat("MoveX", 0f);
+                animator.SetFloat("MoveY", 0f);
+            }
+        }
+    }
     [Command("setspeed", "speed")]
     public void SetSpeed(float newSpeed)
     {
