@@ -2225,13 +2225,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f0b1705fe4563c42a2cc63488aa3366, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BossHealth
-  animator: {fileID: 0}
-  behaviourTree: {fileID: 0}
   healthFillImage: {fileID: 0}
   takenDamageFill: {fileID: 0}
   maxHP: 100
   trailDelayTime: 0.5
   trailDrainSpeed: 1.5
+  behaviourTree: {fileID: 6257530152200430688}
 --- !u!114 &6257530152200430688
 MonoBehaviour:
   m_ObjectHideFlags: 0
