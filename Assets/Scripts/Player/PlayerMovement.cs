@@ -168,7 +168,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (animator != null)
         {
-            animator.SetBool("IsLocked", isLocked);
+         //   animator.SetBool("isLocked", isLocked);
 
             if (isLocked)
             {
