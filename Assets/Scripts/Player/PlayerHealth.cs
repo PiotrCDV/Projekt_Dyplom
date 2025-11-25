@@ -4,12 +4,11 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 using System.Collections;
 
-public class BossHealth : MonoBehaviour, IDamageable
+public class PlayerHealth : MonoBehaviour
 {
-
     [Header("UI & AI References")]
-    [SerializeField] private Image healthFillImage;     
-    [SerializeField] private Image takenDamageFill;   
+    [SerializeField] private Image healthFillImage;
+    [SerializeField] private Image takenDamageFill;
 
     [Header("Health Settings")]
     [SerializeField] private float maxHP = 100f;
@@ -21,23 +20,18 @@ public class BossHealth : MonoBehaviour, IDamageable
     [SerializeField] private float trailDrainSpeed = 0.5f;
 
     private Coroutine trailCoroutine;
-    private NavMeshAgent navMeshAgent;
-    private Animator animator;
-    [SerializeField]private Behaviour behaviourTree;
 
     private void Awake()
     {
         currentHP = maxHP;
         UpdateHealthBar();
-        animator = GetComponent<Animator>();
-        navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))       
+        if (Input.GetMouseButtonDown(0))
         {
-        //    TakeDamage(20f);
+            //    TakeDamage(20f);
         }
     }
 
@@ -50,7 +44,7 @@ public class BossHealth : MonoBehaviour, IDamageable
             StopCoroutine(trailCoroutine);
         }
 
-        float oldHP = currentHP; 
+        float oldHP = currentHP;
         currentHP -= damage;
         currentHP = Mathf.Max(currentHP, 0);
 
@@ -69,7 +63,7 @@ public class BossHealth : MonoBehaviour, IDamageable
             return;
         }
 
-      
+
     }
 
     private void UpdateHealthBar()
@@ -93,7 +87,7 @@ public class BossHealth : MonoBehaviour, IDamageable
 
             takenDamageFill.fillAmount = Mathf.Max(takenDamageFill.fillAmount, targetFill);
 
-            yield return null; 
+            yield return null;
         }
 
         trailCoroutine = null;
@@ -104,13 +98,7 @@ public class BossHealth : MonoBehaviour, IDamageable
     {
         isDead = true;
 
-        if (behaviourTree != null)
-            behaviourTree.enabled = false; 
 
-        if (navMeshAgent != null)
-            navMeshAgent.enabled = false;
 
-   
     }
-
 }
