@@ -10,11 +10,17 @@ public class LockOnBehaviour : MonoBehaviour
     public LayerMask enemyLayer;
     public Animator animator;
 
-    [Header("Dynamiczna Martwa Strefa")]
+    [Header("Dynamiczna Kamera (DeadZone + Damping)")]
     public float farDistance = 10f;
     public float closeDistance = 2f;
+
+    [Space]
     public float farDeadZone = 0.15f;
     public float closeDeadZone = 0.6f;
+
+    [Space]
+    public float farDamping = 0.2f;
+    public float closeDamping = 0f;
 
     [Header("UI Celu")]
     public RectTransform targetDotUI;
@@ -29,7 +35,6 @@ public class LockOnBehaviour : MonoBehaviour
     private Transform currentTarget;
     private Camera mainCamera;
 
-    // Dodana referencja do RotationComposer
     private CinemachineRotationComposer rotationComposer;
 
     public bool IsLocked { get; private set; }
@@ -46,7 +51,6 @@ public class LockOnBehaviour : MonoBehaviour
         if (targetDotUI != null)
             targetDotUI.gameObject.SetActive(false);
 
-        // Pobieramy komponent RotationComposer z kamery
         if (vcamLockOn != null)
         {
             rotationComposer = vcamLockOn.GetComponent<CinemachineRotationComposer>();
@@ -62,29 +66,25 @@ public class LockOnBehaviour : MonoBehaviour
                 JustSwitched = false;
         }
 
-        // --- DODANA LOGIKA DYNAMICZNEJ MARTWEJ STREFY ---
+        //MARTWA STREFA + DAMPING
         if (IsLocked && currentTarget != null && rotationComposer != null)
         {
             float distance = Vector3.Distance(transform.position, currentTarget.position);
             float t = Mathf.InverseLerp(farDistance, closeDistance, distance);
+
             float newDeadZoneWidth = Mathf.Lerp(farDeadZone, closeDeadZone, t);
 
-            // 1. Pobieramy strukturê Composition
             var composition = rotationComposer.Composition;
-
-            // 2. Pobieramy strukturê DeadZone z wewn¹trz Composition
             var deadZone = composition.DeadZone;
-
-            // 3. Modyfikujemy szerokoœæ (x), zachowuj¹c wysokoœæ (y)
             deadZone.Size = new Vector2(newDeadZoneWidth, deadZone.Size.y);
-
-            // 4. Przypisujemy zmienion¹ DeadZone z powrotem do Composition
             composition.DeadZone = deadZone;
-
-            // 5. Przypisujemy zmienion¹ Composition z powrotem do komponentu
             rotationComposer.Composition = composition;
+
+            float newDamping = Mathf.Lerp(farDamping, closeDamping, t);
+
+            rotationComposer.Damping.x = newDamping;
+            rotationComposer.Damping.y = newDamping;
         }
-        // -----------------------------------------------
     }
 
     private void LateUpdate()

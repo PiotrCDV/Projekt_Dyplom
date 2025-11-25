@@ -44920,6 +44920,8 @@ MonoBehaviour:
   closeDistance: 2
   farDeadZone: 0.15
   closeDeadZone: 0.6
+  farDamping: 0.2
+  closeDamping: 0
   targetDotUI: {fileID: 0}
   uiSmoothSpeed: 20
   useScale: 1
@@ -62562,7 +62564,7 @@ PrefabInstance:
       objectReference: {fileID: 1047455620}
     - target: {fileID: 6991254106050310098, guid: 5df9216e5d379114480879e74ad381ec, type: 3}
       propertyPath: closeDeadZone
-      value: 0.05
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 8244078571955274404, guid: 5df9216e5d379114480879e74ad381ec, type: 3}
       propertyPath: field of view
