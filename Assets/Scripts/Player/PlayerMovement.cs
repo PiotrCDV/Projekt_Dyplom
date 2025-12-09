@@ -5,16 +5,22 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [Header("Movement")]
-    public float moveSpeed = 5f;
+    [Header("Movement Stats")]
+    public float walkSpeed = 2f;  
+    public float runSpeed = 5f;     
+    public float sprintSpeed = 8f; 
+
+    [SerializeField] private float currentSpeed;
+
     public CharacterController controller;
     public CinemachineCamera vcamFreeLook;
 
     [Header("Animation")]
     public Animator animator;
 
-    // Zmienne prywatne
     private Vector2 moveInput;
+    private bool isSprinting;
+
     private InputSystem_Actions inputActions;
     private Camera mainCamera;
     private Vector3 camForward;
@@ -24,49 +30,32 @@ public class PlayerMovement : MonoBehaviour
     private LockOnBehaviour lockOnBehaviour;
     private CinemachineOrbitalFollow orbitalFollow;
 
-    // Flagi do opóŸnienia przejœcia z lock-on na freelook
     private bool keepLockOnRotation = false;
     private float keepLockOnTimer = 0f;
-    private const float keepLockOnDuration = 0.4f; // czas opóŸnienia w sekundach
+    private const float keepLockOnDuration = 0.4f;
 
     private void Awake()
     {
         inputActions = new InputSystem_Actions();
+
         inputActions.Player.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
         inputActions.Player.Move.canceled += ctx => moveInput = Vector2.zero;
+
+        inputActions.Player.Sprint.performed += ctx => isSprinting = true;
+        inputActions.Player.Sprint.canceled += ctx => isSprinting = false;
+
         orbitalFollow = vcamFreeLook.GetComponent<CinemachineOrbitalFollow>();
-
         lockOnBehaviour = GetComponent<LockOnBehaviour>();
-        inputActions.Player.LockOn.performed += ctx =>
+
+      
+        if (lockOnBehaviour != null)
         {
-            bool wasLocked = lockOnBehaviour.IsLocked;
-            lockOnBehaviour.ToggleLockOn();
-            // OpóŸnienie przy rêcznym wy³¹czeniu
-            if (wasLocked && !lockOnBehaviour.IsLocked)
-            {
-                keepLockOnRotation = true;
-                keepLockOnTimer = keepLockOnDuration;
-            }
-        };
-
-        // OpóŸnienie przy automatycznym wy³¹czeniu (np. wyjœcie z zasiêgu)
-        lockOnBehaviour.OnUnlock += () =>
-        {
-            keepLockOnRotation = true;
-            keepLockOnTimer = keepLockOnDuration;
-        };
+            inputActions.Player.LockOn.performed += ctx => lockOnBehaviour.ToggleLockOn();
+        }
     }
 
-    private void OnEnable()
-    {
-        inputActions.Enable();
-    }
-
-    private void OnDisable()
-    {
-        inputActions.Disable();
-    }
-
+    private void OnEnable() => inputActions.Enable();
+    private void OnDisable() => inputActions.Disable();
     private void Start()
     {
         CommandManager.Instance.RegisterInstance(this);
@@ -74,76 +63,109 @@ public class PlayerMovement : MonoBehaviour
         Cursor.visible = false;
         mainCamera = Camera.main;
     }
-
-    void Update()
-    {
-        HandleCamera();
-        lockOnBehaviour.HandleLockOnState(transform.position);
-
-        // Obs³uga opóŸnienia rotacji po wy³¹czeniu lock-on
-        if (keepLockOnRotation)
-        {
-            keepLockOnTimer -= Time.deltaTime;
-            if (keepLockOnTimer <= 0f)
-            {
-                keepLockOnRotation = false;
-            }
-        }
-
-        HandleMovementAndAnimation();
-    }
-
     private void LateUpdate()
     {
         var lockOn = lockOnBehaviour.vcamLockOn;
-
         if (lockOnBehaviour.IsLocked && lockOn != null && orbitalFollow != null)
         {
             float targetYaw = lockOn.transform.eulerAngles.y;
             orbitalFollow.HorizontalAxis.Value = targetYaw;
-
             orbitalFollow.VerticalAxis.Value = Mathf.Clamp(10f, -10f, 45f);
         }
     }
-
     private void HandleCamera()
     {
         Transform camTransform = mainCamera.transform;
-
         camForward = camTransform.forward;
         camRight = camTransform.right;
-
         camForward.y = 0;
         camRight.y = 0;
         camForward.Normalize();
         camRight.Normalize();
     }
-
     public void SetMovementEnabled(bool state)
     {
         canMove = state;
-        if (!canMove)
+        if (!canMove && animator != null)
+        {
+            animator.SetFloat("Speed", 0f);
+            animator.SetFloat("MoveX", 0f);
+            animator.SetFloat("MoveY", 0f);
+        }
+    }
+
+    void Update()
+    {
+        HandleCamera();
+        if (lockOnBehaviour) lockOnBehaviour.HandleLockOnState(transform.position);
+
+        if (keepLockOnRotation)
+        {
+            keepLockOnTimer -= Time.deltaTime;
+            if (keepLockOnTimer <= 0f) keepLockOnRotation = false;
+        }
+
+        HandleMovementAndAnimation();
+    }
+
+private void HandleMovementAndAnimation()
+    {
+        if (!canMove) return;
+
+        float targetSpeed = 0f;
+        float inputMagnitude = moveInput.magnitude;
+
+        if (inputMagnitude > 0.1f)
+        {
+            if (isSprinting) targetSpeed = sprintSpeed;
+            else if (inputMagnitude >= 0.6f) targetSpeed = runSpeed;
+            else targetSpeed = walkSpeed;
+        }
+
+        currentSpeed = Mathf.Lerp(currentSpeed, targetSpeed, 10f * Time.deltaTime);
+        
+        Vector3 move = camForward * moveInput.y + camRight * moveInput.x;
+        if (move.magnitude > 1f) move.Normalize();
+
+        controller.Move(move * currentSpeed * Time.deltaTime);
+
+        bool isLocked = lockOnBehaviour.IsLocked && lockOnBehaviour.GetCurrentTarget() != null;
+
+        if (animator != null)
         {
 
-            if (animator != null)
+            bool fightSprintActive = isLocked && isSprinting && inputMagnitude > 0.1f;
+            
+            animator.SetBool("FightSprint", fightSprintActive);
+
+            float animValue = 0f;
+            if (inputMagnitude > 0.1f)
             {
-                animator.SetFloat("Speed", 0f);
+                if (isSprinting) animValue = 1.5f;      
+                else if (inputMagnitude >= 0.6f) animValue = 1.0f;
+                else animValue = 0.5f;                
+            }
+
+            if (isLocked)
+            {
+         
+                Vector3 localMove = transform.InverseTransformDirection(move);
+                
+                float multiplier = isSprinting ? 1.5f : 1f;
+
+                animator.SetFloat("MoveX", localMove.x * multiplier, 0.1f, Time.deltaTime);
+                animator.SetFloat("MoveY", localMove.z * multiplier, 0.1f, Time.deltaTime);
+            }
+            else
+            {
+                animator.SetFloat("Speed", animValue, 0.1f, Time.deltaTime);
                 animator.SetFloat("MoveX", 0f);
                 animator.SetFloat("MoveY", 0f);
             }
         }
-    }
-    private void HandleMovementAndAnimation()
-    {
-        if (!canMove) return;
 
-        Vector3 move = camForward * moveInput.y + camRight * moveInput.x;
-
-        controller.Move(move * moveSpeed * Time.deltaTime);
-
-        bool isLocked = lockOnBehaviour.IsLocked && lockOnBehaviour.GetCurrentTarget() != null;
-
-        if (isLocked || keepLockOnRotation)
+ 
+        if ((isLocked || keepLockOnRotation) && !isSprinting)
         {
             Transform target = lockOnBehaviour.GetCurrentTarget();
             if (target != null)
@@ -157,41 +179,11 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
         }
-        else
+        else if (move.magnitude > 0.1f)
         {
-            if (move.magnitude > 0.1f)
-            {
-                Quaternion targetRotation = Quaternion.LookRotation(move.normalized);
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 10f * Time.deltaTime);
-            }
-        }
-
-        if (animator != null)
-        {
-         //   animator.SetBool("isLocked", isLocked);
-
-            if (isLocked)
-            {
-    
-                Vector3 localMove = transform.InverseTransformDirection(move);
-
-                float strafeSpeed = moveSpeed > 0 ? moveSpeed : 1f;
-
-                animator.SetFloat("MoveX", localMove.x, 0.1f, Time.deltaTime);
-                animator.SetFloat("MoveY", localMove.z, 0.1f, Time.deltaTime); 
-            }
-            else
-            {
-                animator.SetFloat("Speed", move.magnitude, 0.1f, Time.deltaTime);
-
-                animator.SetFloat("MoveX", 0f);
-                animator.SetFloat("MoveY", 0f);
-            }
+            Quaternion targetRotation = Quaternion.LookRotation(move.normalized);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 10f * Time.deltaTime);
         }
     }
-    [Command("setspeed", "speed")]
-    public void SetSpeed(float newSpeed)
-    {
-        moveSpeed = Mathf.Max(0f, newSpeed);
-    }
+
 }
