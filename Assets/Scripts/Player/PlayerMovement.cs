@@ -54,15 +54,20 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void OnEnable() => inputActions.Enable();
-    private void OnDisable() => inputActions.Disable();
-    private void Start()
+    void Update()
     {
-        CommandManager.Instance.RegisterInstance(this);
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-        mainCamera = Camera.main;
+        HandleCamera();
+        if (lockOnBehaviour) lockOnBehaviour.HandleLockOnState(transform.position);
+
+        if (keepLockOnRotation)
+        {
+            keepLockOnTimer -= Time.deltaTime;
+            if (keepLockOnTimer <= 0f) keepLockOnRotation = false;
+        }
+
+        HandleMovementAndAnimation();
     }
+
     private void LateUpdate()
     {
         var lockOn = lockOnBehaviour.vcamLockOn;
@@ -73,6 +78,16 @@ public class PlayerMovement : MonoBehaviour
             orbitalFollow.VerticalAxis.Value = Mathf.Clamp(10f, -10f, 45f);
         }
     }
+    private void OnEnable() => inputActions.Enable();
+    private void OnDisable() => inputActions.Disable();
+    private void Start()
+    {
+        CommandManager.Instance.RegisterInstance(this);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        mainCamera = Camera.main;
+    }
+
     private void HandleCamera()
     {
         Transform camTransform = mainCamera.transform;
@@ -94,24 +109,19 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        HandleCamera();
-        if (lockOnBehaviour) lockOnBehaviour.HandleLockOnState(transform.position);
-
-        if (keepLockOnRotation)
-        {
-            keepLockOnTimer -= Time.deltaTime;
-            if (keepLockOnTimer <= 0f) keepLockOnRotation = false;
-        }
-
-        HandleMovementAndAnimation();
-    }
-
-private void HandleMovementAndAnimation()
+    private void HandleMovementAndAnimation()
     {
         if (!canMove) return;
 
+        Vector3 moveDir = camForward * moveInput.y + camRight * moveInput.x;
+        if (moveDir.magnitude > 1f) moveDir.Normalize();
+
+        HandlePositionAndRotation(moveDir);
+
+        UpdateAnimatorParams(moveDir);
+    }
+    private void HandlePositionAndRotation(Vector3 move)
+    {
         float targetSpeed = 0f;
         float inputMagnitude = moveInput.magnitude;
 
@@ -123,48 +133,11 @@ private void HandleMovementAndAnimation()
         }
 
         currentSpeed = Mathf.Lerp(currentSpeed, targetSpeed, 10f * Time.deltaTime);
-        
-        Vector3 move = camForward * moveInput.y + camRight * moveInput.x;
-        if (move.magnitude > 1f) move.Normalize();
 
         controller.Move(move * currentSpeed * Time.deltaTime);
 
         bool isLocked = lockOnBehaviour.IsLocked && lockOnBehaviour.GetCurrentTarget() != null;
 
-        if (animator != null)
-        {
-
-            bool fightSprintActive = isLocked && isSprinting && inputMagnitude > 0.1f;
-            
-            animator.SetBool("FightSprint", fightSprintActive);
-
-            float animValue = 0f;
-            if (inputMagnitude > 0.1f)
-            {
-                if (isSprinting) animValue = 1.5f;      
-                else if (inputMagnitude >= 0.6f) animValue = 1.0f;
-                else animValue = 0.5f;                
-            }
-
-            if (isLocked)
-            {
-         
-                Vector3 localMove = transform.InverseTransformDirection(move);
-                
-                float multiplier = isSprinting ? 1.5f : 1f;
-
-                animator.SetFloat("MoveX", localMove.x * multiplier, 0.1f, Time.deltaTime);
-                animator.SetFloat("MoveY", localMove.z * multiplier, 0.1f, Time.deltaTime);
-            }
-            else
-            {
-                animator.SetFloat("Speed", animValue, 0.1f, Time.deltaTime);
-                animator.SetFloat("MoveX", 0f);
-                animator.SetFloat("MoveY", 0f);
-            }
-        }
-
- 
         if ((isLocked || keepLockOnRotation) && !isSprinting)
         {
             Transform target = lockOnBehaviour.GetCurrentTarget();
@@ -185,5 +158,37 @@ private void HandleMovementAndAnimation()
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 10f * Time.deltaTime);
         }
     }
+    private void UpdateAnimatorParams(Vector3 move)
+    {
+        if (animator == null) return;
 
+        float inputMagnitude = moveInput.magnitude;
+        bool isLocked = lockOnBehaviour.IsLocked && lockOnBehaviour.GetCurrentTarget() != null;
+
+        bool fightSprintActive = isLocked && isSprinting && inputMagnitude > 0.1f;
+        animator.SetBool("FightSprint", fightSprintActive);
+
+        float animValue = 0f;
+        if (inputMagnitude > 0.1f)
+        {
+            if (isSprinting) animValue = 1.5f;
+            else if (inputMagnitude >= 0.6f) animValue = 1.0f;
+            else animValue = 0.5f;
+        }
+
+        if (isLocked)
+        {
+            Vector3 localMove = transform.InverseTransformDirection(move);
+            float multiplier = isSprinting ? 1.5f : 1f;
+
+            animator.SetFloat("MoveX", localMove.x * multiplier, 0.1f, Time.deltaTime);
+            animator.SetFloat("MoveY", localMove.z * multiplier, 0.1f, Time.deltaTime);
+        }
+        else
+        {
+            animator.SetFloat("Speed", animValue, 0.1f, Time.deltaTime);
+            animator.SetFloat("MoveX", 0f);
+            animator.SetFloat("MoveY", 0f);
+        }
+    }
 }
