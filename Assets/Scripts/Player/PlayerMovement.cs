@@ -47,10 +47,26 @@ public class PlayerMovement : MonoBehaviour
         orbitalFollow = vcamFreeLook.GetComponent<CinemachineOrbitalFollow>();
         lockOnBehaviour = GetComponent<LockOnBehaviour>();
 
-      
         if (lockOnBehaviour != null)
         {
-            inputActions.Player.LockOn.performed += ctx => lockOnBehaviour.ToggleLockOn();
+            inputActions.Player.LockOn.performed += ctx =>
+            {
+                bool wasLocked = lockOnBehaviour.IsLocked;
+                lockOnBehaviour.ToggleLockOn();
+
+                if (wasLocked && !lockOnBehaviour.IsLocked)
+                {
+                    keepLockOnRotation = true;
+                    keepLockOnTimer = keepLockOnDuration;
+                }
+            };
+
+    
+            lockOnBehaviour.OnUnlock += () =>
+            {
+                keepLockOnRotation = true;
+                keepLockOnTimer = keepLockOnDuration;
+            };
         }
     }
 
