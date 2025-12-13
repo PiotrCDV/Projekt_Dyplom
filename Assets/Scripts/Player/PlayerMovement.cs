@@ -179,6 +179,11 @@ public class PlayerMovement : MonoBehaviour
         if (animator == null) return;
 
         float inputMagnitude = moveInput.magnitude;
+
+        bool isMoving = inputMagnitude > 0.01f;
+
+        animator.SetBool("IsMoving", isMoving);
+
         bool isLocked = lockOnBehaviour.IsLocked && lockOnBehaviour.GetCurrentTarget() != null;
 
         bool fightSprintActive = isLocked && isSprinting && inputMagnitude > 0.1f;
