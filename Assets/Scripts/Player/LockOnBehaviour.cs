@@ -10,10 +10,22 @@ public class LockOnBehaviour : MonoBehaviour
     public LayerMask enemyLayer;
     public Animator animator;
 
+    [Header("Dynamiczna Kamera (DeadZone + Damping)")]
+    public float farDistance = 10f;
+    public float closeDistance = 2f;
+
+    [Space]
+    public float farDeadZone = 0.15f;
+    public float closeDeadZone = 0.6f;
+
+    [Space]
+    public float farDamping = 0.2f;
+    public float closeDamping = 0f;
+
     [Header("UI Celu")]
     public RectTransform targetDotUI;
     [Range(1f, 50f)]
-    public float uiSmoothSpeed = 20f; // do wywalenia potem
+    public float uiSmoothSpeed = 20f;
 
     [Header("Skalowanie UI")]
     public bool useScale = true;
@@ -22,6 +34,9 @@ public class LockOnBehaviour : MonoBehaviour
 
     private Transform currentTarget;
     private Camera mainCamera;
+
+    private CinemachineRotationComposer rotationComposer;
+
     public bool IsLocked { get; private set; }
     public bool JustSwitched { get; private set; }
 
@@ -35,6 +50,11 @@ public class LockOnBehaviour : MonoBehaviour
         mainCamera = Camera.main;
         if (targetDotUI != null)
             targetDotUI.gameObject.SetActive(false);
+
+        if (vcamLockOn != null)
+        {
+            rotationComposer = vcamLockOn.GetComponent<CinemachineRotationComposer>();
+        }
     }
 
     private void Update()
@@ -44,6 +64,26 @@ public class LockOnBehaviour : MonoBehaviour
             switchTimer -= Time.deltaTime;
             if (switchTimer <= 0f)
                 JustSwitched = false;
+        }
+
+        //MARTWA STREFA + DAMPING
+        if (IsLocked && currentTarget != null && rotationComposer != null)
+        {
+            float distance = Vector3.Distance(transform.position, currentTarget.position);
+            float t = Mathf.InverseLerp(farDistance, closeDistance, distance);
+
+            float newDeadZoneWidth = Mathf.Lerp(farDeadZone, closeDeadZone, t);
+
+            var composition = rotationComposer.Composition;
+            var deadZone = composition.DeadZone;
+            deadZone.Size = new Vector2(newDeadZoneWidth, deadZone.Size.y);
+            composition.DeadZone = deadZone;
+            rotationComposer.Composition = composition;
+
+            float newDamping = Mathf.Lerp(farDamping, closeDamping, t);
+
+            rotationComposer.Damping.x = newDamping;
+            rotationComposer.Damping.y = newDamping;
         }
     }
 

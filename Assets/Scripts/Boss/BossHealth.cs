@@ -8,8 +8,6 @@ public class BossHealth : MonoBehaviour, IDamageable
 {
 
     [Header("UI & AI References")]
-    [SerializeField] private Animator animator;
-    [SerializeField] private Behaviour behaviourTree;
     [SerializeField] private Image healthFillImage;     
     [SerializeField] private Image takenDamageFill;   
 
@@ -24,11 +22,14 @@ public class BossHealth : MonoBehaviour, IDamageable
 
     private Coroutine trailCoroutine;
     private NavMeshAgent navMeshAgent;
+    private Animator animator;
+    [SerializeField]private Behaviour behaviourTree;
 
     private void Awake()
     {
         currentHP = maxHP;
         UpdateHealthBar();
+        animator = GetComponent<Animator>();
         navMeshAgent = GetComponent<NavMeshAgent>();
     }
 

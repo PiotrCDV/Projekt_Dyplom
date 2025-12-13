@@ -1,14 +1,13 @@
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.InputSystem;
 
 public class PlayerCombat : MonoBehaviour
 {
-    [Header("References")]
-    public Animator animator;
-    public PlayerMovement playerMovement;
-    public LockOnBehaviour lockOnBehaviour;
-
-    public SwordDamage weaponScript;
+    private Animator animator;
+    private PlayerMovement playerMovement;
+    private LockOnBehaviour lockOnBehaviour;
+    private SwordDamage weaponScript;
 
     [Header("Combat Settings")]
     public float attackCooldown = 0.5f;
@@ -24,6 +23,11 @@ public class PlayerCombat : MonoBehaviour
         if (lockOnBehaviour == null) lockOnBehaviour = GetComponent<LockOnBehaviour>();
 
         if (weaponScript == null) weaponScript = GetComponentInChildren<SwordDamage>();
+
+        animator = GetComponent<Animator>();
+
+        playerMovement = GetComponent<PlayerMovement>();
+
     }
 
     private void OnEnable() => inputActions.Enable();

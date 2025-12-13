@@ -3305,7 +3305,7 @@ Transform:
   m_GameObject: {fileID: 96236702}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.4, y: 0.552, z: 6.5}
+  m_LocalPosition: {x: 18.93, y: 0.552, z: 6.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -44916,6 +44916,12 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   animator: {fileID: 1077723824}
+  farDistance: 10
+  closeDistance: 2
+  farDeadZone: 0.15
+  closeDeadZone: 0.6
+  farDamping: 0.2
+  closeDamping: 0
   targetDotUI: {fileID: 0}
   uiSmoothSpeed: 20
   useScale: 1
@@ -62452,6 +62458,66 @@ PrefabInstance:
       propertyPath: UpdateMethod
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3926194379552551023, guid: 5df9216e5d379114480879e74ad381ec, type: 3}
+      propertyPath: Lookahead.Time
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3926194379552551023, guid: 5df9216e5d379114480879e74ad381ec, type: 3}
+      propertyPath: TargetOffset.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3926194379552551023, guid: 5df9216e5d379114480879e74ad381ec, type: 3}
+      propertyPath: Lookahead.Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3926194379552551023, guid: 5df9216e5d379114480879e74ad381ec, type: 3}
+      propertyPath: Lookahead.IgnoreY
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5518082667187823076, guid: 5df9216e5d379114480879e74ad381ec, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5518082667187823076, guid: 5df9216e5d379114480879e74ad381ec, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5518082667187823076, guid: 5df9216e5d379114480879e74ad381ec, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -3.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5518082667187823076, guid: 5df9216e5d379114480879e74ad381ec, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9874442
+      objectReference: {fileID: 0}
+    - target: {fileID: 5518082667187823076, guid: 5df9216e5d379114480879e74ad381ec, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.15795933
+      objectReference: {fileID: 0}
+    - target: {fileID: 5518082667187823076, guid: 5df9216e5d379114480879e74ad381ec, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.0016597001
+      objectReference: {fileID: 0}
+    - target: {fileID: 5518082667187823076, guid: 5df9216e5d379114480879e74ad381ec, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.00026549867
+      objectReference: {fileID: 0}
+    - target: {fileID: 6533825203373728185, guid: 5df9216e5d379114480879e74ad381ec, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9751746
+      objectReference: {fileID: 0}
+    - target: {fileID: 6533825203373728185, guid: 5df9216e5d379114480879e74ad381ec, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.20985101
+      objectReference: {fileID: 0}
+    - target: {fileID: 6533825203373728185, guid: 5df9216e5d379114480879e74ad381ec, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.06910806
+      objectReference: {fileID: 0}
+    - target: {fileID: 6533825203373728185, guid: 5df9216e5d379114480879e74ad381ec, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.014871589
+      objectReference: {fileID: 0}
     - target: {fileID: 6624889837693887381, guid: 5df9216e5d379114480879e74ad381ec, type: 3}
       propertyPath: m_LocalPosition.x
       value: 18.57
@@ -62496,6 +62562,14 @@ PrefabInstance:
       propertyPath: targetDotUI
       value: 
       objectReference: {fileID: 1047455620}
+    - target: {fileID: 6991254106050310098, guid: 5df9216e5d379114480879e74ad381ec, type: 3}
+      propertyPath: closeDeadZone
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 8244078571955274404, guid: 5df9216e5d379114480879e74ad381ec, type: 3}
+      propertyPath: field of view
+      value: 60.1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
