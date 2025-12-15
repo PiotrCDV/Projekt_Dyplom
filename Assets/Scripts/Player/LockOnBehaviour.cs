@@ -1,6 +1,7 @@
+using System;
+using System.Collections.Generic;
 using Unity.Cinemachine;
 using UnityEngine;
-using System;
 
 public class LockOnBehaviour : MonoBehaviour
 {
@@ -32,6 +33,9 @@ public class LockOnBehaviour : MonoBehaviour
     public float minScale = 0.6f;
     public float maxScale = 1.2f;
 
+    [Header("Camera Fix (Virtual Pivot)")]
+    public Transform cameraRoot;
+
     private Transform currentTarget;
     private Camera mainCamera;
 
@@ -44,6 +48,9 @@ public class LockOnBehaviour : MonoBehaviour
     private const float switchCooldown = 0.2f;
 
     public event Action OnUnlock;
+
+    public CinemachineTargetGroup targetGroup;
+    public Transform playerTransform;
 
     private void Awake()
     {
@@ -89,6 +96,8 @@ public class LockOnBehaviour : MonoBehaviour
 
     private void LateUpdate()
     {
+        HandleCameraRootRotation();
+
         if (IsLocked && currentTarget != null && targetDotUI != null)
         {
             Vector3 targetScreenPos = mainCamera.WorldToScreenPoint(currentTarget.position);
@@ -171,10 +180,23 @@ public class LockOnBehaviour : MonoBehaviour
     {
         currentTarget = target;
         IsLocked = true;
+
+        if (targetGroup != null)
+        {
+            var targets = new List<CinemachineTargetGroup.Target>();
+
+            targets.Add(new CinemachineTargetGroup.Target { Object = playerTransform, Weight = 1, Radius = 3 });
+
+            targets.Add(new CinemachineTargetGroup.Target { Object = currentTarget, Weight = 3, Radius = 1.5f });
+
+            targetGroup.Targets = targets;
+        }
         if (vcamLockOn != null)
-            vcamLockOn.LookAt = currentTarget;
-        if (animator != null)
-            animator.SetBool("isLockedOn", true);
+        {
+            vcamLockOn.LookAt = targetGroup.transform;
+        }
+
+        if (animator != null) animator.SetBool("isLockedOn", true);
 
         if (targetDotUI != null)
         {
@@ -197,5 +219,33 @@ public class LockOnBehaviour : MonoBehaviour
             targetDotUI.gameObject.SetActive(false);
 
         OnUnlock?.Invoke();
+
+        if (targetGroup != null)
+        {
+            var targets = new List<CinemachineTargetGroup.Target>();
+            targets.Add(new CinemachineTargetGroup.Target { Object = playerTransform, Weight = 1, Radius = 1 });
+            targetGroup.Targets = targets;
+        }
+    }
+
+    private void HandleCameraRootRotation()
+    {
+        if (cameraRoot == null) return;
+
+        if (IsLocked && targetGroup != null)
+        {
+            Vector3 direction = targetGroup.transform.position - transform.position;
+            direction.y = 0;
+
+            if (direction != Vector3.zero)
+            {
+                Quaternion targetRotation = Quaternion.LookRotation(direction);
+                cameraRoot.rotation = Quaternion.Slerp(cameraRoot.rotation, targetRotation, 50f * Time.deltaTime);
+            }
+        }
+        else
+        {
+            cameraRoot.localRotation = Quaternion.identity;
+        }
     }
 }

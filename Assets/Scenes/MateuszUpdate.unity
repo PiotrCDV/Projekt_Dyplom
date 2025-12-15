@@ -3502,6 +3502,11 @@ Transform:
   - {fileID: 600236295}
   m_Father: {fileID: 72106585}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &110661518 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1653313842305821161, guid: 5df9216e5d379114480879e74ad381ec, type: 3}
+  m_PrefabInstance: {fileID: 1580895363}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &111586051
 GameObject:
   m_ObjectHideFlags: 0
@@ -12737,6 +12742,55 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 313495200}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &271860974
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 271860976}
+  - component: {fileID: 271860975}
+  m_Layer: 0
+  m_Name: targets
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &271860975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 271860974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5eb80d8e62d9d145bb50fb783c0f731, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineTargetGroup
+  PositionMode: 1
+  RotationMode: 0
+  UpdateMethod: 2
+  Targets: []
+  m_LegacyTargets: []
+--- !u!4 &271860976
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 271860974}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &273622449
 GameObject:
@@ -44927,6 +44981,9 @@ MonoBehaviour:
   useScale: 1
   minScale: 0.6
   maxScale: 1.2
+  cameraRoot: {fileID: 0}
+  targetGroup: {fileID: 0}
+  playerTransform: {fileID: 0}
 --- !u!114 &1077723821
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44939,7 +44996,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c82423ab290e68a479c1e264461fd3fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
-  moveSpeed: 5
+  walkSpeed: 2
+  runSpeed: 5
+  sprintSpeed: 8
+  currentSpeed: 0
   controller: {fileID: 1580895365}
   vcamFreeLook: {fileID: 197240721}
   animator: {fileID: 1077723824}
@@ -62454,6 +62514,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerCharacter
       objectReference: {fileID: 0}
+    - target: {fileID: 1290627864155592556, guid: 5df9216e5d379114480879e74ad381ec, type: 3}
+      propertyPath: Target.TrackingTarget
+      value: 
+      objectReference: {fileID: 110661518}
+    - target: {fileID: 1653313842305821161, guid: 5df9216e5d379114480879e74ad381ec, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.04999995
+      objectReference: {fileID: 0}
     - target: {fileID: 2008751348925531548, guid: 5df9216e5d379114480879e74ad381ec, type: 3}
       propertyPath: UpdateMethod
       value: 1
@@ -62501,6 +62569,10 @@ PrefabInstance:
     - target: {fileID: 5518082667187823076, guid: 5df9216e5d379114480879e74ad381ec, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0.00026549867
+      objectReference: {fileID: 0}
+    - target: {fileID: 6533825203373728185, guid: 5df9216e5d379114480879e74ad381ec, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.6999999
       objectReference: {fileID: 0}
     - target: {fileID: 6533825203373728185, guid: 5df9216e5d379114480879e74ad381ec, type: 3}
       propertyPath: m_LocalRotation.w
@@ -62559,12 +62631,24 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6991254106050310098, guid: 5df9216e5d379114480879e74ad381ec, type: 3}
+      propertyPath: cameraRoot
+      value: 
+      objectReference: {fileID: 110661518}
+    - target: {fileID: 6991254106050310098, guid: 5df9216e5d379114480879e74ad381ec, type: 3}
       propertyPath: targetDotUI
       value: 
       objectReference: {fileID: 1047455620}
     - target: {fileID: 6991254106050310098, guid: 5df9216e5d379114480879e74ad381ec, type: 3}
+      propertyPath: targetGroup
+      value: 
+      objectReference: {fileID: 271860975}
+    - target: {fileID: 6991254106050310098, guid: 5df9216e5d379114480879e74ad381ec, type: 3}
       propertyPath: closeDeadZone
       value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 6991254106050310098, guid: 5df9216e5d379114480879e74ad381ec, type: 3}
+      propertyPath: playerTransform
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8244078571955274404, guid: 5df9216e5d379114480879e74ad381ec, type: 3}
       propertyPath: field of view
@@ -87900,3 +87984,4 @@ SceneRoots:
   - {fileID: 1077723825}
   - {fileID: 1626488400}
   - {fileID: 1580895363}
+  - {fileID: 271860976}
