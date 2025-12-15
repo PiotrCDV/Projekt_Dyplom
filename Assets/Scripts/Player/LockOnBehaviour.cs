@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class LockOnBehaviour : MonoBehaviour
 {
+    private Vector3 rootOffset;
+
     [Header("Ustawienia Namierzania")]
     public CinemachineCamera vcamLockOn;
     public float maxLockOnDistance = 20f;
@@ -62,6 +64,11 @@ public class LockOnBehaviour : MonoBehaviour
         {
             rotationComposer = vcamLockOn.GetComponent<CinemachineRotationComposer>();
         }
+        if (cameraRoot != null)
+        {
+            rootOffset = cameraRoot.position - transform.position;
+            cameraRoot.transform.SetParent(null);
+        }
     }
 
     private void Update()
@@ -73,7 +80,6 @@ public class LockOnBehaviour : MonoBehaviour
                 JustSwitched = false;
         }
 
-        //MARTWA STREFA + DAMPING
         if (IsLocked && currentTarget != null && rotationComposer != null)
         {
             float distance = Vector3.Distance(transform.position, currentTarget.position);
@@ -232,20 +238,27 @@ public class LockOnBehaviour : MonoBehaviour
     {
         if (cameraRoot == null) return;
 
+
+        cameraRoot.position = transform.position + rootOffset;
+
         if (IsLocked && targetGroup != null)
         {
-            Vector3 direction = targetGroup.transform.position - transform.position;
-            direction.y = 0;
+            Vector3 direction = targetGroup.transform.position - cameraRoot.position;
+            direction.y = 0; 
 
             if (direction != Vector3.zero)
             {
-                Quaternion targetRotation = Quaternion.LookRotation(direction);
-                cameraRoot.rotation = Quaternion.Slerp(cameraRoot.rotation, targetRotation, 50f * Time.deltaTime);
+
+                cameraRoot.rotation = Quaternion.LookRotation(direction);
             }
         }
         else
         {
-            cameraRoot.localRotation = Quaternion.identity;
+            cameraRoot.rotation = Quaternion.RotateTowards(cameraRoot.rotation, transform.rotation, 720f * Time.deltaTime);
         }
+    }
+    private void OnDestroy()
+    {
+        if (cameraRoot != null) Destroy(cameraRoot.gameObject);
     }
 }
