@@ -1,0 +1,97 @@
+using System.Collections;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+public class PlayerDodge : MonoBehaviour
+{
+    [Header("Ustawienia Uniku")]
+    public float dodgeSlideDuration = 1f; 
+    public float dodgeSpeed = 8f;
+
+    public bool IsDodging { get; private set; } = false;
+
+    private InputSystem_Actions inputActions;
+    private Animator animator;
+    private CharacterController controller;
+    private PlayerMovement playerMovement;
+
+    private Vector3 savedDodgeDirection;
+
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+        controller = GetComponent<CharacterController>();
+        playerMovement = GetComponent<PlayerMovement>();
+
+        inputActions = new InputSystem_Actions();
+        inputActions.Player.Dodge.performed += ctx => PrepareDodge();
+    }
+
+    private void OnEnable() => inputActions.Enable();
+    private void OnDisable() => inputActions.Disable();
+
+    private void PrepareDodge()
+    {
+        if (IsDodging) return;
+
+        IsDodging = true;
+
+        if (playerMovement != null) playerMovement.SetMovementEnabled(false);
+
+        CalculateDodgeDirection();
+
+        transform.rotation = Quaternion.LookRotation(savedDodgeDirection);
+
+        if (animator != null) animator.SetTrigger("Dodge");
+    }
+
+    public void StartDodge()
+    {
+        if (!IsDodging) return;
+        StartCoroutine(DodgeSlideRoutine());
+    }
+
+    public void FinishDodge()
+    {
+        if (playerMovement != null) playerMovement.SetMovementEnabled(true);
+        IsDodging = false;
+
+        StopAllCoroutines();
+    }
+
+    private IEnumerator DodgeSlideRoutine()
+    {
+        float timer = 0f;
+
+        while (timer < dodgeSlideDuration)
+        {
+            controller.Move(savedDodgeDirection * dodgeSpeed * Time.deltaTime);
+
+            timer += Time.deltaTime;
+            yield return null;
+        }
+    }
+
+    private void CalculateDodgeDirection()
+    {
+        Vector2 input = inputActions.Player.Move.ReadValue<Vector2>();
+
+        if (input != Vector2.zero)
+        {
+            Transform camTransform = Camera.main.transform;
+            Vector3 camForward = camTransform.forward;
+            Vector3 camRight = camTransform.right;
+            camForward.y = 0;
+            camRight.y = 0;
+            camForward.Normalize();
+            camRight.Normalize();
+
+            savedDodgeDirection = camForward * input.y + camRight * input.x;
+            savedDodgeDirection.Normalize();
+        }
+        else
+        {
+            savedDodgeDirection = transform.forward;
+        }
+    }
+}
