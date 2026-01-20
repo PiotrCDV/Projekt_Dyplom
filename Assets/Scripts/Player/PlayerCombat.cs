@@ -1,60 +1,68 @@
 using UnityEngine;
-using UnityEngine.AI;
 using UnityEngine.InputSystem;
 
 public class PlayerCombat : MonoBehaviour
 {
+    [Header("References")]
     private Animator animator;
     private PlayerMovement playerMovement;
     private LockOnBehaviour lockOnBehaviour;
     private SwordDamage weaponScript;
+    private PlayerDodge playerDodge;
 
-    [Header("Combat Settings")]
-    public float attackCooldown = 0.5f;
-    private float lastAttackTime = -Mathf.Infinity;
+    [Header("Combo Settings")]
+    public float comboGraceTime = 2.0f;
+
+    private int comboStep = 0;
+    private bool isAttacking = false;
+    private float lastAttackEndTime = 0f;
 
     private InputSystem_Actions inputActions;
 
     private void Awake()
     {
-        inputActions = new InputSystem_Actions();
-        inputActions.Player.Attack.performed += ctx => PerformAttack();
-
-        if (lockOnBehaviour == null) lockOnBehaviour = GetComponent<LockOnBehaviour>();
-
-        if (weaponScript == null) weaponScript = GetComponentInChildren<SwordDamage>();
-
         animator = GetComponent<Animator>();
-
         playerMovement = GetComponent<PlayerMovement>();
+        lockOnBehaviour = GetComponent<LockOnBehaviour>();
+        weaponScript = GetComponentInChildren<SwordDamage>();
+        playerDodge = GetComponent<PlayerDodge>();
 
+        inputActions = new InputSystem_Actions();
+        inputActions.Player.Attack.performed += ctx => HandleAttackInput();
     }
 
     private void OnEnable() => inputActions.Enable();
     private void OnDisable() => inputActions.Disable();
 
-    private void PerformAttack()
+    private void HandleAttackInput()
     {
+        if (playerDodge != null && playerDodge.IsDodging) return;
+
         if (lockOnBehaviour == null || !lockOnBehaviour.IsLocked) return;
 
-        if (Time.time >= lastAttackTime + attackCooldown)
+        if (isAttacking) return;
+
+        PerformAttack();
+    }
+
+    private void PerformAttack()
+    {
+        if (comboStep > 0 && Time.time - lastAttackEndTime <= comboGraceTime)
         {
-            animator.SetTrigger("Attack1");
-            lastAttackTime = Time.time;
+            comboStep++;
+            if (comboStep > 3) comboStep = 1;
         }
-    }
+        else
+        {
+            comboStep = 1;
+        }
 
-    public void OnAttackStart()
-    {
+        isAttacking = true;
+
         if (playerMovement != null) playerMovement.SetMovementEnabled(false);
-    }
 
-    public void OnAttackEnd()
-    {
-        if (playerMovement != null) playerMovement.SetMovementEnabled(true);
-        DisableWeaponHitbox();
+        animator.SetTrigger("Attack" + comboStep);
     }
-
 
     public void EnableWeaponHitbox()
     {
@@ -64,5 +72,27 @@ public class PlayerCombat : MonoBehaviour
     public void DisableWeaponHitbox()
     {
         if (weaponScript != null) weaponScript.DisableDamage();
+    }
+
+    public void OnAttackEnd()
+    {
+        isAttacking = false;
+
+        if (playerMovement != null) playerMovement.SetMovementEnabled(true);
+
+        DisableWeaponHitbox();
+
+        lastAttackEndTime = Time.time;
+    }
+
+    private void Update()
+    {
+        if (!isAttacking && comboStep > 0)
+        {
+            if (Time.time - lastAttackEndTime > comboGraceTime)
+            {
+                comboStep = 0;
+            }
+        }
     }
 }
