@@ -10,12 +10,12 @@ public class PlayerCombat : MonoBehaviour
     private SwordDamage weaponScript;
     private PlayerDodge playerDodge;
 
-    [Header("Combo Settings")]
-    public float comboGraceTime = 2.0f;
-
     private int comboStep = 0;
     private bool isAttacking = false;
-    private float lastAttackEndTime = 0f;
+
+    [Header("Debug Info")] 
+    [SerializeField] private bool inputQueued = false;
+    [SerializeField] private bool allowInputQueuing = false;
 
     private InputSystem_Actions inputActions;
 
@@ -37,32 +37,42 @@ public class PlayerCombat : MonoBehaviour
     private void HandleAttackInput()
     {
         if (playerDodge != null && playerDodge.IsDodging) return;
-
         if (lockOnBehaviour == null || !lockOnBehaviour.IsLocked) return;
 
-        if (isAttacking) return;
+        if (isAttacking)
+        {
+            if (allowInputQueuing)
+            {
+                inputQueued = true;
+            }
+          
+            return;
+        }
 
         PerformAttack();
     }
 
     private void PerformAttack()
     {
-        if (comboStep > 0 && Time.time - lastAttackEndTime <= comboGraceTime)
-        {
-            comboStep++;
-            if (comboStep > 3) comboStep = 1;
-        }
-        else
-        {
-            comboStep = 1;
-        }
+        comboStep++;
+        if (comboStep > 3) comboStep = 1;
+
 
         isAttacking = true;
+
+        inputQueued = false;
+        allowInputQueuing = false; 
 
         if (playerMovement != null) playerMovement.SetMovementEnabled(false);
 
         animator.SetTrigger("Attack" + comboStep);
     }
+
+    public void EnableAttackQueue()
+    {
+        allowInputQueuing = true;
+    }
+
 
     public void EnableWeaponHitbox()
     {
@@ -76,23 +86,21 @@ public class PlayerCombat : MonoBehaviour
 
     public void OnAttackEnd()
     {
+
         isAttacking = false;
-
-        if (playerMovement != null) playerMovement.SetMovementEnabled(true);
-
+        allowInputQueuing = false;
         DisableWeaponHitbox();
 
-        lastAttackEndTime = Time.time;
-    }
-
-    private void Update()
-    {
-        if (!isAttacking && comboStep > 0)
+        if (inputQueued)
         {
-            if (Time.time - lastAttackEndTime > comboGraceTime)
-            {
-                comboStep = 0;
-            }
+            PerformAttack();
+        }
+        else
+        {
+            animator.SetTrigger("Recovery");
+            comboStep = 0;
+
+            if (playerMovement != null) playerMovement.SetMovementEnabled(true);
         }
     }
 }
