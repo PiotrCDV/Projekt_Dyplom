@@ -1,58 +1,76 @@
 using UnityEngine;
-using UnityEngine.AI;
 using UnityEngine.InputSystem;
 
 public class PlayerCombat : MonoBehaviour
 {
+    [Header("References")]
     private Animator animator;
     private PlayerMovement playerMovement;
     private LockOnBehaviour lockOnBehaviour;
     private SwordDamage weaponScript;
+    private PlayerDodge playerDodge;
 
-    [Header("Combat Settings")]
-    public float attackCooldown = 0.5f;
-    private float lastAttackTime = -Mathf.Infinity;
+    private int comboStep = 0;
+    private bool isAttacking = false;
+
+    [Header("Debug Info")] 
+    [SerializeField] private bool inputQueued = false;
+    [SerializeField] private bool allowInputQueuing = false;
 
     private InputSystem_Actions inputActions;
 
     private void Awake()
     {
-        inputActions = new InputSystem_Actions();
-        inputActions.Player.Attack.performed += ctx => PerformAttack();
-
-        if (lockOnBehaviour == null) lockOnBehaviour = GetComponent<LockOnBehaviour>();
-
-        if (weaponScript == null) weaponScript = GetComponentInChildren<SwordDamage>();
-
         animator = GetComponent<Animator>();
-
         playerMovement = GetComponent<PlayerMovement>();
+        lockOnBehaviour = GetComponent<LockOnBehaviour>();
+        weaponScript = GetComponentInChildren<SwordDamage>();
+        playerDodge = GetComponent<PlayerDodge>();
 
+        inputActions = new InputSystem_Actions();
+        inputActions.Player.Attack.performed += ctx => HandleAttackInput();
     }
 
     private void OnEnable() => inputActions.Enable();
     private void OnDisable() => inputActions.Disable();
 
-    private void PerformAttack()
+    private void HandleAttackInput()
     {
+        if (playerDodge != null && playerDodge.IsDodging) return;
         if (lockOnBehaviour == null || !lockOnBehaviour.IsLocked) return;
 
-        if (Time.time >= lastAttackTime + attackCooldown)
+        if (isAttacking)
         {
-            animator.SetTrigger("Attack1");
-            lastAttackTime = Time.time;
+            if (allowInputQueuing)
+            {
+                inputQueued = true;
+            }
+          
+            return;
         }
+
+        PerformAttack();
     }
 
-    public void OnAttackStart()
+    private void PerformAttack()
     {
+        comboStep++;
+        if (comboStep > 3) comboStep = 1;
+
+
+        isAttacking = true;
+
+        inputQueued = false;
+        allowInputQueuing = false; 
+
         if (playerMovement != null) playerMovement.SetMovementEnabled(false);
+
+        animator.SetTrigger("Attack" + comboStep);
     }
 
-    public void OnAttackEnd()
+    public void EnableAttackQueue()
     {
-        if (playerMovement != null) playerMovement.SetMovementEnabled(true);
-        DisableWeaponHitbox();
+        allowInputQueuing = true;
     }
 
 
@@ -64,5 +82,25 @@ public class PlayerCombat : MonoBehaviour
     public void DisableWeaponHitbox()
     {
         if (weaponScript != null) weaponScript.DisableDamage();
+    }
+
+    public void OnAttackEnd()
+    {
+
+        isAttacking = false;
+        allowInputQueuing = false;
+        DisableWeaponHitbox();
+
+        if (inputQueued)
+        {
+            PerformAttack();
+        }
+        else
+        {
+            animator.SetTrigger("Recovery");
+            comboStep = 0;
+
+            if (playerMovement != null) playerMovement.SetMovementEnabled(true);
+        }
     }
 }
