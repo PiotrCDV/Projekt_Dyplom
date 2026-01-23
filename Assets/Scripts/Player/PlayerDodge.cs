@@ -5,8 +5,8 @@ using UnityEngine.InputSystem;
 public class PlayerDodge : MonoBehaviour
 {
     [Header("Ustawienia Uniku")]
-    public float dodgeSlideDuration = 1f; 
-    public float dodgeSpeed = 8f;
+    public float dodgeSlideDuration = 0.3f;
+    public float dodgeSpeed = 12f;
 
     public bool IsDodging { get; private set; } = false;
 
@@ -15,6 +15,8 @@ public class PlayerDodge : MonoBehaviour
     private CharacterController controller;
     private PlayerMovement playerMovement;
 
+    private PlayerCombat playerCombat;
+
     private Vector3 savedDodgeDirection;
 
     private void Awake()
@@ -22,6 +24,7 @@ public class PlayerDodge : MonoBehaviour
         animator = GetComponent<Animator>();
         controller = GetComponent<CharacterController>();
         playerMovement = GetComponent<PlayerMovement>();
+        playerCombat = GetComponent<PlayerCombat>();
 
         inputActions = new InputSystem_Actions();
         inputActions.Player.Dodge.performed += ctx => PrepareDodge();
@@ -33,6 +36,8 @@ public class PlayerDodge : MonoBehaviour
     private void PrepareDodge()
     {
         if (IsDodging) return;
+
+        if (playerCombat != null && playerCombat.IsAttacking) return;
 
         IsDodging = true;
 
@@ -55,7 +60,6 @@ public class PlayerDodge : MonoBehaviour
     {
         if (playerMovement != null) playerMovement.SetMovementEnabled(true);
         IsDodging = false;
-
         StopAllCoroutines();
     }
 
@@ -66,7 +70,6 @@ public class PlayerDodge : MonoBehaviour
         while (timer < dodgeSlideDuration)
         {
             controller.Move(savedDodgeDirection * dodgeSpeed * Time.deltaTime);
-
             timer += Time.deltaTime;
             yield return null;
         }

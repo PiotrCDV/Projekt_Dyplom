@@ -13,12 +13,12 @@ public class PlayerCombat : MonoBehaviour
     private int comboStep = 0;
     private bool isAttacking = false;
 
-    [Header("Debug Info")] 
+    [Header("Debug Info")]
     [SerializeField] private bool inputQueued = false;
     [SerializeField] private bool allowInputQueuing = false;
 
     private InputSystem_Actions inputActions;
-
+    public bool IsAttacking => isAttacking;
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -36,7 +36,9 @@ public class PlayerCombat : MonoBehaviour
 
     private void HandleAttackInput()
     {
+
         if (playerDodge != null && playerDodge.IsDodging) return;
+
         if (lockOnBehaviour == null || !lockOnBehaviour.IsLocked) return;
 
         if (isAttacking)
@@ -45,7 +47,6 @@ public class PlayerCombat : MonoBehaviour
             {
                 inputQueued = true;
             }
-          
             return;
         }
 
@@ -57,22 +58,29 @@ public class PlayerCombat : MonoBehaviour
         comboStep++;
         if (comboStep > 3) comboStep = 1;
 
-
         isAttacking = true;
-
         inputQueued = false;
-        allowInputQueuing = false; 
+        allowInputQueuing = false;
 
         if (playerMovement != null) playerMovement.SetMovementEnabled(false);
 
-        animator.SetTrigger("Attack" + comboStep);
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Recovery"))
+        {
+
+            animator.SetTrigger("RecoveryStop");
+
+        }
+        else
+        {
+
+            animator.SetTrigger("Attack" + comboStep);
+        }
     }
 
     public void EnableAttackQueue()
     {
         allowInputQueuing = true;
     }
-
 
     public void EnableWeaponHitbox()
     {
@@ -86,7 +94,6 @@ public class PlayerCombat : MonoBehaviour
 
     public void OnAttackEnd()
     {
-
         isAttacking = false;
         allowInputQueuing = false;
         DisableWeaponHitbox();
