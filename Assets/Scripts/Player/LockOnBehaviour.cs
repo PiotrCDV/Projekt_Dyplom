@@ -25,6 +25,16 @@ public class LockOnBehaviour : MonoBehaviour
     public float farDamping = 0.2f;
     public float closeDamping = 0f;
 
+    [Header("BALANS SHOULDER OFFSET (Sprint)")]
+    [Tooltip("Domyœlna pozycja barku (X=0.5, Y=1.2, Z=0)")]
+    public Vector3 baseShoulderOffset = new Vector3(0.5f, 1.2f, 0f);
+    [Tooltip("O ile X ma wzrosn¹æ w lewo")]
+    public float shiftLeftAmount = 1.0f;
+    [Tooltip("O ile X ma spaœæ w prawo")]
+    public float shiftRightAmount = 1.0f;
+    public float shoulderShiftSpeed = 5f;
+
+
     [Header("UI Celu")]
     public RectTransform targetDotUI;
     [Range(1f, 50f)]
@@ -42,6 +52,7 @@ public class LockOnBehaviour : MonoBehaviour
     private Camera mainCamera;
 
     private CinemachineRotationComposer rotationComposer;
+    private CinemachineThirdPersonFollow thirdPersonFollow;
 
     public bool IsLocked { get; private set; }
     public bool JustSwitched { get; private set; }
@@ -54,6 +65,9 @@ public class LockOnBehaviour : MonoBehaviour
     public CinemachineTargetGroup targetGroup;
     public Transform playerTransform;
 
+    private bool isSprinting = false;
+    private float sprintInputX = 0f;
+
     private void Awake()
     {
         mainCamera = Camera.main;
@@ -63,12 +77,19 @@ public class LockOnBehaviour : MonoBehaviour
         if (vcamLockOn != null)
         {
             rotationComposer = vcamLockOn.GetComponent<CinemachineRotationComposer>();
+            thirdPersonFollow = vcamLockOn.GetComponent<CinemachineThirdPersonFollow>();
         }
         if (cameraRoot != null)
         {
             rootOffset = cameraRoot.position - transform.position;
             cameraRoot.transform.SetParent(null);
         }
+    }
+
+    public void SetSprintData(bool sprinting, float inputX)
+    {
+        isSprinting = sprinting;
+        sprintInputX = inputX;
     }
 
     private void Update()
@@ -80,23 +101,43 @@ public class LockOnBehaviour : MonoBehaviour
                 JustSwitched = false;
         }
 
-        if (IsLocked && currentTarget != null && rotationComposer != null)
+        if (IsLocked && currentTarget != null)
         {
             float distance = Vector3.Distance(transform.position, currentTarget.position);
             float t = Mathf.InverseLerp(farDistance, closeDistance, distance);
 
-            float newDeadZoneWidth = Mathf.Lerp(farDeadZone, closeDeadZone, t);
+            if (rotationComposer != null)
+            {
+                float newDeadZoneWidth = Mathf.Lerp(farDeadZone, closeDeadZone, t);
+                var composition = rotationComposer.Composition;
+                var deadZone = composition.DeadZone;
+                deadZone.Size = new Vector2(newDeadZoneWidth, deadZone.Size.y);
+                composition.DeadZone = deadZone;
+                rotationComposer.Composition = composition;
 
-            var composition = rotationComposer.Composition;
-            var deadZone = composition.DeadZone;
-            deadZone.Size = new Vector2(newDeadZoneWidth, deadZone.Size.y);
-            composition.DeadZone = deadZone;
-            rotationComposer.Composition = composition;
+                float newDamping = Mathf.Lerp(farDamping, closeDamping, t);
+                rotationComposer.Damping.x = newDamping;
+                rotationComposer.Damping.y = newDamping;
+            }
 
-            float newDamping = Mathf.Lerp(farDamping, closeDamping, t);
+            if (thirdPersonFollow != null)
+            {
+                float targetX = baseShoulderOffset.x;
 
-            rotationComposer.Damping.x = newDamping;
-            rotationComposer.Damping.y = newDamping;
+                if (isSprinting)
+                {
+                    if (sprintInputX < -0.1f) 
+                        targetX = baseShoulderOffset.x + (Mathf.Abs(sprintInputX) * shiftLeftAmount);
+                    else if (sprintInputX > 0.1f) 
+                        targetX = baseShoulderOffset.x - (sprintInputX * shiftRightAmount);
+                }
+
+                Vector3 currentOffset = thirdPersonFollow.ShoulderOffset;
+                currentOffset.x = Mathf.Lerp(currentOffset.x, targetX, Time.deltaTime * shoulderShiftSpeed);
+                currentOffset.y = baseShoulderOffset.y;
+                currentOffset.z = baseShoulderOffset.z;
+                thirdPersonFollow.ShoulderOffset = currentOffset;
+            }
         }
     }
 
@@ -190,11 +231,8 @@ public class LockOnBehaviour : MonoBehaviour
         if (targetGroup != null)
         {
             var targets = new List<CinemachineTargetGroup.Target>();
-
             targets.Add(new CinemachineTargetGroup.Target { Object = playerTransform, Weight = 1, Radius = 3 });
-
             targets.Add(new CinemachineTargetGroup.Target { Object = currentTarget, Weight = 3, Radius = 1.5f });
-
             targetGroup.Targets = targets;
         }
         if (vcamLockOn != null)
@@ -237,18 +275,14 @@ public class LockOnBehaviour : MonoBehaviour
     private void HandleCameraRootRotation()
     {
         if (cameraRoot == null) return;
-
-
         cameraRoot.position = transform.position + rootOffset;
 
         if (IsLocked && targetGroup != null)
         {
             Vector3 direction = targetGroup.transform.position - cameraRoot.position;
-            direction.y = 0; 
-
+            direction.y = 0;
             if (direction != Vector3.zero)
             {
-
                 cameraRoot.rotation = Quaternion.LookRotation(direction);
             }
         }

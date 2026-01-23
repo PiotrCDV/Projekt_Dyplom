@@ -132,6 +132,12 @@ public class PlayerMovement : MonoBehaviour
         Vector3 moveDir = camForward * moveInput.y + camRight * moveInput.x;
         if (moveDir.magnitude > 1f) moveDir.Normalize();
 
+        if (lockOnBehaviour != null)
+        {
+            bool sprintActive = isSprinting && moveInput.magnitude > 0.1f;
+            lockOnBehaviour.SetSprintData(sprintActive, moveInput.x);
+        }
+
         HandlePositionAndRotation(moveDir);
 
         UpdateAnimatorParams(moveDir);
