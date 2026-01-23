@@ -70,7 +70,7 @@ public class PlayerCombat : MonoBehaviour
             animator.SetTrigger("RecoveryStop");
 
         }
-        else
+        else 
         {
 
             animator.SetTrigger("Attack" + comboStep);
