@@ -13,9 +13,8 @@ public class PlayerCombat : MonoBehaviour
     private int comboStep = 0;
     private bool isAttacking = false;
 
-    [Header("Debug Info")]
-    [SerializeField] private bool inputQueued = false;
-    [SerializeField] private bool allowInputQueuing = false;
+     private bool inputQueued = false;
+     private bool allowInputQueuing = false;
 
     private InputSystem_Actions inputActions;
     public bool IsAttacking => isAttacking;

@@ -996,14 +996,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerCharacter
       objectReference: {fileID: 0}
-    - target: {fileID: 3150244945780024518, guid: 5df9216e5d379114480879e74ad381ec, type: 3}
-      propertyPath: healthFillImage
-      value: 
-      objectReference: {fileID: 1667980864}
-    - target: {fileID: 3150244945780024518, guid: 5df9216e5d379114480879e74ad381ec, type: 3}
-      propertyPath: takenDamageFill
-      value: 
-      objectReference: {fileID: 2108228508}
     - target: {fileID: 6624889837693887381, guid: 5df9216e5d379114480879e74ad381ec, type: 3}
       propertyPath: m_LocalPosition.x
       value: 18.57
@@ -1115,9 +1107,38 @@ PrefabInstance:
       value: BossWithHitBox
       objectReference: {fileID: 0}
     - target: {fileID: 6257530152200430688, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
+      propertyPath: 'managedReferences[1739613891645669419]'
+      value: 'Unity.Behavior Unity.Behavior.BlackboardVariable`1[[System.Single,
+        mscorlib]]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6257530152200430688, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
+      propertyPath: managedReferences[1739613891645669419].Name
+      value: BasicAttackRange
+      objectReference: {fileID: 0}
+    - target: {fileID: 6257530152200430688, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
+      propertyPath: m_BlackboardVariableOverridesList.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6257530152200430688, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
+      propertyPath: managedReferences[1739613891645669419].m_Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6257530152200430688, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
       propertyPath: managedReferences[4651023333483348056].m_Value
       value: 
       objectReference: {fileID: 1580895364}
+    - target: {fileID: 6257530152200430688, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
+      propertyPath: 'm_BlackboardVariableOverridesList.Array.data[4]'
+      value: 1739613891645669419
+      objectReference: {fileID: 0}
+    - target: {fileID: 6257530152200430688, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
+      propertyPath: managedReferences[1739613891645669419].GUID.m_Value0
+      value: 1628806469147378231
+      objectReference: {fileID: 0}
+    - target: {fileID: 6257530152200430688, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
+      propertyPath: managedReferences[1739613891645669419].GUID.m_Value1
+      value: 423103945065795739
+      objectReference: {fileID: 0}
     - target: {fileID: 6257530152200430688, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
       propertyPath: 'managedReferences[4651023333483348081].m_Value.Array.data[0]'
       value: 
@@ -1143,17 +1164,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
---- !u!114 &1667980864 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8754568064445752292, guid: 9d3607c1d3c303b44911daf2cd8ea934, type: 3}
-  m_PrefabInstance: {fileID: 3689127812757017356}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!114 &1754796511 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8473276208583515083, guid: 9d3607c1d3c303b44911daf2cd8ea934, type: 3}
@@ -1196,17 +1206,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 687044572}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2108228508 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7000966535571075148, guid: 9d3607c1d3c303b44911daf2cd8ea934, type: 3}
-  m_PrefabInstance: {fileID: 3689127812757017356}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!1 &2120913971
 GameObject:
   m_ObjectHideFlags: 0
