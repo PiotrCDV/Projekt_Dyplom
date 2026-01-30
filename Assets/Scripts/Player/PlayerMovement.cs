@@ -27,6 +27,8 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 camRight;
     private bool canMove = true;
 
+    private bool isCloseCamera = false;
+
     private LockOnBehaviour lockOnBehaviour;
     private CinemachineOrbitalFollow orbitalFollow;
 
@@ -72,6 +74,13 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+
+        //
+        if (Keyboard.current.vKey.wasPressedThisFrame)
+        {
+            ToggleCameraMode();
+        }
+        //
         HandleCamera();
         if (lockOnBehaviour) lockOnBehaviour.HandleLockOnState(transform.position);
 
@@ -82,6 +91,18 @@ public class PlayerMovement : MonoBehaviour
         }
 
         HandleMovementAndAnimation();
+    }
+
+    private void ToggleCameraMode()
+    {
+        if (lockOnBehaviour != null && lockOnBehaviour.IsLocked) return;
+
+        isCloseCamera = !isCloseCamera;
+
+        if (animator != null)
+        {
+            animator.SetBool("CameraClose", isCloseCamera);
+        }
     }
 
     private void LateUpdate()
