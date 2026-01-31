@@ -119,7 +119,6 @@ public class PlayerMovement : MonoBehaviour
     private void OnDisable() => inputActions.Disable();
     private void Start()
     {
-        CommandManager.Instance.RegisterInstance(this);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         mainCamera = Camera.main;
