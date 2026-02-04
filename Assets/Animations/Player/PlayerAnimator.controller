@@ -315,7 +315,7 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: 7400000, guid: 763a91b06d93c0b4a8669cbb79757096, type: 2}
-  m_Tag: 
+  m_Tag: Combat
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
@@ -603,7 +603,7 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: 7400000, guid: 62129db4f9beb0d4cbf9e4f901daaf46, type: 2}
-  m_Tag: 
+  m_Tag: Combat
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
@@ -1624,7 +1624,7 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: 7400000, guid: 531dcf64383065b4c8134f031218c36c, type: 2}
-  m_Tag: 
+  m_Tag: Combat
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
@@ -1704,7 +1704,7 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: -1032995138621653135}
-  m_Tag: 
+  m_Tag: Combat
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
@@ -1962,7 +1962,7 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: 7400000, guid: aa368505466a179418e811bd45e56b01, type: 2}
-  m_Tag: 
+  m_Tag: Combat
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
@@ -2270,7 +2270,7 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: 7400000, guid: 1f01c94d0229a7743ba91a492d72c4f4, type: 2}
-  m_Tag: 
+  m_Tag: NoCombat
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
@@ -2453,7 +2453,7 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: 7400000, guid: 2b06ef4b8d4860541a93928cf88578d8, type: 2}
-  m_Tag: 
+  m_Tag: NoCombat
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
