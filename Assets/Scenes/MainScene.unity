@@ -237,6 +237,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2005595456}
     - target: {fileID: 6814543300484262438, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
+      propertyPath: damageSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 848784f92181d554194de6a01b94a053, type: 3}
+    - target: {fileID: 6814543300484262438, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
       propertyPath: healthFillImage
       value: 
       objectReference: {fileID: 1991645613}
@@ -2495,6 +2499,10 @@ PrefabInstance:
       propertyPath: targetGroup
       value: 
       objectReference: {fileID: 128244574}
+    - target: {fileID: 2016017187875150652, guid: 98d51c6bfc0eee54ba72492a93ce7aca, type: 3}
+      propertyPath: damageSound
+      value: 
+      objectReference: {fileID: 8300000, guid: aab61e6de593caf44b4cb1eb3a23f29f, type: 3}
     - target: {fileID: 2016017187875150652, guid: 98d51c6bfc0eee54ba72492a93ce7aca, type: 3}
       propertyPath: healthFillImage
       value: 

@@ -21,6 +21,9 @@ public class PlayerHealth : MonoBehaviour
 
     private Coroutine trailCoroutine;
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip damageSound;
+
     private void Awake()
     {
         currentHP = maxHP;
@@ -47,6 +50,7 @@ public class PlayerHealth : MonoBehaviour
         float oldHP = currentHP;
         currentHP -= damage;
         currentHP = Mathf.Max(currentHP, 0);
+        AudioManager.Instance.PlaySFX(damageSound);
 
         UpdateHealthBar();
 

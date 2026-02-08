@@ -25,6 +25,11 @@ public class BossHealth : MonoBehaviour, IDamageable
     private Animator animator;
     [SerializeField]private Behaviour behaviourTree;
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip damageSound;
+
+
+
     private void Awake()
     {
         currentHP = maxHP;
@@ -53,6 +58,8 @@ public class BossHealth : MonoBehaviour, IDamageable
         float oldHP = currentHP; 
         currentHP -= damage;
         currentHP = Mathf.Max(currentHP, 0);
+
+        AudioManager.Instance.PlaySFX(damageSound);
 
         UpdateHealthBar();
 
