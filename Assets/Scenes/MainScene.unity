@@ -978,8 +978,8 @@ PrefabInstance:
     - target: {fileID: 3294630759148957806, guid: 9d3607c1d3c303b44911daf2cd8ea934, type: 3}
       propertyPath: m_text
       value: "Combat & Interaction\r\n\r\nLMB\_ \_ \_ Light Attack\r\n\r\nMovement
-        & Camera\r\n\r\nSpace Press\_ Roll \r\nShift\_  Sprint \r\nWASD\_ \_   Movement
-        \r\nMouse\_ \_ \_Camera \r\nControl C \_   Camera Mode"
+        & Camera\r\n\r\nSpace Press\_ Roll \r\nShift\_         Sprint \r\nWASD\_
+        \_   Movement \r\nMouse\_ \_ \_Camera \r\nControl C \_   Camera Mode"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
