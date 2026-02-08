@@ -1464,14 +1464,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
-    - target: {fileID: 1412098052403128124, guid: 9d3607c1d3c303b44911daf2cd8ea934, type: 3}
-      propertyPath: textField
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 7985519071289767253, guid: 9d3607c1d3c303b44911daf2cd8ea934, type: 3}
-    - {fileID: 7692830522944905767, guid: 9d3607c1d3c303b44911daf2cd8ea934, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d3607c1d3c303b44911daf2cd8ea934, type: 3}
