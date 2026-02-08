@@ -43,11 +43,9 @@ public class ControlsTutorial : MonoBehaviour
 
             if (lastDevice is Gamepad)
             {
-                // Sprawdzamy, czy to ruch analogowy (Vector2)
                 if (inputAction.activeValueType == typeof(Vector2))
                 {
                     Vector2 stickValue = inputAction.ReadValue<Vector2>();
-                    // Jeœli wychylenie jest mniejsze ni¿ próg, ignorujemy
                     if (stickValue.magnitude < analogThreshold) return;
                 }
 
