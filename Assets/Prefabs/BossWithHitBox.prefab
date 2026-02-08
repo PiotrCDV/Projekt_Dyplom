@@ -2226,8 +2226,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc9966d2f7642294db59e6e2201ad557, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BossCombatManager
-  rightHandHitbox: {fileID: 5497579241748811511}
-  attack1Damage: 20
+  availableAttacks:
+  - attackName: Light Attack 1
+    animationTrigger: BossLightAttack
+    damage: 20
+    cooldown: 2
+    attackRange: 2.5
+    hitbox: {fileID: 5497579241748811511}
+  rotationSpeed: 10
 --- !u!114 &6814543300484262438
 MonoBehaviour:
   m_ObjectHideFlags: 0

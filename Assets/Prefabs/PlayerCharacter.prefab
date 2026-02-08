@@ -1841,6 +1841,7 @@ Transform:
   - {fileID: 5518082667187823076}
   - {fileID: 1677534291333663773}
   - {fileID: 1653313842305821161}
+  - {fileID: 4165714695031415826}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &3390272809261212992
@@ -1932,8 +1933,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c48ac87d7e8b1ef4da2092b75b13d941, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCombat
-  inputQueued: 0
-  allowInputQueuing: 0
 --- !u!114 &4282743272862643298
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1953,6 +1952,12 @@ MonoBehaviour:
   controller: {fileID: 2917805733547537356}
   vcamFreeLook: {fileID: 354990926200369465}
   animator: {fileID: 3390272809261212992}
+  groundCheck: {fileID: 4165714695031415826}
+  groundDistance: 0.4
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 512
+  gravity: -30
 --- !u!114 &6991254106050310098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1977,6 +1982,10 @@ MonoBehaviour:
   closeDeadZone: 0.01
   farDamping: 0.2
   closeDamping: 0
+  baseShoulderOffset: {x: 0.5, y: 1.2, z: 0}
+  shiftLeftAmount: 1
+  shiftRightAmount: 1
+  shoulderShiftSpeed: 5
   targetDotUI: {fileID: 0}
   uiSmoothSpeed: 20
   useScale: 1
@@ -10248,6 +10257,37 @@ CapsuleCollider:
   m_Height: 0.0062373444
   m_Direction: 1
   m_Center: {x: -0.000039246883, y: 0.00013439129, z: 0.00014769284}
+--- !u!1 &4445962229410976869
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4165714695031415826}
+  m_Layer: 0
+  m_Name: GroundCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4165714695031415826
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4445962229410976869}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6624889837693887381}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4476650745375217422
 GameObject:
   m_ObjectHideFlags: 0
@@ -12865,13 +12905,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5827662384307900382}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.15795933, y: -0.0016597001, z: 0.00026549867, w: 0.9874442}
-  m_LocalPosition: {x: 0, y: 2.25, z: -3.1}
+  m_LocalRotation: {x: -0.0028706142, y: 0.98728263, z: -0.15793324, w: -0.017944973}
+  m_LocalPosition: {x: 0.13855998, y: 2.2500002, z: 3.096909}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6624889837693887381}
-  m_LocalEulerAnglesHint: {x: 30, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 18.174, y: -178.965, z: -0.327}
 --- !u!20 &8244078571955274404
 Camera:
   m_ObjectHideFlags: 0
@@ -12904,7 +12944,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.1
-  far clip plane: 1000
+  far clip plane: 250
   field of view: 60.1
   orthographic: 0
   orthographic size: 5
@@ -15223,8 +15263,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6887118160664903857}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.15795933, y: -0.0016597, z: 0.00026549862, w: 0.9874442}
-  m_LocalPosition: {x: -1.6049995, y: 2.3, z: -3.205}
+  m_LocalRotation: {x: -0.0028706137, y: 0.98728263, z: -0.15793319, w: -0.017944975}
+  m_LocalPosition: {x: -1.4664396, y: 2.3000002, z: 2.991909}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -15257,7 +15297,7 @@ MonoBehaviour:
     FieldOfView: 60.1
     OrthographicSize: 5
     NearClipPlane: 0.1
-    FarClipPlane: 1000
+    FarClipPlane: 250
     Dutch: 0
     ModeOverride: 0
     PhysicalProperties:
@@ -15349,7 +15389,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineRotationComposer
   Composition:
-    ScreenPosition: {x: 0.002016127, y: 0.057347596}
+    ScreenPosition: {x: 0.005141139, y: 0.057347585}
     DeadZone:
       Enabled: 1
       Size: {x: 0.5, y: 0.1}
@@ -17511,7 +17551,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7686689931408778560}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.20985101, y: -0.06910806, z: 0.014871589, w: 0.9751746}
+  m_LocalRotation: {x: -0.2098508, y: 0.06910894, z: -0.014871764, w: -0.9751746}
   m_LocalPosition: {x: -1.1049995, y: 1.6999999, z: -3.605}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -17545,7 +17585,7 @@ MonoBehaviour:
     FieldOfView: 71.021706
     OrthographicSize: 5
     NearClipPlane: 0.1
-    FarClipPlane: 1000
+    FarClipPlane: 250
     Dutch: 0
     ModeOverride: 0
     PhysicalProperties:

@@ -35,6 +35,11 @@ public class PlayerCombat : MonoBehaviour
 
     private void HandleAttackInput()
     {
+        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+
+        if (!stateInfo.IsTag("Combat")) return;
+
+        if (stateInfo.IsTag("NoCombat")) return;
 
         if (playerDodge != null && playerDodge.IsDodging) return;
 
