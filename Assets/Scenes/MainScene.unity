@@ -221,10 +221,6 @@ PrefabInstance:
       value: BossWithHitBox
       objectReference: {fileID: 0}
     - target: {fileID: 6257530152200430688, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
-      propertyPath: managedReferences[1739613891645669419].m_Value
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6257530152200430688, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
       propertyPath: managedReferences[4651023333483348056].m_Value
       value: 
       objectReference: {fileID: 1932483758}
