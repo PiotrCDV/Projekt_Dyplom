@@ -14,7 +14,6 @@ public class PlayerDodge : MonoBehaviour
     private Animator animator;
     private CharacterController controller;
     private PlayerMovement playerMovement;
-
     private PlayerCombat playerCombat;
 
     private Vector3 savedDodgeDirection;
@@ -27,28 +26,48 @@ public class PlayerDodge : MonoBehaviour
         playerCombat = GetComponent<PlayerCombat>();
 
         inputActions = new InputSystem_Actions();
-        inputActions.Player.Dodge.performed += ctx => PrepareDodge();
+
+        // OBS£UGA KLAWIATURY (Spacja)
+        inputActions.Player.Dodge.performed += ctx =>
+        {
+            // Jeœli to klawiatura, wykonujemy unik natychmiast po klikniêciu Spacji
+            if (ctx.control.device is Keyboard)
+            {
+                PrepareDodge();
+            }
+            // Pad jest ignorowany tutaj, bo jego logikê (Tap/Hold) obs³uguje PlayerMovement
+        };
     }
 
     private void OnEnable() => inputActions.Enable();
     private void OnDisable() => inputActions.Disable();
 
-    private void PrepareDodge()
+    // Metoda wywo³ywana przez klawiaturê LUB przez PlayerMovement (dla pada)
+    public void PrepareDodge()
     {
         if (IsDodging) return;
 
+        // Blokada uniku, jeœli postaæ w³aœnie atakuje
         if (playerCombat != null && playerCombat.IsAttacking) return;
 
         IsDodging = true;
 
+        // Wy³¹czamy standardowy ruch na czas uniku
         if (playerMovement != null) playerMovement.SetMovementEnabled(false);
 
+        // Obliczamy kierunek (gdzie gracz wychyla analog/klawisze)
         CalculateDodgeDirection();
 
-        transform.rotation = Quaternion.LookRotation(savedDodgeDirection);
+        // Obracamy postaæ natychmiast w stronê uniku
+        if (savedDodgeDirection != Vector3.zero)
+        {
+            transform.rotation = Quaternion.LookRotation(savedDodgeDirection);
+        }
 
         if (animator != null) animator.SetTrigger("Dodge");
     }
+
+    // --- Metody wywo³ywane przez Animation Events ---
 
     public void StartDodge()
     {
@@ -63,12 +82,15 @@ public class PlayerDodge : MonoBehaviour
         StopAllCoroutines();
     }
 
+    // --- Logika Ruchu ---
+
     private IEnumerator DodgeSlideRoutine()
     {
         float timer = 0f;
 
         while (timer < dodgeSlideDuration)
         {
+            // Przesuwamy postaæ w zapisanym kierunku
             controller.Move(savedDodgeDirection * dodgeSpeed * Time.deltaTime);
             timer += Time.deltaTime;
             yield return null;
@@ -77,13 +99,16 @@ public class PlayerDodge : MonoBehaviour
 
     private void CalculateDodgeDirection()
     {
+        // Czytamy wejœcie z osi ruchu (WASD / Analog)
         Vector2 input = inputActions.Player.Move.ReadValue<Vector2>();
 
-        if (input != Vector2.zero)
+        if (input.magnitude > 0.1f)
         {
+            // Pobieramy wektory kamery, aby unik lecia³ tam, gdzie gracz widzi
             Transform camTransform = Camera.main.transform;
             Vector3 camForward = camTransform.forward;
             Vector3 camRight = camTransform.right;
+
             camForward.y = 0;
             camRight.y = 0;
             camForward.Normalize();
@@ -94,6 +119,7 @@ public class PlayerDodge : MonoBehaviour
         }
         else
         {
+            // Jeœli gracz nie trzyma ¿adnego kierunku, unik leci "do przodu" postaci
             savedDodgeDirection = transform.forward;
         }
     }

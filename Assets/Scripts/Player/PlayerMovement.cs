@@ -9,25 +9,30 @@ public class PlayerMovement : MonoBehaviour
     public float walkSpeed = 2f;
     public float runSpeed = 5f;
     public float sprintSpeed = 8f;
-
     [SerializeField] private float currentSpeed;
+
+    [Header("Sprint/Dodge Combo Settings")]
+    public float holdThreshold = 0.2f;
+    private float buttonDownTime;
+    private bool isHoldingButton;
 
     [Header("Components")]
     public CharacterController controller;
     public CinemachineCamera vcamFreeLook;
     public Animator animator;
+    private PlayerDodge dodgeScript;
 
     [Header("Gravity & Grounding")]
-    public Transform groundCheck;    
+    public Transform groundCheck;
     public float groundDistance = 0.4f;
-    public LayerMask groundMask;      
-    public float gravity = -30f;    
+    public LayerMask groundMask;
+    public float gravity = -30f;
 
-    private Vector3 velocity;       
+    private Vector3 velocity;
     private bool isGrounded;
-
     private Vector2 moveInput;
     private bool isSprinting;
+    public bool IsSprinting => isSprinting;
 
     private InputSystem_Actions inputActions;
     private Camera mainCamera;
@@ -36,7 +41,6 @@ public class PlayerMovement : MonoBehaviour
     private bool canMove = true;
 
     private bool isCloseCamera = false;
-
     private LockOnBehaviour lockOnBehaviour;
     private CinemachineOrbitalFollow orbitalFollow;
 
@@ -47,23 +51,45 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         inputActions = new InputSystem_Actions();
-
-        inputActions.Player.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
-        inputActions.Player.Move.canceled += ctx => moveInput = Vector2.zero;
-
-        inputActions.Player.Sprint.performed += ctx => isSprinting = true;
-        inputActions.Player.Sprint.canceled += ctx => isSprinting = false;
-
+        dodgeScript = GetComponent<PlayerDodge>();
         orbitalFollow = vcamFreeLook.GetComponent<CinemachineOrbitalFollow>();
         lockOnBehaviour = GetComponent<LockOnBehaviour>();
 
+        // Logika Ruchu
+        inputActions.Player.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
+        inputActions.Player.Move.canceled += ctx => moveInput = Vector2.zero;
+
+        // Logika Sprintu i Uniku (Tap/Hold)
+        inputActions.Player.Sprint.started += ctx =>
+        {
+            if (ctx.control.device is Keyboard)
+            {
+                if (moveInput.magnitude > 0.1f) isSprinting = true;
+            }
+            buttonDownTime = Time.time;
+            isHoldingButton = true;
+        };
+
+        inputActions.Player.Sprint.canceled += ctx =>
+        {
+            if (ctx.control.device is Gamepad)
+            {
+                if (isHoldingButton && (Time.time - buttonDownTime) < holdThreshold)
+                {
+                    if (dodgeScript != null) dodgeScript.PrepareDodge();
+                }
+            }
+            isHoldingButton = false;
+            isSprinting = false;
+        };
+
+        // Logika Lock-On (PRZYWRÓCONA W PE£NI)
         if (lockOnBehaviour != null)
         {
             inputActions.Player.LockOn.performed += ctx =>
             {
                 bool wasLocked = lockOnBehaviour.IsLocked;
                 lockOnBehaviour.ToggleLockOn();
-
                 if (wasLocked && !lockOnBehaviour.IsLocked)
                 {
                     keepLockOnRotation = true;
@@ -79,16 +105,29 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        mainCamera = Camera.main;
+    }
+
     void Update()
     {
         ApplyGravity();
 
-        if (Keyboard.current.vKey.wasPressedThisFrame)
+        if (isHoldingButton && !isSprinting)
         {
-            ToggleCameraMode();
+            if ((Time.time - buttonDownTime) >= holdThreshold && moveInput.magnitude > 0.1f)
+            {
+                isSprinting = true;
+            }
         }
 
-        HandleCamera();
+        if (Keyboard.current.vKey.wasPressedThisFrame) ToggleCameraMode();
+
+        HandleCamera(); // Aktualizuje wektory kamery
+
         if (lockOnBehaviour) lockOnBehaviour.HandleLockOnState(transform.position);
 
         if (keepLockOnRotation)
@@ -100,50 +139,32 @@ public class PlayerMovement : MonoBehaviour
         HandleMovementAndAnimation();
     }
 
-    private void ApplyGravity()
-    {
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
-
-        if (isGrounded && velocity.y < 0)
-        {
-            velocity.y = -2f;
-        }
-
-        velocity.y += gravity * Time.deltaTime;
-
-        controller.Move(velocity * Time.deltaTime);
-    }
-
-    private void ToggleCameraMode()
-    {
-        if (lockOnBehaviour != null && lockOnBehaviour.IsLocked) return;
-        isCloseCamera = !isCloseCamera;
-        if (animator != null) animator.SetBool("CameraClose", isCloseCamera);
-    }
-
     private void LateUpdate()
     {
+        // TO ODPOWIADA ZA LOCKOWANIE KAMERY NA CELU
         var lockOn = lockOnBehaviour.vcamLockOn;
         if (lockOnBehaviour.IsLocked && lockOn != null && orbitalFollow != null)
         {
             float targetYaw = lockOn.transform.eulerAngles.y;
             orbitalFollow.HorizontalAxis.Value = targetYaw;
-            orbitalFollow.VerticalAxis.Value = Mathf.Clamp(10f, -10f, 45f);
+            orbitalFollow.VerticalAxis.Value = Mathf.Clamp(orbitalFollow.VerticalAxis.Value, -10f, 45f);
         }
     }
 
-    private void OnEnable() => inputActions.Enable();
-    private void OnDisable() => inputActions.Disable();
-
-    private void Start()
+    private void ApplyGravity()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-        mainCamera = Camera.main;
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        if (isGrounded && velocity.y < 0)
+        {
+            velocity.y = -2f;
+        }
+        velocity.y += gravity * Time.deltaTime;
+        controller.Move(velocity * Time.deltaTime);
     }
 
     private void HandleCamera()
     {
+        if (mainCamera == null) return;
         Transform camTransform = mainCamera.transform;
         camForward = camTransform.forward;
         camRight = camTransform.right;
@@ -153,21 +174,9 @@ public class PlayerMovement : MonoBehaviour
         camRight.Normalize();
     }
 
-    public void SetMovementEnabled(bool state)
-    {
-        canMove = state;
-        if (!canMove && animator != null)
-        {
-            animator.SetFloat("Speed", 0f);
-            animator.SetFloat("MoveX", 0f);
-            animator.SetFloat("MoveY", 0f);
-        }
-    }
-
     private void HandleMovementAndAnimation()
     {
         if (!canMove) return;
-
         Vector3 moveDir = camForward * moveInput.y + camRight * moveInput.x;
         if (moveDir.magnitude > 1f) moveDir.Normalize();
 
@@ -194,7 +203,6 @@ public class PlayerMovement : MonoBehaviour
         }
 
         currentSpeed = Mathf.Lerp(currentSpeed, targetSpeed, 10f * Time.deltaTime);
-
         controller.Move(move * currentSpeed * Time.deltaTime);
 
         bool isLocked = lockOnBehaviour.IsLocked && lockOnBehaviour.GetCurrentTarget() != null;
@@ -223,7 +231,6 @@ public class PlayerMovement : MonoBehaviour
     private void UpdateAnimatorParams(Vector3 move)
     {
         if (animator == null) return;
-
         float inputMagnitude = moveInput.magnitude;
         bool isMoving = inputMagnitude > 0.01f;
         animator.SetBool("IsMoving", isMoving);
@@ -244,7 +251,6 @@ public class PlayerMovement : MonoBehaviour
         {
             Vector3 localMove = transform.InverseTransformDirection(move);
             float multiplier = isSprinting ? 1.5f : 1f;
-
             animator.SetFloat("MoveX", localMove.x * multiplier, 0.1f, Time.deltaTime);
             animator.SetFloat("MoveY", localMove.z * multiplier, 0.1f, Time.deltaTime);
         }
@@ -255,4 +261,25 @@ public class PlayerMovement : MonoBehaviour
             animator.SetFloat("MoveY", 0f);
         }
     }
+
+    private void ToggleCameraMode()
+    {
+        if (lockOnBehaviour != null && lockOnBehaviour.IsLocked) return;
+        isCloseCamera = !isCloseCamera;
+        if (animator != null) animator.SetBool("CameraClose", isCloseCamera);
+    }
+
+    public void SetMovementEnabled(bool state)
+    {
+        canMove = state;
+        if (!canMove && animator != null)
+        {
+            animator.SetFloat("Speed", 0f);
+            animator.SetFloat("MoveX", 0f);
+            animator.SetFloat("MoveY", 0f);
+        }
+    }
+
+    private void OnEnable() => inputActions.Enable();
+    private void OnDisable() => inputActions.Disable();
 }
