@@ -1,8 +1,7 @@
 using UnityEngine;
-using UnityEngine.AI;
-using UnityEngine.Events;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement; 
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -18,8 +17,10 @@ public class PlayerHealth : MonoBehaviour
     [Header("Visual Effects")]
     [SerializeField] private float trailDelayTime = 1.0f;
     [SerializeField] private float trailDrainSpeed = 0.5f;
+    [SerializeField] private float delayBeforeReload = 3.0f; 
 
     private Coroutine trailCoroutine;
+    private Animator animator; 
 
     [Header("Audio")]
     [SerializeField] private AudioClip damageSound;
@@ -27,15 +28,8 @@ public class PlayerHealth : MonoBehaviour
     private void Awake()
     {
         currentHP = maxHP;
+        animator = GetComponent<Animator>(); 
         UpdateHealthBar();
-    }
-
-    private void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            //    TakeDamage(20f);
-        }
     }
 
     public void TakeDamage(float damage)
@@ -50,24 +44,22 @@ public class PlayerHealth : MonoBehaviour
         float oldHP = currentHP;
         currentHP -= damage;
         currentHP = Mathf.Max(currentHP, 0);
-        AudioManager.Instance.PlaySFX(damageSound);
+
+        if (AudioManager.Instance != null)
+            AudioManager.Instance.PlaySFX(damageSound);
 
         UpdateHealthBar();
 
         if (takenDamageFill != null)
         {
             takenDamageFill.fillAmount = oldHP / maxHP;
-
             trailCoroutine = StartCoroutine(DrainHealthTrail());
-
         }
+
         if (currentHP <= 0)
         {
             Die();
-            return;
         }
-
-
     }
 
     private void UpdateHealthBar()
@@ -82,27 +74,37 @@ public class PlayerHealth : MonoBehaviour
     private IEnumerator DrainHealthTrail()
     {
         yield return new WaitForSeconds(trailDelayTime);
-
         float targetFill = currentHP / maxHP;
 
         while (takenDamageFill.fillAmount > targetFill)
         {
             takenDamageFill.fillAmount -= trailDrainSpeed * Time.deltaTime;
-
             takenDamageFill.fillAmount = Mathf.Max(takenDamageFill.fillAmount, targetFill);
-
             yield return null;
         }
-
         trailCoroutine = null;
     }
 
-
     private void Die()
     {
+        if (isDead) return;
         isDead = true;
 
+        if (animator != null)
+        {
+            animator.SetTrigger("PlayerDeath");
+        }
 
+        if (GetComponent<PlayerMovement>() != null) GetComponent<PlayerMovement>().enabled = false;
+        if (GetComponent<PlayerCombat>() != null) GetComponent<PlayerCombat>().enabled = false;
 
+        StartCoroutine(ReloadSceneRoutine());
+    }
+
+    private IEnumerator ReloadSceneRoutine()
+    {
+        yield return new WaitForSeconds(delayBeforeReload);
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

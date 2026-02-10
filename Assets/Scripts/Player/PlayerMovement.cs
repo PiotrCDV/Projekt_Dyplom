@@ -55,11 +55,9 @@ public class PlayerMovement : MonoBehaviour
         orbitalFollow = vcamFreeLook.GetComponent<CinemachineOrbitalFollow>();
         lockOnBehaviour = GetComponent<LockOnBehaviour>();
 
-        // Logika Ruchu
         inputActions.Player.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
         inputActions.Player.Move.canceled += ctx => moveInput = Vector2.zero;
 
-        // Logika Sprintu i Uniku (Tap/Hold)
         inputActions.Player.Sprint.started += ctx =>
         {
             if (ctx.control.device is Keyboard)
@@ -83,7 +81,6 @@ public class PlayerMovement : MonoBehaviour
             isSprinting = false;
         };
 
-        // Logika Lock-On (PRZYWRÓCONA W PE£NI)
         if (lockOnBehaviour != null)
         {
             inputActions.Player.LockOn.performed += ctx =>
@@ -126,7 +123,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (Keyboard.current.vKey.wasPressedThisFrame) ToggleCameraMode();
 
-        HandleCamera(); // Aktualizuje wektory kamery
+        HandleCamera();
 
         if (lockOnBehaviour) lockOnBehaviour.HandleLockOnState(transform.position);
 
@@ -141,7 +138,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void LateUpdate()
     {
-        // TO ODPOWIADA ZA LOCKOWANIE KAMERY NA CELU
         var lockOn = lockOnBehaviour.vcamLockOn;
         if (lockOnBehaviour.IsLocked && lockOn != null && orbitalFollow != null)
         {
@@ -192,9 +188,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandlePositionAndRotation(Vector3 move)
     {
-        float targetSpeed = 0f;
+        bool isLocked = lockOnBehaviour != null && lockOnBehaviour.IsLocked && lockOnBehaviour.GetCurrentTarget() != null;
         float inputMagnitude = moveInput.magnitude;
 
+        float targetSpeed = 0f;
         if (inputMagnitude > 0.1f)
         {
             if (isSprinting) targetSpeed = sprintSpeed;
@@ -204,8 +201,6 @@ public class PlayerMovement : MonoBehaviour
 
         currentSpeed = Mathf.Lerp(currentSpeed, targetSpeed, 10f * Time.deltaTime);
         controller.Move(move * currentSpeed * Time.deltaTime);
-
-        bool isLocked = lockOnBehaviour.IsLocked && lockOnBehaviour.GetCurrentTarget() != null;
 
         if ((isLocked || keepLockOnRotation) && !isSprinting)
         {
@@ -217,7 +212,7 @@ public class PlayerMovement : MonoBehaviour
                 if (lookDir != Vector3.zero)
                 {
                     Quaternion targetRotation = Quaternion.LookRotation(lookDir.normalized);
-                    transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 15f * Time.deltaTime);
+                    transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 20f * Time.deltaTime);
                 }
             }
         }
@@ -231,34 +226,36 @@ public class PlayerMovement : MonoBehaviour
     private void UpdateAnimatorParams(Vector3 move)
     {
         if (animator == null) return;
+
+        bool isLocked = lockOnBehaviour != null && lockOnBehaviour.IsLocked && lockOnBehaviour.GetCurrentTarget() != null;
         float inputMagnitude = moveInput.magnitude;
         bool isMoving = inputMagnitude > 0.01f;
+
         animator.SetBool("IsMoving", isMoving);
 
-        bool isLocked = lockOnBehaviour.IsLocked && lockOnBehaviour.GetCurrentTarget() != null;
         bool fightSprintActive = isLocked && isSprinting && inputMagnitude > 0.1f;
         animator.SetBool("FightSprint", fightSprintActive);
 
-        float animValue = 0f;
-        if (inputMagnitude > 0.1f)
-        {
-            if (isSprinting) animValue = 1.5f;
-            else if (inputMagnitude >= 0.6f) animValue = 1.0f;
-            else animValue = 0.5f;
-        }
-
-        if (isLocked)
+        if (isLocked && !isSprinting)
         {
             Vector3 localMove = transform.InverseTransformDirection(move);
-            float multiplier = isSprinting ? 1.5f : 1f;
-            animator.SetFloat("MoveX", localMove.x * multiplier, 0.1f, Time.deltaTime);
-            animator.SetFloat("MoveY", localMove.z * multiplier, 0.1f, Time.deltaTime);
+            animator.SetFloat("MoveX", localMove.x, 0.1f, Time.deltaTime);
+            animator.SetFloat("MoveY", localMove.z, 0.1f, Time.deltaTime);
+            animator.SetFloat("Speed", 0f); 
         }
         else
         {
+            float animValue = 0f;
+            if (inputMagnitude > 0.1f)
+            {
+                if (isSprinting) animValue = 1.5f;
+                else if (inputMagnitude >= 0.6f) animValue = 1.0f;
+                else animValue = 0.5f;
+            }
+
             animator.SetFloat("Speed", animValue, 0.1f, Time.deltaTime);
-            animator.SetFloat("MoveX", 0f);
-            animator.SetFloat("MoveY", 0f);
+            animator.SetFloat("MoveX", 0f, 0.1f, Time.deltaTime); 
+            animator.SetFloat("MoveY", 0f, 0.1f, Time.deltaTime);
         }
     }
 

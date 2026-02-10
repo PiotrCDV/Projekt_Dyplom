@@ -59,7 +59,8 @@ public class BossHealth : MonoBehaviour, IDamageable
         currentHP -= damage;
         currentHP = Mathf.Max(currentHP, 0);
 
-        AudioManager.Instance.PlaySFX(damageSound);
+        if (AudioManager.Instance != null)
+            AudioManager.Instance.PlaySFX(damageSound);
 
         UpdateHealthBar();
 
