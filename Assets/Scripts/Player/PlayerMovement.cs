@@ -85,13 +85,12 @@ public class PlayerMovement : MonoBehaviour
         {
             inputActions.Player.LockOn.performed += ctx =>
             {
-                bool wasLocked = lockOnBehaviour.IsLocked;
-                lockOnBehaviour.ToggleLockOn();
-                if (wasLocked && !lockOnBehaviour.IsLocked)
-                {
-                    keepLockOnRotation = true;
-                    keepLockOnTimer = keepLockOnDuration;
-                }
+                PerformLockOnAction();
+            };
+
+            inputActions.Player.SwitchCamera.performed += ctx =>
+            {
+                ToggleCameraMode();
             };
 
             lockOnBehaviour.OnUnlock += () =>
@@ -120,8 +119,6 @@ public class PlayerMovement : MonoBehaviour
                 isSprinting = true;
             }
         }
-
-        if (Keyboard.current.vKey.wasPressedThisFrame) ToggleCameraMode();
 
         HandleCamera();
 
@@ -168,6 +165,18 @@ public class PlayerMovement : MonoBehaviour
         camRight.y = 0;
         camForward.Normalize();
         camRight.Normalize();
+    }
+
+    private void PerformLockOnAction()
+    {
+        bool wasLocked = lockOnBehaviour.IsLocked;
+        lockOnBehaviour.ToggleLockOn();
+
+        if (wasLocked && !lockOnBehaviour.IsLocked)
+        {
+            keepLockOnRotation = true;
+            keepLockOnTimer = keepLockOnDuration;
+        }
     }
 
     private void HandleMovementAndAnimation()

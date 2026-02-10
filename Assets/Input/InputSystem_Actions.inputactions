@@ -43,6 +43,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "SwitchCamera",
+                    "type": "Button",
+                    "id": "6e531912-d1c9-4aae-a1d8-115ce6c4104f",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Crouch",
                     "type": "Button",
                     "id": "27c5f898-bc57-4ee1-8800-db469aca5fe3",
@@ -434,7 +443,7 @@
                     "name": "",
                     "id": "1c04ea5f-b012-41d1-a6f7-02e963b52893",
                     "path": "<Keyboard>/t",
-                    "interactions": "",
+                    "interactions": "Tap(duration=0.4)",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "LockOn",
@@ -445,10 +454,32 @@
                     "name": "",
                     "id": "b3f66d0b-7751-423f-908b-a11c5bd95930",
                     "path": "<Gamepad>/buttonNorth",
-                    "interactions": "",
+                    "interactions": "Tap(duration=0.4)",
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "LockOn",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "80bcb0a7-f5ef-4bdf-bd2e-b5c4af3a7260",
+                    "path": "<Keyboard>/t",
+                    "interactions": "Hold(duration=0.4)",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "SwitchCamera",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "434fc6da-75a1-4fb1-a868-bec79e2e83ef",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "Hold(duration=0.4)",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "SwitchCamera",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
