@@ -1,15 +1,14 @@
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Events;
 using UnityEngine.UI;
 using System.Collections;
 
 public class BossHealth : MonoBehaviour, IDamageable
 {
-
     [Header("UI & AI References")]
-    [SerializeField] private Image healthFillImage;     
-    [SerializeField] private Image takenDamageFill;   
+    [SerializeField] private GameObject healthBarContainer; // DODANE: Ca³y kontener paska UI
+    [SerializeField] private Image healthFillImage;
+    [SerializeField] private Image takenDamageFill;
 
     [Header("Health Settings")]
     [SerializeField] private float maxHP = 100f;
@@ -19,16 +18,15 @@ public class BossHealth : MonoBehaviour, IDamageable
     [Header("Visual Effects")]
     [SerializeField] private float trailDelayTime = 1.0f;
     [SerializeField] private float trailDrainSpeed = 0.5f;
+    [SerializeField] private float timeBeforeDisable = 5.0f;
 
     private Coroutine trailCoroutine;
     private NavMeshAgent navMeshAgent;
     private Animator animator;
-    [SerializeField]private Behaviour behaviourTree;
+    [SerializeField] private Behaviour behaviourTree;
 
     [Header("Audio")]
     [SerializeField] private AudioClip damageSound;
-
-
 
     private void Awake()
     {
@@ -36,14 +34,6 @@ public class BossHealth : MonoBehaviour, IDamageable
         UpdateHealthBar();
         animator = GetComponent<Animator>();
         navMeshAgent = GetComponent<NavMeshAgent>();
-    }
-
-    private void Update()
-    {
-        if (Input.GetMouseButtonDown(0))       
-        {
-        //    TakeDamage(20f);
-        }
     }
 
     public void TakeDamage(float damage)
@@ -55,7 +45,7 @@ public class BossHealth : MonoBehaviour, IDamageable
             StopCoroutine(trailCoroutine);
         }
 
-        float oldHP = currentHP; 
+        float oldHP = currentHP;
         currentHP -= damage;
         currentHP = Mathf.Max(currentHP, 0);
 
@@ -67,17 +57,13 @@ public class BossHealth : MonoBehaviour, IDamageable
         if (takenDamageFill != null)
         {
             takenDamageFill.fillAmount = oldHP / maxHP;
-
             trailCoroutine = StartCoroutine(DrainHealthTrail());
-
         }
+
         if (currentHP <= 0)
         {
             Die();
-            return;
         }
-
-      
     }
 
     private void UpdateHealthBar()
@@ -92,33 +78,48 @@ public class BossHealth : MonoBehaviour, IDamageable
     private IEnumerator DrainHealthTrail()
     {
         yield return new WaitForSeconds(trailDelayTime);
-
         float targetFill = currentHP / maxHP;
 
         while (takenDamageFill.fillAmount > targetFill)
         {
             takenDamageFill.fillAmount -= trailDrainSpeed * Time.deltaTime;
-
             takenDamageFill.fillAmount = Mathf.Max(takenDamageFill.fillAmount, targetFill);
-
-            yield return null; 
+            yield return null;
         }
-
         trailCoroutine = null;
     }
 
-
     private void Die()
     {
+        if (isDead) return;
         isDead = true;
 
+        if (animator != null)
+        {
+            animator.SetTrigger("BossDowned");
+        }
+
+     
+
         if (behaviourTree != null)
-            behaviourTree.enabled = false; 
+            behaviourTree.enabled = false;
 
         if (navMeshAgent != null)
+        {
+            navMeshAgent.isStopped = true;
             navMeshAgent.enabled = false;
+        }
 
-   
+        StartCoroutine(DisableBossRoutine());
     }
 
+    private IEnumerator DisableBossRoutine()
+    {
+        yield return new WaitForSeconds(timeBeforeDisable);
+        gameObject.SetActive(false);
+        if (healthBarContainer != null)
+        {
+            healthBarContainer.SetActive(false);
+        }
+    }
 }

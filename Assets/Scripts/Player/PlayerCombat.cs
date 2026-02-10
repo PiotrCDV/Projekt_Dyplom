@@ -36,21 +36,22 @@ public class PlayerCombat : MonoBehaviour
     private void HandleAttackInput()
     {
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        bool isInTransition = animator.IsInTransition(0);
 
-        if (!stateInfo.IsTag("Combat")) return;
+        if (isInTransition)
+        {
+            stateInfo = animator.GetNextAnimatorStateInfo(0);
+        }
 
-        if (stateInfo.IsTag("NoCombat")) return;
+
+        if (!stateInfo.IsTag("Combat") || stateInfo.IsTag("NoCombat")) return;
 
         if (playerDodge != null && playerDodge.IsDodging) return;
-
         if (lockOnBehaviour == null || !lockOnBehaviour.IsLocked) return;
 
         if (isAttacking)
         {
-            if (allowInputQueuing)
-            {
-                inputQueued = true;
-            }
+            if (allowInputQueuing) inputQueued = true;
             return;
         }
 
