@@ -6,14 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 1
-    path: Assets/Scenes/Piotr.unity
-    guid: f2088302e898a15459647637c37f8fd0
-  - enabled: 1
-    path: Assets/Scenes/Kopu/Test#1.unity
-    guid: 91c0a0a181885df24a65ea81db3a2a0d
+    path: Assets/Scenes/LoadingSystem.unity
+    guid: fdeecc0cafad46d42811c797e908f305
   - enabled: 1
     path: Assets/Scenes/MainScene.unity
     guid: d39928bd96895fd41931bf1138ee92cd

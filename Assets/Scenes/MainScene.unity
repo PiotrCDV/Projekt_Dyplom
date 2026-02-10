@@ -1046,6 +1046,38 @@ PrefabInstance:
         & Camera\r\n\r\nSpace           Roll \r\nShift\_         Sprint \r\nWASD\_
         \_   Movement \r\nMouse\_ \_ \_Camera \r\nt \_   Camera Mode"
       objectReference: {fileID: 0}
+    - target: {fileID: 6852134846108986952, guid: 9d3607c1d3c303b44911daf2cd8ea934, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.9767085
+      objectReference: {fileID: 0}
+    - target: {fileID: 6852134846108986952, guid: 9d3607c1d3c303b44911daf2cd8ea934, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.9620001
+      objectReference: {fileID: 0}
+    - target: {fileID: 6852134846108986952, guid: 9d3607c1d3c303b44911daf2cd8ea934, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.7164792
+      objectReference: {fileID: 0}
+    - target: {fileID: 6852134846108986952, guid: 9d3607c1d3c303b44911daf2cd8ea934, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.55600005
+      objectReference: {fileID: 0}
+    - target: {fileID: 6852134846108986952, guid: 9d3607c1d3c303b44911daf2cd8ea934, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -0.42041016
+      objectReference: {fileID: 0}
+    - target: {fileID: 6852134846108986952, guid: 9d3607c1d3c303b44911daf2cd8ea934, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0.21331787
+      objectReference: {fileID: 0}
+    - target: {fileID: 6852134846108986952, guid: 9d3607c1d3c303b44911daf2cd8ea934, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6852134846108986952, guid: 9d3607c1d3c303b44911daf2cd8ea934, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.38519287
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
