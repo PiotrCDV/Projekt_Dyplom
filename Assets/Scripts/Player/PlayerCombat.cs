@@ -10,14 +10,15 @@ public class PlayerCombat : MonoBehaviour
     private SwordDamage weaponScript;
     private PlayerDodge playerDodge;
 
+    [Header("Combat State")]
     private int comboStep = 0;
     private bool isAttacking = false;
-
-     private bool inputQueued = false;
-     private bool allowInputQueuing = false;
+    private bool inputQueued = false;
+    private bool allowInputQueuing = false;
 
     private InputSystem_Actions inputActions;
     public bool IsAttacking => isAttacking;
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -43,11 +44,13 @@ public class PlayerCombat : MonoBehaviour
             stateInfo = animator.GetNextAnimatorStateInfo(0);
         }
 
+        if (stateInfo.IsTag("NoCombat")) return;
 
-        if (!stateInfo.IsTag("Combat") || stateInfo.IsTag("NoCombat")) return;
+        bool isLocked = lockOnBehaviour != null && lockOnBehaviour.IsLocked;
+        bool isSprinting = playerMovement != null && playerMovement.IsSprinting;
 
+        if (!isLocked && !isSprinting) return;
         if (playerDodge != null && playerDodge.IsDodging) return;
-        if (lockOnBehaviour == null || !lockOnBehaviour.IsLocked) return;
 
         if (isAttacking)
         {
@@ -60,8 +63,11 @@ public class PlayerCombat : MonoBehaviour
 
     private void PerformAttack()
     {
-        comboStep++;
-        if (comboStep > 3) comboStep = 1;
+        animator.ResetTrigger("Recovery");
+        animator.ResetTrigger("RecoveryStop");
+        animator.ResetTrigger("FightSprintAttack");
+        animator.ResetTrigger("SprintAttack");
+        animator.SetBool("SprintAttackBool", false); 
 
         isAttacking = true;
         inputQueued = false;
@@ -69,32 +75,36 @@ public class PlayerCombat : MonoBehaviour
 
         if (playerMovement != null) playerMovement.SetMovementEnabled(false);
 
+        bool isLocked = lockOnBehaviour != null && lockOnBehaviour.IsLocked;
+        bool isSprinting = playerMovement != null && playerMovement.IsSprinting;
+
+        if (isSprinting)
+        {
+            animator.SetBool("SprintAttackDelay", true); 
+
+            if (isLocked)
+            {
+                animator.SetTrigger("FightSprintAttack");
+            }
+            else
+            {
+                animator.SetTrigger("SprintAttack");
+            }
+            comboStep = 0;
+            return;
+        }
+
+        comboStep++;
+        if (comboStep > 3) comboStep = 1;
+
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Recovery"))
         {
-
             animator.SetTrigger("RecoveryStop");
-
         }
-        else 
+        else
         {
-
             animator.SetTrigger("Attack" + comboStep);
         }
-    }
-
-    public void EnableAttackQueue()
-    {
-        allowInputQueuing = true;
-    }
-
-    public void EnableWeaponHitbox()
-    {
-        if (weaponScript != null) weaponScript.EnableDamage();
-    }
-
-    public void DisableWeaponHitbox()
-    {
-        if (weaponScript != null) weaponScript.DisableDamage();
     }
 
     public void OnAttackEnd()
@@ -103,16 +113,32 @@ public class PlayerCombat : MonoBehaviour
         allowInputQueuing = false;
         DisableWeaponHitbox();
 
+        animator.SetBool("SprintAttackDelay", false);
+
         if (inputQueued)
         {
             PerformAttack();
         }
         else
         {
-            animator.SetTrigger("Recovery");
-            comboStep = 0;
+            AnimatorStateInfo currentInfo = animator.GetCurrentAnimatorStateInfo(0);
 
-            if (playerMovement != null) playerMovement.SetMovementEnabled(true);
+            bool isSprintAttack = currentInfo.IsName("Fight_Sprint_Light_Attack") || currentInfo.IsName("Sprint_Light_Attack");
+
+            if (isSprintAttack)
+            {
+                if (playerMovement != null) playerMovement.SetMovementEnabled(true);
+            }
+            else
+            {
+                animator.SetTrigger("Recovery");
+                comboStep = 0;
+                if (playerMovement != null) playerMovement.SetMovementEnabled(true);
+            }
         }
     }
+
+    public void EnableAttackQueue() => allowInputQueuing = true;
+    public void EnableWeaponHitbox() { if (weaponScript != null) weaponScript.EnableDamage(); }
+    public void DisableWeaponHitbox() { if (weaponScript != null) weaponScript.DisableDamage(); }
 }
