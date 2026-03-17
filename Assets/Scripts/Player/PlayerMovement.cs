@@ -47,6 +47,7 @@ public class PlayerMovement : MonoBehaviour
     private bool keepLockOnRotation = false;
     private float keepLockOnTimer = 0f;
     private const float keepLockOnDuration = 0.4f;
+    private bool wasCombatSprinting = false;
 
     private void Awake()
     {
@@ -232,25 +233,34 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+
+
     private void UpdateAnimatorParams(Vector3 move)
     {
         if (animator == null) return;
 
-        bool isLocked = lockOnBehaviour != null && lockOnBehaviour.IsLocked && lockOnBehaviour.GetCurrentTarget() != null;
         float inputMagnitude = moveInput.magnitude;
+        bool isLocked = lockOnBehaviour != null && lockOnBehaviour.IsLocked && lockOnBehaviour.GetCurrentTarget() != null;
         bool isMoving = inputMagnitude > 0.01f;
+
+        bool isCombatSprintingNow = isSprinting && isLocked;
+
+        if (isCombatSprintingNow && !wasCombatSprinting)
+        {
+            animator.SetTrigger("EnterCombatSprint");
+        }
+        wasCombatSprinting = isCombatSprintingNow;
 
         animator.SetBool("IsMoving", isMoving);
 
-        bool fightSprintActive = isLocked && isSprinting && inputMagnitude > 0.1f;
-        animator.SetBool("FightSprint", fightSprintActive);
+        animator.SetBool("FightSprint", isLocked && isSprinting && inputMagnitude > 0.1f);
 
         if (isLocked && !isSprinting)
         {
             Vector3 localMove = transform.InverseTransformDirection(move);
             animator.SetFloat("MoveX", localMove.x, 0.1f, Time.deltaTime);
             animator.SetFloat("MoveY", localMove.z, 0.1f, Time.deltaTime);
-            animator.SetFloat("Speed", 0f); 
+            animator.SetFloat("Speed", 0f);
         }
         else
         {
@@ -261,9 +271,8 @@ public class PlayerMovement : MonoBehaviour
                 else if (inputMagnitude >= 0.6f) animValue = 1.0f;
                 else animValue = 0.5f;
             }
-
             animator.SetFloat("Speed", animValue, 0.1f, Time.deltaTime);
-            animator.SetFloat("MoveX", 0f, 0.1f, Time.deltaTime); 
+            animator.SetFloat("MoveX", 0f, 0.1f, Time.deltaTime);
             animator.SetFloat("MoveY", 0f, 0.1f, Time.deltaTime);
         }
     }
