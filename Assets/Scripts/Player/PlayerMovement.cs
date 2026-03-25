@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     public float walkSpeed = 2f;
     public float runSpeed = 5f;
     public float sprintSpeed = 8f;
+    public float sprintStaminaCost = 15f;
     [SerializeField] private float currentSpeed;
 
     [Header("Sprint/Dodge Combo Settings")]
@@ -21,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
     public CinemachineCamera vcamFreeLook;
     public Animator animator;
     private PlayerDodge dodgeScript;
+    private PlayerStamina stamina;
 
     [Header("Gravity & Grounding")]
     public Transform groundCheck;
@@ -53,6 +55,7 @@ public class PlayerMovement : MonoBehaviour
     {
         inputActions = new InputSystem_Actions();
         dodgeScript = GetComponent<PlayerDodge>();
+        stamina = GetComponent<PlayerStamina>();
         orbitalFollow = vcamFreeLook.GetComponent<CinemachineOrbitalFollow>();
         lockOnBehaviour = GetComponent<LockOnBehaviour>();
 
@@ -63,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (ctx.control.device is Keyboard)
             {
-                if (moveInput.magnitude > 0.1f) isSprinting = true;
+                if (moveInput.magnitude > 0.1f && stamina != null && stamina.CanPerformAction()) isSprinting = true;
             }
             buttonDownTime = Time.time;
             isHoldingButton = true;
@@ -84,16 +87,8 @@ public class PlayerMovement : MonoBehaviour
 
         if (lockOnBehaviour != null)
         {
-            inputActions.Player.LockOn.performed += ctx =>
-            {
-                PerformLockOnAction();
-            };
-
-            inputActions.Player.SwitchCamera.performed += ctx =>
-            {
-                ToggleCameraMode();
-            };
-
+            inputActions.Player.LockOn.performed += ctx => PerformLockOnAction();
+            inputActions.Player.SwitchCamera.performed += ctx => ToggleCameraMode();
             lockOnBehaviour.OnUnlock += () =>
             {
                 keepLockOnRotation = true;
@@ -117,12 +112,23 @@ public class PlayerMovement : MonoBehaviour
         {
             if ((Time.time - buttonDownTime) >= holdThreshold && moveInput.magnitude > 0.1f)
             {
-                isSprinting = true;
+                if (stamina != null && stamina.CanPerformAction()) isSprinting = true;
+            }
+        }
+
+        if (isSprinting && moveInput.magnitude > 0.1f && (dodgeScript == null || !dodgeScript.IsDodging))
+        {
+            if (stamina != null && stamina.CanPerformAction())
+            {
+                stamina.UseStamina(sprintStaminaCost * Time.deltaTime);
+            }
+            else
+            {
+                isSprinting = false;
             }
         }
 
         HandleCamera();
-
         if (lockOnBehaviour) lockOnBehaviour.HandleLockOnState(transform.position);
 
         if (keepLockOnRotation)
@@ -148,10 +154,7 @@ public class PlayerMovement : MonoBehaviour
     private void ApplyGravity()
     {
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
-        if (isGrounded && velocity.y < 0)
-        {
-            velocity.y = -2f;
-        }
+        if (isGrounded && velocity.y < 0) velocity.y = -2f;
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
     }
@@ -172,7 +175,6 @@ public class PlayerMovement : MonoBehaviour
     {
         bool wasLocked = lockOnBehaviour.IsLocked;
         lockOnBehaviour.ToggleLockOn();
-
         if (wasLocked && !lockOnBehaviour.IsLocked)
         {
             keepLockOnRotation = true;
@@ -185,13 +187,11 @@ public class PlayerMovement : MonoBehaviour
         if (!canMove) return;
         Vector3 moveDir = camForward * moveInput.y + camRight * moveInput.x;
         if (moveDir.magnitude > 1f) moveDir.Normalize();
-
         if (lockOnBehaviour != null)
         {
             bool sprintActive = isSprinting && moveInput.magnitude > 0.1f;
             lockOnBehaviour.SetSprintData(sprintActive, moveInput.x);
         }
-
         HandlePositionAndRotation(moveDir);
         UpdateAnimatorParams(moveDir);
     }
@@ -200,7 +200,6 @@ public class PlayerMovement : MonoBehaviour
     {
         bool isLocked = lockOnBehaviour != null && lockOnBehaviour.IsLocked && lockOnBehaviour.GetCurrentTarget() != null;
         float inputMagnitude = moveInput.magnitude;
-
         float targetSpeed = 0f;
         if (inputMagnitude > 0.1f)
         {
@@ -208,10 +207,8 @@ public class PlayerMovement : MonoBehaviour
             else if (inputMagnitude >= 0.6f) targetSpeed = runSpeed;
             else targetSpeed = walkSpeed;
         }
-
         currentSpeed = Mathf.Lerp(currentSpeed, targetSpeed, 10f * Time.deltaTime);
         controller.Move(move * currentSpeed * Time.deltaTime);
-
         if ((isLocked || keepLockOnRotation) && !isSprinting)
         {
             Transform target = lockOnBehaviour.GetCurrentTarget();
@@ -233,28 +230,17 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-
-
     private void UpdateAnimatorParams(Vector3 move)
     {
         if (animator == null) return;
-
         float inputMagnitude = moveInput.magnitude;
         bool isLocked = lockOnBehaviour != null && lockOnBehaviour.IsLocked && lockOnBehaviour.GetCurrentTarget() != null;
         bool isMoving = inputMagnitude > 0.01f;
-
         bool isCombatSprintingNow = isSprinting && isLocked;
-
-        if (isCombatSprintingNow && !wasCombatSprinting)
-        {
-            animator.SetTrigger("EnterCombatSprint");
-        }
+        if (isCombatSprintingNow && !wasCombatSprinting) animator.SetTrigger("EnterCombatSprint");
         wasCombatSprinting = isCombatSprintingNow;
-
         animator.SetBool("IsMoving", isMoving);
-
         animator.SetBool("FightSprint", isLocked && isSprinting && inputMagnitude > 0.1f);
-
         if (isLocked && !isSprinting)
         {
             Vector3 localMove = transform.InverseTransformDirection(move);

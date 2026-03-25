@@ -107,4 +107,20 @@ public class PlayerHealth : MonoBehaviour
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+
+    public void Heal(float amount)
+    {
+        if (isDead) return;
+
+        currentHP += amount;
+        currentHP = Mathf.Min(currentHP, maxHP); 
+
+        UpdateHealthBar();
+
+    
+        if (takenDamageFill != null)
+        {
+            takenDamageFill.fillAmount = currentHP / maxHP;
+        }
+    }
 }
