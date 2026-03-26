@@ -1036,12 +1036,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
-    - target: {fileID: 3294630759148957806, guid: 9d3607c1d3c303b44911daf2cd8ea934, type: 3}
-      propertyPath: m_text
-      value: "Combat & Interaction\r\n\r\nLMB\_ \_ \_ Light Attack\r\n\r\nMovement
-        & Camera\r\n\r\nSpace Press\_ Roll \r\nShift\_         Sprint \r\nWASD\_
-        \_   Movement \r\nMouse\_ \_ \_Camera \r\nControl C \_   Camera Mode"
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1197,6 +1191,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1306370041 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7700363865478002766, guid: 9d3607c1d3c303b44911daf2cd8ea934, type: 3}
+  m_PrefabInstance: {fileID: 944001245}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!114 &1497241990 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7000966535571075148, guid: 9d3607c1d3c303b44911daf2cd8ea934, type: 3}
@@ -2500,10 +2505,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 128244574}
     - target: {fileID: 2016017187875150652, guid: 98d51c6bfc0eee54ba72492a93ce7aca, type: 3}
-      propertyPath: damageSound
-      value: 
-      objectReference: {fileID: 8300000, guid: aab61e6de593caf44b4cb1eb3a23f29f, type: 3}
-    - target: {fileID: 2016017187875150652, guid: 98d51c6bfc0eee54ba72492a93ce7aca, type: 3}
       propertyPath: healthFillImage
       value: 
       objectReference: {fileID: 298868179}
@@ -2511,6 +2512,14 @@ PrefabInstance:
       propertyPath: takenDamageFill
       value: 
       objectReference: {fileID: 1497241990}
+    - target: {fileID: 3255733728550318896, guid: 98d51c6bfc0eee54ba72492a93ce7aca, type: 3}
+      propertyPath: maxStamina
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 3255733728550318896, guid: 98d51c6bfc0eee54ba72492a93ce7aca, type: 3}
+      propertyPath: staminaFillImage
+      value: 
+      objectReference: {fileID: 1306370041}
     - target: {fileID: 4711210143094237258, guid: 98d51c6bfc0eee54ba72492a93ce7aca, type: 3}
       propertyPath: m_LocalPosition.x
       value: 541.072

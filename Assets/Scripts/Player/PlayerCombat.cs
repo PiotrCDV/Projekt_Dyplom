@@ -9,6 +9,11 @@ public class PlayerCombat : MonoBehaviour
     private LockOnBehaviour lockOnBehaviour;
     private SwordDamage weaponScript;
     private PlayerDodge playerDodge;
+    private PlayerStamina stamina;
+
+    [Header("Combat Settings")]
+    public float attackStaminaCost = 15f;
+    public float sprintAttackStaminaCost = 20f;
 
     [Header("Combat State")]
     private int comboStep = 0;
@@ -26,6 +31,7 @@ public class PlayerCombat : MonoBehaviour
         lockOnBehaviour = GetComponent<LockOnBehaviour>();
         weaponScript = GetComponentInChildren<SwordDamage>();
         playerDodge = GetComponent<PlayerDodge>();
+        stamina = GetComponent<PlayerStamina>();
 
         inputActions = new InputSystem_Actions();
         inputActions.Player.Attack.performed += ctx => HandleAttackInput();
@@ -38,19 +44,16 @@ public class PlayerCombat : MonoBehaviour
     {
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
         bool isInTransition = animator.IsInTransition(0);
-
-        if (isInTransition)
-        {
-            stateInfo = animator.GetNextAnimatorStateInfo(0);
-        }
+        if (isInTransition) stateInfo = animator.GetNextAnimatorStateInfo(0);
 
         if (stateInfo.IsTag("NoCombat")) return;
 
         bool isLocked = lockOnBehaviour != null && lockOnBehaviour.IsLocked;
-        bool isSprinting = playerMovement != null && playerMovement.IsSprinting;
+        bool isSprintingInput = playerMovement != null && playerMovement.IsSprinting;
 
-        if (!isLocked && !isSprinting) return;
+        if (!isLocked && !isSprintingInput) return;
         if (playerDodge != null && playerDodge.IsDodging) return;
+        if (stamina != null && !stamina.CanPerformAction()) return;
 
         if (isAttacking)
         {
@@ -67,7 +70,19 @@ public class PlayerCombat : MonoBehaviour
         animator.ResetTrigger("RecoveryStop");
         animator.ResetTrigger("FightSprintAttack");
         animator.ResetTrigger("SprintAttack");
-        animator.SetBool("SprintAttackBool", false); 
+
+        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        bool isSprintingInAnimator = stateInfo.IsName("Sprint") || stateInfo.IsName("Fight_Sprint");
+        bool isSprintingInput = playerMovement != null && playerMovement.IsSprinting;
+        bool isLocked = lockOnBehaviour != null && lockOnBehaviour.IsLocked;
+
+        bool shouldDoSprintAttack = isSprintingInput && isSprintingInAnimator;
+
+        if (!isLocked && !shouldDoSprintAttack)
+        {
+            if (playerMovement != null) playerMovement.SetMovementEnabled(true);
+            return;
+        }
 
         isAttacking = true;
         inputQueued = false;
@@ -75,21 +90,14 @@ public class PlayerCombat : MonoBehaviour
 
         if (playerMovement != null) playerMovement.SetMovementEnabled(false);
 
-        bool isLocked = lockOnBehaviour != null && lockOnBehaviour.IsLocked;
-        bool isSprinting = playerMovement != null && playerMovement.IsSprinting;
+        float currentCost = shouldDoSprintAttack ? sprintAttackStaminaCost : attackStaminaCost;
+        if (stamina != null) stamina.UseStamina(currentCost);
 
-        if (isSprinting)
+        if (shouldDoSprintAttack)
         {
             animator.SetBool("SprintAttackDelay", true); 
-
-            if (isLocked)
-            {
-                animator.SetTrigger("FightSprintAttack");
-            }
-            else
-            {
-                animator.SetTrigger("SprintAttack");
-            }
+            if (isLocked) animator.SetTrigger("FightSprintAttack");
+            else animator.SetTrigger("SprintAttack");
             comboStep = 0;
             return;
         }
@@ -97,14 +105,8 @@ public class PlayerCombat : MonoBehaviour
         comboStep++;
         if (comboStep > 3) comboStep = 1;
 
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Recovery"))
-        {
-            animator.SetTrigger("RecoveryStop");
-        }
-        else
-        {
-            animator.SetTrigger("Attack" + comboStep);
-        }
+        if (stateInfo.IsName("Recovery")) animator.SetTrigger("RecoveryStop");
+        else animator.SetTrigger("Attack" + comboStep);
     }
 
     public void OnAttackEnd()
@@ -112,19 +114,13 @@ public class PlayerCombat : MonoBehaviour
         isAttacking = false;
         allowInputQueuing = false;
         DisableWeaponHitbox();
-
         animator.SetBool("SprintAttackDelay", false);
 
-        if (inputQueued)
-        {
-            PerformAttack();
-        }
+        if (inputQueued) PerformAttack();
         else
         {
             AnimatorStateInfo currentInfo = animator.GetCurrentAnimatorStateInfo(0);
-
             bool isSprintAttack = currentInfo.IsName("Fight_Sprint_Light_Attack") || currentInfo.IsName("Sprint_Light_Attack");
-
             if (isSprintAttack)
             {
                 if (playerMovement != null) playerMovement.SetMovementEnabled(true);
