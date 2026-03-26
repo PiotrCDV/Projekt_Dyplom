@@ -137,4 +137,35 @@ public class PlayerCombat : MonoBehaviour
     public void EnableAttackQueue() => allowInputQueuing = true;
     public void EnableWeaponHitbox() { if (weaponScript != null) weaponScript.EnableDamage(); }
     public void DisableWeaponHitbox() { if (weaponScript != null) weaponScript.DisableDamage(); }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            // 1. Sprawdzamy, czy gracz w ogóle coœ namierza
+            if (lockOnBehaviour != null && lockOnBehaviour.IsLocked)
+            {
+                // 2. U¿ywamy funkcji GetCurrentTarget(), ¿eby pobraæ cel z LockOnBehaviour
+                Transform targetEnemy = lockOnBehaviour.GetCurrentTarget();
+
+                if (targetEnemy != null)
+                {
+                    // 3. Szukamy Animatora na namierzonym wrogu.
+                    // U¿ywamy GetComponentInParent, bo Twój system LockOn prawdopodobnie namierza 
+                    // punkt na koœci wroga (np. œrodek klatki piersiowej), a nie g³ówny obiekt
+                    Animator wilkolakAnimator = targetEnemy.GetComponentInParent<Animator>();
+
+                    if (wilkolakAnimator != null)
+                    {
+                        // 4. Akcja!
+                        ExecutionManager.Instance.StartExecution(animator, wilkolakAnimator);
+                    }
+                    else
+                    {
+                        Debug.LogWarning("Znalaz³em cel LockOn, ale nie znalaz³em na nim Animatora!");
+                    }
+                }
+            }
+        }
+    }
 }
