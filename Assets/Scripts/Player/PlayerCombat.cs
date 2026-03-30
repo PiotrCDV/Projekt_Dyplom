@@ -1,9 +1,9 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
 
 public class PlayerCombat : MonoBehaviour
 {
-    [Header("References")]
     private Animator animator;
     private PlayerMovement playerMovement;
     private LockOnBehaviour lockOnBehaviour;
@@ -11,16 +11,18 @@ public class PlayerCombat : MonoBehaviour
     private PlayerDodge playerDodge;
     private PlayerStamina stamina;
 
-    [Header("Combat Settings")]
-    public float attackStaminaCost = 15f;
+    public float lightAttackStaminaCost = 15f;
+    public float heavyAttackStaminaCost = 25f;
     public float sprintAttackStaminaCost = 20f;
 
-    [Header("Combat State")]
     private int comboStep = 0;
     private bool isAttacking = false;
     private bool inputQueued = false;
     private bool allowInputQueuing = false;
+    private bool nextAttackIsHeavy = false;
+    private bool currentComboIsHeavy = false;
 
+    private Coroutine attackFailsafe;
     private InputSystem_Actions inputActions;
     public bool IsAttacking => isAttacking;
 
@@ -34,55 +36,48 @@ public class PlayerCombat : MonoBehaviour
         stamina = GetComponent<PlayerStamina>();
 
         inputActions = new InputSystem_Actions();
-        inputActions.Player.Attack.performed += ctx => HandleAttackInput();
+        inputActions.Player.Attack.performed += ctx => HandleAttackInput(false);
+        inputActions.Player.HeavyAttack.performed += ctx => HandleAttackInput(true);
     }
 
     private void OnEnable() => inputActions.Enable();
     private void OnDisable() => inputActions.Disable();
 
-    private void HandleAttackInput()
+    private void HandleAttackInput(bool heavy)
     {
-        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-        bool isInTransition = animator.IsInTransition(0);
-        if (isInTransition) stateInfo = animator.GetNextAnimatorStateInfo(0);
-
-        if (stateInfo.IsTag("NoCombat")) return;
-
-        bool isLocked = lockOnBehaviour != null && lockOnBehaviour.IsLocked;
-        bool isSprintingInput = playerMovement != null && playerMovement.IsSprinting;
-
-        if (!isLocked && !isSprintingInput) return;
         if (playerDodge != null && playerDodge.IsDodging) return;
         if (stamina != null && !stamina.CanPerformAction()) return;
 
         if (isAttacking)
         {
-            if (allowInputQueuing) inputQueued = true;
+            if (allowInputQueuing)
+            {
+                inputQueued = true;
+                nextAttackIsHeavy = heavy;
+            }
             return;
         }
 
+        nextAttackIsHeavy = heavy;
         PerformAttack();
     }
 
     private void PerformAttack()
     {
-        animator.ResetTrigger("Recovery");
-        animator.ResetTrigger("RecoveryStop");
-        animator.ResetTrigger("FightSprintAttack");
-        animator.ResetTrigger("SprintAttack");
-
+        bool isLocked = lockOnBehaviour != null && lockOnBehaviour.IsLocked;
+        bool isSprintingInput = playerMovement != null && playerMovement.IsSprinting;
+        
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
         bool isSprintingInAnimator = stateInfo.IsName("Sprint") || stateInfo.IsName("Fight_Sprint");
-        bool isSprintingInput = playerMovement != null && playerMovement.IsSprinting;
-        bool isLocked = lockOnBehaviour != null && lockOnBehaviour.IsLocked;
-
         bool shouldDoSprintAttack = isSprintingInput && isSprintingInAnimator;
 
         if (!isLocked && !shouldDoSprintAttack)
         {
-            if (playerMovement != null) playerMovement.SetMovementEnabled(true);
+            ResetCombatState();
             return;
         }
+
+        ResetAllAttackTriggers();
 
         isAttacking = true;
         inputQueued = false;
@@ -90,7 +85,10 @@ public class PlayerCombat : MonoBehaviour
 
         if (playerMovement != null) playerMovement.SetMovementEnabled(false);
 
-        float currentCost = shouldDoSprintAttack ? sprintAttackStaminaCost : attackStaminaCost;
+        if (attackFailsafe != null) StopCoroutine(attackFailsafe);
+        attackFailsafe = StartCoroutine(AttackFailsafeRoutine());
+
+        float currentCost = shouldDoSprintAttack ? sprintAttackStaminaCost : (nextAttackIsHeavy ? heavyAttackStaminaCost : lightAttackStaminaCost);
         if (stamina != null) stamina.UseStamina(currentCost);
 
         if (shouldDoSprintAttack)
@@ -99,39 +97,90 @@ public class PlayerCombat : MonoBehaviour
             if (isLocked) animator.SetTrigger("FightSprintAttack");
             else animator.SetTrigger("SprintAttack");
             comboStep = 0;
-            return;
+            currentComboIsHeavy = false;
         }
+        else
+        {
+            string triggerToFire = "";
 
-        comboStep++;
-        if (comboStep > 3) comboStep = 1;
+            if (nextAttackIsHeavy)
+            {
+                if (comboStep == 1 && !currentComboIsHeavy) triggerToFire = "HAttack2";
+                else if (comboStep == 2 && !currentComboIsHeavy) triggerToFire = "HAttack2";
+                else if (comboStep == 3 && !currentComboIsHeavy) triggerToFire = "HAttack1";
+                else if (comboStep == 1 && currentComboIsHeavy) triggerToFire = "HAttack2";
+                else triggerToFire = "HAttack1";
 
-        if (stateInfo.IsName("Recovery")) animator.SetTrigger("RecoveryStop");
-        else animator.SetTrigger("Attack" + comboStep);
+                comboStep = (triggerToFire == "HAttack1") ? 1 : 2;
+                currentComboIsHeavy = true;
+            }
+            else
+            {
+                if (comboStep == 1 && !currentComboIsHeavy) triggerToFire = "Attack2";
+                else if (comboStep == 2 && !currentComboIsHeavy) triggerToFire = "Attack3";
+                else if (comboStep == 1 && currentComboIsHeavy) triggerToFire = "Attack3";
+                else triggerToFire = "Attack1";
+
+                if (triggerToFire == "Attack1") comboStep = 1;
+                else if (triggerToFire == "Attack2") comboStep = 2;
+                else comboStep = 3;
+                
+                currentComboIsHeavy = false;
+            }
+
+            if (stateInfo.IsName("Recovery")) animator.SetTrigger("RecoveryStop");
+            animator.SetTrigger(triggerToFire);
+        }
     }
 
     public void OnAttackEnd()
     {
+        if (attackFailsafe != null) StopCoroutine(attackFailsafe);
+
         isAttacking = false;
         allowInputQueuing = false;
         DisableWeaponHitbox();
         animator.SetBool("SprintAttackDelay", false);
 
-        if (inputQueued) PerformAttack();
+        if (inputQueued)
+        {
+            PerformAttack();
+        }
         else
         {
-            AnimatorStateInfo currentInfo = animator.GetCurrentAnimatorStateInfo(0);
-            bool isSprintAttack = currentInfo.IsName("Fight_Sprint_Light_Attack") || currentInfo.IsName("Sprint_Light_Attack");
-            if (isSprintAttack)
-            {
-                if (playerMovement != null) playerMovement.SetMovementEnabled(true);
-            }
-            else
-            {
-                animator.SetTrigger("Recovery");
-                comboStep = 0;
-                if (playerMovement != null) playerMovement.SetMovementEnabled(true);
-            }
+            comboStep = 0;
+            currentComboIsHeavy = false;
+            if (playerMovement != null) playerMovement.SetMovementEnabled(true);
+            animator.SetTrigger("Recovery");
         }
+    }
+
+    private void ResetAllAttackTriggers()
+    {
+        animator.ResetTrigger("Attack1");
+        animator.ResetTrigger("Attack2");
+        animator.ResetTrigger("Attack3");
+        animator.ResetTrigger("HAttack1");
+        animator.ResetTrigger("HAttack2");
+        animator.ResetTrigger("SprintAttack");
+        animator.ResetTrigger("FightSprintAttack");
+        animator.ResetTrigger("Recovery");
+        animator.ResetTrigger("RecoveryStop");
+    }
+
+    private void ResetCombatState()
+    {
+        isAttacking = false;
+        inputQueued = false;
+        comboStep = 0;
+        currentComboIsHeavy = false;
+        if (playerMovement != null) playerMovement.SetMovementEnabled(true);
+    }
+
+    private IEnumerator AttackFailsafeRoutine()
+    {
+        yield return new WaitForSeconds(2.0f);
+        if (isAttacking) OnAttackEnd();
     }
 
     public void EnableAttackQueue() => allowInputQueuing = true;
