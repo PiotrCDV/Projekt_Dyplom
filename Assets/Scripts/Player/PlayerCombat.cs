@@ -186,4 +186,29 @@ public class PlayerCombat : MonoBehaviour
     public void EnableAttackQueue() => allowInputQueuing = true;
     public void EnableWeaponHitbox() { if (weaponScript != null) weaponScript.EnableDamage(); }
     public void DisableWeaponHitbox() { if (weaponScript != null) weaponScript.DisableDamage(); }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            if (lockOnBehaviour != null && lockOnBehaviour.IsLocked)
+            {
+                Transform targetEnemy = lockOnBehaviour.GetCurrentTarget();
+
+                if (targetEnemy != null)
+                {
+                    Animator wilkolakAnimator = targetEnemy.GetComponentInParent<Animator>();
+
+                    if (wilkolakAnimator != null)
+                    {
+                        ExecutionManager.Instance.StartExecution(animator, wilkolakAnimator);
+                    }
+                    else
+                    {
+                        Debug.LogWarning("Znalaz³em cel LockOn, ale nie znalaz³em na nim Animatora!");
+                    }
+                }
+            }
+        }
+    }
 }
