@@ -2282,7 +2282,7 @@ PrefabInstance:
         Attack\nX              Healing Potion\n\r\nMovement & Camera\r\n\r\nB Press     
         Roll\r\nB Hold       Sprint\r\nLS            Movement\r\nRS           Camera
         Control\r\nPress Y \_ Camera Lock\nHold Y \_  Camera Mode\r\n\nExperimental
-        Mode\nj                 Execution  "
+        Mode\nLB                 Execution  "
       objectReference: {fileID: 0}
     - target: {fileID: 1232265474937138766, guid: 9d3607c1d3c303b44911daf2cd8ea934, type: 3}
       propertyPath: m_fontColor32.rgba
