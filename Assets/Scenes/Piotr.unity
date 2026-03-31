@@ -2192,6 +2192,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 887437220358402953, guid: 9d3607c1d3c303b44911daf2cd8ea934, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 907278134584967941, guid: 9d3607c1d3c303b44911daf2cd8ea934, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -2272,9 +2276,33 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1232265474937138766, guid: 9d3607c1d3c303b44911daf2cd8ea934, type: 3}
+      propertyPath: m_text
+      value: "Combat & Interaction\r\n\r\nRB           Light Attack\r\nRT\_ \_ \_Right
+        Attack\nX              Healing Potion\n\r\nMovement & Camera\r\n\r\nB Press     
+        Roll\r\nB Hold       Sprint\r\nLS            Movement\r\nRS           Camera
+        Control\r\nPress Y \_ Camera Lock\nHold Y \_  Camera Mode\r\n\nExperimental
+        Mode\nj                 Execution  "
+      objectReference: {fileID: 0}
+    - target: {fileID: 1232265474937138766, guid: 9d3607c1d3c303b44911daf2cd8ea934, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4291480266
+      objectReference: {fileID: 0}
     - target: {fileID: 1368664189447756019, guid: 9d3607c1d3c303b44911daf2cd8ea934, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 3294630759148957806, guid: 9d3607c1d3c303b44911daf2cd8ea934, type: 3}
+      propertyPath: m_text
+      value: "Combat & Interaction\r\n\r\nLMB\_ \_ \_Light Attack\nRMB\_ \_ \_Right
+        Attack\nE                Healing Potion\r\n\r\nMovement & Camera\r\n\r\nSpace
+        Press\_ Roll \r\nShift\_         Sprint \r\nWASD\_ \_   Movement \r\nMouse\_
+        \_ \_Camera \r\nPress t \_      Camera Lock\nHold t \_       Camera Mode\n\nExperimental
+        Mode\nj                 Execution  "
+      objectReference: {fileID: 0}
+    - target: {fileID: 6410822578096815104, guid: 9d3607c1d3c303b44911daf2cd8ea934, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3916,7 +3944,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3255733728550318896, guid: 98d51c6bfc0eee54ba72492a93ce7aca, type: 3}
       propertyPath: maxStamina
-      value: 1000
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 3255733728550318896, guid: 98d51c6bfc0eee54ba72492a93ce7aca, type: 3}
       propertyPath: staminaFillImage
@@ -3952,15 +3980,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4711210143094237258, guid: 98d51c6bfc0eee54ba72492a93ce7aca, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 550.4
+      value: 540.362
       objectReference: {fileID: 0}
     - target: {fileID: 4711210143094237258, guid: 98d51c6bfc0eee54ba72492a93ce7aca, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.49
+      value: 3.013
       objectReference: {fileID: 0}
     - target: {fileID: 4711210143094237258, guid: 98d51c6bfc0eee54ba72492a93ce7aca, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 181.95
+      value: 225.876
       objectReference: {fileID: 0}
     - target: {fileID: 4711210143094237258, guid: 98d51c6bfc0eee54ba72492a93ce7aca, type: 3}
       propertyPath: m_LocalRotation.w

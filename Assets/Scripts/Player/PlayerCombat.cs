@@ -189,7 +189,7 @@ public class PlayerCombat : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.J))
+        if (Input.GetKeyDown(KeyCode.J) || Input.GetKeyDown(KeyCode.JoystickButton4))
         {
             if (lockOnBehaviour != null && lockOnBehaviour.IsLocked)
             {
@@ -205,7 +205,7 @@ public class PlayerCombat : MonoBehaviour
                     }
                     else
                     {
-                        Debug.LogWarning("Znalaz³em cel LockOn, ale nie znalaz³em na nim Animatora!");
+                        Debug.LogWarning("Znalazï¿½em cel LockOn, ale nie znalazï¿½em na nim Animatora!");
                     }
                 }
             }
