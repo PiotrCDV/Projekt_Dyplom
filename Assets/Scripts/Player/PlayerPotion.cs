@@ -15,6 +15,7 @@ public class PlayerPotion : MonoBehaviour
     private PlayerHealth playerHealth;
 
     private InputSystem_Actions inputActions;
+    private bool isDrinking;
 
     private void Awake()
     {
@@ -35,6 +36,7 @@ public class PlayerPotion : MonoBehaviour
 
     public void TryDrinkPotion()
     {
+        if (isDrinking) return;
         if (playerCombat != null && playerCombat.IsAttacking) return;
         if (GetComponent<PlayerDodge>().IsDodging) return;
 
@@ -44,6 +46,8 @@ public class PlayerPotion : MonoBehaviour
     private void ExecutePotionAnimation()
     {
         if (animator == null) return;
+
+        isDrinking = true;
 
         if (potionModel != null) potionModel.SetActive(true);
 
@@ -64,6 +68,8 @@ public class PlayerPotion : MonoBehaviour
 
     public void OnDrinkFinished()
     {
+        isDrinking = false;
+
         if (potionModel != null) potionModel.SetActive(false);
 
         if (playerMovement != null)

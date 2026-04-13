@@ -22,6 +22,14 @@ public class PlayerCombat : MonoBehaviour
     private bool nextAttackIsHeavy = false;
     private bool currentComboIsHeavy = false;
 
+    private bool hasBufferedUnlockSprintAttack;
+    private bool bufferedUnlockSprintAttackHeavy;
+    private float bufferedUnlockSprintAttackExpireAt;
+    private const float unlockSprintAttackBufferDuration = 0.22f;
+    private const float sprintAttackMinSpeed = 1.4f;
+
+    private bool currentAttackWasSprintAttack;
+
     private Coroutine attackFailsafe;
     private InputSystem_Actions inputActions;
     public bool IsAttacking => isAttacking;
@@ -38,10 +46,17 @@ public class PlayerCombat : MonoBehaviour
         inputActions = new InputSystem_Actions();
         inputActions.Player.Attack.performed += ctx => HandleAttackInput(false);
         inputActions.Player.HeavyAttack.performed += ctx => HandleAttackInput(true);
+
+        if (lockOnBehaviour != null) lockOnBehaviour.OnUnlock += HandleUnlockDuringAttack;
     }
 
     private void OnEnable() => inputActions.Enable();
     private void OnDisable() => inputActions.Disable();
+
+    private void OnDestroy()
+    {
+        if (lockOnBehaviour != null) lockOnBehaviour.OnUnlock -= HandleUnlockDuringAttack;
+    }
 
     private void HandleAttackInput(bool heavy)
     {
@@ -66,18 +81,38 @@ public class PlayerCombat : MonoBehaviour
     {
         bool isLocked = lockOnBehaviour != null && lockOnBehaviour.IsLocked;
         bool isSprintingInput = playerMovement != null && playerMovement.IsSprinting;
+        bool hasSprintSpeed = HasSprintAttackSpeed();
         
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-        bool isSprintingInAnimator = stateInfo.IsName("Sprint") || stateInfo.IsName("Fight_Sprint");
-        bool shouldDoSprintAttack = isSprintingInput && isSprintingInAnimator;
+        bool isInFightSprint = stateInfo.IsName("Fight_Sprint");
+        bool isInFreeSprint = stateInfo.IsName("Sprint");
+        bool transitioningToFightSprint = animator.IsInTransition(0) && animator.GetNextAnimatorStateInfo(0).IsName("Fight_Sprint");
+        bool transitioningToFreeSprint = animator.IsInTransition(0) && animator.GetNextAnimatorStateInfo(0).IsName("Sprint");
+
+
+        if (!isLocked && isSprintingInput && isInFightSprint && !transitioningToFreeSprint)
+        {
+            BufferUnlockSprintAttack(nextAttackIsHeavy);
+            return;
+        }
+
+        bool shouldDoSprintAttack;
+        if (isLocked)
+        {
+            bool sprintIntentByParams = animator.GetBool("FightSprint");
+            bool isSprintingInAnimator = isInFightSprint || isInFreeSprint;
+            shouldDoSprintAttack = hasSprintSpeed && (isSprintingInAnimator || (isSprintingInput && (transitioningToFightSprint || sprintIntentByParams)));
+        }
+        else
+        {
+            shouldDoSprintAttack = hasSprintSpeed && isSprintingInput && (isInFreeSprint || transitioningToFreeSprint);
+        }
 
         if (!isLocked && !shouldDoSprintAttack)
         {
             ResetCombatState();
             return;
         }
-
-        ResetAllAttackTriggers();
 
         isAttacking = true;
         inputQueued = false;
@@ -93,14 +128,17 @@ public class PlayerCombat : MonoBehaviour
 
         if (shouldDoSprintAttack)
         {
-            animator.SetBool("SprintAttackDelay", true); 
-            if (isLocked) animator.SetTrigger("FightSprintAttack");
-            else animator.SetTrigger("SprintAttack");
+            animator.SetBool("SprintAttackDelay", true);
+            string sprintTrigger = ResolveSprintAttackTrigger(stateInfo, isLocked);
+            ResetConflictingTriggers(sprintTrigger);
+            animator.SetTrigger(sprintTrigger);
             comboStep = 0;
             currentComboIsHeavy = false;
+            currentAttackWasSprintAttack = true;
         }
         else
         {
+            animator.SetBool("SprintAttackDelay", false);
             string triggerToFire = "";
 
             if (nextAttackIsHeavy)
@@ -124,13 +162,71 @@ public class PlayerCombat : MonoBehaviour
                 if (triggerToFire == "Attack1") comboStep = 1;
                 else if (triggerToFire == "Attack2") comboStep = 2;
                 else comboStep = 3;
-                
+
                 currentComboIsHeavy = false;
             }
 
             if (stateInfo.IsName("Recovery")) animator.SetTrigger("RecoveryStop");
+            ResetConflictingTriggers(triggerToFire);
             animator.SetTrigger(triggerToFire);
+            currentAttackWasSprintAttack = false;
         }
+    }
+
+    private string ResolveSprintAttackTrigger(AnimatorStateInfo stateInfo, bool isLocked)
+    {
+        if (stateInfo.IsName("Fight_Sprint")) return "FightSprintAttack";
+        if (stateInfo.IsName("Sprint")) return "SprintAttack";
+        return isLocked ? "FightSprintAttack" : "SprintAttack";
+    }
+
+
+    private void BufferUnlockSprintAttack(bool heavy)
+    {
+        hasBufferedUnlockSprintAttack = true;
+        bufferedUnlockSprintAttackHeavy = heavy;
+        bufferedUnlockSprintAttackExpireAt = Time.time + unlockSprintAttackBufferDuration;
+    }
+
+    private bool HasSprintAttackSpeed()
+    {
+        return animator.GetFloat("Speed") > sprintAttackMinSpeed;
+    }
+
+    private void TryConsumeBufferedUnlockSprintAttack()
+    {
+        if (!hasBufferedUnlockSprintAttack) return;
+
+        if (Time.time > bufferedUnlockSprintAttackExpireAt)
+        {
+            hasBufferedUnlockSprintAttack = false;
+            return;
+        }
+
+        if (isAttacking) return;
+        if (playerDodge != null && playerDodge.IsDodging) return;
+        if (stamina != null && !stamina.CanPerformAction())
+        {
+            hasBufferedUnlockSprintAttack = false;
+            return;
+        }
+
+        bool isLocked = lockOnBehaviour != null && lockOnBehaviour.IsLocked;
+        if (isLocked)
+        {
+            hasBufferedUnlockSprintAttack = false;
+            return;
+        }
+
+        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        bool isInFreeSprint = stateInfo.IsName("Sprint")
+            || (animator.IsInTransition(0) && animator.GetNextAnimatorStateInfo(0).IsName("Sprint"));
+
+        if (!isInFreeSprint || !HasSprintAttackSpeed()) return;
+
+        nextAttackIsHeavy = bufferedUnlockSprintAttackHeavy;
+        hasBufferedUnlockSprintAttack = false;
+        PerformAttack();
     }
 
     public void OnAttackEnd()
@@ -151,21 +247,38 @@ public class PlayerCombat : MonoBehaviour
             comboStep = 0;
             currentComboIsHeavy = false;
             if (playerMovement != null) playerMovement.SetMovementEnabled(true);
-            animator.SetTrigger("Recovery");
+
+            bool shouldReturnDirectlyToIdle = currentAttackWasSprintAttack
+                && (lockOnBehaviour == null || !lockOnBehaviour.IsLocked)
+                && (playerMovement == null || !playerMovement.IsSprinting)
+                && !HasSprintAttackSpeed();
+
+            currentAttackWasSprintAttack = false;
+
+            if (shouldReturnDirectlyToIdle)
+            {
+                ResetConflictingTriggers("SprintToIdle");
+                animator.SetTrigger("SprintToIdle");
+            }
+            else
+            {
+                animator.SetTrigger("Recovery");
+            }
         }
     }
 
-    private void ResetAllAttackTriggers()
+    private void ResetConflictingTriggers(string nextTrigger)
     {
-        animator.ResetTrigger("Attack1");
-        animator.ResetTrigger("Attack2");
-        animator.ResetTrigger("Attack3");
-        animator.ResetTrigger("HAttack1");
-        animator.ResetTrigger("HAttack2");
-        animator.ResetTrigger("SprintAttack");
-        animator.ResetTrigger("FightSprintAttack");
-        animator.ResetTrigger("Recovery");
-        animator.ResetTrigger("RecoveryStop");
+        if (nextTrigger != "Attack1") animator.ResetTrigger("Attack1");
+        if (nextTrigger != "Attack2") animator.ResetTrigger("Attack2");
+        if (nextTrigger != "Attack3") animator.ResetTrigger("Attack3");
+        if (nextTrigger != "HAttack1") animator.ResetTrigger("HAttack1");
+        if (nextTrigger != "HAttack2") animator.ResetTrigger("HAttack2");
+        if (nextTrigger != "SprintAttack") animator.ResetTrigger("SprintAttack");
+        if (nextTrigger != "FightSprintAttack") animator.ResetTrigger("FightSprintAttack");
+        if (nextTrigger != "SprintToIdle") animator.ResetTrigger("SprintToIdle");
+        if (nextTrigger != "Recovery") animator.ResetTrigger("Recovery");
+        if (nextTrigger != "RecoveryStop") animator.ResetTrigger("RecoveryStop");
     }
 
     private void ResetCombatState()
@@ -174,7 +287,31 @@ public class PlayerCombat : MonoBehaviour
         inputQueued = false;
         comboStep = 0;
         currentComboIsHeavy = false;
+        hasBufferedUnlockSprintAttack = false;
+        currentAttackWasSprintAttack = false;
         if (playerMovement != null) playerMovement.SetMovementEnabled(true);
+    }
+
+    private void HandleUnlockDuringAttack()
+    {
+        if (animator == null) return;
+
+        animator.SetBool("FightSprint", false);
+        animator.SetBool("SprintAttackDelay", false);
+        animator.ResetTrigger("FightSprintAttack");
+        animator.ResetTrigger("SprintAttack");
+        animator.ResetTrigger("Attack1");
+        animator.ResetTrigger("Attack2");
+        animator.ResetTrigger("Attack3");
+        animator.ResetTrigger("HAttack1");
+        animator.ResetTrigger("HAttack2");
+        animator.ResetTrigger("SprintToIdle");
+        animator.ResetTrigger("Recovery");
+        animator.ResetTrigger("RecoveryStop");
+
+        if (!isAttacking) return;
+
+        animator.CrossFadeInFixedTime("Idle", 0.1f, 0);
     }
 
     private IEnumerator AttackFailsafeRoutine()
@@ -189,6 +326,8 @@ public class PlayerCombat : MonoBehaviour
 
     private void Update()
     {
+        TryConsumeBufferedUnlockSprintAttack();
+
         if (Input.GetKeyDown(KeyCode.J) || Input.GetKeyDown(KeyCode.JoystickButton4))
         {
             if (lockOnBehaviour != null && lockOnBehaviour.IsLocked)

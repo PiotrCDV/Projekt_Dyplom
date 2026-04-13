@@ -3944,7 +3944,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3255733728550318896, guid: 98d51c6bfc0eee54ba72492a93ce7aca, type: 3}
       propertyPath: maxStamina
-      value: 150
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 3255733728550318896, guid: 98d51c6bfc0eee54ba72492a93ce7aca, type: 3}
       propertyPath: staminaFillImage

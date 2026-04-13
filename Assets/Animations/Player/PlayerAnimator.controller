@@ -50,7 +50,7 @@ AnimatorStateTransition:
   m_ExitTime: 0.70000005
   m_HasExitTime: 0
   m_HasFixedDuration: 1
-  m_InterruptionSource: 0
+  m_InterruptionSource: 3
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
 --- !u!1101 &-8479103894852302537
@@ -364,12 +364,12 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.4347422
+  m_TransitionDuration: 0.31
   m_TransitionOffset: 0
   m_ExitTime: 0.7251169
   m_HasExitTime: 0
   m_HasFixedDuration: 1
-  m_InterruptionSource: 0
+  m_InterruptionSource: 3
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
 --- !u!1101 &-6971281476921259050
@@ -1331,10 +1331,7 @@ AnimatorStateTransition:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_Conditions:
-  - m_ConditionMode: 2
-    m_ConditionEvent: FightSprint
-    m_EventTreshold: 0
+  m_Conditions: []
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1736591155270444791}
   m_Solo: 0
@@ -1344,7 +1341,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.37927824
   m_TransitionOffset: 0
   m_ExitTime: 0.6861145
-  m_HasExitTime: 0
+  m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
