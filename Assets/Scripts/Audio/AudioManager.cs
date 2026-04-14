@@ -1,18 +1,22 @@
 using UnityEngine;
-using UnityEngine.Audio;
+using FMODUnity; // Wymagane do obs≥ugi FMOD
+using FMOD.Studio;
+
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance;
 
-    [Header("Audio Mixer")]
-    public AudioMixer mainMixer;
+    [Header("åcieøki do kana≥Ûw FMOD (do g≥oúnoúci)")]
+    // W FMOD domyúlnie sπ takie úcieøki. Zmienisz je pod swoje potrzeby pÛüniej.
+    public string musicBusPath = "bus:/Music";
+    public string sfxBusPath = "bus:/SFX";
 
-    [Header("èrÛd≥a DüwiÍku")]
-    public AudioSource musicSource;
-    public AudioSource sfxSource;
+    private Bus musicBus;
+    private Bus sfxBus;
 
-    [Header("Klipy Audio (Ambient)")]
-    public AudioClip ambientClip;
+    [Header("Instancja Muzyki")]
+    // Muzyka musi byÊ zapisana jako "Instancja", øebyúmy mogli jπ zapÍtlaÊ i zatrzymywaÊ
+    private EventInstance musicInstance;
 
     private void Awake()
     {
@@ -24,43 +28,49 @@ public class AudioManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
+            return; // Dodane return, øeby po zniszczeniu kod nie lecia≥ dalej
         }
+
+        // Pobieramy referencje do kana≥Ûw g≥oúnoúci z FMOD-a
+        musicBus = RuntimeManager.GetBus(musicBusPath);
+        sfxBus = RuntimeManager.GetBus(sfxBusPath);
     }
 
-    private void Start()
+    // Odtwarzanie Muzyki (Loop)
+    public void PlayMusic(EventReference musicEvent)
     {
-        if (ambientClip != null)
+        // Jeúli jakaú muzyka juø gra, zatrzymaj jπ p≥ynnie (FADEOUT)
+        if (musicInstance.isValid())
         {
-            PlayMusic(ambientClip);
+            musicInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            musicInstance.release();
         }
+
+        // StwÛrz nowπ muzykÍ i jπ odpal
+        musicInstance = RuntimeManager.CreateInstance(musicEvent);
+        musicInstance.start();
     }
 
-
-    public void PlayMusic(AudioClip clip)
+    // Odtwarzanie DüwiÍkÛw (Pojedyncze strza≥y / uderzenia)
+    // Dodano pozycjÍ, dziÍki czemu FMOD wie, z ktÛrej strony odtworzyÊ düwiÍk 3D!
+    public void PlaySFX(EventReference sfxEvent, Vector3 position = new Vector3())
     {
-        musicSource.clip = clip;
-        musicSource.loop = true;
-        musicSource.Play();
-    }
-
-    public void PlaySFX(AudioClip clip)
-    {
-        if (clip != null)
+        if (!sfxEvent.IsNull)
         {
-            sfxSource.PlayOneShot(clip);
+            // FMOD sam tworzy düwiÍk w danym miejscu, gra go i po cichu sprzπta z pamiÍci
+            RuntimeManager.PlayOneShot(sfxEvent, position);
         }
     }
 
-
+    // FMOD uøywa prostej skali g≥oúnoúci: 0.0 (cisza) do 1.0 (max)
+    // Nie trzeba juø øadnej logarytmicznej matematyki!
     public void SetMusicVolume(float sliderValue)
     {
-        float volume = Mathf.Log10(Mathf.Clamp(sliderValue, 0.0001f, 1f)) * 20;
-        mainMixer.SetFloat("MusicVol", volume);
+        musicBus.setVolume(sliderValue);
     }
 
     public void SetSFXVolume(float sliderValue)
     {
-        float volume = Mathf.Log10(Mathf.Clamp(sliderValue, 0.0001f, 1f)) * 20;
-        mainMixer.SetFloat("SFXVol", volume);
+        sfxBus.setVolume(sliderValue);
     }
 }
