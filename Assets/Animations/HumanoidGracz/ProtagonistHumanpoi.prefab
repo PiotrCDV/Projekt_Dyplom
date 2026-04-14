@@ -4986,10 +4986,7 @@ Animator:
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_AnimatePhysics: 0
-  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
-    are already bound by a Humanoid avatar. These transforms can only be changed
-    by Humanoid clips.\n\tTransform 'rig'\n\tTransform 'rig'\n\tTransform 'rig'\n\tFrom
-    animation clip 'Fight_Drinking_animation'"
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
@@ -5145,7 +5142,13 @@ MonoBehaviour:
   trailDelayTime: 1
   trailDrainSpeed: 0.5
   delayBeforeReload: 3
-  damageSound: {fileID: 8300000, guid: aab61e6de593caf44b4cb1eb3a23f29f, type: 3}
+  damageSound:
+    Guid:
+      Data1: 556079396
+      Data2: 1336603304
+      Data3: -1079974988
+      Data4: 210337655
+    Path: event:/Damaging
 --- !u!114 &6100778997673328114
 MonoBehaviour:
   m_ObjectHideFlags: 0
