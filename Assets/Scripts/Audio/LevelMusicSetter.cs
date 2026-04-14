@@ -1,12 +1,14 @@
 using UnityEngine;
+using FMODUnity; // Dodane
 
 public class LevelMusicSetter : MonoBehaviour
 {
-    public AudioClip levelAmbient;
+    // Zamiast AudioClip:
+    public EventReference levelAmbient;
 
     void Start()
     {
-        if (AudioManager.Instance != null)
+        if (AudioManager.Instance != null && !levelAmbient.IsNull)
         {
             AudioManager.Instance.PlayMusic(levelAmbient);
         }

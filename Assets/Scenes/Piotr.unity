@@ -1128,6 +1128,26 @@ PrefabInstance:
       propertyPath: takenDamageFill
       value: 
       objectReference: {fileID: 276703336}
+    - target: {fileID: 6814543300484262438, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
+      propertyPath: damageSound.Path
+      value: event:/Damaging
+      objectReference: {fileID: 0}
+    - target: {fileID: 6814543300484262438, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
+      propertyPath: damageSound.Guid.Data1
+      value: 556079396
+      objectReference: {fileID: 0}
+    - target: {fileID: 6814543300484262438, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
+      propertyPath: damageSound.Guid.Data2
+      value: 1336603304
+      objectReference: {fileID: 0}
+    - target: {fileID: 6814543300484262438, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
+      propertyPath: damageSound.Guid.Data3
+      value: -1079974988
+      objectReference: {fileID: 0}
+    - target: {fileID: 6814543300484262438, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
+      propertyPath: damageSound.Guid.Data4
+      value: 210337655
+      objectReference: {fileID: 0}
     - target: {fileID: 6827681922937452192, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 72.19791
@@ -1500,6 +1520,26 @@ PrefabInstance:
       propertyPath: levelAmbient
       value: 
       objectReference: {fileID: 8300000, guid: f76e444ce60019e42bb04f359e902d6b, type: 3}
+    - target: {fileID: 1142667975300756033, guid: 2d1ca096de1d3554da9115cb616f4cea, type: 3}
+      propertyPath: levelAmbient.Path
+      value: event:/AmbientMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 1142667975300756033, guid: 2d1ca096de1d3554da9115cb616f4cea, type: 3}
+      propertyPath: levelAmbient.Guid.Data1
+      value: 1028212675
+      objectReference: {fileID: 0}
+    - target: {fileID: 1142667975300756033, guid: 2d1ca096de1d3554da9115cb616f4cea, type: 3}
+      propertyPath: levelAmbient.Guid.Data2
+      value: 1118640611
+      objectReference: {fileID: 0}
+    - target: {fileID: 1142667975300756033, guid: 2d1ca096de1d3554da9115cb616f4cea, type: 3}
+      propertyPath: levelAmbient.Guid.Data3
+      value: 1102779834
+      objectReference: {fileID: 0}
+    - target: {fileID: 1142667975300756033, guid: 2d1ca096de1d3554da9115cb616f4cea, type: 3}
+      propertyPath: levelAmbient.Guid.Data4
+      value: 479833428
+      objectReference: {fileID: 0}
     - target: {fileID: 7103323637717968287, guid: 2d1ca096de1d3554da9115cb616f4cea, type: 3}
       propertyPath: m_Name
       value: SceneAudio
@@ -2178,7 +2218,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4577903852261487518, guid: 98d51c6bfc0eee54ba72492a93ce7aca, type: 3}
   m_PrefabInstance: {fileID: 1932483756}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1932483757}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
@@ -2539,6 +2579,52 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e46b6b477ff0ffe41b59df4671676270, type: 3}
+--- !u!1 &1399362088
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1399362090}
+  - component: {fileID: 1399362089}
+  m_Layer: 0
+  m_Name: audiomanager_to_delete
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &1399362089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1399362088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d07f4153b752be4d94f58208d7e7591, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AudioManager
+  musicBusPath: bus:/Music
+  sfxBusPath: bus:/SFX
+--- !u!4 &1399362090
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1399362088}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 565.97876, y: -5.95774, z: 193.46678}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1440044971
 GameObject:
   m_ObjectHideFlags: 0
@@ -3926,6 +4012,26 @@ PrefabInstance:
       propertyPath: takenDamageFill
       value: 
       objectReference: {fileID: 1497241990}
+    - target: {fileID: 2016017187875150652, guid: 98d51c6bfc0eee54ba72492a93ce7aca, type: 3}
+      propertyPath: damageSound.Path
+      value: event:/Damaging
+      objectReference: {fileID: 0}
+    - target: {fileID: 2016017187875150652, guid: 98d51c6bfc0eee54ba72492a93ce7aca, type: 3}
+      propertyPath: damageSound.Guid.Data1
+      value: 556079396
+      objectReference: {fileID: 0}
+    - target: {fileID: 2016017187875150652, guid: 98d51c6bfc0eee54ba72492a93ce7aca, type: 3}
+      propertyPath: damageSound.Guid.Data2
+      value: 1336603304
+      objectReference: {fileID: 0}
+    - target: {fileID: 2016017187875150652, guid: 98d51c6bfc0eee54ba72492a93ce7aca, type: 3}
+      propertyPath: damageSound.Guid.Data3
+      value: -1079974988
+      objectReference: {fileID: 0}
+    - target: {fileID: 2016017187875150652, guid: 98d51c6bfc0eee54ba72492a93ce7aca, type: 3}
+      propertyPath: damageSound.Guid.Data4
+      value: 210337655
+      objectReference: {fileID: 0}
     - target: {fileID: 2429826919613244340, guid: 98d51c6bfc0eee54ba72492a93ce7aca, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.9751746
@@ -4062,11 +4168,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: NewPlayer
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4681797195563279908, guid: 98d51c6bfc0eee54ba72492a93ce7aca, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5409231950570880149, guid: 98d51c6bfc0eee54ba72492a93ce7aca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1932483760}
   m_SourcePrefab: {fileID: 100100000, guid: 98d51c6bfc0eee54ba72492a93ce7aca, type: 3}
+--- !u!1 &1932483757 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5409231950570880149, guid: 98d51c6bfc0eee54ba72492a93ce7aca, type: 3}
+  m_PrefabInstance: {fileID: 1932483756}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1932483758 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6832533341976819358, guid: 98d51c6bfc0eee54ba72492a93ce7aca, type: 3}
@@ -4077,6 +4192,20 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 5693407884426259894, guid: 98d51c6bfc0eee54ba72492a93ce7aca, type: 3}
   m_PrefabInstance: {fileID: 1932483756}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1932483760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1932483757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioListener
+  nonRigidbodyVelocity: 0
+  attenuationObject: {fileID: 0}
 --- !u!114 &1991645613 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8473276208583515083, guid: 9d3607c1d3c303b44911daf2cd8ea934, type: 3}
@@ -4139,3 +4268,4 @@ SceneRoots:
   - {fileID: 290741429}
   - {fileID: 1440044973}
   - {fileID: 1385306379}
+  - {fileID: 1399362090}

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{aa327656-2068-446d-82cd-517f2459a7e9}">
+		<property name="assetPath">
+			<value>Magic Forest (1).mp3</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>260.07510204081632</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{a7893954-a3d1-403e-86a3-9413058f499d}</destination>
+		</relationship>
+	</object>
+</objects>
