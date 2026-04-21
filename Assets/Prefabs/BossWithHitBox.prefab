@@ -2255,7 +2255,13 @@ MonoBehaviour:
   trailDrainSpeed: 1.5
   timeBeforeDisable: 5
   behaviourTree: {fileID: 6257530152200430688}
-  damageSound: {fileID: 8300000, guid: 848784f92181d554194de6a01b94a053, type: 3}
+  damageSound:
+    Guid:
+      Data1: 556079396
+      Data2: 1336603304
+      Data3: -1079974988
+      Data4: 210337655
+    Path: event:/Damaging
 --- !u!114 &6257530152200430688
 MonoBehaviour:
   m_ObjectHideFlags: 0

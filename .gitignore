@@ -97,3 +97,9 @@ InitTestScene*.unity*
 
 # Auto-generated scenes by play mode tests
 /[Aa]ssets/[Ii]nit[Tt]est[Ss]cene*.unity*
+
+# FMOD
+FMOD_Audio/.cache/
+FMOD_Audio/Build/
+FMOD_Audio/*.user
+FMOD_Audio/*.user.xml

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using FMODUnity;
 using UnityEngine.UI;
 using System.Collections;
 
@@ -26,7 +27,7 @@ public class BossHealth : MonoBehaviour, IDamageable
     [SerializeField] private Behaviour behaviourTree;
 
     [Header("Audio")]
-    [SerializeField] private AudioClip damageSound;
+    [SerializeField] private EventReference damageSound;
 
     private void Awake()
     {
@@ -50,7 +51,9 @@ public class BossHealth : MonoBehaviour, IDamageable
         currentHP = Mathf.Max(currentHP, 0);
 
         if (AudioManager.Instance != null)
-            AudioManager.Instance.PlaySFX(damageSound);
+        {
+            AudioManager.Instance.PlaySFX(damageSound, transform.position);
+        }
 
         UpdateHealthBar();
 

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using FMODUnity;
 using System.Collections;
 using UnityEngine.SceneManagement; 
 
@@ -20,10 +21,10 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private float delayBeforeReload = 3.0f; 
 
     private Coroutine trailCoroutine;
-    private Animator animator; 
+    private Animator animator;
 
     [Header("Audio")]
-    [SerializeField] private AudioClip damageSound;
+    [SerializeField] private EventReference damageSound; // Zamiast AudioClip
 
     private void Awake()
     {
@@ -46,7 +47,9 @@ public class PlayerHealth : MonoBehaviour
         currentHP = Mathf.Max(currentHP, 0);
 
         if (AudioManager.Instance != null)
-            AudioManager.Instance.PlaySFX(damageSound);
+        {
+            AudioManager.Instance.PlaySFX(damageSound, transform.position);
+        }
 
         UpdateHealthBar();
 
