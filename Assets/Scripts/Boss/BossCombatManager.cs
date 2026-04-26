@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using System.Collections;
 using System.Collections.Generic;
 
 public class BossCombatManager : MonoBehaviour
@@ -10,29 +11,35 @@ public class BossCombatManager : MonoBehaviour
     [Header("Attacks Configuration")]
     public List<BossAttack> availableAttacks;
 
+    [Header("Global Cooldown Settings")]
+    [Tooltip("Czas przerwy między zakończeniem jednego ataku a rozpoczęciem kolejnego")]
+    public float timeBetweenAttacks = 2f;
+    private float nextAllowedAttackTime = -999f;
+
     [Header("Rotation Settings")]
     public float rotationSpeed = 10f;
 
     [Header("Attack Selection")]
     [SerializeField] private bool useWeightedAttackSelection = true;
-    [SerializeField] private bool logSelectedAttackIndex = true;
-    [SerializeField] private bool avoidRepeatingSameAttack = true;
+    [SerializeField] private bool logSelection = true;
+    [SerializeField] private int maxConsecutiveAttacks = 2;
 
-    [Header("Animator Attack Lock")]
+    [Header("Attack Lock Settings")]
+    [SerializeField] private bool unlockMovementOnlyByEvent = false; 
     [SerializeField] private string locomotionSpeedParam = "SpeedMagnitude";
 
-    [Header("Attack Movement Lock")]
-    [SerializeField] private bool unlockMovementOnlyByEvent = true;
-    [SerializeField] private bool allowRotateWhileMovementLocked = true;
-
-    private float lastAttackTime = -999f;
     private bool isAttacking = false;
     private BossAttack currentAttack;
     private GameObject currentTarget;
+    
     private int lastSelectedAttackIndex = -1;
+    private int consecutiveCount = 0;
+
     private int locomotionSpeedParamHash;
     private bool hasLocomotionSpeedParam;
-    private bool isMovementLockedByAttack;
+    private bool isMovementLockedByAttack = false;
+    private bool isDashing = false;
+    private Coroutine dashCoroutine;
 
     private void Start()
     {
@@ -42,13 +49,13 @@ public class BossCombatManager : MonoBehaviour
         if (animator != null && !string.IsNullOrEmpty(locomotionSpeedParam))
         {
             locomotionSpeedParamHash = Animator.StringToHash(locomotionSpeedParam);
-            hasLocomotionSpeedParam = HasAnimatorParameter(animator, locomotionSpeedParamHash, AnimatorControllerParameterType.Float);
+            hasLocomotionSpeedParam = true;
         }
     }
 
     private void Update()
     {
-        if (currentTarget != null && (allowRotateWhileMovementLocked || !isMovementLockedByAttack))
+        if (currentTarget != null && !isDashing && (!isMovementLockedByAttack))
         {
             SmoothRotateTowardsTarget();
         }
@@ -57,7 +64,6 @@ public class BossCombatManager : MonoBehaviour
         {
             agent.isStopped = true;
             agent.velocity = Vector3.zero;
-            if (agent.hasPath) agent.ResetPath();
         }
 
         if (isMovementLockedByAttack && animator != null && hasLocomotionSpeedParam)
@@ -66,20 +72,10 @@ public class BossCombatManager : MonoBehaviour
         }
     }
 
-    private static bool HasAnimatorParameter(Animator anim, int hash, AnimatorControllerParameterType type)
-    {
-        foreach (var param in anim.parameters)
-        {
-            if (param.nameHash == hash && param.type == type) return true;
-        }
-        return false;
-    }
-
     private void SmoothRotateTowardsTarget()
     {
         Vector3 direction = (currentTarget.transform.position - transform.position).normalized;
         direction.y = 0;
-
         if (direction != Vector3.zero)
         {
             Quaternion targetRotation = Quaternion.LookRotation(direction);
@@ -87,115 +83,116 @@ public class BossCombatManager : MonoBehaviour
         }
     }
 
-    public void TryAttack(int attackIndex, GameObject target)
+    public void TryAttack(int behaviorIndex, GameObject target)
     {
         currentTarget = target;
 
-        if (isAttacking || isMovementLockedByAttack) return;
-        if (availableAttacks == null || availableAttacks.Count == 0) return;
+        if (isAttacking || isMovementLockedByAttack || Time.time < nextAllowedAttackTime) return;
 
-        int selectedAttackIndex = ResolveAttackIndex(attackIndex);
-        if (selectedAttackIndex < 0 || selectedAttackIndex >= availableAttacks.Count) return;
-
-        BossAttack attackToPerform = availableAttacks[selectedAttackIndex];
-
-        if (logSelectedAttackIndex)
-        {
-            Debug.Log($"[BossCombatManager] Selected attack: {attackToPerform.attackName}");
-        }
-
-        if (Time.time - lastAttackTime < attackToPerform.cooldown) return;
-
-        PerformAttackLogic(attackToPerform);
-    }
-
-    private int ResolveAttackIndex(int behaviorGraphIndex)
-    {
-        List<int> candidateIndices = new List<int>();
+        List<int> readyIndices = new List<int>();
         for (int i = 0; i < availableAttacks.Count; i++)
         {
-            if (availableAttacks[i] != null) candidateIndices.Add(i);
+            if (i != lastSelectedAttackIndex || consecutiveCount < maxConsecutiveAttacks)
+            {
+                readyIndices.Add(i);
+            }
         }
 
-        if (candidateIndices.Count == 0) return -1;
+        if (readyIndices.Count == 0)
+        {
+            for (int i = 0; i < availableAttacks.Count; i++) readyIndices.Add(i);
+        }
 
+        int finalIndex = -1;
         if (!useWeightedAttackSelection)
         {
-            return (behaviorGraphIndex >= 0 && behaviorGraphIndex < availableAttacks.Count) ? behaviorGraphIndex : -1;
+            finalIndex = (behaviorIndex >= 0 && behaviorIndex < availableAttacks.Count) ? behaviorIndex : readyIndices[0];
         }
-
-        if (avoidRepeatingSameAttack && candidateIndices.Count > 1)
+        else
         {
-            candidateIndices.Remove(lastSelectedAttackIndex);
+            finalIndex = RollWeightedAttack(readyIndices);
         }
 
-        float totalWeight = 0f;
-        foreach (int i in candidateIndices)
+        if (finalIndex != -1)
         {
-            totalWeight += Mathf.Max(0f, availableAttacks[i].selectionChancePercent);
+            PerformAttackLogic(availableAttacks[finalIndex], finalIndex);
         }
-
-        if (totalWeight <= 0f) return candidateIndices[Random.Range(0, candidateIndices.Count)];
-
-        float roll = Random.Range(0f, totalWeight);
-        float cumulative = 0f;
-
-        foreach (int i in candidateIndices)
-        {
-            cumulative += Mathf.Max(0f, availableAttacks[i].selectionChancePercent);
-            if (roll <= cumulative) return i;
-        }
-
-        return candidateIndices[candidateIndices.Count - 1];
     }
 
-    private void PerformAttackLogic(BossAttack attack)
+    private int RollWeightedAttack(List<int> candidates)
     {
-        lastAttackTime = Time.time;
+        float totalWeight = 0;
+        foreach (int i in candidates) totalWeight += Mathf.Max(0.1f, availableAttacks[i].selectionChancePercent);
+
+        float roll = Random.Range(0, totalWeight);
+        float cumulative = 0;
+
+        foreach (int i in candidates)
+        {
+            cumulative += Mathf.Max(0.1f, availableAttacks[i].selectionChancePercent);
+            if (roll <= cumulative) return i;
+        }
+        return candidates[0];
+    }
+
+    private void PerformAttackLogic(BossAttack attack, int index)
+    {
+        if (index == lastSelectedAttackIndex) consecutiveCount++;
+        else consecutiveCount = 1;
+
+        lastSelectedAttackIndex = index;
         isAttacking = true;
         currentAttack = attack;
-        lastSelectedAttackIndex = availableAttacks.IndexOf(attack);
+        
         LockMovementForAttack();
+
+        if (logSelection) Debug.Log($"[BossAI] Atak: {attack.attackName}");
 
         if (animator != null)
         {
-            if (hasLocomotionSpeedParam) animator.SetFloat(locomotionSpeedParamHash, 0f);
             animator.SetTrigger(attack.animationTrigger);
         }
     }
 
 
-    public void EnableMainHitbox()
+    public void OnDashAttackStart()
     {
-        if (currentAttack == null || currentAttack.hitbox == null) return;
-
-        currentAttack.hitbox.SetDamage(currentAttack.damage);
-        currentAttack.hitbox.EnableDamage();
+        if (currentAttack != null && currentAttack.isDashAttack)
+        {
+            if (dashCoroutine != null) StopCoroutine(dashCoroutine);
+            dashCoroutine = StartCoroutine(DashRoutine(currentAttack.dashDistance, currentAttack.dashDuration));
+        }
     }
 
-    public void EnableSecondHitbox()
+    private IEnumerator DashRoutine(float dist, float dur)
     {
-        if (currentAttack == null || currentAttack.secondHitbox == null) return;
-
-        currentAttack.secondHitbox.SetDamage(currentAttack.damage);
-        currentAttack.secondHitbox.EnableDamage();
+        isDashing = true;
+        float elapsed = 0;
+        Vector3 dir = transform.forward;
+        while (elapsed < dur)
+        {
+            if (agent != null && agent.enabled) agent.Move(dir * (dist / dur) * Time.deltaTime);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+        isDashing = false;
+        dashCoroutine = null;
     }
 
-    public void DisableAllHitboxes()
-    {
-        if (currentAttack == null) return;
-
-        if (currentAttack.hitbox != null) currentAttack.hitbox.DisableDamage();
-        if (currentAttack.secondHitbox != null) currentAttack.secondHitbox.DisableDamage();
-    }
+    public void EnableMainHitbox() { if (currentAttack?.hitbox != null) { currentAttack.hitbox.SetDamage(currentAttack.damage); currentAttack.hitbox.EnableDamage(); } }
+    public void EnableSecondHitbox() { if (currentAttack?.secondHitbox != null) { currentAttack.secondHitbox.SetDamage(currentAttack.damage); currentAttack.secondHitbox.EnableDamage(); } }
+    public void DisableAllHitboxes() { currentAttack?.hitbox?.DisableDamage(); currentAttack?.secondHitbox?.DisableDamage(); }
 
     public void OnAttackAnimationEnd()
     {
         DisableAllHitboxes();
         isAttacking = false;
         currentAttack = null;
+        isDashing = false;
 
-        if (!unlockMovementOnlyByEvent)
+        nextAllowedAttackTime = Time.time + timeBetweenAttacks;
+
+        if (!unlockMovementOnlyByEvent) 
         {
             UnlockMovementAfterAttack();
         }
@@ -206,22 +203,18 @@ public class BossCombatManager : MonoBehaviour
         UnlockMovementAfterAttack();
     }
 
-    private void LockMovementForAttack()
-    {
-        isMovementLockedByAttack = true;
-        if (agent != null && agent.enabled)
-        {
-            agent.isStopped = true;
-            agent.velocity = Vector3.zero;
-        }
+    private void LockMovementForAttack() 
+    { 
+        isMovementLockedByAttack = true; 
+        if (agent != null && agent.enabled) agent.isStopped = true; 
     }
 
-    private void UnlockMovementAfterAttack()
-    {
-        isMovementLockedByAttack = false;
-        if (agent != null && agent.enabled)
+    private void UnlockMovementAfterAttack() 
+    { 
+        isMovementLockedByAttack = false; 
+        if (agent != null && agent.enabled) 
         {
-            agent.isStopped = false;
+            agent.isStopped = false; 
         }
     }
 }
@@ -229,12 +222,15 @@ public class BossCombatManager : MonoBehaviour
 [System.Serializable]
 public class BossAttack
 {
-    public string attackName; 
-    public string animationTrigger; 
-    [Range(0f, 100f)] public float selectionChancePercent = 100f;
-    public int damage;              
-    public float cooldown;          
-    public float attackRange;       
+    public string attackName;
+    public string animationTrigger;
+    [Range(0f, 100f)] public float selectionChancePercent = 50f;
+    public int damage;
     public BossDamage hitbox;
     public BossDamage secondHitbox;
+
+    [Header("Dash Settings")]
+    public bool isDashAttack;
+    public float dashDistance;
+    public float dashDuration;
 }
