@@ -23,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
     public Animator animator;
     private PlayerDodge dodgeScript;
     private PlayerStamina stamina;
+    private PlayerPotion playerPotion;
 
     [Header("Gravity & Grounding")]
     public Transform groundCheck;
@@ -56,6 +57,7 @@ public class PlayerMovement : MonoBehaviour
         inputActions = new InputSystem_Actions();
         dodgeScript = GetComponent<PlayerDodge>();
         stamina = GetComponent<PlayerStamina>();
+        playerPotion = GetComponent<PlayerPotion>();
         orbitalFollow = vcamFreeLook.GetComponent<CinemachineOrbitalFollow>();
         lockOnBehaviour = GetComponent<LockOnBehaviour>();
 
@@ -64,6 +66,8 @@ public class PlayerMovement : MonoBehaviour
 
         inputActions.Player.Sprint.started += ctx =>
         {
+            if (playerPotion != null && playerPotion.IsDrinking) return;
+
             if (ctx.control.device is Keyboard)
             {
                 if (moveInput.magnitude > 0.1f && stamina != null && stamina.CanPerformAction()) isSprinting = true;
@@ -107,6 +111,12 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         ApplyGravity();
+
+        if (playerPotion != null && playerPotion.IsDrinking)
+        {
+            isSprinting = false;
+            isHoldingButton = false;
+        }
 
         if (isHoldingButton && !isSprinting)
         {

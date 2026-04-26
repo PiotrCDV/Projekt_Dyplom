@@ -17,6 +17,7 @@ public class PlayerDodge : MonoBehaviour
     private PlayerMovement playerMovement;
     private PlayerCombat playerCombat;
     private PlayerStamina stamina;
+    private PlayerPotion playerPotion;
 
     private Vector3 savedDodgeDirection;
 
@@ -27,6 +28,7 @@ public class PlayerDodge : MonoBehaviour
         playerMovement = GetComponent<PlayerMovement>();
         playerCombat = GetComponent<PlayerCombat>();
         stamina = GetComponent<PlayerStamina>();
+        playerPotion = GetComponent<PlayerPotion>();
 
         inputActions = new InputSystem_Actions();
 
@@ -44,6 +46,7 @@ public class PlayerDodge : MonoBehaviour
 
     public void PrepareDodge()
     {
+        if (playerPotion != null && playerPotion.IsDrinking) return;
         if (IsDodging) return;
         if (playerCombat != null && playerCombat.IsAttacking) return;
         if (stamina != null && !stamina.CanPerformAction()) return;

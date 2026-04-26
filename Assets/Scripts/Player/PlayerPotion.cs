@@ -10,18 +10,17 @@ public class PlayerPotion : MonoBehaviour
     [Header("References")]
     private Animator animator;
     private LockOnBehaviour lockOnBehaviour;
-    private PlayerMovement playerMovement;
     private PlayerCombat playerCombat;
     private PlayerHealth playerHealth;
 
     private InputSystem_Actions inputActions;
     private bool isDrinking;
+    public bool IsDrinking => isDrinking;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
         lockOnBehaviour = GetComponent<LockOnBehaviour>();
-        playerMovement = GetComponent<PlayerMovement>();
         playerCombat = GetComponent<PlayerCombat>();
         playerHealth = GetComponent<PlayerHealth>();
 
@@ -54,8 +53,6 @@ public class PlayerPotion : MonoBehaviour
         bool isLocked = lockOnBehaviour != null && lockOnBehaviour.IsLocked;
         animator.SetBool("isLockedOn", isLocked);
         animator.SetTrigger("DrinkPotion");
-
-        playerMovement.SetMovementEnabled(false);
     }
 
     public void ApplyHealing()
@@ -71,10 +68,5 @@ public class PlayerPotion : MonoBehaviour
         isDrinking = false;
 
         if (potionModel != null) potionModel.SetActive(false);
-
-        if (playerMovement != null)
-        {
-            playerMovement.SetMovementEnabled(true);
-        }
     }
 }

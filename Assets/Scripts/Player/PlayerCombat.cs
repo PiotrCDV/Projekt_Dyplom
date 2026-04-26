@@ -10,6 +10,7 @@ public class PlayerCombat : MonoBehaviour
     private SwordDamage weaponScript;
     private PlayerDodge playerDodge;
     private PlayerStamina stamina;
+    private PlayerPotion playerPotion;
 
     public float lightAttackStaminaCost = 15f;
     public float heavyAttackStaminaCost = 25f;
@@ -42,6 +43,7 @@ public class PlayerCombat : MonoBehaviour
         weaponScript = GetComponentInChildren<SwordDamage>();
         playerDodge = GetComponent<PlayerDodge>();
         stamina = GetComponent<PlayerStamina>();
+        playerPotion = GetComponent<PlayerPotion>();
 
         inputActions = new InputSystem_Actions();
         inputActions.Player.Attack.performed += ctx => HandleAttackInput(false);
@@ -60,6 +62,7 @@ public class PlayerCombat : MonoBehaviour
 
     private void HandleAttackInput(bool heavy)
     {
+        if (playerPotion != null && playerPotion.IsDrinking) return;
         if (playerDodge != null && playerDodge.IsDodging) return;
         if (stamina != null && !stamina.CanPerformAction()) return;
 
