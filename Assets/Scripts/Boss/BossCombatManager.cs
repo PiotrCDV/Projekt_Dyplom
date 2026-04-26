@@ -12,7 +12,6 @@ public class BossCombatManager : MonoBehaviour
     public List<BossAttack> availableAttacks;
 
     [Header("Global Cooldown Settings")]
-    [Tooltip("Czas przerwy między zakończeniem jednego ataku a rozpoczęciem kolejnego")]
     public float timeBetweenAttacks = 2f;
     private float nextAllowedAttackTime = -999f;
 
@@ -25,7 +24,7 @@ public class BossCombatManager : MonoBehaviour
     [SerializeField] private int maxConsecutiveAttacks = 2;
 
     [Header("Attack Lock Settings")]
-    [SerializeField] private bool unlockMovementOnlyByEvent = false; 
+    [SerializeField] private bool unlockMovementOnlyByEvent = false;
     [SerializeField] private string locomotionSpeedParam = "SpeedMagnitude";
 
     private bool isAttacking = false;
@@ -55,7 +54,7 @@ public class BossCombatManager : MonoBehaviour
 
     private void Update()
     {
-        if (currentTarget != null && !isDashing && (!isMovementLockedByAttack))
+        if (currentTarget != null && !isDashing && !isMovementLockedByAttack)
         {
             SmoothRotateTowardsTarget();
         }
@@ -85,32 +84,46 @@ public class BossCombatManager : MonoBehaviour
 
     public void TryAttack(int behaviorIndex, GameObject target)
     {
+        if (target == null) return;
         currentTarget = target;
 
         if (isAttacking || isMovementLockedByAttack || Time.time < nextAllowedAttackTime) return;
 
-        List<int> readyIndices = new List<int>();
+        float distanceToTarget = Vector3.Distance(transform.position, target.transform.position);
+
+        List<int> validIndices = new List<int>();
         for (int i = 0; i < availableAttacks.Count; i++)
         {
-            if (i != lastSelectedAttackIndex || consecutiveCount < maxConsecutiveAttacks)
+            BossAttack atk = availableAttacks[i];
+            
+            bool withinRange = distanceToTarget <= atk.attackRange && distanceToTarget >= atk.minAttackRange;
+            
+            bool underStreakLimit = (i != lastSelectedAttackIndex || consecutiveCount < maxConsecutiveAttacks);
+
+            if (withinRange && underStreakLimit)
             {
-                readyIndices.Add(i);
+                validIndices.Add(i);
             }
         }
 
-        if (readyIndices.Count == 0)
+        if (validIndices.Count == 0)
         {
-            for (int i = 0; i < availableAttacks.Count; i++) readyIndices.Add(i);
+            for (int i = 0; i < availableAttacks.Count; i++)
+            {
+                if (distanceToTarget <= availableAttacks[i].attackRange) validIndices.Add(i);
+            }
         }
+
+        if (validIndices.Count == 0) return;
 
         int finalIndex = -1;
         if (!useWeightedAttackSelection)
         {
-            finalIndex = (behaviorIndex >= 0 && behaviorIndex < availableAttacks.Count) ? behaviorIndex : readyIndices[0];
+            finalIndex = validIndices.Contains(behaviorIndex) ? behaviorIndex : validIndices[0];
         }
         else
         {
-            finalIndex = RollWeightedAttack(readyIndices);
+            finalIndex = RollWeightedAttack(validIndices);
         }
 
         if (finalIndex != -1)
@@ -146,7 +159,8 @@ public class BossCombatManager : MonoBehaviour
         
         LockMovementForAttack();
 
-        if (logSelection) Debug.Log($"[BossAI] Atak: {attack.attackName}");
+        if (logSelection) 
+            Debug.Log($"[BossAI] Wybrano: {attack.attackName} | Dystans: {Vector3.Distance(transform.position, currentTarget.transform.position):F1}");
 
         if (animator != null)
         {
@@ -189,34 +203,14 @@ public class BossCombatManager : MonoBehaviour
         isAttacking = false;
         currentAttack = null;
         isDashing = false;
-
         nextAllowedAttackTime = Time.time + timeBetweenAttacks;
-
-        if (!unlockMovementOnlyByEvent) 
-        {
-            UnlockMovementAfterAttack();
-        }
+        if (!unlockMovementOnlyByEvent) UnlockMovementAfterAttack();
     }
 
-    public void OnAttackMovementUnlockEvent()
-    {
-        UnlockMovementAfterAttack();
-    }
+    public void OnAttackMovementUnlockEvent() => UnlockMovementAfterAttack();
 
-    private void LockMovementForAttack() 
-    { 
-        isMovementLockedByAttack = true; 
-        if (agent != null && agent.enabled) agent.isStopped = true; 
-    }
-
-    private void UnlockMovementAfterAttack() 
-    { 
-        isMovementLockedByAttack = false; 
-        if (agent != null && agent.enabled) 
-        {
-            agent.isStopped = false; 
-        }
-    }
+    private void LockMovementForAttack() { isMovementLockedByAttack = true; if (agent != null && agent.enabled) agent.isStopped = true; }
+    private void UnlockMovementAfterAttack() { isMovementLockedByAttack = false; if (agent != null && agent.enabled) agent.isStopped = false; }
 }
 
 [System.Serializable]
@@ -224,6 +218,8 @@ public class BossAttack
 {
     public string attackName;
     public string animationTrigger;
+    public float attackRange = 5f;
+    public float minAttackRange = 0f; 
     [Range(0f, 100f)] public float selectionChancePercent = 50f;
     public int damage;
     public BossDamage hitbox;
