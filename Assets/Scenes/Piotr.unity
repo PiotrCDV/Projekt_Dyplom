@@ -124,6 +124,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4764843333923533259, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
   m_PrefabInstance: {fileID: 1225225973}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &93440595 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8011415489574932470, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+  m_PrefabInstance: {fileID: 1225225973}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &128244573
 GameObject:
   m_ObjectHideFlags: 0
@@ -970,17 +975,6 @@ Transform:
   - {fileID: 1049911537}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &682802996 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4577903852261487518, guid: 98d51c6bfc0eee54ba72492a93ce7aca, type: 3}
-  m_PrefabInstance: {fileID: 1932483756}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1932483757}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineBrain
 --- !u!1001 &944001245
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1399,11 +1393,11 @@ PrefabInstance:
     - target: {fileID: 8310342084686888520, guid: e46b6b477ff0ffe41b59df4671676270, type: 3}
       propertyPath: m_SceneBindings.Array.data[0].value
       value: 
-      objectReference: {fileID: 682802996}
+      objectReference: {fileID: 1466746994}
     - target: {fileID: 8310342084686888520, guid: e46b6b477ff0ffe41b59df4671676270, type: 3}
       propertyPath: m_SceneBindings.Array.data[2].value
       value: 
-      objectReference: {fileID: 1932483759}
+      objectReference: {fileID: 93440595}
     - target: {fileID: 8310342084686888520, guid: e46b6b477ff0ffe41b59df4671676270, type: 3}
       propertyPath: m_SceneBindings.Array.data[3].value
       value: 
@@ -1507,6 +1501,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1466746994 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3658233168854238028, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+  m_PrefabInstance: {fileID: 1225225973}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineBrain
 --- !u!114 &1497241990 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7000966535571075148, guid: 9d3607c1d3c303b44911daf2cd8ea934, type: 3}
@@ -3018,11 +3023,6 @@ PrefabInstance:
 --- !u!1 &1932483757 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5409231950570880149, guid: 98d51c6bfc0eee54ba72492a93ce7aca, type: 3}
-  m_PrefabInstance: {fileID: 1932483756}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &1932483759 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 5693407884426259894, guid: 98d51c6bfc0eee54ba72492a93ce7aca, type: 3}
   m_PrefabInstance: {fileID: 1932483756}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &1932483760
