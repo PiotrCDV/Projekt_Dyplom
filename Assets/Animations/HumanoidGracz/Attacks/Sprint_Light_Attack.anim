@@ -42760,14 +42760,14 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.625
+  - time: 0.5833333
     functionName: EnableWeaponHitbox
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 1.125
+  - time: 1.0416666
     functionName: DisableWeaponHitbox
     data: 
     objectReferenceParameter: {fileID: 0}

@@ -169383,6 +169383,13 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
+  - time: 0.25
+    functionName: EnableMainHitbox
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 0.29166666
     functionName: OnDashAttackStart
     data: 
@@ -169390,14 +169397,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.375
-    functionName: EnableMainHitbox
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 2.0416667
+  - time: 1.4583334
     functionName: DisableAllHitboxes
     data: 
     objectReferenceParameter: {fileID: 0}

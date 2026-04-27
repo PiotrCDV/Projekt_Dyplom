@@ -1785,7 +1785,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1547135814504856213}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.15795782, y: -0.0041291504, z: 0.0006605297, w: 0.98743707}
+  m_LocalRotation: {x: 0.15795782, y: -0.0041291504, z: 0.00066052965, w: 0.98743707}
   m_LocalPosition: {x: -1.6049805, y: 2.2999997, z: -3.2050018}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3193,8 +3193,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2284006823814934782}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.5410884, y: -0.22234671, z: 0.79899025, w: -0.13928342}
-  m_LocalPosition: {x: -0.00173, y: 0.00167, z: 0.00078}
+  m_LocalRotation: {x: 0.5917228, y: -0.25468826, z: 0.76073575, w: -0.079241864}
+  m_LocalPosition: {x: -0.00164, y: 0.00135, z: 0.00068}
   m_LocalScale: {x: 0.010000004, y: 0.010000001, z: 0.010000001}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3202,7 +3202,7 @@ Transform:
   - {fileID: 7896950969715895445}
   - {fileID: 3790587206830823045}
   m_Father: {fileID: 2318174535085157782}
-  m_LocalEulerAnglesHint: {x: -191.805, y: -108.80701, z: 28.242004}
+  m_LocalEulerAnglesHint: {x: -197.081, y: -100.24402, z: 26.196}
 --- !u!33 &7494738751291686289
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -7034,7 +7034,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6358174342791457152}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.15795784, y: -0.004129151, z: 0.0006605299, w: 0.987437}
+  m_LocalRotation: {x: 0.15795784, y: -0.0041291513, z: 0.00066053006, w: 0.987437}
   m_LocalPosition: {x: 0, y: 2.2499998, z: -3.100006}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -9180,8 +9180,8 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 0
   serializedVersion: 2
-  m_Radius: 0.07506915
-  m_Height: 1.0395815
+  m_Radius: 0.1
+  m_Height: 1.4
   m_Direction: 1
   m_Center: {x: -0.009628868, y: 0.49622214, z: 0.0037750972}
 --- !u!114 &2300444443712169514
