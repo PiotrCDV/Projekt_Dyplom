@@ -5115,6 +5115,7 @@ GameObject:
   - component: {fileID: 9207611066143767671}
   - component: {fileID: 993452768496131233}
   - component: {fileID: 6518775397165666529}
+  - component: {fileID: 8935966201727263936}
   m_Layer: 7
   m_Name: ProtagonistHumanpoi
   m_TagString: Untagged
@@ -5415,6 +5416,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerWeaponVisuals
   swordInHand: {fileID: 4417603047095342200}
   swordOnBelt: {fileID: 2284006823814934782}
+--- !u!114 &8935966201727263936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4764843333923533259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f5a797194282b148b5abbd281b932e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerFootIK
+  ikWeight: 1
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 512
+  raycastUpOffset: 1
+  raycastDownDistance: 1.5
+  footOffset: 0.07
 --- !u!1 &4784925666118379883
 GameObject:
   m_ObjectHideFlags: 0

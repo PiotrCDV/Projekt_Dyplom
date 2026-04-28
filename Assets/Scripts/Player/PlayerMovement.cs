@@ -243,7 +243,12 @@ public class PlayerMovement : MonoBehaviour
     private void UpdateAnimatorParams(Vector3 move)
     {
         if (animator == null) return;
-        float inputMagnitude = moveInput.magnitude;
+
+        float inputMagnitude = Mathf.Clamp01(moveInput.magnitude);
+        float animationSpeedFloor = 0.7f;
+        float finalAnimMultiplier = Mathf.Max(animationSpeedFloor, inputMagnitude);
+        animator.SetFloat("AnimSpeed", finalAnimMultiplier);
+
         bool isLocked = lockOnBehaviour != null && lockOnBehaviour.IsLocked && lockOnBehaviour.GetCurrentTarget() != null;
         bool isMoving = inputMagnitude > 0.01f;
         bool isCombatSprintingNow = isSprinting && isLocked;
@@ -264,8 +269,7 @@ public class PlayerMovement : MonoBehaviour
             if (inputMagnitude > 0.1f)
             {
                 if (isSprinting) animValue = 1.5f;
-                else if (inputMagnitude >= 0.6f) animValue = 1.0f;
-                else animValue = 0.5f;
+                else animValue = inputMagnitude;
             }
             animator.SetFloat("Speed", animValue, 0.1f, Time.deltaTime);
             animator.SetFloat("MoveX", 0f, 0.1f, Time.deltaTime);
