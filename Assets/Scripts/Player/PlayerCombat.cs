@@ -35,6 +35,9 @@ public class PlayerCombat : MonoBehaviour
     private InputSystem_Actions inputActions;
     public bool IsAttacking => isAttacking;
 
+    [Header("Execution Settings")]
+    public float maxExecutionDistance = 3.0f; // odległość, z której można wykonać egzekucję
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -65,6 +68,11 @@ public class PlayerCombat : MonoBehaviour
         if (playerPotion != null && playerPotion.IsDrinking) return;
         if (playerDodge != null && playerDodge.IsDodging) return;
         if (stamina != null && !stamina.CanPerformAction()) return;
+
+        if (!heavy && TryExecuteBoss())
+        {
+            return;
+        }
 
         if (isAttacking)
         {
@@ -317,6 +325,38 @@ public class PlayerCombat : MonoBehaviour
         animator.CrossFadeInFixedTime("Idle", 0.1f, 0);
     }
 
+    private bool TryExecuteBoss()
+    {
+        if (lockOnBehaviour != null && lockOnBehaviour.IsLocked)
+        {
+            Transform targetEnemy = lockOnBehaviour.GetCurrentTarget();
+            if (targetEnemy != null)
+            {
+                BossHealth bossHealth = targetEnemy.GetComponentInParent<BossHealth>();
+
+                if (bossHealth != null && bossHealth.IsExecutable)
+                {
+                    float distance = Vector3.Distance(transform.position, targetEnemy.position);
+                    if (distance <= maxExecutionDistance)
+                    {
+                        Animator wilkolakAnimator = targetEnemy.GetComponentInParent<Animator>();
+                        if (wilkolakAnimator != null)
+                        {
+                            // Odpalamy egzekucję!
+                            bossHealth.ConfirmExecution();
+                            ExecutionManager.Instance.StartExecution(animator, wilkolakAnimator);
+
+                            // Czyścimy stan walki, żeby postać nie próbowała w tle machać mieczem
+                            ResetCombatState();
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
     private IEnumerator AttackFailsafeRoutine()
     {
         yield return new WaitForSeconds(2.0f);
@@ -330,27 +370,5 @@ public class PlayerCombat : MonoBehaviour
     private void Update()
     {
         TryConsumeBufferedUnlockSprintAttack();
-
-        if (Input.GetKeyDown(KeyCode.J) || Input.GetKeyDown(KeyCode.JoystickButton4))
-        {
-            if (lockOnBehaviour != null && lockOnBehaviour.IsLocked)
-            {
-                Transform targetEnemy = lockOnBehaviour.GetCurrentTarget();
-
-                if (targetEnemy != null)
-                {
-                    Animator wilkolakAnimator = targetEnemy.GetComponentInParent<Animator>();
-
-                    if (wilkolakAnimator != null)
-                    {
-                        ExecutionManager.Instance.StartExecution(animator, wilkolakAnimator);
-                    }
-                    else
-                    {
-                        Debug.LogWarning("Znalaz�em cel LockOn, ale nie znalaz�em na nim Animatora!");
-                    }
-                }
-            }
-        }
     }
 }

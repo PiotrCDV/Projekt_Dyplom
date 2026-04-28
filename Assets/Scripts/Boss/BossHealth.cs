@@ -7,7 +7,7 @@ using System.Collections;
 public class BossHealth : MonoBehaviour, IDamageable
 {
     [Header("UI & AI References")]
-    [SerializeField] private GameObject healthBarContainer; // DODANE: Ca³y kontener paska UI
+    [SerializeField] private GameObject healthBarContainer;
     [SerializeField] private Image healthFillImage;
     [SerializeField] private Image takenDamageFill;
 
@@ -16,10 +16,13 @@ public class BossHealth : MonoBehaviour, IDamageable
     private float currentHP;
     private bool isDead = false;
 
-    [Header("Visual Effects")]
+    public bool IsExecutable { get; private set; }
+
+    [Header("Visual Effects & Timing")]
     [SerializeField] private float trailDelayTime = 1.0f;
     [SerializeField] private float trailDrainSpeed = 0.5f;
-    [SerializeField] private float timeBeforeDisable = 5.0f;
+    [SerializeField] private float executionWindowTime = 5.0f; // Ile sekund gracz ma na wciœniêcie ataku zeby aktywowaæ egzekucjê
+    [SerializeField] private float timeBeforeDisable = 5.0f;   // Ile czasu po ostatecznej œmierci boss znika
 
     private Coroutine trailCoroutine;
     private NavMeshAgent navMeshAgent;
@@ -97,12 +100,12 @@ public class BossHealth : MonoBehaviour, IDamageable
         if (isDead) return;
         isDead = true;
 
+        IsExecutable = true;
+
         if (animator != null)
         {
             animator.SetTrigger("BossDowned");
         }
-
-     
 
         if (behaviourTree != null)
             behaviourTree.enabled = false;
@@ -113,13 +116,56 @@ public class BossHealth : MonoBehaviour, IDamageable
             navMeshAgent.enabled = false;
         }
 
-        StartCoroutine(DisableBossRoutine());
+        StartCoroutine(ExecutionWindowRoutine());
+    }
+
+    private IEnumerator ExecutionWindowRoutine()
+    {
+        yield return new WaitForSeconds(executionWindowTime);
+
+        if (IsExecutable)
+        {
+            IsExecutable = false;
+
+            if (animator != null)
+            {
+                animator.SetTrigger("BossDeath");
+            }
+
+            StartCoroutine(DisableBossRoutine());
+        }
+    }
+
+    public void ConfirmExecution()
+    {
+        IsExecutable = false;
+
+        if (healthBarContainer != null)
+        {
+            healthBarContainer.SetActive(false);
+        }
+
+        if (animator != null)
+        {
+            animator.SetTrigger("BossDeath");
+        }
+
+        StartCoroutine(DisableAfterExecutionRoutine());
+    }
+
+    private IEnumerator DisableAfterExecutionRoutine()
+    {
+
+        yield return new WaitForSeconds(8.0f);
+        gameObject.SetActive(false);
     }
 
     private IEnumerator DisableBossRoutine()
     {
         yield return new WaitForSeconds(timeBeforeDisable);
+
         gameObject.SetActive(false);
+
         if (healthBarContainer != null)
         {
             healthBarContainer.SetActive(false);
