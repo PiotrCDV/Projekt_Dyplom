@@ -272,6 +272,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 276703336}
     - target: {fileID: 6814543300484262438, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
+      propertyPath: damageSound.Path
+      value: event:/Damaging
+      objectReference: {fileID: 0}
+    - target: {fileID: 6814543300484262438, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
       propertyPath: buttonPromptImage
       value: 
       objectReference: {fileID: 568611864}
@@ -283,6 +287,22 @@ PrefabInstance:
       propertyPath: healthBarContainer
       value: 
       objectReference: {fileID: 1764499225}
+    - target: {fileID: 6814543300484262438, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
+      propertyPath: damageSound.Guid.Data1
+      value: 556079396
+      objectReference: {fileID: 0}
+    - target: {fileID: 6814543300484262438, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
+      propertyPath: damageSound.Guid.Data2
+      value: 1336603304
+      objectReference: {fileID: 0}
+    - target: {fileID: 6814543300484262438, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
+      propertyPath: damageSound.Guid.Data3
+      value: -1079974988
+      objectReference: {fileID: 0}
+    - target: {fileID: 6814543300484262438, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
+      propertyPath: damageSound.Guid.Data4
+      value: 210337655
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 6748769630295407221, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
@@ -989,6 +1009,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6492354245376932737, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
   m_PrefabInstance: {fileID: 172881906}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &637680086 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6358174342791457152, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+  m_PrefabInstance: {fileID: 1225225973}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &662590164
 GameObject:
   m_ObjectHideFlags: 0
@@ -1274,6 +1299,26 @@ PrefabInstance:
       propertyPath: takenDamageFill
       value: 
       objectReference: {fileID: 1497241990}
+    - target: {fileID: 3639915503974793807, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: damageSound.Path
+      value: event:/Damaging
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639915503974793807, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: damageSound.Guid.Data1
+      value: 556079396
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639915503974793807, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: damageSound.Guid.Data2
+      value: 1336603304
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639915503974793807, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: damageSound.Guid.Data3
+      value: -1079974988
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639915503974793807, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: damageSound.Guid.Data4
+      value: 210337655
+      objectReference: {fileID: 0}
     - target: {fileID: 4315640772320842696, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.0010629811
@@ -1514,10 +1559,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0.000000001182832
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5324687320320692467, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6358174342791457152, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1466746999}
   m_SourcePrefab: {fileID: 100100000, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
 --- !u!1 &1242895702
 GameObject:
@@ -1817,12 +1866,26 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3658233168854238028, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
   m_PrefabInstance: {fileID: 1225225973}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 637680086}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineBrain
+--- !u!114 &1466746999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 637680086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioListener
+  nonRigidbodyVelocity: 0
+  attenuationObject: {fileID: 0}
 --- !u!114 &1497241990 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7000966535571075148, guid: 9d3607c1d3c303b44911daf2cd8ea934, type: 3}
