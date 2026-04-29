@@ -54,7 +54,7 @@ public class BossCombatManager : MonoBehaviour
 
     private void Update()
     {
-        if (currentTarget != null && !isDashing && !isMovementLockedByAttack)
+        if (currentTarget != null && !isDashing && !isMovementLockedByAttack && !BossHealth.Instance.isDead)
         {
             SmoothRotateTowardsTarget();
         }

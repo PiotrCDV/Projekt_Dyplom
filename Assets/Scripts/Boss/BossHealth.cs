@@ -7,6 +7,8 @@ using System.Collections;
 
 public class BossHealth : MonoBehaviour, IDamageable
 {
+    public static BossHealth Instance { get; private set; }
+
     [Header("UI & AI References")]
     [SerializeField] private GameObject healthBarContainer;
     [SerializeField] private Image healthFillImage;
@@ -15,7 +17,7 @@ public class BossHealth : MonoBehaviour, IDamageable
     [Header("Health Settings")]
     [SerializeField] private float maxHP = 100f;
     private float currentHP;
-    private bool isDead = false;
+    public bool isDead { get; private set; } = false;
 
     public bool IsExecutable { get; private set; }
 
@@ -43,6 +45,13 @@ public class BossHealth : MonoBehaviour, IDamageable
 
     private void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+
         currentHP = maxHP;
         UpdateHealthBar();
         animator = GetComponent<Animator>();
