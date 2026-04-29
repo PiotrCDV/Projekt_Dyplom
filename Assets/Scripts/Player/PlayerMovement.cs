@@ -163,6 +163,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void ApplyGravity()
     {
+        if (controller == null || !controller.enabled) return;
+
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
         if (isGrounded && velocity.y < 0) velocity.y = -2f;
         velocity.y += gravity * Time.deltaTime;
@@ -218,7 +220,12 @@ public class PlayerMovement : MonoBehaviour
             else targetSpeed = walkSpeed;
         }
         currentSpeed = Mathf.Lerp(currentSpeed, targetSpeed, 10f * Time.deltaTime);
-        controller.Move(move * currentSpeed * Time.deltaTime);
+
+        if (controller != null && controller.enabled)
+        {
+            controller.Move(move * currentSpeed * Time.deltaTime);
+        }
+
         if ((isLocked || keepLockOnRotation) && !isSprinting)
         {
             Transform target = lockOnBehaviour.GetCurrentTarget();

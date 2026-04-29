@@ -1151,6 +1151,50 @@ PrefabInstance:
       propertyPath: staminaFillImage
       value: 
       objectReference: {fileID: 1306370041}
+    - target: {fileID: 1697090453931178552, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9751746
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697090453931178552, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.209851
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697090453931178552, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.06910805
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697090453931178552, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.014871587
+      objectReference: {fileID: 0}
+    - target: {fileID: 2390115697546364137, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.6049805
+      objectReference: {fileID: 0}
+    - target: {fileID: 2390115697546364137, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.2999997
+      objectReference: {fileID: 0}
+    - target: {fileID: 2390115697546364137, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -3.2050018
+      objectReference: {fileID: 0}
+    - target: {fileID: 2390115697546364137, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.987437
+      objectReference: {fileID: 0}
+    - target: {fileID: 2390115697546364137, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.15795776
+      objectReference: {fileID: 0}
+    - target: {fileID: 2390115697546364137, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.004129269
+      objectReference: {fileID: 0}
+    - target: {fileID: 2390115697546364137, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.0006605485
+      objectReference: {fileID: 0}
     - target: {fileID: 3639915503974793807, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
       propertyPath: healthFillImage
       value: 
@@ -1162,6 +1206,34 @@ PrefabInstance:
     - target: {fileID: 4764843333923533259, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
       propertyPath: m_Name
       value: ProtagonistHumanpoi
+      objectReference: {fileID: 0}
+    - target: {fileID: 7302813476444378984, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.6049805
+      objectReference: {fileID: 0}
+    - target: {fileID: 7302813476444378984, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7302813476444378984, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -3.1049957
+      objectReference: {fileID: 0}
+    - target: {fileID: 7302813476444378984, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9885646
+      objectReference: {fileID: 0}
+    - target: {fileID: 7302813476444378984, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.020396981
+      objectReference: {fileID: 0}
+    - target: {fileID: 7302813476444378984, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.14938074
+      objectReference: {fileID: 0}
+    - target: {fileID: 7302813476444378984, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.0030821618
       objectReference: {fileID: 0}
     - target: {fileID: 7816838684190353340, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1484,8 +1556,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   executionDirector: {fileID: 571997594}
   executionTimelineAsset: {fileID: 11400000, guid: 4e001c78578bb4848998e52194955b15, type: 2}
-  playerTrackName: rig|Execution_01_Werewolf_p
-  enemyTrackName: werewolftest_exe
+  playerTrackName: PlayerTrack
+  enemyTrackName: EnemyTrack
 --- !u!4 &1440044973
 Transform:
   m_ObjectHideFlags: 0
