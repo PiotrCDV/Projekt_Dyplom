@@ -250,7 +250,7 @@ public class LockOnBehaviour : MonoBehaviour
         }
     }
 
-    private void UnlockTarget()
+    public void UnlockTarget()
     {
         currentTarget = null;
         IsLocked = false;

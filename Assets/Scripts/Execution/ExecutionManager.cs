@@ -7,7 +7,7 @@ public class ExecutionManager : MonoBehaviour
 {
     public static ExecutionManager Instance;
 
-    [Header("Referencje")]
+    [Header("Referencje Timeline")]
     public PlayableDirector executionDirector;
     public TimelineAsset executionTimelineAsset;
 
@@ -18,8 +18,12 @@ public class ExecutionManager : MonoBehaviour
     // Zmienne do usypiania skryptów
     private CharacterController playerCC;
     private PlayerMovement playerMovementScript;
+    private LockOnBehaviour playerLockOnScript;
 
-    // Cache TYLKO dla gracza, bo tylko jemu modyfikujemy offsety
+    // Zmienna do kontrolowania przezroczystości kropki
+    private CanvasGroup dotCanvasGroup;
+
+    // Cache dla gracza
     private AnimationTrack cachedPlayerTrack;
 
     private void Awake()
@@ -29,19 +33,35 @@ public class ExecutionManager : MonoBehaviour
 
     public void StartExecution(Animator playerAnim, Animator werewolfAnim)
     {
-        // 1. KNEBLUJEMY SKRYPTY RUCHU GRACZA
+        // 1. POBIERAMY KOMPONENTY
         playerCC = playerAnim.GetComponent<CharacterController>();
-        if (playerCC != null) playerCC.enabled = false;
-
         playerMovementScript = playerAnim.GetComponent<PlayerMovement>();
+        playerLockOnScript = playerAnim.GetComponent<LockOnBehaviour>();
+
+        // 2. MAGICZNE UKRYCIE KROPKI (Bez wyłączania skryptu!)
+        if (playerLockOnScript != null && playerLockOnScript.targetDotUI != null)
+        {
+            // Szukamy CanvasGroup, a jak nie ma, to dodajemy w locie
+            dotCanvasGroup = playerLockOnScript.targetDotUI.GetComponent<CanvasGroup>();
+            if (dotCanvasGroup == null)
+            {
+                dotCanvasGroup = playerLockOnScript.targetDotUI.gameObject.AddComponent<CanvasGroup>();
+            }
+
+            // Robimy kropkę w 100% przezroczystą. 
+            // Obiekt nadal jest "Active", więc LockOnBehaviour z tym nie walczy!
+            dotCanvasGroup.alpha = 0f;
+        }
+
+        // 3. KNEBLUJEMY TYLKO RUCH GRACZA
+        if (playerCC != null) playerCC.enabled = false;
         if (playerMovementScript != null) playerMovementScript.enabled = false;
 
-        // 2. TEPAMY CAŁY OBIEKT TIMELINE DO WILKOŁAKA
-        // Kamera leci za nim, bo jest jego dzieckiem
+        // 4. TELEPORTACJA TIMELINE
         executionDirector.transform.position = werewolfAnim.transform.position;
         executionDirector.transform.rotation = werewolfAnim.transform.rotation;
 
-        // 3. PRZYPISUJEMY ŚCIEŻKI
+        // 5. PRZYPISYWANIE I OFFSETY
         foreach (var track in executionTimelineAsset.GetOutputTracks())
         {
             if (track.name == playerTrackName)
@@ -50,7 +70,6 @@ public class ExecutionManager : MonoBehaviour
                 if (track is AnimationTrack animTrack)
                 {
                     cachedPlayerTrack = animTrack;
-                    // Wymuszamy pozycję TYLKO dla Humanoida (gracza)
                     animTrack.trackOffset = TrackOffset.ApplyTransformOffsets;
                     animTrack.position = werewolfAnim.transform.position;
                     animTrack.rotation = werewolfAnim.transform.rotation * Quaternion.Euler(0, 180f, 0);
@@ -58,17 +77,13 @@ public class ExecutionManager : MonoBehaviour
             }
             else if (track.name == enemyTrackName)
             {
-                // Wilkołak dostaje tylko powiązanie. Żadnego grzebania w offsetach!
                 executionDirector.SetGenericBinding(track, werewolfAnim);
             }
         }
 
-        // Twardy reset Animatora gracza
         playerAnim.Rebind();
         playerAnim.Update(0f);
-
         executionDirector.RebuildGraph();
-
         executionDirector.time = 0;
         executionDirector.Evaluate();
 
@@ -80,11 +95,27 @@ public class ExecutionManager : MonoBehaviour
     {
         executionDirector.stopped -= OnExecutionFinished;
 
-        // 4. BUDZIMY GRACZA PO EGZEKUCJI
+        // 6. ODPINAMY LOCK-ON NA SAMYM KOŃCU I PRZYWRACAMY KROPKĘ
+        if (playerLockOnScript != null)
+        {
+            if (playerLockOnScript.IsLocked)
+            {
+                playerLockOnScript.UnlockTarget(); // Puszczamy cel po zakończeniu animacji
+            }
+        }
+
+        // Przywracamy kropce widoczność na przyszłość (dla kolejnych wrogów)
+        if (dotCanvasGroup != null)
+        {
+            dotCanvasGroup.alpha = 1f;
+            dotCanvasGroup = null;
+        }
+
+        // 7. BUDZIMY RUCH GRACZA
         if (playerCC != null) playerCC.enabled = true;
         if (playerMovementScript != null) playerMovementScript.enabled = true;
 
-        // 5. CZYŚCIMY OFFSETY GRACZA
+        // 8. CZYŚCIMY OFFSETY
         if (cachedPlayerTrack != null)
         {
             cachedPlayerTrack.position = Vector3.zero;

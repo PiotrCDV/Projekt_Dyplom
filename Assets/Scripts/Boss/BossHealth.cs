@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using FMODUnity;
 using UnityEngine.UI;
+using UnityEngine.InputSystem; // WA¯NE: Dodano Input System
 using System.Collections;
 
 public class BossHealth : MonoBehaviour, IDamageable
@@ -32,12 +33,61 @@ public class BossHealth : MonoBehaviour, IDamageable
     [Header("Audio")]
     [SerializeField] private EventReference damageSound;
 
+    [Header("Execution UI")]
+    [SerializeField] private GameObject executionUIParent; // Rodzic ikon (ExecutionUI)
+    [SerializeField] private Image buttonPromptImage;      // Obrazek, który siê zmienia
+    [SerializeField] private Sprite mouseIcon;             // PNG dla LPM
+    [SerializeField] private Sprite gamepadIcon;           // PNG dla przycisku pada
+
+    private Camera mainCamera;
+
     private void Awake()
     {
         currentHP = maxHP;
         UpdateHealthBar();
         animator = GetComponent<Animator>();
         navMeshAgent = GetComponent<NavMeshAgent>();
+        mainCamera = Camera.main;
+
+        // Upewniamy siê, ¿e UI egzekucji jest wy³¹czone na starcie
+        if (executionUIParent != null) executionUIParent.SetActive(false);
+    }
+
+    private void Update()
+    {
+        if (IsExecutable)
+        {
+            HandleExecutionUI();
+        }
+    }
+
+    private void HandleExecutionUI()
+    {
+        if (executionUIParent == null) return;
+
+        if (mainCamera != null)
+        {
+            executionUIParent.transform.LookAt(executionUIParent.transform.position + mainCamera.transform.rotation * Vector3.forward, mainCamera.transform.rotation * Vector3.up);
+        }
+
+        if (buttonPromptImage != null)
+        {
+            bool usingGamepad = false;
+
+            if (Gamepad.current != null)
+            {
+                float lastPadTime = (float)Gamepad.current.lastUpdateTime;
+                float lastKbTime = Keyboard.current != null ? (float)Keyboard.current.lastUpdateTime : 0;
+                float lastMouseTime = Mouse.current != null ? (float)Mouse.current.lastUpdateTime : 0;
+
+                if (lastPadTime > lastKbTime && lastPadTime > lastMouseTime)
+                {
+                    usingGamepad = true;
+                }
+            }
+
+            buttonPromptImage.sprite = usingGamepad ? gamepadIcon : mouseIcon;
+        }
     }
 
     public void TakeDamage(float damage)
@@ -102,6 +152,11 @@ public class BossHealth : MonoBehaviour, IDamageable
 
         IsExecutable = true;
 
+        if (executionUIParent != null)
+        {
+            executionUIParent.SetActive(true);
+        }
+
         if (animator != null)
         {
             animator.SetTrigger("BossDowned");
@@ -127,6 +182,11 @@ public class BossHealth : MonoBehaviour, IDamageable
         {
             IsExecutable = false;
 
+            if (executionUIParent != null)
+            {
+                executionUIParent.SetActive(false);
+            }
+
             if (animator != null)
             {
                 animator.SetTrigger("BossDeath");
@@ -139,6 +199,11 @@ public class BossHealth : MonoBehaviour, IDamageable
     public void ConfirmExecution()
     {
         IsExecutable = false;
+
+        if (executionUIParent != null)
+        {
+            executionUIParent.SetActive(false);
+        }
 
         if (healthBarContainer != null)
         {
@@ -155,7 +220,6 @@ public class BossHealth : MonoBehaviour, IDamageable
 
     private IEnumerator DisableAfterExecutionRoutine()
     {
-
         yield return new WaitForSeconds(8.0f);
         gameObject.SetActive(false);
     }
