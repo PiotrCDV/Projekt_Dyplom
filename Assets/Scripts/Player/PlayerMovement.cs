@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement Stats")]
     public float walkSpeed = 2f;
     public float runSpeed = 5f;
-    public float combatSpeed = 3.5f;
+    public float combatSpeed = 2.6f;
     public float sprintSpeed = 8f;
     public float sprintStaminaCost = 15f;
     [SerializeField] private float currentSpeed;
@@ -272,7 +272,7 @@ public class PlayerMovement : MonoBehaviour
         if (isLocked)
         {
             // 1. TRYB WALKI (Lock-on)
-            finalAnimMultiplier = 1.0f;
+            finalAnimMultiplier = 1.35f;
         }
         else if (inputMagnitude > 0.1f)
         {
