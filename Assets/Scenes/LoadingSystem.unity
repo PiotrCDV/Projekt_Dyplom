@@ -155,7 +155,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 479.73996, y: -245.23871}
+  m_AnchoredPosition: {x: 479.99997, y: -227.63211}
   m_SizeDelta: {x: 505.9724, y: 51.2079}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2874097
@@ -600,7 +600,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 479.73996, y: -106.238754}
+  m_AnchoredPosition: {x: 479.99997, y: -100.36989}
   m_SizeDelta: {x: 376.6361, y: 78.163}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &185156643
@@ -811,7 +811,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 479.73996, y: -384.2387}
+  m_AnchoredPosition: {x: 479.99997, y: -354.89435}
   m_SizeDelta: {x: 376.6361, y: 78.163}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &387548219
@@ -2322,7 +2322,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 479.74, y: -523.23865}
+  m_AnchoredPosition: {x: 479.99997, y: -482.15656}
   m_SizeDelta: {x: 505.9724, y: 51.2079}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1153343793
@@ -2536,12 +2536,13 @@ RectTransform:
   - {fileID: 2874096}
   - {fileID: 387548218}
   - {fileID: 1153343792}
+  - {fileID: 1886022325}
   m_Father: {fileID: 1613482918}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.25039586, y: 0.14918523}
-  m_AnchorMax: {x: 0.750125, y: 0.7473333}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0.000015258789, y: 0}
+  m_AnchorMin: {x: 0.25039586, y: 0.02051852}
+  m_AnchorMax: {x: 0.753, y: 0.7473333}
+  m_AnchoredPosition: {x: -2.5, y: 1.6671753}
+  m_SizeDelta: {x: -5, y: -3.3343048}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1376126170
 MonoBehaviour:
@@ -2556,7 +2557,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.79607844}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.45490196}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2824,7 +2825,6 @@ RectTransform:
   - {fileID: 201150486}
   - {fileID: 985387424}
   - {fileID: 1376126169}
-  - {fileID: 1886022325}
   m_Father: {fileID: 475532008}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -3567,12 +3567,12 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 747116722}
-  m_Father: {fileID: 1613482918}
+  m_Father: {fileID: 1376126169}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.38000003, y: 0.010185185}
-  m_AnchorMax: {x: 0.619, y: 0.121296294}
-  m_AnchoredPosition: {x: 0.5, y: 1}
-  m_SizeDelta: {x: -7, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 479.99997, y: -630.3373}
+  m_SizeDelta: {x: 450, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1886022326
 MonoBehaviour:

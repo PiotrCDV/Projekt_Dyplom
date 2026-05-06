@@ -8,12 +8,13 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement Stats")]
     public float walkSpeed = 2f;
     public float runSpeed = 5f;
+    public float combatSpeed = 3.5f;
     public float sprintSpeed = 8f;
     public float sprintStaminaCost = 15f;
     [SerializeField] private float currentSpeed;
 
     [Header("Sprint/Dodge Combo Settings")]
-    public float holdThreshold = 0.2f;
+    public float holdThreshold = 0.3f;
     private float buttonDownTime;
     private bool isHoldingButton;
 
@@ -215,9 +216,22 @@ public class PlayerMovement : MonoBehaviour
         float targetSpeed = 0f;
         if (inputMagnitude > 0.1f)
         {
-            if (isSprinting) targetSpeed = sprintSpeed;
-            else if (inputMagnitude >= 0.6f) targetSpeed = runSpeed;
-            else targetSpeed = walkSpeed;
+            if (isSprinting)
+            {
+                targetSpeed = sprintSpeed;
+            }
+            else if (isLocked)
+            {
+                targetSpeed = combatSpeed;
+            }
+            else if (inputMagnitude >= 0.6f)
+            {
+                targetSpeed = runSpeed;
+            }
+            else
+            {
+                targetSpeed = walkSpeed;
+            }
         }
         currentSpeed = Mathf.Lerp(currentSpeed, targetSpeed, 10f * Time.deltaTime);
 
@@ -252,11 +266,30 @@ public class PlayerMovement : MonoBehaviour
         if (animator == null) return;
 
         float inputMagnitude = Mathf.Clamp01(moveInput.magnitude);
-        float animationSpeedFloor = 0.7f;
-        float finalAnimMultiplier = Mathf.Max(animationSpeedFloor, inputMagnitude);
+        bool isLocked = lockOnBehaviour != null && lockOnBehaviour.IsLocked && lockOnBehaviour.GetCurrentTarget() != null;
+        float finalAnimMultiplier = 1.0f;
+
+        if (isLocked)
+        {
+            // 1. TRYB WALKI (Lock-on)
+            finalAnimMultiplier = 1.0f;
+        }
+        else if (inputMagnitude > 0.1f)
+        {
+            if (inputMagnitude >= 0.6f)
+            {
+                // 2. TRYB BIEGU (Run)
+                finalAnimMultiplier = inputMagnitude * 0.9f;
+            }
+            else
+            {
+                // 3. TRYB CHODZENIA (Walk)
+                float spowolnionyChod = inputMagnitude * 0.85f;
+                finalAnimMultiplier = Mathf.Max(0.5f, spowolnionyChod);
+            }
+        }
         animator.SetFloat("AnimSpeed", finalAnimMultiplier);
 
-        bool isLocked = lockOnBehaviour != null && lockOnBehaviour.IsLocked && lockOnBehaviour.GetCurrentTarget() != null;
         bool isMoving = inputMagnitude > 0.01f;
         bool isCombatSprintingNow = isSprinting && isLocked;
         if (isCombatSprintingNow && !wasCombatSprinting) animator.SetTrigger("EnterCombatSprint");
@@ -266,8 +299,8 @@ public class PlayerMovement : MonoBehaviour
         if (isLocked && !isSprinting)
         {
             Vector3 localMove = transform.InverseTransformDirection(move);
-            animator.SetFloat("MoveX", localMove.x, 0.1f, Time.deltaTime);
-            animator.SetFloat("MoveY", localMove.z, 0.1f, Time.deltaTime);
+            animator.SetFloat("MoveX", localMove.x, 0.15f, Time.deltaTime);
+            animator.SetFloat("MoveY", localMove.z, 0.15f, Time.deltaTime);
             animator.SetFloat("Speed", 0f);
         }
         else
