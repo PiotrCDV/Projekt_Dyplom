@@ -272,7 +272,7 @@ public class PlayerMovement : MonoBehaviour
         if (isLocked)
         {
             // 1. TRYB WALKI (Lock-on)
-            finalAnimMultiplier = 1.35f;
+            finalAnimMultiplier = 1.4f;
         }
         else if (inputMagnitude > 0.1f)
         {

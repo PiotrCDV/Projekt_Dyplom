@@ -1223,6 +1223,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 558345095296806604, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: combatSpeed
+      value: 2.9
+      objectReference: {fileID: 0}
     - target: {fileID: 559627106308182185, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.85207784
