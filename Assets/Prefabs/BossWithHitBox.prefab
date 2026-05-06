@@ -2384,7 +2384,6 @@ MonoBehaviour:
       Data4: 210337655
     Path: event:/Damaging
   executionUIParent: {fileID: 0}
-  uiAnchor: {fileID: 0}
   buttonPromptImage: {fileID: 0}
   mouseIcon: {fileID: 0}
   gamepadIcon: {fileID: 0}
@@ -4452,7 +4451,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2763060676248895538}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.978}
+  m_LocalPosition: {x: 0, y: 0, z: -0.122}
   m_LocalScale: {x: 0.005, y: 0.005, z: 0.005}
   m_ConstrainProportionsScale: 0
   m_Children:
