@@ -10,6 +10,9 @@ public class PlayerDodge : MonoBehaviour
     public float dodgeStaminaCost = 20f;
 
     public bool IsDodging { get; private set; } = false;
+    
+    // Nowa właściwość określająca, czy gracz jest aktualnie nieśmiertelny
+    public bool IsInvincible { get; private set; } = false;
 
     private InputSystem_Actions inputActions;
     private Animator animator;
@@ -66,6 +69,17 @@ public class PlayerDodge : MonoBehaviour
 
         if (animator != null) animator.SetTrigger("Dodge");
     }
+   
+    public void EnableInvincibility()
+    {
+        IsInvincible = true;
+    }
+
+
+    public void DisableInvincibility()
+    {
+        IsInvincible = false;
+    }
 
     public void StartDodge()
     {
@@ -77,8 +91,13 @@ public class PlayerDodge : MonoBehaviour
     {
         if (playerMovement != null) playerMovement.SetMovementEnabled(true);
         IsDodging = false;
+        
+        
+        IsInvincible = false; 
+        
         StopAllCoroutines();
     }
+
 
     private IEnumerator DodgeSlideRoutine()
     {

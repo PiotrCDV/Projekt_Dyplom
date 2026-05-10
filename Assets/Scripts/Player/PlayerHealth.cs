@@ -35,6 +35,12 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        PlayerDodge dodge = GetComponent<PlayerDodge>();
+
+        if (dodge != null && dodge.IsInvincible)
+        {
+            return; 
+        }
         if (isDead) return;
 
         if (trailCoroutine != null)
