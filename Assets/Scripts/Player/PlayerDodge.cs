@@ -84,6 +84,7 @@ public class PlayerDodge : MonoBehaviour
     public void StartDodge()
     {
         if (!IsDodging) return;
+        
         StartCoroutine(DodgeSlideRoutine());
     }
 
