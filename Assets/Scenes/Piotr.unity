@@ -134,6 +134,17 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 8011415489574932470, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
   m_PrefabInstance: {fileID: 1225225973}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &99643897 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6866818887359393520, guid: 9d3607c1d3c303b44911daf2cd8ea934, type: 3}
+  m_PrefabInstance: {fileID: 944001245}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1 &128244573
 GameObject:
   m_ObjectHideFlags: 0
@@ -1223,6 +1234,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 46112868729701874, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.15795782
+      objectReference: {fileID: 0}
+    - target: {fileID: 46112868729701874, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.0041291197
+      objectReference: {fileID: 0}
+    - target: {fileID: 46112868729701874, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.0006605249
+      objectReference: {fileID: 0}
+    - target: {fileID: 558345095296806604, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: combatSpeed
+      value: 2.9
+      objectReference: {fileID: 0}
     - target: {fileID: 559627106308182185, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.85207784
@@ -1269,27 +1296,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2390115697546364137, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.3
+      value: 2.2999997
       objectReference: {fileID: 0}
     - target: {fileID: 2390115697546364137, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.2049956
+      value: -3.2050018
       objectReference: {fileID: 0}
     - target: {fileID: 2390115697546364137, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.98743695
+      value: 0.98743707
       objectReference: {fileID: 0}
     - target: {fileID: 2390115697546364137, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.1579582
+      value: 0.1579578
       objectReference: {fileID: 0}
     - target: {fileID: 2390115697546364137, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.004129147
+      value: -0.0041291188
       objectReference: {fileID: 0}
     - target: {fileID: 2390115697546364137, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.00066053076
+      value: 0.0006605217
       objectReference: {fileID: 0}
     - target: {fileID: 3639915503974793807, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
       propertyPath: healthFillImage
@@ -1387,6 +1414,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0.00031453883
       objectReference: {fileID: 0}
+    - target: {fileID: 6100778997673328114, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: dodgeSlideDuration
+      value: 0.7
+      objectReference: {fileID: 0}
     - target: {fileID: 6376115845517016574, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.85207796
@@ -1421,15 +1452,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7302813476444378984, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.020396939
+      value: 0.02039698
       objectReference: {fileID: 0}
     - target: {fileID: 7302813476444378984, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.1493807
+      value: 0.14938074
       objectReference: {fileID: 0}
     - target: {fileID: 7302813476444378984, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0030821548
+      value: -0.0030821615
       objectReference: {fileID: 0}
     - target: {fileID: 7353468820970065057, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1559,10 +1590,22 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -7.870678e-10
       objectReference: {fileID: 0}
+    - target: {fileID: 9025023005841588370, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: movementReEnableDelay
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 9148208039381562233, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0.000000001182832
       objectReference: {fileID: 0}
+    - target: {fileID: 9207611066143767671, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: maxPotions
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 9207611066143767671, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: potionCountText
+      value: 
+      objectReference: {fileID: 99643897}
     m_RemovedComponents:
     - {fileID: 5324687320320692467, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
     m_RemovedGameObjects: []

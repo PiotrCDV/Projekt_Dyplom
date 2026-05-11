@@ -1,11 +1,17 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro; 
 
 public class PlayerPotion : MonoBehaviour
 {
     [Header("Potion Settings")]
     [SerializeField] private float healAmount = 40f;
+    [SerializeField] private int maxPotions = 5;
+   private int currentPotions;
     [SerializeField] private GameObject potionModel;
+
+    [Header("UI References")]
+    [SerializeField] private TextMeshProUGUI potionCountText;
 
     [Header("References")]
     private Animator animator;
@@ -24,6 +30,9 @@ public class PlayerPotion : MonoBehaviour
         playerCombat = GetComponent<PlayerCombat>();
         playerHealth = GetComponent<PlayerHealth>();
 
+        currentPotions = maxPotions;
+        UpdatePotionUI();
+
         inputActions = new InputSystem_Actions();
         inputActions.Player.UsePotion.performed += ctx => TryDrinkPotion();
         
@@ -35,6 +44,12 @@ public class PlayerPotion : MonoBehaviour
 
     public void TryDrinkPotion()
     {
+        if (currentPotions <= 0)
+        {
+            Debug.Log("Brak mikstur!");
+            return;
+        }
+
         if (isDrinking) return;
         if (playerCombat != null && playerCombat.IsAttacking) return;
         if (GetComponent<PlayerDodge>().IsDodging) return;
@@ -47,12 +62,23 @@ public class PlayerPotion : MonoBehaviour
         if (animator == null) return;
 
         isDrinking = true;
+        
+        currentPotions--;
+        UpdatePotionUI();
 
         if (potionModel != null) potionModel.SetActive(true);
 
         bool isLocked = lockOnBehaviour != null && lockOnBehaviour.IsLocked;
         animator.SetBool("isLockedOn", isLocked);
         animator.SetTrigger("DrinkPotion");
+    }
+
+    private void UpdatePotionUI()
+    {
+        if (potionCountText != null)
+        {
+            potionCountText.text = currentPotions.ToString();
+        }
     }
 
     public void ApplyHealing()
@@ -69,4 +95,5 @@ public class PlayerPotion : MonoBehaviour
 
         if (potionModel != null) potionModel.SetActive(false);
     }
+
 }

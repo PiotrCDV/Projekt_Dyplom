@@ -34,9 +34,13 @@ public class PlayerCombat : MonoBehaviour
     private Coroutine attackFailsafe;
     private InputSystem_Actions inputActions;
     public bool IsAttacking => isAttacking;
-
+    
+    [Header("Movement Settings")]
+    [SerializeField] private float movementReEnableDelay = 0.5f; 
+    private Coroutine movementDelayCoroutine; 
+    
     [Header("Execution Settings")]
-    public float maxExecutionDistance = 3.0f; // odległość, z której można wykonać egzekucję
+    public float maxExecutionDistance = 3.0f; 
 
     private void Awake()
     {
@@ -90,6 +94,8 @@ public class PlayerCombat : MonoBehaviour
 
     private void PerformAttack()
     {
+        if (movementDelayCoroutine != null) StopCoroutine(movementDelayCoroutine);
+        
         bool isLocked = lockOnBehaviour != null && lockOnBehaviour.IsLocked;
         bool isSprintingInput = playerMovement != null && playerMovement.IsSprinting;
         bool hasSprintSpeed = HasSprintAttackSpeed();
@@ -239,6 +245,12 @@ public class PlayerCombat : MonoBehaviour
         hasBufferedUnlockSprintAttack = false;
         PerformAttack();
     }
+    private IEnumerator EnableMovementRoutine()
+    {
+        yield return new WaitForSeconds(movementReEnableDelay);
+        if (playerMovement != null) playerMovement.SetMovementEnabled(true);
+        movementDelayCoroutine = null;
+    }
 
     public void OnAttackEnd()
     {
@@ -257,8 +269,9 @@ public class PlayerCombat : MonoBehaviour
         {
             comboStep = 0;
             currentComboIsHeavy = false;
-            if (playerMovement != null) playerMovement.SetMovementEnabled(true);
-
+            if (movementDelayCoroutine != null) StopCoroutine(movementDelayCoroutine);
+            movementDelayCoroutine = StartCoroutine(EnableMovementRoutine());
+            
             bool shouldReturnDirectlyToIdle = currentAttackWasSprintAttack
                 && (lockOnBehaviour == null || !lockOnBehaviour.IsLocked)
                 && (playerMovement == null || !playerMovement.IsSprinting)
