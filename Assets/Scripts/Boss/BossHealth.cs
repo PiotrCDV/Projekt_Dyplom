@@ -201,6 +201,11 @@ public class BossHealth : MonoBehaviour, IDamageable
                 animator.SetTrigger("BossDeath");
             }
 
+            if (LockOnBehaviour.Instance != null && LockOnBehaviour.Instance.IsLocked)
+            {
+                LockOnBehaviour.Instance.UnlockTarget();
+            }
+
             StartCoroutine(DisableBossRoutine());
         }
     }
