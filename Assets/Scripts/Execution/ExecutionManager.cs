@@ -95,31 +95,32 @@ public class ExecutionManager : MonoBehaviour
     {
         executionDirector.stopped -= OnExecutionFinished;
 
-        // 6. ODPINAMY LOCK-ON NA SAMYM KOŃCU I PRZYWRACAMY KROPKĘ
         if (playerLockOnScript != null)
         {
             if (playerLockOnScript.IsLocked)
             {
-                playerLockOnScript.UnlockTarget(); // Puszczamy cel po zakończeniu animacji
+                playerLockOnScript.UnlockTarget();
             }
         }
 
-        // Przywracamy kropce widoczność na przyszłość (dla kolejnych wrogów)
         if (dotCanvasGroup != null)
         {
             dotCanvasGroup.alpha = 1f;
             dotCanvasGroup = null;
         }
 
-        // 7. BUDZIMY RUCH GRACZA
         if (playerCC != null) playerCC.enabled = true;
         if (playerMovementScript != null) playerMovementScript.enabled = true;
 
-        // 8. CZYŚCIMY OFFSETY
         if (cachedPlayerTrack != null)
         {
             cachedPlayerTrack.position = Vector3.zero;
             cachedPlayerTrack.rotation = Quaternion.identity;
+        }
+
+        if (GameMessageUI.Instance != null)
+        {
+            GameMessageUI.Instance.ShowVictory();
         }
 
         Debug.Log("Egzekucja Zakończona!");
