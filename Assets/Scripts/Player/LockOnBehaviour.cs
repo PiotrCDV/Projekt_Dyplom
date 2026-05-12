@@ -54,6 +54,8 @@ public class LockOnBehaviour : MonoBehaviour
     private CinemachineRotationComposer rotationComposer;
     private CinemachineThirdPersonFollow thirdPersonFollow;
 
+    public static LockOnBehaviour Instance { get; private set; }
+
     public bool IsLocked { get; private set; }
     public bool JustSwitched { get; private set; }
 
@@ -70,6 +72,7 @@ public class LockOnBehaviour : MonoBehaviour
 
     private void Awake()
     {
+        if (Instance == null) Instance = this;
         mainCamera = Camera.main;
         if (targetDotUI != null)
             targetDotUI.gameObject.SetActive(false);

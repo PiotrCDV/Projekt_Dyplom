@@ -18,7 +18,7 @@ public class PlayerHealth : MonoBehaviour
     [Header("Visual Effects")]
     [SerializeField] private float trailDelayTime = 1.0f;
     [SerializeField] private float trailDrainSpeed = 0.5f;
-    [SerializeField] private float delayBeforeReload = 3.0f; 
+    [SerializeField] private float delayBeforeReload = 5.0f; 
 
     private Coroutine trailCoroutine;
     private Animator animator;
@@ -106,6 +106,11 @@ public class PlayerHealth : MonoBehaviour
 
         if (GetComponent<PlayerMovement>() != null) GetComponent<PlayerMovement>().enabled = false;
         if (GetComponent<PlayerCombat>() != null) GetComponent<PlayerCombat>().enabled = false;
+
+        if (GameMessageUI.Instance != null)
+        {
+            GameMessageUI.Instance.ShowDeath();
+        }
 
         StartCoroutine(ReloadSceneRoutine());
     }
