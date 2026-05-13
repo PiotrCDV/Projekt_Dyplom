@@ -5,38 +5,39 @@ public class BossGateController : MonoBehaviour
 {
     [Header("Referencje")]
     public Renderer gateRenderer;
-    public Transform playerTransform;
     public Collider blockingCollider;
 
-    [Header("Ustawienia Interakcji")]
-    public float interactionDistance = 3f;
+    [Header("UI Interakcji (World Space)")]
+    [Tooltip("Przeci¹gnij tutaj obiekt Canvas unocz¹cy siê nad bram¹")]
+    public GameObject interactUI;
+
+    [Header("Ustawienia")]
     public KeyCode interactKey = KeyCode.F;
     public string dissolveParam = "_DissolveAmount";
-
-    [Header("Ustawienia Animacji")]
     public float fadeDuration = 1.5f;
 
     private Material gateMaterial;
     private bool isOpened = false;
     private bool isPlayerInside = false;
+    private bool playerInRange = false;
 
     void Start()
     {
         if (gateRenderer != null)
             gateMaterial = gateRenderer.material;
+
         gateMaterial.SetFloat(dissolveParam, 0f);
+
+        if (interactUI != null) interactUI.SetActive(false);
+
         if (blockingCollider != null) blockingCollider.enabled = true;
     }
 
     void Update()
     {
-        if (isOpened || isPlayerInside) return;
-
-        float dist = Vector3.Distance(transform.position, playerTransform.position);
-
-        if (dist <= interactionDistance)
+        if (playerInRange && !isOpened && !isPlayerInside)
         {
-            if (Input.GetKeyDown(interactKey))
+            if (Input.GetKeyDown(interactKey) || Input.GetMouseButtonDown(0))
             {
                 OpenGate();
             }
@@ -46,6 +47,7 @@ public class BossGateController : MonoBehaviour
     public void OpenGate()
     {
         isOpened = true;
+        if (interactUI != null) interactUI.SetActive(false);
         StartCoroutine(FadeDissolve(0f, 1f));
         if (blockingCollider != null) blockingCollider.enabled = false;
     }
@@ -54,6 +56,8 @@ public class BossGateController : MonoBehaviour
     {
         isPlayerInside = true;
         isOpened = false;
+        playerInRange = false;
+        if (interactUI != null) interactUI.SetActive(false);
         StartCoroutine(FadeDissolve(1f, 0f));
         if (blockingCollider != null) blockingCollider.enabled = true;
     }
@@ -69,5 +73,23 @@ public class BossGateController : MonoBehaviour
             yield return null;
         }
         gateMaterial.SetFloat(dissolveParam, end);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player") && !isOpened && !isPlayerInside)
+        {
+            playerInRange = true;
+            if (interactUI != null) interactUI.SetActive(true);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerInRange = false;
+            if (interactUI != null) interactUI.SetActive(false);
+        }
     }
 }

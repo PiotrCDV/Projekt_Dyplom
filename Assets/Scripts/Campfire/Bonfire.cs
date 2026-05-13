@@ -6,6 +6,10 @@ public class Bonfire : MonoBehaviour
     public ParticleSystem fireParticles;
     public Light glowLight;
 
+    [Header("UI Interakcji")]
+    [Tooltip("Przeci¹gnij tutaj obiekt tekstowy z Canvasa (np. napis 'Naciœnij E')")]
+    public GameObject interactUI;
+
     [Header("Ustawienia")]
     public bool isLit = false;
     public KeyCode interactKey = KeyCode.E;
@@ -14,6 +18,9 @@ public class Bonfire : MonoBehaviour
 
     void Start()
     {
+        // Upewniamy siê, ¿e UI jest wy³¹czone na starcie
+        if (interactUI != null) interactUI.SetActive(false);
+
         if (!isLit)
         {
             if (fireParticles != null) fireParticles.Stop();
@@ -28,41 +35,36 @@ public class Bonfire : MonoBehaviour
 
     void Update()
     {
-        if (playerInRange && Input.GetKeyDown(interactKey))
+        // Interakcja dzia³a TYLKO jeœli gracz jest w zasiêgu i ognisko jest zgaszone
+        if (playerInRange && !isLit && Input.GetKeyDown(interactKey))
         {
-            if (!isLit)
-            {
-                LightBonfire();
-            }
-            else
-            {
-                RestAtBonfire();
-            }
+            LightBonfire();
         }
     }
 
     private void LightBonfire()
     {
         isLit = true;
+
+        // Odpalamy efekty wizualne!
         if (fireParticles != null) fireParticles.Play();
         if (glowLight != null) glowLight.enabled = true;
 
-        Debug.Log("OGNISKO ROZPALONE! (Bonfire Lit)");
+        // Wy³¹czamy UI interakcji, bo nie ma ju¿ tu nic do roboty
+        if (interactUI != null) interactUI.SetActive(false);
+
+        Debug.Log("OGNISKO ROZPALONE!");
     }
 
-    private void RestAtBonfire()
-    {
-        Debug.Log("Odpoczywasz przy ognisku...");
-        // TODO: Tutaj w przysz³oœci dodasz odnawianie zdrowia, reset przeciwników i menu levelowania
-    }
+    // --- LOGIKA STREFY INTERAKCJI ---
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        // Reagujemy tylko, gdy wejdzie gracz, a ognisko jest wci¹¿ do rozpalenia
+        if (other.CompareTag("Player") && !isLit)
         {
             playerInRange = true;
-            Debug.Log("Naciœnij E, aby wejœæ w interakcjê z ogniskiem");
-            // TODO: Pokazaæ UI na ekranie
+            if (interactUI != null) interactUI.SetActive(true);
         }
     }
 
@@ -71,7 +73,8 @@ public class Bonfire : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = false;
-            // TODO: Ukryæ UI
+            // Zawsze chowamy UI, gdy gracz odejdzie
+            if (interactUI != null) interactUI.SetActive(false);
         }
     }
 }
