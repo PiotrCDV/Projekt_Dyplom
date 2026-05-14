@@ -18,7 +18,6 @@ public class Bonfire : MonoBehaviour
 
     void Start()
     {
-        // Upewniamy siê, ¿e UI jest wy³¹czone na starcie
         if (interactUI != null) interactUI.SetActive(false);
 
         if (!isLit)
@@ -35,7 +34,6 @@ public class Bonfire : MonoBehaviour
 
     void Update()
     {
-        // Interakcja dzia³a TYLKO jeœli gracz jest w zasiêgu i ognisko jest zgaszone
         if (playerInRange && !isLit && Input.GetKeyDown(interactKey))
         {
             LightBonfire();
@@ -46,21 +44,16 @@ public class Bonfire : MonoBehaviour
     {
         isLit = true;
 
-        // Odpalamy efekty wizualne!
         if (fireParticles != null) fireParticles.Play();
         if (glowLight != null) glowLight.enabled = true;
 
-        // Wy³¹czamy UI interakcji, bo nie ma ju¿ tu nic do roboty
         if (interactUI != null) interactUI.SetActive(false);
 
         Debug.Log("OGNISKO ROZPALONE!");
     }
 
-    // --- LOGIKA STREFY INTERAKCJI ---
-
     private void OnTriggerEnter(Collider other)
     {
-        // Reagujemy tylko, gdy wejdzie gracz, a ognisko jest wci¹¿ do rozpalenia
         if (other.CompareTag("Player") && !isLit)
         {
             playerInRange = true;
@@ -73,7 +66,6 @@ public class Bonfire : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = false;
-            // Zawsze chowamy UI, gdy gracz odejdzie
             if (interactUI != null) interactUI.SetActive(false);
         }
     }
