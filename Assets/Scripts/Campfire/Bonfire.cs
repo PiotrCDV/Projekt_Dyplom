@@ -7,34 +7,33 @@ public class Bonfire : MonoBehaviour
     public Light glowLight;
 
     [Header("UI Interakcji")]
-    [Tooltip("Przeciπgnij tutaj obiekt tekstowy z Canvasa (np. napis 'Naciúnij E')")]
     public GameObject interactUI;
 
     [Header("Ustawienia")]
-    public bool isLit = false;
     public KeyCode interactKey = KeyCode.E;
+    public Transform spawnPoint;
 
+    private static bool isGlobalBonfireLit = false;
     private bool playerInRange = false;
 
     void Start()
     {
         if (interactUI != null) interactUI.SetActive(false);
 
-        if (!isLit)
+        if (isGlobalBonfireLit)
         {
-            if (fireParticles != null) fireParticles.Stop();
-            if (glowLight != null) glowLight.enabled = false;
+            ApplyLitState();
         }
         else
         {
-            if (fireParticles != null) fireParticles.Play();
-            if (glowLight != null) glowLight.enabled = true;
+            if (fireParticles != null) fireParticles.Stop();
+            if (glowLight != null) glowLight.enabled = false;
         }
     }
 
     void Update()
     {
-        if (playerInRange && !isLit && Input.GetKeyDown(interactKey))
+        if (playerInRange && !isGlobalBonfireLit && Input.GetKeyDown(interactKey))
         {
             LightBonfire();
         }
@@ -42,22 +41,32 @@ public class Bonfire : MonoBehaviour
 
     private void LightBonfire()
     {
-        isLit = true;
-
-        if (fireParticles != null) fireParticles.Play();
-        if (glowLight != null) glowLight.enabled = true;
+        isGlobalBonfireLit = true;
+        ApplyLitState();
 
         if (interactUI != null) interactUI.SetActive(false);
 
-        Debug.Log("OGNISKO ROZPALONE!");
+        Vector3 pos = spawnPoint != null ? spawnPoint.position : transform.position;
+        Quaternion rot = spawnPoint != null ? spawnPoint.rotation : transform.rotation;
+        
+        PlayerHealth.UpdateCheckpoint(pos, rot);
+        
+        Debug.Log("OGNISKO ZAPALONE NA STA≈ÅE!");
+    }
+
+    private void ApplyLitState()
+    {
+        if (fireParticles != null) fireParticles.Play();
+        if (glowLight != null) glowLight.enabled = true;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && !isLit)
+        if (other.CompareTag("Player"))
         {
             playerInRange = true;
-            if (interactUI != null) interactUI.SetActive(true);
+            if (interactUI != null && !isGlobalBonfireLit) 
+                interactUI.SetActive(true);
         }
     }
 

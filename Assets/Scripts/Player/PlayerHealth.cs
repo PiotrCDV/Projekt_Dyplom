@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using FMODUnity;
 using System.Collections;
-using UnityEngine.SceneManagement; 
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -15,47 +15,67 @@ public class PlayerHealth : MonoBehaviour
     private float currentHP;
     private bool isDead = false;
 
+    [Header("Respawn Settings")]
+    [SerializeField] private Transform startingPoint; 
+    [SerializeField] private float delayBeforeReload = 3.0f; 
+
+    private static Vector3? activeCheckpointPos;
+    private static Quaternion? activeCheckpointRot;
+
     [Header("Visual Effects")]
     [SerializeField] private float trailDelayTime = 1.0f;
     [SerializeField] private float trailDrainSpeed = 0.5f;
-    [SerializeField] private float delayBeforeReload = 5.0f; 
 
     private Coroutine trailCoroutine;
     private Animator animator;
 
     [Header("Audio")]
-    [SerializeField] private EventReference damageSound; // Zamiast AudioClip
+    [SerializeField] private EventReference damageSound;
 
     private void Awake()
     {
         currentHP = maxHP;
-        animator = GetComponent<Animator>(); 
+        animator = GetComponent<Animator>();
+
+        CharacterController cc = GetComponent<CharacterController>();
+        if (cc != null) cc.enabled = false;
+
+        if (activeCheckpointPos.HasValue)
+        {
+            transform.position = activeCheckpointPos.Value;
+            transform.rotation = activeCheckpointRot.Value;
+        }
+        else if (startingPoint != null)
+        {
+            transform.position = startingPoint.position;
+            transform.rotation = startingPoint.rotation;
+        }
+
+        if (cc != null) cc.enabled = true;
+
         UpdateHealthBar();
+    }
+
+    public static void UpdateCheckpoint(Vector3 pos, Quaternion rot)
+    {
+        activeCheckpointPos = pos;
+        activeCheckpointRot = rot;
     }
 
     public void TakeDamage(float damage)
     {
         PlayerDodge dodge = GetComponent<PlayerDodge>();
-
-        if (dodge != null && dodge.IsInvincible)
-        {
-            return; 
-        }
+        if (dodge != null && dodge.IsInvincible) return; 
         if (isDead) return;
 
-        if (trailCoroutine != null)
-        {
-            StopCoroutine(trailCoroutine);
-        }
+        if (trailCoroutine != null) StopCoroutine(trailCoroutine);
 
         float oldHP = currentHP;
         currentHP -= damage;
         currentHP = Mathf.Max(currentHP, 0);
 
         if (AudioManager.Instance != null)
-        {
             AudioManager.Instance.PlaySFX(damageSound, transform.position);
-        }
 
         UpdateHealthBar();
 
@@ -65,19 +85,13 @@ public class PlayerHealth : MonoBehaviour
             trailCoroutine = StartCoroutine(DrainHealthTrail());
         }
 
-        if (currentHP <= 0)
-        {
-            Die();
-        }
+        if (currentHP <= 0) Die();
     }
 
     private void UpdateHealthBar()
     {
         if (healthFillImage != null)
-        {
-            float fillRatio = currentHP / maxHP;
-            healthFillImage.fillAmount = fillRatio;
-        }
+            healthFillImage.fillAmount = currentHP / maxHP;
     }
 
     private IEnumerator DrainHealthTrail()
@@ -99,18 +113,12 @@ public class PlayerHealth : MonoBehaviour
         if (isDead) return;
         isDead = true;
 
-        if (animator != null)
-        {
-            animator.SetTrigger("PlayerDeath");
-        }
+        if (animator != null) animator.SetTrigger("PlayerDeath");
 
         if (GetComponent<PlayerMovement>() != null) GetComponent<PlayerMovement>().enabled = false;
         if (GetComponent<PlayerCombat>() != null) GetComponent<PlayerCombat>().enabled = false;
 
-        if (GameMessageUI.Instance != null)
-        {
-            GameMessageUI.Instance.ShowDeath();
-        }
+        if (GameMessageUI.Instance != null) GameMessageUI.Instance.ShowDeath();
 
         StartCoroutine(ReloadSceneRoutine());
     }
@@ -118,23 +126,15 @@ public class PlayerHealth : MonoBehaviour
     private IEnumerator ReloadSceneRoutine()
     {
         yield return new WaitForSeconds(delayBeforeReload);
-
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void Heal(float amount)
     {
         if (isDead) return;
-
         currentHP += amount;
         currentHP = Mathf.Min(currentHP, maxHP); 
-
         UpdateHealthBar();
-
-    
-        if (takenDamageFill != null)
-        {
-            takenDamageFill.fillAmount = currentHP / maxHP;
-        }
+        if (takenDamageFill != null) takenDamageFill.fillAmount = currentHP / maxHP;
     }
 }

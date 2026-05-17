@@ -267,15 +267,26 @@ public class PlayerCombat : MonoBehaviour
         }
         else
         {
+            bool isExcludedFromDelay = (comboStep == 3 && !currentComboIsHeavy) || (comboStep == 2 && currentComboIsHeavy);
+
+            if (isExcludedFromDelay)
+            {
+                if (playerMovement != null) playerMovement.SetMovementEnabled(true);
+                if (movementDelayCoroutine != null) StopCoroutine(movementDelayCoroutine);
+            }
+            else
+            {
+                if (movementDelayCoroutine != null) StopCoroutine(movementDelayCoroutine);
+                movementDelayCoroutine = StartCoroutine(EnableMovementRoutine());
+            }
+
             comboStep = 0;
             currentComboIsHeavy = false;
-            if (movementDelayCoroutine != null) StopCoroutine(movementDelayCoroutine);
-            movementDelayCoroutine = StartCoroutine(EnableMovementRoutine());
-            
+
             bool shouldReturnDirectlyToIdle = currentAttackWasSprintAttack
-                && (lockOnBehaviour == null || !lockOnBehaviour.IsLocked)
-                && (playerMovement == null || !playerMovement.IsSprinting)
-                && !HasSprintAttackSpeed();
+                                              && (lockOnBehaviour == null || !lockOnBehaviour.IsLocked)
+                                              && (playerMovement == null || !playerMovement.IsSprinting)
+                                              && !HasSprintAttackSpeed();
 
             currentAttackWasSprintAttack = false;
 

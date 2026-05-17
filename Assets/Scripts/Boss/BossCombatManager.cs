@@ -17,6 +17,7 @@ public class BossCombatManager : MonoBehaviour
 
     [Header("Rotation Settings")]
     public float rotationSpeed = 10f;
+    public float attackAngleThreshold = 15f;
 
     [Header("Attack Selection")]
     [SerializeField] private bool useWeightedAttackSelection = true;
@@ -82,12 +83,21 @@ public class BossCombatManager : MonoBehaviour
         }
     }
 
+    private bool IsFacingTarget()
+    {
+        if (currentTarget == null) return false;
+        Vector3 direction = (currentTarget.transform.position - transform.position).normalized;
+        direction.y = 0;
+        float angle = Vector3.Angle(transform.forward, direction);
+        return angle <= attackAngleThreshold;
+    }
+
     public void TryAttack(int behaviorIndex, GameObject target)
     {
         if (target == null) return;
         currentTarget = target;
 
-        if (isAttacking || isMovementLockedByAttack || Time.time < nextAllowedAttackTime) return;
+        if (isAttacking || isMovementLockedByAttack || Time.time < nextAllowedAttackTime || !IsFacingTarget()) return;
 
         float distanceToTarget = Vector3.Distance(transform.position, target.transform.position);
 
@@ -95,9 +105,7 @@ public class BossCombatManager : MonoBehaviour
         for (int i = 0; i < availableAttacks.Count; i++)
         {
             BossAttack atk = availableAttacks[i];
-            
             bool withinRange = distanceToTarget <= atk.attackRange && distanceToTarget >= atk.minAttackRange;
-            
             bool underStreakLimit = (i != lastSelectedAttackIndex || consecutiveCount < maxConsecutiveAttacks);
 
             if (withinRange && underStreakLimit)
@@ -167,7 +175,6 @@ public class BossCombatManager : MonoBehaviour
             animator.SetTrigger(attack.animationTrigger);
         }
     }
-
 
     public void OnDashAttackStart()
     {
