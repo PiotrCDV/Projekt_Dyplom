@@ -263,6 +263,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 271457569651477700, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
+      propertyPath: availableAttacks.Array.data[2].attackName
+      value: Basic Attack
+      objectReference: {fileID: 0}
+    - target: {fileID: 271457569651477700, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
+      propertyPath: availableAttacks.Array.data[2].animationTrigger
+      value: BossLightAttack3
+      objectReference: {fileID: 0}
+    - target: {fileID: 271457569651477700, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
+      propertyPath: availableAttacks.Array.data[0].selectionChancePercent
+      value: 33
+      objectReference: {fileID: 0}
+    - target: {fileID: 271457569651477700, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
+      propertyPath: availableAttacks.Array.data[1].selectionChancePercent
+      value: 33
+      objectReference: {fileID: 0}
+    - target: {fileID: 271457569651477700, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
+      propertyPath: availableAttacks.Array.data[2].selectionChancePercent
+      value: 34
+      objectReference: {fileID: 0}
     - target: {fileID: 988059150404663337, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 545.1192
@@ -324,18 +344,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2005595456}
     - target: {fileID: 6814543300484262438, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
-      propertyPath: maxHP
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 6814543300484262438, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
-      propertyPath: mouseIcon
-      value: 
-      objectReference: {fileID: 21300000, guid: 6928e9ed93821a14ca6d66f39ce27c16, type: 3}
-    - target: {fileID: 6814543300484262438, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
-      propertyPath: gamepadIcon
-      value: 
-      objectReference: {fileID: 21300000, guid: 85777390449f50e448892d962ed8cac4, type: 3}
-    - target: {fileID: 6814543300484262438, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
       propertyPath: healthFillImage
       value: 
       objectReference: {fileID: 1991645613}
@@ -344,40 +352,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 276703336}
     - target: {fileID: 6814543300484262438, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
-      propertyPath: damageSound.Path
-      value: event:/Damaging
-      objectReference: {fileID: 0}
-    - target: {fileID: 6814543300484262438, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
-      propertyPath: buttonPromptImage
-      value: 
-      objectReference: {fileID: 568611864}
-    - target: {fileID: 6814543300484262438, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
-      propertyPath: executionUIParent
-      value: 
-      objectReference: {fileID: 591890612}
-    - target: {fileID: 6814543300484262438, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
       propertyPath: healthBarContainer
       value: 
       objectReference: {fileID: 1764499225}
-    - target: {fileID: 6814543300484262438, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
-      propertyPath: damageSound.Guid.Data1
-      value: 556079396
-      objectReference: {fileID: 0}
-    - target: {fileID: 6814543300484262438, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
-      propertyPath: damageSound.Guid.Data2
-      value: 1336603304
-      objectReference: {fileID: 0}
-    - target: {fileID: 6814543300484262438, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
-      propertyPath: damageSound.Guid.Data3
-      value: -1079974988
-      objectReference: {fileID: 0}
-    - target: {fileID: 6814543300484262438, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
-      propertyPath: damageSound.Guid.Data4
-      value: 210337655
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 6748769630295407221, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
@@ -1060,26 +1039,10 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e47671ab28ab7c2469827add09e64927, type: 3}
---- !u!114 &568611864 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1089736785426641763, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
-  m_PrefabInstance: {fileID: 172881906}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!320 &571997594 stripped
 PlayableDirector:
   m_CorrespondingSourceObject: {fileID: 8310342084686888520, guid: e46b6b477ff0ffe41b59df4671676270, type: 3}
   m_PrefabInstance: {fileID: 1385306379}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &591890612 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6492354245376932737, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
-  m_PrefabInstance: {fileID: 172881906}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &637680086 stripped
 GameObject:

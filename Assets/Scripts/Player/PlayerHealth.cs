@@ -118,6 +118,12 @@ public class PlayerHealth : MonoBehaviour
         if (GetComponent<PlayerMovement>() != null) GetComponent<PlayerMovement>().enabled = false;
         if (GetComponent<PlayerCombat>() != null) GetComponent<PlayerCombat>().enabled = false;
 
+        PlayerDodge dodge = GetComponent<PlayerDodge>();
+        if (dodge != null) 
+        {
+            dodge.enabled = false; 
+        }
+        
         if (GameMessageUI.Instance != null) GameMessageUI.Instance.ShowDeath();
 
         StartCoroutine(ReloadSceneRoutine());
