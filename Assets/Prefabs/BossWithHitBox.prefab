@@ -2330,7 +2330,7 @@ MonoBehaviour:
     animationTrigger: BossLightAttack
     attackRange: 3
     minAttackRange: 0
-    selectionChancePercent: 50
+    selectionChancePercent: 33
     damage: 20
     hitbox: {fileID: 5497579241748811511}
     secondHitbox: {fileID: 7512152855405496655}
@@ -2341,18 +2341,18 @@ MonoBehaviour:
     animationTrigger: SpecialAttack
     attackRange: 20
     minAttackRange: 10
-    selectionChancePercent: 50
+    selectionChancePercent: 33
     damage: 35
     hitbox: {fileID: 1188869759112469363}
     secondHitbox: {fileID: 0}
     isDashAttack: 1
     dashDistance: 8
     dashDuration: 1
-  - attackName: Light Attack 3
+  - attackName: Basic Attack
     animationTrigger: BossLightAttack3
     attackRange: 3
     minAttackRange: 0
-    selectionChancePercent: 50
+    selectionChancePercent: 34
     damage: 35
     hitbox: {fileID: 5497579241748811511}
     secondHitbox: {fileID: 0}
