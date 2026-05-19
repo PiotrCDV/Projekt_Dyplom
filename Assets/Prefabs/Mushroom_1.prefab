@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &8574518135164850281
+--- !u!1 &8382473006538584793
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,25 +8,25 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 567793224468157049}
-  - component: {fileID: 7657396647628290711}
-  - component: {fileID: 2373016444435297308}
-  - component: {fileID: 7421370732700499222}
-  - component: {fileID: 2883296497304968939}
+  - component: {fileID: 1820126602128187283}
+  - component: {fileID: 2208024228647620065}
+  - component: {fileID: 5884933117738343580}
+  - component: {fileID: 1473368910228333085}
+  - component: {fileID: 4555768550039691548}
   m_Layer: 0
-  m_Name: Mushroom
+  m_Name: Mushroom_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &567793224468157049
+--- !u!4 &1820126602128187283
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8574518135164850281}
+  m_GameObject: {fileID: 8382473006538584793}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -35,21 +35,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &7657396647628290711
+--- !u!33 &2208024228647620065
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8574518135164850281}
-  m_Mesh: {fileID: -1550514412580984892, guid: cfc1cf7e334cd6cf5aad9b25f14f197a, type: 3}
---- !u!23 &2373016444435297308
+  m_GameObject: {fileID: 8382473006538584793}
+  m_Mesh: {fileID: 7095223698070364054, guid: 542fc28a847861e4ab01f1b6afd19357, type: 3}
+--- !u!23 &5884933117738343580
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8574518135164850281}
+  m_GameObject: {fileID: 8382473006538584793}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -91,13 +91,29 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &7421370732700499222
+--- !u!114 &1473368910228333085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8382473006538584793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e7574c7479bb624bb7d61345ea39f32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GlowingMushroom
+  mushroomRenderer: {fileID: 5884933117738343580}
+  targetIntensity: 5
+  fadeSpeed: 2
+  shaderParameter: _GlowIntensity
+--- !u!135 &4555768550039691548
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8574518135164850281}
+  m_GameObject: {fileID: 8382473006538584793}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -110,21 +126,5 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 3
-  m_Center: {x: 0.015944824, y: 0.15303199, z: -0.020334825}
---- !u!114 &2883296497304968939
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8574518135164850281}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e7574c7479bb624bb7d61345ea39f32, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GlowingMushroom
-  mushroomRenderer: {fileID: 2373016444435297308}
-  targetIntensity: 5
-  fadeSpeed: 2
-  shaderParameter: _GlowIntensity
+  m_Radius: 2.5
+  m_Center: {x: 0, y: 0, z: -0.000000007450581}
