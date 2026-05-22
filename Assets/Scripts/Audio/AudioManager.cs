@@ -18,6 +18,15 @@ public class AudioManager : MonoBehaviour
     // Muzyka musi byæ zapisana jako "Instancja", ¿ebyœmy mogli j¹ zapêtlaæ i zatrzymywaæ
     private EventInstance musicInstance;
 
+    private void Start()
+    {
+        // Wczytujemy zapisan¹ g³oœnoœæ przy starcie gry (domyœlnie 0.8 czyli 80%)
+        float savedMusicVol = PlayerPrefs.GetFloat("MusicVolume", 0.8f);
+        float savedSFXVol = PlayerPrefs.GetFloat("SFXVolume", 0.8f);
+
+        SetMusicVolume(savedMusicVol);
+        SetSFXVolume(savedSFXVol);
+    }
     private void Awake()
     {
         if (Instance == null)
@@ -67,10 +76,15 @@ public class AudioManager : MonoBehaviour
     public void SetMusicVolume(float sliderValue)
     {
         musicBus.setVolume(sliderValue);
+        PlayerPrefs.SetFloat("MusicVolume", sliderValue);
     }
 
     public void SetSFXVolume(float sliderValue)
     {
         sfxBus.setVolume(sliderValue);
+        PlayerPrefs.SetFloat("SFXVolume", sliderValue);
     }
+
+    public float GetMusicVolume() => PlayerPrefs.GetFloat("MusicVolume", 0.8f);
+    public float GetSFXVolume() => PlayerPrefs.GetFloat("SFXVolume", 0.8f);
 }
