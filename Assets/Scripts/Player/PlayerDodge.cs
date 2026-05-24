@@ -1,10 +1,3 @@
-        inputActions.Player.Dodge.performed += ctx =>
-        {
-            if (ctx.control.device is Keyboard)
-            {
-                PrepareDodge();
-            }
-        };
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
