@@ -1200,6 +1200,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 271457569651477700, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
+      propertyPath: availableAttacks.Array.data[0].damage
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 271457569651477700, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
+      propertyPath: availableAttacks.Array.data[1].damage
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 271457569651477700, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
+      propertyPath: availableAttacks.Array.data[2].damage
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 271457569651477700, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
+      propertyPath: availableAttacks.Array.data[1].attackRange
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 988059150404663337, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 555.32
@@ -1264,6 +1280,10 @@ PrefabInstance:
       propertyPath: 'managedReferences[4651023333483348081].m_Value.Array.data[2]'
       value: 
       objectReference: {fileID: 2005595456}
+    - target: {fileID: 6814543300484262438, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
+      propertyPath: maxHP
+      value: 350
+      objectReference: {fileID: 0}
     - target: {fileID: 6814543300484262438, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
       propertyPath: healthFillImage
       value: 
@@ -9248,6 +9268,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 558345095296806604, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: sprintStaminaCost
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 993452768496131233, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: regenRate
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 993452768496131233, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: maxStamina
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 993452768496131233, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: regenDelay
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 993452768496131233, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
       propertyPath: staminaFillImage
       value: 
@@ -9287,6 +9323,10 @@ PrefabInstance:
     - target: {fileID: 4764843333923533259, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
       propertyPath: m_Name
       value: ProtagonistHumanpoi
+      objectReference: {fileID: 0}
+    - target: {fileID: 6100778997673328114, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: dodgeStaminaCost
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 7816838684190353340, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9336,6 +9376,34 @@ PrefabInstance:
       propertyPath: targetGroup
       value: 
       objectReference: {fileID: 128244574}
+    - target: {fileID: 9025023005841588370, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: heavyAttackDamage
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 9025023005841588370, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: lightAttackDamage
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 9025023005841588370, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: sprintAttackDamage
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 9025023005841588370, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: heavyAttackStaminaCost
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 9025023005841588370, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: lightAttackStaminaCost
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 9207611066143767671, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: healAmount
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 9207611066143767671, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: maxPotions
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 9207611066143767671, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
       propertyPath: potionCountText
       value: 

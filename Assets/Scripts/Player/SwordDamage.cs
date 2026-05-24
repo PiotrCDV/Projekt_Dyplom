@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class SwordDamage : MonoBehaviour
 {
     [Header("Weapon Stats")]
-    public float damageAmount = 20f;
+    [SerializeField] private float damageAmount = 20f;
     public Collider swordCollider;
 
     private List<IDamageable> hitTargets = new List<IDamageable>();
@@ -35,6 +35,11 @@ public class SwordDamage : MonoBehaviour
 
  
         }
+    }
+
+    public void SetDamage(float amount)
+    {
+        damageAmount = amount;
     }
 
     public void EnableDamage()

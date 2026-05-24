@@ -12,6 +12,11 @@ public class PlayerCombat : MonoBehaviour
     private PlayerStamina stamina;
     private PlayerPotion playerPotion;
 
+    [Header("Attack Damage")]
+    public float lightAttackDamage = 12f;
+    public float heavyAttackDamage = 36f;
+    public float sprintAttackDamage = 20f;
+
     public float lightAttackStaminaCost = 15f;
     public float heavyAttackStaminaCost = 25f;
     public float sprintAttackStaminaCost = 20f;
@@ -143,6 +148,9 @@ public class PlayerCombat : MonoBehaviour
 
         float currentCost = shouldDoSprintAttack ? sprintAttackStaminaCost : (nextAttackIsHeavy ? heavyAttackStaminaCost : lightAttackStaminaCost);
         if (stamina != null) stamina.UseStamina(currentCost);
+
+        float currentDamage = shouldDoSprintAttack ? sprintAttackDamage : (nextAttackIsHeavy ? heavyAttackDamage : lightAttackDamage);
+        ApplyWeaponDamage(currentDamage);
 
         if (shouldDoSprintAttack)
         {
@@ -391,6 +399,14 @@ public class PlayerCombat : MonoBehaviour
     public void EnableAttackQueue() => allowInputQueuing = true;
     public void EnableWeaponHitbox() { if (weaponScript != null) weaponScript.EnableDamage(); }
     public void DisableWeaponHitbox() { if (weaponScript != null) weaponScript.DisableDamage(); }
+
+    private void ApplyWeaponDamage(float amount)
+    {
+        if (weaponScript != null)
+        {
+            weaponScript.SetDamage(amount);
+        }
+    }
 
     private void Update()
     {
