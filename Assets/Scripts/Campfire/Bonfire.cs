@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class Bonfire : MonoBehaviour
 {
@@ -8,6 +10,12 @@ public class Bonfire : MonoBehaviour
 
     [Header("UI Interakcji")]
     public GameObject interactUI;
+    [Tooltip("Ikona dla myszy/klawiatury (LPM)")]
+    public Sprite mouseIcon;
+    [Tooltip("Ikona dla pada")]
+    public Sprite gamepadIcon;
+    [Tooltip("Próg wychylenia analoga, powyżej którego uznajemy użycie pada")]
+    public float analogThreshold = 0.2f;
 
     [Header("Ustawienia")]
     public KeyCode interactKey = KeyCode.E;
@@ -15,10 +23,13 @@ public class Bonfire : MonoBehaviour
 
     private static bool isGlobalBonfireLit = false;
     private bool playerInRange = false;
+    private bool isUsingGamepad = false;
 
     void Start()
     {
         if (interactUI != null) interactUI.SetActive(false);
+
+        UpdateIconImmediate();
 
         if (isGlobalBonfireLit)
         {
@@ -29,6 +40,57 @@ public class Bonfire : MonoBehaviour
             if (fireParticles != null) fireParticles.Stop();
             if (glowLight != null) glowLight.enabled = false;
         }
+    }
+
+    private void OnEnable()
+    {
+        InputSystem.onActionChange += OnActionChange;
+    }
+
+    private void OnDisable()
+    {
+        InputSystem.onActionChange -= OnActionChange;
+    }
+
+    private void OnActionChange(object obj, InputActionChange change)
+    {
+        if (change != InputActionChange.ActionPerformed) return;
+
+        var inputAction = (InputAction)obj;
+        var lastDevice = inputAction.activeControl.device;
+
+        if (lastDevice is Gamepad)
+        {
+            if (inputAction.activeValueType == typeof(Vector2))
+            {
+                Vector2 stickValue = inputAction.ReadValue<Vector2>();
+                if (stickValue.magnitude < analogThreshold) return;
+            }
+
+            if (!isUsingGamepad)
+            {
+                isUsingGamepad = true;
+                UpdateIconImmediate();
+            }
+        }
+        else if (lastDevice is Keyboard || lastDevice is Mouse)
+        {
+            if (isUsingGamepad)
+            {
+                isUsingGamepad = false;
+                UpdateIconImmediate();
+            }
+        }
+    }
+
+    private void UpdateIconImmediate()
+    {
+        if (interactUI == null) return;
+
+        var image = interactUI.GetComponentInChildren<Image>();
+        if (image == null) return;
+
+        image.sprite = isUsingGamepad ? gamepadIcon : mouseIcon;
     }
 
     void Update()
@@ -65,8 +127,11 @@ public class Bonfire : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = true;
-            if (interactUI != null && !isGlobalBonfireLit) 
+            if (interactUI != null && !isGlobalBonfireLit)
+            {
+                UpdateIconImmediate();
                 interactUI.SetActive(true);
+            }
         }
     }
 
