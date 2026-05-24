@@ -9618,6 +9618,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BossGate
       objectReference: {fileID: 0}
+    - target: {fileID: 4810996382960864086, guid: 0aa75b41c49665d41808fe608ee06a22, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.308
+      objectReference: {fileID: 0}
     - target: {fileID: 7560670058166990907, guid: 0aa75b41c49665d41808fe608ee06a22, type: 3}
       propertyPath: m_LocalScale.x
       value: 3.3790607
