@@ -6,7 +6,7 @@ public class FogCloseTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && controller != null)
         {
             controller.CloseGate();
             gameObject.SetActive(false);

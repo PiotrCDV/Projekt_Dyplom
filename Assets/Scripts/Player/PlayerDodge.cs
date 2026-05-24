@@ -84,7 +84,8 @@ public class PlayerDodge : MonoBehaviour
     public void StartDodge()
     {
         if (!IsDodging) return;
-        
+        EnableInvincibility();
+
         StartCoroutine(DodgeSlideRoutine());
     }
 
@@ -93,9 +94,8 @@ public class PlayerDodge : MonoBehaviour
         if (playerMovement != null) playerMovement.SetMovementEnabled(true);
         IsDodging = false;
         
-        
-        IsInvincible = false; 
-        
+        DisableInvincibility();
+
         StopAllCoroutines();
     }
 
@@ -105,6 +105,14 @@ public class PlayerDodge : MonoBehaviour
         float timer = 0f;
         while (timer < dodgeSlideDuration)
         {
+            if (savedDodgeDirection != Vector3.zero)
+            {
+                Vector3 rotDir = savedDodgeDirection;
+                rotDir.y = 0f;
+                if (rotDir.sqrMagnitude > 0.0001f)
+                    transform.rotation = Quaternion.LookRotation(rotDir);
+            }
+
             controller.Move(savedDodgeDirection * dodgeSpeed * Time.deltaTime);
             timer += Time.deltaTime;
             yield return null;

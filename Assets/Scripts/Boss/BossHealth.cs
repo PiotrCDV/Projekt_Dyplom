@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using FMODUnity;
 using UnityEngine.UI;
-using UnityEngine.InputSystem; // WA¯NE: Dodano Input System
+using UnityEngine.InputSystem; // WAï¿½NE: Dodano Input System
 using System.Collections;
 
 public class BossHealth : MonoBehaviour, IDamageable
@@ -24,8 +24,8 @@ public class BossHealth : MonoBehaviour, IDamageable
     [Header("Visual Effects & Timing")]
     [SerializeField] private float trailDelayTime = 1.0f;
     [SerializeField] private float trailDrainSpeed = 0.5f;
-    [SerializeField] private float executionWindowTime = 5.0f; // Ile sekund gracz ma na wciœniêcie ataku zeby aktywowaæ egzekucjê
-    [SerializeField] private float timeBeforeDisable = 5.0f;   // Ile czasu po ostatecznej œmierci boss znika
+    [SerializeField] private float executionWindowTime = 5.0f; // Ile sekund gracz ma na wciï¿½niï¿½cie ataku zeby aktywowaï¿½ egzekucjï¿½
+    [SerializeField] private float timeBeforeDisable = 5.0f;   // Ile czasu po ostatecznej ï¿½mierci boss znika
 
     private Coroutine trailCoroutine;
     private NavMeshAgent navMeshAgent;
@@ -37,7 +37,7 @@ public class BossHealth : MonoBehaviour, IDamageable
 
     [Header("Execution UI")]
     [SerializeField] private GameObject executionUIParent; // Rodzic ikon (ExecutionUI)
-    [SerializeField] private Image buttonPromptImage;      // Obrazek, który siê zmienia
+    [SerializeField] private Image buttonPromptImage;      // Obrazek, ktï¿½ry siï¿½ zmienia
     [SerializeField] private Sprite mouseIcon;             // PNG dla LPM
     [SerializeField] private Sprite gamepadIcon;           // PNG dla przycisku pada
 
@@ -58,8 +58,28 @@ public class BossHealth : MonoBehaviour, IDamageable
         navMeshAgent = GetComponent<NavMeshAgent>();
         mainCamera = Camera.main;
 
-        // Upewniamy siê, ¿e UI egzekucji jest wy³¹czone na starcie
+        if (healthBarContainer != null)
+        {
+            healthBarContainer.SetActive(false);
+        }
+
         if (executionUIParent != null) executionUIParent.SetActive(false);
+    }
+
+    public void ShowHealthBar()
+    {
+        if (healthBarContainer != null)
+        {
+            healthBarContainer.SetActive(true);
+        }
+    }
+
+    public void HideHealthBar()
+    {
+        if (healthBarContainer != null)
+        {
+            healthBarContainer.SetActive(false);
+        }
     }
 
     private void Update()
@@ -249,9 +269,6 @@ public class BossHealth : MonoBehaviour, IDamageable
 
         gameObject.SetActive(false);
 
-        if (healthBarContainer != null)
-        {
-            healthBarContainer.SetActive(false);
-        }
+        HideHealthBar();
     }
 }

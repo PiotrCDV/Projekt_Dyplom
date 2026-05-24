@@ -8,7 +8,7 @@ public class BossGateController : MonoBehaviour
     public Collider blockingCollider;
 
     [Header("UI Interakcji (World Space)")]
-    [Tooltip("Przeci¹gnij tutaj obiekt Canvas unocz¹cy siê nad bram¹")]
+    [Tooltip("Przeciï¿½gnij tutaj obiekt Canvas unoczï¿½cy siï¿½ nad bramï¿½")]
     public GameObject interactUI;
 
     [Header("Ustawienia")]
@@ -26,7 +26,8 @@ public class BossGateController : MonoBehaviour
         if (gateRenderer != null)
             gateMaterial = gateRenderer.material;
 
-        gateMaterial.SetFloat(dissolveParam, 0f);
+        if (gateMaterial != null)
+            gateMaterial.SetFloat(dissolveParam, 0f);
 
         if (interactUI != null) interactUI.SetActive(false);
 
@@ -54,16 +55,27 @@ public class BossGateController : MonoBehaviour
 
     public void CloseGate()
     {
+        if (!isOpened || isPlayerInside)
+            return;
+
         isPlayerInside = true;
         isOpened = false;
         playerInRange = false;
         if (interactUI != null) interactUI.SetActive(false);
         StartCoroutine(FadeDissolve(1f, 0f));
         if (blockingCollider != null) blockingCollider.enabled = true;
+
+        if (BossHealth.Instance != null)
+        {
+            BossHealth.Instance.ShowHealthBar();
+        }
     }
 
     private IEnumerator FadeDissolve(float start, float end)
     {
+        if (gateMaterial == null)
+            yield break;
+
         float elapsed = 0;
         while (elapsed < fadeDuration)
         {

@@ -9596,6 +9596,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7560670058166990907, guid: 0aa75b41c49665d41808fe608ee06a22, type: 3}
   m_PrefabInstance: {fileID: 1256923209}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1256923211 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 805614465443006728, guid: 0aa75b41c49665d41808fe608ee06a22, type: 3}
+  m_PrefabInstance: {fileID: 1256923209}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 303bcdcbb2cbe60429ac393070be31fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BossGateController
 --- !u!1001 &1263193629
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12172,7 +12183,7 @@ Transform:
   m_GameObject: {fileID: 1594281965}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 504.797, y: 20.751, z: 349.576}
+  m_LocalPosition: {x: 561.12, y: 2.89, z: 230.21}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14090,7 +14101,7 @@ Transform:
   m_GameObject: {fileID: 1797879731}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.44, y: 0, z: 10.81}
+  m_LocalPosition: {x: -1.44, y: 0, z: 3.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14529,7 +14540,7 @@ Transform:
   m_GameObject: {fileID: 1855578157}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.18, y: 0, z: -1.91}
+  m_LocalPosition: {x: 11.56, y: 0, z: 0.39}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14940,6 +14951,73 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 573.51447, y: -0.14124079, z: 259.16373}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1906242629
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1906242632}
+  - component: {fileID: 1906242631}
+  - component: {fileID: 1906242630}
+  m_Layer: 0
+  m_Name: FogCloseTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &1906242630
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1906242629}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 6.47, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1906242631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1906242629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cab83ca281e356348b95761cdc4dbfe9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FogCloseTrigger
+  controller: {fileID: 1256923211}
+--- !u!4 &1906242632
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1906242629}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 555.717, y: 2.83829, z: 219.292}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -15512,7 +15590,7 @@ Transform:
   m_GameObject: {fileID: 2005595456}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.06, y: 0, z: -6.77}
+  m_LocalPosition: {x: 14.75, y: 0, z: 7.02}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -16150,3 +16228,4 @@ SceneRoots:
   - {fileID: 29942332}
   - {fileID: 146909805}
   - {fileID: 832850227}
+  - {fileID: 1906242632}
