@@ -1,3 +1,5 @@
+        inputActions.Player.Attack.performed += ctx => HandleAttackInput(false);
+        inputActions.Player.HeavyAttack.performed += ctx => HandleAttackInput(true);
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;

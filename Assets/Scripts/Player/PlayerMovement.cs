@@ -1,3 +1,37 @@
+            inputActions.Player.LockOn.performed += ctx => PerformLockOnAction();
+            inputActions.Player.SwitchCamera.performed += ctx => ToggleCameraMode();
+            lockOnBehaviour.OnUnlock += () =>
+            {
+                keepLockOnRotation = true;
+                keepLockOnTimer = keepLockOnDuration;
+            };
+        inputActions.Player.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
+        inputActions.Player.Move.canceled += ctx => moveInput = Vector2.zero;
+
+        inputActions.Player.Sprint.started += ctx =>
+        {
+            if (playerPotion != null && playerPotion.IsDrinking) return;
+
+            if (ctx.control.device is Keyboard)
+            {
+                if (moveInput.magnitude > 0.1f && stamina != null && stamina.CanPerformAction()) isSprinting = true;
+            }
+            buttonDownTime = Time.time;
+            isHoldingButton = true;
+        };
+
+        inputActions.Player.Sprint.canceled += ctx =>
+        {
+            if (ctx.control.device is Gamepad)
+            {
+                if (isHoldingButton && (Time.time - buttonDownTime) < holdThreshold)
+                {
+                    if (dodgeScript != null) dodgeScript.PrepareDodge();
+                }
+            }
+            isHoldingButton = false;
+            isSprinting = false;
+        };
 using Unity.Cinemachine;
 using Commands;
 using UnityEngine;
