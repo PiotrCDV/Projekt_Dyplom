@@ -7657,12 +7657,39 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8473276208583515083, guid: 9d3607c1d3c303b44911daf2cd8ea934, type: 3}
+      propertyPath: m_Color.b
+      value: 0.62352943
+      objectReference: {fileID: 0}
+    - target: {fileID: 8473276208583515083, guid: 9d3607c1d3c303b44911daf2cd8ea934, type: 3}
+      propertyPath: m_Color.g
+      value: 0.61960787
+      objectReference: {fileID: 0}
+    - target: {fileID: 8473276208583515083, guid: 9d3607c1d3c303b44911daf2cd8ea934, type: 3}
+      propertyPath: m_Color.r
+      value: 0.90588236
+      objectReference: {fileID: 0}
+    - target: {fileID: 8754568064445752292, guid: 9d3607c1d3c303b44911daf2cd8ea934, type: 3}
+      propertyPath: m_Color.b
+      value: 0.62352943
+      objectReference: {fileID: 0}
+    - target: {fileID: 8754568064445752292, guid: 9d3607c1d3c303b44911daf2cd8ea934, type: 3}
+      propertyPath: m_Color.g
+      value: 0.61960787
+      objectReference: {fileID: 0}
+    - target: {fileID: 8754568064445752292, guid: 9d3607c1d3c303b44911daf2cd8ea934, type: 3}
+      propertyPath: m_Color.r
+      value: 0.90588236
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 907278134584967941, guid: 9d3607c1d3c303b44911daf2cd8ea934, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1720503668}
+    - targetCorrespondingSourceObject: {fileID: 3561353740541918882, guid: 9d3607c1d3c303b44911daf2cd8ea934, type: 3}
+      insertIndex: 0
+      addedObject: {fileID: 1763353053}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1368664189447756019, guid: 9d3607c1d3c303b44911daf2cd8ea934, type: 3}
       insertIndex: -1
@@ -8161,6 +8188,11 @@ CanvasRenderer:
 --- !u!1 &1006492200 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3819208367679162645, guid: 9d3607c1d3c303b44911daf2cd8ea934, type: 3}
+  m_PrefabInstance: {fileID: 944001245}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &1006492201 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3561353740541918882, guid: 9d3607c1d3c303b44911daf2cd8ea934, type: 3}
   m_PrefabInstance: {fileID: 944001245}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1017801238
@@ -9366,7 +9398,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 558345095296806604, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
       propertyPath: sprintStaminaCost
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 993452768496131233, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
       propertyPath: regenRate
@@ -9381,9 +9413,17 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 993452768496131233, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: trailDrainSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 993452768496131233, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
       propertyPath: staminaFillImage
       value: 
       objectReference: {fileID: 1306370041}
+    - target: {fileID: 993452768496131233, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: staminaTrailImage
+      value: 
+      objectReference: {fileID: 1763353051}
     - target: {fileID: 1697090453931178552, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.97285914
@@ -9491,6 +9531,10 @@ PrefabInstance:
     - target: {fileID: 9025023005841588370, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
       propertyPath: lightAttackStaminaCost
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 9025023005841588370, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: sprintAttackStaminaCost
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 9207611066143767671, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
       propertyPath: healAmount
@@ -9716,7 +9760,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4810996382960864086, guid: 0aa75b41c49665d41808fe608ee06a22, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.308
+      value: 0.111
       objectReference: {fileID: 0}
     - target: {fileID: 7560670058166990907, guid: 0aa75b41c49665d41808fe608ee06a22, type: 3}
       propertyPath: m_LocalScale.x
@@ -14132,6 +14176,81 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4cc3b7b5e54c92743a94831df3bd3641, type: 3}
+--- !u!1 &1763353050
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1763353053}
+  - component: {fileID: 1763353052}
+  - component: {fileID: 1763353051}
+  m_Layer: 5
+  m_Name: StaminaFillTaken
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1763353051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1763353050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.7607843, g: 1, b: 0.4117647, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 2080460012, guid: 10282d9be59799f44923ed675fe1877e, type: 3}
+  m_Type: 3
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 0
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1763353052
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1763353050}
+  m_CullTransparentMesh: 1
+--- !u!224 &1763353053
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1763353050}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.62873, y: 0.62873, z: 0.62873}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1006492201}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 8, y: -2.554}
+  m_SizeDelta: {x: 196.5897, y: -3.6789}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1764499225 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2144618807238506759, guid: 9d3607c1d3c303b44911daf2cd8ea934, type: 3}
