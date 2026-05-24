@@ -25,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
     private PlayerDodge dodgeScript;
     private PlayerStamina stamina;
     private PlayerPotion playerPotion;
+    private PlayerCombat playerCombat;
 
     [Header("Gravity & Grounding")]
     public Transform groundCheck;
@@ -59,6 +60,7 @@ public class PlayerMovement : MonoBehaviour
         dodgeScript = GetComponent<PlayerDodge>();
         stamina = GetComponent<PlayerStamina>();
         playerPotion = GetComponent<PlayerPotion>();
+        playerCombat = GetComponent<PlayerCombat>();
         orbitalFollow = vcamFreeLook.GetComponent<CinemachineOrbitalFollow>();
         lockOnBehaviour = GetComponent<LockOnBehaviour>();
 
@@ -187,6 +189,11 @@ public class PlayerMovement : MonoBehaviour
     private void PerformLockOnAction()
     {
         bool wasLocked = lockOnBehaviour.IsLocked;
+        if (!wasLocked && playerCombat != null && playerCombat.IsPerformingSprintAttack)
+        {
+            return;
+        }
+
         lockOnBehaviour.ToggleLockOn();
         if (wasLocked && !lockOnBehaviour.IsLocked)
         {

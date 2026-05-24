@@ -34,6 +34,7 @@ public class PlayerCombat : MonoBehaviour
     private Coroutine attackFailsafe;
     private InputSystem_Actions inputActions;
     public bool IsAttacking => isAttacking;
+    public bool IsPerformingSprintAttack => isAttacking && currentAttackWasSprintAttack;
     
     [Header("Movement Settings")]
     [SerializeField] private float movementReEnableDelay = 0.5f; 
