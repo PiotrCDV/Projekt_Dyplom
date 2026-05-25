@@ -174,8 +174,11 @@ MonoBehaviour:
   fireParticles: {fileID: 6239869072973760150}
   glowLight: {fileID: 8357904329133324549}
   interactUI: {fileID: 5281755048793226329}
-  isLit: 0
+  mouseIcon: {fileID: 0}
+  gamepadIcon: {fileID: 21300000, guid: 68b8985051054b74693d6b117760c5f7, type: 3}
+  analogThreshold: 0.2
   interactKey: 102
+  spawnPoint: {fileID: 0}
 --- !u!1 &5006778351696201910
 GameObject:
   m_ObjectHideFlags: 0
@@ -483,7 +486,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 85777390449f50e448892d962ed8cac4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 68b8985051054b74693d6b117760c5f7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
