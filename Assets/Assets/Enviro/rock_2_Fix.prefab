@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5899784715700555527}
   - component: {fileID: 3796700384083157626}
   - component: {fileID: 9158649078120874588}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: rock_2_Fix
   m_TagString: Untagged
   m_Icon: {fileID: 0}
