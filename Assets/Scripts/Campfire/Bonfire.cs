@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using FMODUnity;
 
 public class Bonfire : MonoBehaviour
 {
@@ -21,6 +22,9 @@ public class Bonfire : MonoBehaviour
     public KeyCode interactKey = KeyCode.E;
     public Transform spawnPoint;
 
+    [Header("Audio (FMOD)")]
+    public StudioEventEmitter bonfireEmitter;
+
     private static bool isGlobalBonfireLit = false;
     private bool playerInRange = false;
     private bool isUsingGamepad = false;
@@ -39,6 +43,7 @@ public class Bonfire : MonoBehaviour
         {
             if (fireParticles != null) fireParticles.Stop();
             if (glowLight != null) glowLight.enabled = false;
+            if (bonfireEmitter != null) bonfireEmitter.Stop();
         }
     }
 
@@ -120,6 +125,11 @@ public class Bonfire : MonoBehaviour
     {
         if (fireParticles != null) fireParticles.Play();
         if (glowLight != null) glowLight.enabled = true;
+
+        if (bonfireEmitter != null && !bonfireEmitter.IsPlaying())
+        {
+            bonfireEmitter.Play();
+        }
     }
 
     private void OnTriggerEnter(Collider other)

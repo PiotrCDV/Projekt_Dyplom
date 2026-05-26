@@ -45,18 +45,21 @@ MonoBehaviour:
   EditorEvents:
   - {fileID: -1839719526748285547}
   - {fileID: 7281285983017315181}
+  - {fileID: 3721231662220001572}
   EditorParameters: []
   MasterBanks:
   - {fileID: 1492542366039740032}
   StringsBanks:
   - {fileID: 3883775779756134354}
   cacheVersion: 131859
-  cacheTime: 639123990826846021
+  cacheTime: 639153938557147699
   SerializableEventsDict:
   - key: event:/Damaging
     index: 0
   - key: event:/AmbientMenu
     index: 1
+  - key: event:/Campfire
+    index: 2
 --- !u!114 &1492542366039740032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -72,11 +75,38 @@ MonoBehaviour:
   Path: FMOD_Audio/AudioProject/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639123990826835943
+  lastModified: 639153938557137710
   FileSizes:
   - Name: Desktop
-    Value: 3510976
+    Value: 4102304
   Exists: 1
+--- !u!114 &3721231662220001572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Campfire
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Campfire
+  Guid:
+    Data1: 1303289242
+    Data2: 1272055719
+    Data3: 1388791210
+    Data4: -1324014454
+  Banks:
+  - {fileID: 1492542366039740032}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 44664
 --- !u!114 &3883775779756134354
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -92,10 +122,10 @@ MonoBehaviour:
   Path: FMOD_Audio/AudioProject/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639123990826846021
+  lastModified: 639153938557147699
   FileSizes:
   - Name: Desktop
-    Value: 894
+    Value: 932
   Exists: 1
 --- !u!114 &7281285983017315181
 MonoBehaviour:
