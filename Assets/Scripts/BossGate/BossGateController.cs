@@ -9,6 +9,9 @@ public class BossGateController : MonoBehaviour
     public Renderer gateRenderer;
     public Collider blockingCollider;
 
+    [Header("Obiekty powiązane z bramą")]
+    public GameObject linkedObject;
+
     [Header("UI Interakcji (World Space)")]
     [Tooltip("Przeci�gnij tutaj obiekt Canvas unocz�cy si� nad bram�")]
     public GameObject interactUI;
@@ -40,6 +43,8 @@ public class BossGateController : MonoBehaviour
 
         if (interactUI != null) interactUI.SetActive(false);
         UpdateIconImmediate();
+
+        if (linkedObject != null) linkedObject.SetActive(true);
 
         if (blockingCollider != null) blockingCollider.enabled = true;
     }
@@ -110,6 +115,7 @@ public class BossGateController : MonoBehaviour
     {
         isOpened = true;
         if (interactUI != null) interactUI.SetActive(false);
+        if (linkedObject != null) linkedObject.SetActive(false);
         StartCoroutine(FadeDissolve(0f, 1f));
         if (blockingCollider != null) blockingCollider.enabled = false;
     }
@@ -123,6 +129,7 @@ public class BossGateController : MonoBehaviour
         isOpened = false;
         playerInRange = false;
         if (interactUI != null) interactUI.SetActive(false);
+        if (linkedObject != null) linkedObject.SetActive(true);
         StartCoroutine(FadeDissolve(1f, 0f));
         if (blockingCollider != null) blockingCollider.enabled = true;
 
