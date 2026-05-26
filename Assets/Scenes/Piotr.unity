@@ -3361,6 +3361,69 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7186397052036007447, guid: 7c7baabdbc078cb4098d5880fc72c0f3, type: 3}
   m_PrefabInstance: {fileID: 368608956}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &375825453
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 375825454}
+  - component: {fileID: 375825455}
+  m_Layer: 0
+  m_Name: HowlSound1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &375825454
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 375825453}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.8, y: 8.64, z: -63.41}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1210970438}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &375825455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 375825453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -1423229330
+      Data2: 1241575113
+      Data3: -499982464
+      Data4: -1172187213
+    Path: event:/werewolf_scream1
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 35
+  OverrideMaxDistance: 150
 --- !u!4 &379375224 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7279745971587022448, guid: b925890d72583d448a78995a46eb7625, type: 3}
@@ -4509,6 +4572,81 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 12e5fb096927eec229d60e7b6eaaeaa4, type: 3}
   m_PrefabInstance: {fileID: 509239359}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &520002122
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 520002123}
+  - component: {fileID: 520002125}
+  - component: {fileID: 520002124}
+  m_Layer: 0
+  m_Name: HowlTrigger2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &520002123
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 520002122}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0.3795721, z: -0, w: 0.9251622}
+  m_LocalPosition: {x: 10.69, y: -0.38, z: -9.03}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1210970438}
+  m_LocalEulerAnglesHint: {x: 0, y: -44.614, z: 0}
+--- !u!114 &520002124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 520002122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 076413321f7254141852d1d8417c90bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HowlTrigger
+  howlEvent:
+    Guid:
+      Data1: -747322952
+      Data2: 1176038056
+      Data3: -1711041134
+      Data4: -2138486816
+    Path: event:/werewolf_scream2
+  howlSourceLocation: {fileID: 2003361581}
+  playOnlyOnce: 1
+--- !u!65 &520002125
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 520002122}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 33.267075, y: 2.901926, z: 1.6886065}
+  m_Center: {x: -2.3903122, y: 0.31890392, z: 0.3443047}
 --- !u!1001 &540645701
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10833,6 +10971,10 @@ Transform:
   - {fileID: 818415562}
   - {fileID: 1906242632}
   - {fileID: 128244575}
+  - {fileID: 1334689658}
+  - {fileID: 520002123}
+  - {fileID: 375825454}
+  - {fileID: 2003361581}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1214490149
@@ -12176,6 +12318,81 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 12e5fb096927eec229d60e7b6eaaeaa4, type: 3}
   m_PrefabInstance: {fileID: 1329639576}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1334689657
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1334689658}
+  - component: {fileID: 1334689660}
+  - component: {fileID: 1334689659}
+  m_Layer: 0
+  m_Name: HowlTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1334689658
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1334689657}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0.3795721, z: -0, w: 0.9251622}
+  m_LocalPosition: {x: -39.647, y: 11.5, z: 23.608}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1210970438}
+  m_LocalEulerAnglesHint: {x: 0, y: -44.614, z: 0}
+--- !u!114 &1334689659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1334689657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 076413321f7254141852d1d8417c90bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HowlTrigger
+  howlEvent:
+    Guid:
+      Data1: -1423229330
+      Data2: 1241575113
+      Data3: -499982464
+      Data4: -1172187213
+    Path: event:/werewolf_scream1
+  howlSourceLocation: {fileID: 375825454}
+  playOnlyOnce: 1
+--- !u!65 &1334689660
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1334689657}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 33.267075, y: 2.901926, z: 1.6886065}
+  m_Center: {x: -2.3903122, y: 0.31890392, z: 0.3443047}
 --- !u!1001 &1335413610
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16706,7 +16923,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1902056128
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17124,6 +17341,69 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+--- !u!1 &2003361580
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2003361581}
+  - component: {fileID: 2003361582}
+  m_Layer: 0
+  m_Name: HowlSound2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2003361581
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2003361580}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.96, y: 1.87, z: -69.89}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1210970438}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2003361582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2003361580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -747322952
+      Data2: 1176038056
+      Data3: -1711041134
+      Data4: -2138486816
+    Path: event:/werewolf_scream2
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 35
+  OverrideMaxDistance: 100
 --- !u!1 &2005595456
 GameObject:
   m_ObjectHideFlags: 0

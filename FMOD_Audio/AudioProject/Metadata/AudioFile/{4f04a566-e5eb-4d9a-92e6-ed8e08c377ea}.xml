@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{4f04a566-e5eb-4d9a-92e6-ed8e08c377ea}">
+		<property name="assetPath">
+			<value>wilkołak_wycie2.mp3</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>5.8799999999999999</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{a7893954-a3d1-403e-86a3-9413058f499d}</destination>
+		</relationship>
+	</object>
+</objects>

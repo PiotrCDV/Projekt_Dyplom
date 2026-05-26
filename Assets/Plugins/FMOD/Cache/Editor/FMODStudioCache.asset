@@ -46,13 +46,15 @@ MonoBehaviour:
   - {fileID: -1839719526748285547}
   - {fileID: 7281285983017315181}
   - {fileID: 3721231662220001572}
+  - {fileID: 9177003185578583771}
+  - {fileID: 6294637952885202481}
   EditorParameters: []
   MasterBanks:
   - {fileID: 1492542366039740032}
   StringsBanks:
   - {fileID: 3883775779756134354}
   cacheVersion: 131859
-  cacheTime: 639153938557147699
+  cacheTime: 639153959482812866
   SerializableEventsDict:
   - key: event:/Damaging
     index: 0
@@ -60,6 +62,10 @@ MonoBehaviour:
     index: 1
   - key: event:/Campfire
     index: 2
+  - key: event:/werewolf_scream1
+    index: 3
+  - key: event:/werewolf_scream2
+    index: 4
 --- !u!114 &1492542366039740032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -75,10 +81,10 @@ MonoBehaviour:
   Path: FMOD_Audio/AudioProject/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639153938557137710
+  lastModified: 639153959482802730
   FileSizes:
   - Name: Desktop
-    Value: 4102304
+    Value: 4274336
   Exists: 1
 --- !u!114 &3721231662220001572
 MonoBehaviour:
@@ -122,11 +128,38 @@ MonoBehaviour:
   Path: FMOD_Audio/AudioProject/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639153938557147699
+  lastModified: 639153959482812866
   FileSizes:
   - Name: Desktop
-    Value: 932
+    Value: 1024
   Exists: 1
+--- !u!114 &6294637952885202481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/werewolf_scream2
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/werewolf_scream2
+  Guid:
+    Data1: -747322952
+    Data2: 1176038056
+    Data3: -1711041134
+    Data4: -2138486816
+  Banks:
+  - {fileID: 1492542366039740032}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 35
+  MaxDistance: 100
+  Length: 5880
 --- !u!114 &7281285983017315181
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,3 +187,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &9177003185578583771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/werewolf_scream1
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/werewolf_scream1
+  Guid:
+    Data1: -1423229330
+    Data2: 1241575113
+    Data3: -499982464
+    Data4: -1172187213
+  Banks:
+  - {fileID: 1492542366039740032}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 35
+  MaxDistance: 150
+  Length: 9768
