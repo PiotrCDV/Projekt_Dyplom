@@ -100,10 +100,17 @@ public class Bonfire : MonoBehaviour
 
     void Update()
     {
-        if (playerInRange && !isGlobalBonfireLit && Input.GetKeyDown(interactKey))
+        if (playerInRange && !isGlobalBonfireLit && IsInteractPressedThisFrame())
         {
             LightBonfire();
         }
+    }
+
+    private bool IsInteractPressedThisFrame()
+    {
+        return Input.GetKeyDown(interactKey)
+            || Input.GetMouseButtonDown(0)
+            || (Gamepad.current != null && Gamepad.current.buttonSouth.wasPressedThisFrame);
     }
 
     private void LightBonfire()

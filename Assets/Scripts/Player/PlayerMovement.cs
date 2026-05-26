@@ -54,6 +54,12 @@ public class PlayerMovement : MonoBehaviour
     private const float keepLockOnDuration = 0.4f;
     private bool wasCombatSprinting = false;
 
+    private bool IsCameraToggleBlocked()
+    {
+        return (playerPotion != null && playerPotion.IsDrinking)
+            || (dodgeScript != null && dodgeScript.IsDodging);
+    }
+
     private void Awake()
     {
         inputActions = new InputSystem_Actions();
@@ -188,6 +194,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void PerformLockOnAction()
     {
+        if (IsCameraToggleBlocked())
+            return;
+
         bool wasLocked = lockOnBehaviour.IsLocked;
         if (!wasLocked && playerCombat != null && playerCombat.IsPerformingSprintAttack)
         {
@@ -326,6 +335,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void ToggleCameraMode()
     {
+        if (IsCameraToggleBlocked())
+            return;
+
         if (lockOnBehaviour != null && lockOnBehaviour.IsLocked) return;
         isCloseCamera = !isCloseCamera;
         if (animator != null) animator.SetBool("CameraClose", isCloseCamera);

@@ -104,11 +104,18 @@ public class BossGateController : MonoBehaviour
     {
         if (playerInRange && !isOpened && !isPlayerInside)
         {
-            if (Input.GetKeyDown(interactKey) || Input.GetMouseButtonDown(0))
+            if (IsInteractPressedThisFrame())
             {
                 OpenGate();
             }
         }
+    }
+
+    private bool IsInteractPressedThisFrame()
+    {
+        return Input.GetKeyDown(interactKey)
+            || Input.GetMouseButtonDown(0)
+            || (Gamepad.current != null && Gamepad.current.buttonSouth.wasPressedThisFrame);
     }
 
     public void OpenGate()
