@@ -593,12 +593,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 155275906}
+  m_Father: {fileID: 944001247}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.039978027, y: 0.020019531}
-  m_SizeDelta: {x: -0.5599365, y: -0.040039062}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &65097140
 MonoBehaviour:
@@ -1231,11 +1231,6 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 4292338587318551031, guid: 5b9bb020f2ad37c478cf75d38e41fad4, type: 3}
   m_PrefabInstance: {fileID: 147979056}
-  m_PrefabAsset: {fileID: 0}
---- !u!224 &155275906 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 922909304192010634, guid: 9d3607c1d3c303b44911daf2cd8ea934, type: 3}
-  m_PrefabInstance: {fileID: 944001245}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &157545321
 GameObject:
@@ -9095,6 +9090,9 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 907278134584967941, guid: 9d3607c1d3c303b44911daf2cd8ea934, type: 3}
+      insertIndex: 5
+      addedObject: {fileID: 65097139}
+    - targetCorrespondingSourceObject: {fileID: 907278134584967941, guid: 9d3607c1d3c303b44911daf2cd8ea934, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1720503668}
     - targetCorrespondingSourceObject: {fileID: 5724651811165754105, guid: 9d3607c1d3c303b44911daf2cd8ea934, type: 3}
@@ -9103,9 +9101,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3561353740541918882, guid: 9d3607c1d3c303b44911daf2cd8ea934, type: 3}
       insertIndex: 0
       addedObject: {fileID: 1763353053}
-    - targetCorrespondingSourceObject: {fileID: 922909304192010634, guid: 9d3607c1d3c303b44911daf2cd8ea934, type: 3}
-      insertIndex: 0
-      addedObject: {fileID: 65097139}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1368664189447756019, guid: 9d3607c1d3c303b44911daf2cd8ea934, type: 3}
       insertIndex: -1
