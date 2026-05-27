@@ -562,6 +562,95 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!1 &65097138
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 65097139}
+  - component: {fileID: 65097141}
+  - component: {fileID: 65097140}
+  - component: {fileID: 65097142}
+  m_Layer: 5
+  m_Name: BlackScreen
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &65097139
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 65097138}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 155275906}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0.039978027, y: 0.020019531}
+  m_SizeDelta: {x: -0.5599365, y: -0.040039062}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &65097140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 65097138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &65097141
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 65097138}
+  m_CullTransparentMesh: 1
+--- !u!114 &65097142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 65097138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a7957e0e67ee6543b97fbad52bfda8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BlackScreen
+  fadeDuration: 2
 --- !u!1001 &72230789
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1142,6 +1231,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 4292338587318551031, guid: 5b9bb020f2ad37c478cf75d38e41fad4, type: 3}
   m_PrefabInstance: {fileID: 147979056}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &155275906 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 922909304192010634, guid: 9d3607c1d3c303b44911daf2cd8ea934, type: 3}
+  m_PrefabInstance: {fileID: 944001245}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &157545321
 GameObject:
@@ -7262,12 +7356,12 @@ GameObject:
   - component: {fileID: 818415559}
   - component: {fileID: 818415563}
   m_Layer: 0
-  m_Name: TestowyMessageTrigger
+  m_Name: MushroomMessage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!65 &818415559
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7287,8 +7381,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 3.4659166, y: 3.3176274, z: 0.34250924}
+  m_Center: {x: 0.35788906, y: 1.1588527, z: 0.12404282}
 --- !u!23 &818415560
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7296,7 +7390,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 818415558}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -7353,13 +7447,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 818415558}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.8424072, y: -2.09448, z: -40.31816}
-  m_LocalScale: {x: 2.9962, y: 1, z: 3.2328}
+  m_LocalRotation: {x: 0.08215714, y: 0.9789993, z: -0.028251622, w: -0.18442477}
+  m_LocalPosition: {x: -50.25, y: 17.21, z: 61.919983}
+  m_LocalScale: {x: 5.830346, y: 1, z: 3.339933}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1210970438}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Father: {fileID: 1412742555}
+  m_LocalEulerAnglesHint: {x: 1.433, y: -158.54, z: 9.866}
 --- !u!114 &818415563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7372,7 +7466,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2400b9d13776e0c4388829efea1cd40d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MessageTrigger
-  message: 'Mateusz To MEGA SIGMA '
+  message: "Ten nienaturalny blask... Cokolwiek sprawia, \u017Ce \u015Bwiec\u0105,
+    wydaj\u0105 si\u0119 tworzy\u0107 drog\u0119 w g\u0142\u0105b lasu."
   displayDuration: 4
   showOnlyOnce: 1
 --- !u!4 &818975835 stripped
@@ -8670,6 +8765,76 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b925890d72583d448a78995a46eb7625, type: 3}
+--- !u!1 &943710755
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 943710756}
+  - component: {fileID: 943710758}
+  - component: {fileID: 943710757}
+  m_Layer: 0
+  m_Name: FireCampMessage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &943710756
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 943710755}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0.3795721, z: -0, w: 0.9251622}
+  m_LocalPosition: {x: 20.08, y: -0.902, z: -28.03}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1412742555}
+  m_LocalEulerAnglesHint: {x: 0, y: -44.614, z: 0}
+--- !u!114 &943710757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 943710755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2400b9d13776e0c4388829efea1cd40d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MessageTrigger
+  message: "Koj\u0105ce ciep\u0142o po\u015Brodku tego przekl\u0119tego lasu. Bezpieczna
+    przysta\u0144. Pytanie tylko... na jak d\u0142ugo?"
+  displayDuration: 4
+  showOnlyOnce: 1
+--- !u!65 &943710758
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 943710755}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 11.715269, y: 2.901926, z: 7.50315}
+  m_Center: {x: -0.11068312, y: 0.31890392, z: -3.755388}
 --- !u!1001 &944001245
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8938,6 +9103,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3561353740541918882, guid: 9d3607c1d3c303b44911daf2cd8ea934, type: 3}
       insertIndex: 0
       addedObject: {fileID: 1763353053}
+    - targetCorrespondingSourceObject: {fileID: 922909304192010634, guid: 9d3607c1d3c303b44911daf2cd8ea934, type: 3}
+      insertIndex: 0
+      addedObject: {fileID: 65097139}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1368664189447756019, guid: 9d3607c1d3c303b44911daf2cd8ea934, type: 3}
       insertIndex: -1
@@ -9447,6 +9615,76 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3561353740541918882, guid: 9d3607c1d3c303b44911daf2cd8ea934, type: 3}
   m_PrefabInstance: {fileID: 944001245}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1012288558
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1012288559}
+  - component: {fileID: 1012288561}
+  - component: {fileID: 1012288562}
+  m_Layer: 0
+  m_Name: HowlMessage1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1012288559
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1012288558}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0.3795721, z: -0, w: 0.9251622}
+  m_LocalPosition: {x: -39.647003, y: 11.5, z: 23.608002}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1412742555}
+  m_LocalEulerAnglesHint: {x: 0, y: -44.614, z: 0}
+--- !u!65 &1012288561
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1012288558}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 33.267075, y: 2.901926, z: 1.6886065}
+  m_Center: {x: -2.3903122, y: 0.31890392, z: 0.3443047}
+--- !u!114 &1012288562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1012288558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2400b9d13776e0c4388829efea1cd40d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MessageTrigger
+  message: "Ten ryk niesie si\u0119 echem z g\u0142\u0119bi lasu... To nie jest zwyk\u0142y
+    wilk. Cokolwiek tam jest, jest ogromne."
+  displayDuration: 5
+  showOnlyOnce: 1
 --- !u!1001 &1017801238
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10169,6 +10407,76 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1053103583}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1055028784
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1055028785}
+  - component: {fileID: 1055028787}
+  - component: {fileID: 1055028788}
+  m_Layer: 0
+  m_Name: HowlMessage2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1055028785
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1055028784}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0.3795721, z: -0, w: 0.9251622}
+  m_LocalPosition: {x: 10.690002, y: -0.3800001, z: -9.029999}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1412742555}
+  m_LocalEulerAnglesHint: {x: 0, y: -44.614, z: 0}
+--- !u!65 &1055028787
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1055028784}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 33.267075, y: 2.901926, z: 1.6886065}
+  m_Center: {x: -2.3903122, y: 0.31890392, z: 0.3443047}
+--- !u!114 &1055028788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1055028784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2400b9d13776e0c4388829efea1cd40d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MessageTrigger
+  message: "To by\u0142o tu\u017C obok... S\u0142ysz\u0119 jego ci\u0119\u017Cki
+    oddech \u0142ami\u0105cy ga\u0142\u0119zie. Musz\u0119 walczy\u0107 albo ucieka\u0107"
+  displayDuration: 4
+  showOnlyOnce: 1
 --- !u!4 &1062577316 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7279745971587022448, guid: b925890d72583d448a78995a46eb7625, type: 3}
@@ -11185,9 +11493,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1412742555}
   - {fileID: 1480907730}
   - {fileID: 1594281966}
-  - {fileID: 818415562}
   - {fileID: 1906242632}
   - {fileID: 128244575}
   - {fileID: 1334689658}
@@ -11680,11 +11988,11 @@ PrefabInstance:
     - target: {fileID: 805614465443006728, guid: 0aa75b41c49665d41808fe608ee06a22, type: 3}
       propertyPath: mouseIcon
       value: 
-      objectReference: {fileID: 21300000, guid: 6928e9ed93821a14ca6d66f39ce27c16, type: 3}
+      objectReference: {fileID: 21300000, guid: a2128d76e563ccf45abaae0f3a4152f8, type: 3}
     - target: {fileID: 805614465443006728, guid: 0aa75b41c49665d41808fe608ee06a22, type: 3}
       propertyPath: gamepadIcon
       value: 
-      objectReference: {fileID: 21300000, guid: 85777390449f50e448892d962ed8cac4, type: 3}
+      objectReference: {fileID: 21300000, guid: 68b8985051054b74693d6b117760c5f7, type: 3}
     - target: {fileID: 805614465443006728, guid: 0aa75b41c49665d41808fe608ee06a22, type: 3}
       propertyPath: linkedObject
       value: 
@@ -11702,8 +12010,20 @@ PrefabInstance:
       value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4810996382960864086, guid: 0aa75b41c49665d41808fe608ee06a22, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4810996382960864086, guid: 0aa75b41c49665d41808fe608ee06a22, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4810996382960864086, guid: 0aa75b41c49665d41808fe608ee06a22, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.008
+      objectReference: {fileID: 0}
+    - target: {fileID: 4810996382960864086, guid: 0aa75b41c49665d41808fe608ee06a22, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.111
+      value: 0.33
       objectReference: {fileID: 0}
     - target: {fileID: 4981581847393042018, guid: 0aa75b41c49665d41808fe608ee06a22, type: 3}
       propertyPath: m_Layer
@@ -13617,6 +13937,42 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1408174638}
   m_CullTransparentMesh: 1
+--- !u!1 &1412742554
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1412742555}
+  m_Layer: 0
+  m_Name: Message
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1412742555
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1412742554}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 818415562}
+  - {fileID: 1012288559}
+  - {fileID: 1055028785}
+  - {fileID: 943710756}
+  - {fileID: 2048142085}
+  m_Father: {fileID: 1210970438}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1418548829 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8505101868330324448, guid: 3263d294df022284f99bb168ff075cf1, type: 3}
@@ -15014,7 +15370,7 @@ Transform:
   m_GameObject: {fileID: 1594281965}
   serializedVersion: 2
   m_LocalRotation: {x: 0.0030259977, y: -0.96848834, z: 0.018126395, w: 0.24838004}
-  m_LocalPosition: {x: -45.235474, y: 18.421776, z: 71.736694}
+  m_LocalPosition: {x: -44.133, y: 16.473, z: 70.895}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -17993,6 +18349,76 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8505101868330324448, guid: 3263d294df022284f99bb168ff075cf1, type: 3}
   m_PrefabInstance: {fileID: 1878845563}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2048142084
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2048142085}
+  - component: {fileID: 2048142087}
+  - component: {fileID: 2048142086}
+  m_Layer: 0
+  m_Name: BossMessage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2048142085
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2048142084}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0.0030470854, z: -0, w: 0.99999535}
+  m_LocalPosition: {x: 7.67, y: -0.902, z: -40}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1412742555}
+  m_LocalEulerAnglesHint: {x: 0, y: -0.349, z: 0}
+--- !u!114 &2048142086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2048142084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2400b9d13776e0c4388829efea1cd40d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MessageTrigger
+  message: "Ta aura... \u015Bmierdzi \u015Bmierci\u0105 i furi\u0105. Co\u015B pradawnego
+    czai si\u0119 za t\u0105 zas\u0142on\u0105"
+  displayDuration: 4
+  showOnlyOnce: 1
+--- !u!65 &2048142087
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2048142084}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 27.446234, y: 2.901926, z: 2.4883587}
+  m_Center: {x: -1.4150562, y: 0.31890392, z: -6.2626233}
 --- !u!1 &2061250478
 GameObject:
   m_ObjectHideFlags: 0

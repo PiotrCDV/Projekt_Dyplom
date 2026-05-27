@@ -158,6 +158,7 @@ MonoBehaviour:
   analogThreshold: 0.2
   interactKey: 102
   spawnPoint: {fileID: 0}
+  bonfireEmitter: {fileID: 0}
 --- !u!1 &1985978693196011046
 GameObject:
   m_ObjectHideFlags: 0
@@ -14897,7 +14898,7 @@ RectTransform:
   m_GameObject: {fileID: 6725156649946516782}
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: -0.014}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1016727068904231523}
@@ -14905,7 +14906,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0.017, y: 1.344}
+  m_AnchoredPosition: {x: -0.017, y: 1.511}
   m_SizeDelta: {x: 0.5, y: 0.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &2118944877730917853
