@@ -1066,18 +1066,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnUp: {fileID: 1602800993}
+    m_SelectOnDown: {fileID: 719416659}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.4627451, g: 0.45490196, b: 0.45490196, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 0.4627451, g: 0.45490196, b: 0.45490196, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -6322,18 +6322,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
+    m_SelectOnUp: {fileID: 1439526770}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
+    m_SelectOnRight: {fileID: 142423533}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.8584906, g: 0.8584906, b: 0.8584906, a: 1}
+    m_HighlightedColor: {r: 0.4627451, g: 0.45490196, b: 0.45490196, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 0.4627451, g: 0.45490196, b: 0.45490196, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -7666,7 +7666,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.EventSystems.EventSystem
-  m_FirstSelected: {fileID: 0}
+  m_FirstSelected: {fileID: 1439526768}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
 --- !u!4 &832850227
@@ -11992,6 +11992,46 @@ PrefabInstance:
       propertyPath: linkedObject
       value: 
       objectReference: {fileID: 2110767253}
+    - target: {fileID: 805614465443006728, guid: 0aa75b41c49665d41808fe608ee06a22, type: 3}
+      propertyPath: openGateSound.Path
+      value: event:/gate_sound
+      objectReference: {fileID: 0}
+    - target: {fileID: 805614465443006728, guid: 0aa75b41c49665d41808fe608ee06a22, type: 3}
+      propertyPath: closeGateSound.Path
+      value: event:/gate_sound
+      objectReference: {fileID: 0}
+    - target: {fileID: 805614465443006728, guid: 0aa75b41c49665d41808fe608ee06a22, type: 3}
+      propertyPath: openGateSound.Guid.Data1
+      value: -1827854667
+      objectReference: {fileID: 0}
+    - target: {fileID: 805614465443006728, guid: 0aa75b41c49665d41808fe608ee06a22, type: 3}
+      propertyPath: openGateSound.Guid.Data2
+      value: 1090603679
+      objectReference: {fileID: 0}
+    - target: {fileID: 805614465443006728, guid: 0aa75b41c49665d41808fe608ee06a22, type: 3}
+      propertyPath: openGateSound.Guid.Data3
+      value: 546949795
+      objectReference: {fileID: 0}
+    - target: {fileID: 805614465443006728, guid: 0aa75b41c49665d41808fe608ee06a22, type: 3}
+      propertyPath: openGateSound.Guid.Data4
+      value: -1908349570
+      objectReference: {fileID: 0}
+    - target: {fileID: 805614465443006728, guid: 0aa75b41c49665d41808fe608ee06a22, type: 3}
+      propertyPath: closeGateSound.Guid.Data1
+      value: -1827854667
+      objectReference: {fileID: 0}
+    - target: {fileID: 805614465443006728, guid: 0aa75b41c49665d41808fe608ee06a22, type: 3}
+      propertyPath: closeGateSound.Guid.Data2
+      value: 1090603679
+      objectReference: {fileID: 0}
+    - target: {fileID: 805614465443006728, guid: 0aa75b41c49665d41808fe608ee06a22, type: 3}
+      propertyPath: closeGateSound.Guid.Data3
+      value: 546949795
+      objectReference: {fileID: 0}
+    - target: {fileID: 805614465443006728, guid: 0aa75b41c49665d41808fe608ee06a22, type: 3}
+      propertyPath: closeGateSound.Guid.Data4
+      value: -1908349570
+      objectReference: {fileID: 0}
     - target: {fileID: 3070027670890172768, guid: 0aa75b41c49665d41808fe608ee06a22, type: 3}
       propertyPath: m_Name
       value: BossGate
@@ -14449,18 +14489,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnDown: {fileID: 719416659}
     m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
+    m_SelectOnRight: {fileID: 1602800993}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.8584906, g: 0.8584906, b: 0.8584906, a: 1}
+    m_HighlightedColor: {r: 0.4627451, g: 0.45490196, b: 0.45490196, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 0.4627451, g: 0.45490196, b: 0.45490196, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -14563,6 +14603,10 @@ MonoBehaviour:
   executionTimelineAsset: {fileID: 11400000, guid: 4e001c78578bb4848998e52194955b15, type: 2}
   playerTrackName: PlayerTrack
   enemyTrackName: EnemyTrack
+  executionSafeRadius: 9
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!4 &1440044973
 Transform:
   m_ObjectHideFlags: 0
@@ -15537,18 +15581,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnDown: {fileID: 142423533}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.4627451, g: 0.45490196, b: 0.45490196, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 0.4627451, g: 0.45490196, b: 0.45490196, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -16281,6 +16325,7 @@ GameObject:
   - component: {fileID: 1720503668}
   - component: {fileID: 1720503670}
   - component: {fileID: 1720503669}
+  - component: {fileID: 1720503671}
   m_Layer: 5
   m_Name: Pause_panel
   m_TagString: Untagged
@@ -16351,6 +16396,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1720503667}
   m_CullTransparentMesh: 1
+--- !u!114 &1720503671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1720503667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11c7db642304ac144860699a3ea4b15c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MenuAutoSelect
+  firstSelectedButton: {fileID: 1439526768}
 --- !u!1001 &1749335340
 PrefabInstance:
   m_ObjectHideFlags: 0

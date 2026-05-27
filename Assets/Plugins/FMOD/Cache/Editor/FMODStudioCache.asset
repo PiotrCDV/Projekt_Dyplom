@@ -1,5 +1,32 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-3947747029841028902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/gate_sound
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/gate_sound
+  Guid:
+    Data1: -1827854667
+    Data2: 1090603679
+    Data3: 546949795
+    Data4: -1908349570
+  Banks:
+  - {fileID: 1492542366039740032}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-1839719526748285547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48,14 +75,14 @@ MonoBehaviour:
   - {fileID: 3721231662220001572}
   - {fileID: 9177003185578583771}
   - {fileID: 6294637952885202481}
-  - {fileID: 5480156081436841916}
+  - {fileID: -3947747029841028902}
   EditorParameters: []
   MasterBanks:
   - {fileID: 1492542366039740032}
   StringsBanks:
   - {fileID: 3883775779756134354}
   cacheVersion: 131859
-  cacheTime: 639154864684768577
+  cacheTime: 639154871971133295
   SerializableEventsDict:
   - key: event:/Damaging
     index: 0
@@ -84,7 +111,7 @@ MonoBehaviour:
   Path: FMOD_Audio/AudioProject/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639154864684758412
+  lastModified: 639154871971053430
   FileSizes:
   - Name: Desktop
     Value: 4302656
@@ -131,7 +158,7 @@ MonoBehaviour:
   Path: FMOD_Audio/AudioProject/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639154864684768577
+  lastModified: 639154871971133295
   FileSizes:
   - Name: Desktop
     Value: 1064
