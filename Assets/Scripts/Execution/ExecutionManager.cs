@@ -15,6 +15,14 @@ public class ExecutionManager : MonoBehaviour
     public string playerTrackName = "PlayerTrack";
     public string enemyTrackName = "EnemyTrack";
 
+    // --- NOWE: Ustawienia przestrzeni egzekucji ---
+    [Header("Omijanie Ścian")]
+    [Tooltip("Promień wolnego miejsca, jakiego potrzebuje kamera i animacja (np. 2 metry)")]
+    public float executionSafeRadius = 2.0f;
+    [Tooltip("Warstwa, na której znajdują się ściany areny")]
+    public LayerMask obstacleLayer;
+    // ----------------------------------------------
+
     // Zmienne do usypiania skryptów
     private CharacterController playerCC;
     private PlayerMovement playerMovementScript;
@@ -38,18 +46,14 @@ public class ExecutionManager : MonoBehaviour
         playerMovementScript = playerAnim.GetComponent<PlayerMovement>();
         playerLockOnScript = playerAnim.GetComponent<LockOnBehaviour>();
 
-        // 2. MAGICZNE UKRYCIE KROPKI (Bez wyłączania skryptu!)
+        // 2. MAGICZNE UKRYCIE KROPKI
         if (playerLockOnScript != null && playerLockOnScript.targetDotUI != null)
         {
-            // Szukamy CanvasGroup, a jak nie ma, to dodajemy w locie
             dotCanvasGroup = playerLockOnScript.targetDotUI.GetComponent<CanvasGroup>();
             if (dotCanvasGroup == null)
             {
                 dotCanvasGroup = playerLockOnScript.targetDotUI.gameObject.AddComponent<CanvasGroup>();
             }
-
-            // Robimy kropkę w 100% przezroczystą. 
-            // Obiekt nadal jest "Active", więc LockOnBehaviour z tym nie walczy!
             dotCanvasGroup.alpha = 0f;
         }
 
@@ -57,7 +61,11 @@ public class ExecutionManager : MonoBehaviour
         if (playerCC != null) playerCC.enabled = false;
         if (playerMovementScript != null) playerMovementScript.enabled = false;
 
-        // 4. TELEPORTACJA TIMELINE
+        // --- NOWE: ODSUWANIE OD ŚCIANY ZANIM TIMELINE PRZEJMIE KONTROLĘ ---
+        AdjustPositionsBeforeExecution(playerAnim.transform, werewolfAnim.transform);
+        // ------------------------------------------------------------------
+
+        // 4. TELEPORTACJA TIMELINE (Użyje już nowej, bezpiecznej pozycji wilkołaka)
         executionDirector.transform.position = werewolfAnim.transform.position;
         executionDirector.transform.rotation = werewolfAnim.transform.rotation;
 
@@ -90,6 +98,38 @@ public class ExecutionManager : MonoBehaviour
         executionDirector.stopped += OnExecutionFinished;
         executionDirector.Play();
     }
+
+    // --- NOWE: FUNKCJA DO ODSUWANIA OD ŚCIAN ---
+    private void AdjustPositionsBeforeExecution(Transform player, Transform werewolf)
+    {
+        // Skanujemy otoczenie wokół wilkołaka
+        Collider[] walls = Physics.OverlapSphere(werewolf.position, executionSafeRadius, obstacleLayer);
+        Vector3 pushOffset = Vector3.zero;
+
+        foreach (Collider wall in walls)
+        {
+            Vector3 closestPoint = wall.ClosestPoint(werewolf.position);
+            Vector3 directionFromWall = werewolf.position - closestPoint;
+            directionFromWall.y = 0; // Ignorujemy oś Y
+
+            float distanceToWall = directionFromWall.magnitude;
+
+            if (distanceToWall < executionSafeRadius && distanceToWall > 0.01f)
+            {
+                float missingDistance = executionSafeRadius - distanceToWall;
+                pushOffset += directionFromWall.normalized * missingDistance;
+            }
+        }
+
+        // Jeśli trzeba, odsuwamy obie postacie synchronicznie
+        if (pushOffset != Vector3.zero)
+        {
+            player.position += pushOffset;
+            werewolf.position += pushOffset;
+            Debug.Log($"[Egzekucja] Zbyt blisko ściany! Odsunięto postacie o {pushOffset.magnitude}m.");
+        }
+    }
+    // ---------------------------------------------
 
     private void OnExecutionFinished(PlayableDirector director)
     {
