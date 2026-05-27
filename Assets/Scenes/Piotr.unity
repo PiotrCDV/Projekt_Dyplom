@@ -3810,7 +3810,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Combat (target Lock Required) \n\nLMB\_ \_ \_Light Attack\nRMB\_ \_ \_Right
+  m_text: "Combat (target Lock Required) \n\nLMB\_ \_ \_Light Attack\nRMB\_ \_ \_Heavy
     Attack\n\nAdditional Actions\n\nE                Healing Potion\nF               
     Interaction\n\nMovement & Camera\n\nSpace Press\_ Roll \nShift\_         Sprint
     \nWASD\_ \_   Movement \nMouse\_ \_ \_Camera \nPress t \_      Camera Lock\nHold
@@ -7993,7 +7993,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7279745971587022448, guid: b925890d72583d448a78995a46eb7625, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -113.31239
+      value: -112.808
       objectReference: {fileID: 0}
     - target: {fileID: 7279745971587022448, guid: b925890d72583d448a78995a46eb7625, type: 3}
       propertyPath: m_LocalRotation.w
@@ -8054,7 +8054,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7279745971587022448, guid: b925890d72583d448a78995a46eb7625, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -113.42
+      value: -112.9156
       objectReference: {fileID: 0}
     - target: {fileID: 7279745971587022448, guid: b925890d72583d448a78995a46eb7625, type: 3}
       propertyPath: m_LocalRotation.w
@@ -8793,7 +8793,7 @@ PrefabInstance:
     - target: {fileID: 1232265474937138766, guid: 9d3607c1d3c303b44911daf2cd8ea934, type: 3}
       propertyPath: m_text
       value: "Combat (target Lock Required) \r\n\r\nRB           Light Attack\r\nRT\_
-        \_ \_Right Attack\n\nAdditional Actions\n\nX              Healing Potion\nA             
+        \_ \_Heavy Attack\n\nAdditional Actions\n\nX              Healing Potion\nA             
         Interaction\n\r\nMovement & Camera\r\n\r\nB Press      Roll\r\nB Hold      
         Sprint\r\nLS            Movement\r\nRS           Camera Control\r\nPress
         Y \_ Camera Lock\nHold Y \_  Camera Mode"
@@ -8821,7 +8821,7 @@ PrefabInstance:
     - target: {fileID: 3294630759148957806, guid: 9d3607c1d3c303b44911daf2cd8ea934, type: 3}
       propertyPath: m_text
       value: "Combat (target Lock Required) \r\n\r\nLMB\_ \_ \_Light Attack\nRMB\_
-        \_ \_Right Attack\n\nAdditional Actions\n\nE                Healing Potion\r\nF               
+        \_    Heavy Attack\n\nAdditional Actions\n\nE                Healing Potion\r\nF               
         Interaction\n\r\nMovement & Camera\r\n\r\nSpace Press\_ Roll \r\nShift\_        
         Sprint \r\nWASD\_ \_   Movement \r\nMouse\_ \_ \_Camera \r\nPress t \_     
         Camera Lock\nHold t \_       Camera Mode"
@@ -13349,6 +13349,7 @@ Transform:
   - {fileID: 1256923210}
   - {fileID: 319951509}
   - {fileID: 1504993970}
+  - {fileID: 2140662533}
   m_Father: {fileID: 801635759}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1399362088
@@ -14323,13 +14324,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1480907729}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 14.86438, y: -1.1043003, z: -41.25215}
+  m_LocalRotation: {x: -0, y: -0.9140418, z: -0, w: 0.4056199}
+  m_LocalPosition: {x: 21.21, y: -1.1043003, z: -29.99}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1210970438}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -132.14, z: 0}
 --- !u!1001 &1491753762
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15012,8 +15013,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1594281965}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 12.686401, y: -1.1463001, z: -46.523148}
+  m_LocalRotation: {x: 0.0030259977, y: -0.96848834, z: 0.018126395, w: 0.24838004}
+  m_LocalPosition: {x: -45.235474, y: 18.421776, z: 71.736694}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -16619,7 +16620,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Combat (target Lock Required) \n\nRB           Light Attack\nRT\_ \_ \_Right
+  m_text: "Combat (target Lock Required) \n\nRB           Light Attack\nRT\_ \_ \_Heavy
     Attack\n\nAdditional Actions\n\nX              Healing Potion\nA             
     Interaction\n\nMovement & Camera\n\nB Press      Roll\nB Hold       Sprint\nLS           
     Movement\nRS           Camera Control\nPress Y \_ Camera Lock\nHold Y \_  Camera
@@ -17084,7 +17085,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7279745971587022448, guid: b925890d72583d448a78995a46eb7625, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 65.48416
+      value: 65.8
       objectReference: {fileID: 0}
     - target: {fileID: 7279745971587022448, guid: b925890d72583d448a78995a46eb7625, type: 3}
       propertyPath: m_LocalPosition.y
@@ -17092,7 +17093,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7279745971587022448, guid: b925890d72583d448a78995a46eb7625, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -109.38536
+      value: -106.63
       objectReference: {fileID: 0}
     - target: {fileID: 7279745971587022448, guid: b925890d72583d448a78995a46eb7625, type: 3}
       propertyPath: m_LocalRotation.w
@@ -17153,7 +17154,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8505101868330324448, guid: 3263d294df022284f99bb168ff075cf1, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -113.50824
+      value: -113.003845
       objectReference: {fileID: 0}
     - target: {fileID: 8505101868330324448, guid: 3263d294df022284f99bb168ff075cf1, type: 3}
       propertyPath: m_LocalRotation.w
@@ -17377,7 +17378,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1902056128
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18432,7 +18433,7 @@ Transform:
   m_GameObject: {fileID: 2110767253}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.0007300997, y: -0.53306293, z: -1.3051553}
+  m_LocalPosition: {x: -0.0007300997, y: -0.5297, z: -1.3051553}
   m_LocalScale: {x: 1.0750469, y: 0.06635844, z: 1.0393564}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -18706,6 +18707,118 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3263d294df022284f99bb168ff075cf1, type: 3}
+--- !u!1 &2140662532
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2140662533}
+  - component: {fileID: 2140662536}
+  - component: {fileID: 2140662535}
+  - component: {fileID: 2140662534}
+  m_Layer: 0
+  m_Name: Plane
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2140662533
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2140662532}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.0433, y: 0.01, z: 1.9438}
+  m_LocalScale: {x: 2.7050254, y: 1, z: 2.6782756}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1387605286}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &2140662534
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2140662532}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &2140662535
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2140662532}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 712a0ac09b24d6b4485b3a3544c6f620, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &2140662536
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2140662532}
+  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!4 &525817724491910534 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4292338587318551031, guid: 5b9bb020f2ad37c478cf75d38e41fad4, type: 3}
