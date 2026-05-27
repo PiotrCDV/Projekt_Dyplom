@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
+using FMODUnity; // WAŻNE: Dodana biblioteka FMOD
 
 public class PlayerCombat : MonoBehaviour
 {
@@ -21,6 +22,16 @@ public class PlayerCombat : MonoBehaviour
     public float heavyAttackStaminaCost = 25f;
     public float sprintAttackStaminaCost = 20f;
 
+    // --- NOWE: Sekcja FMOD dla dźwięków ataku ---
+    [Header("Audio (FMOD)")]
+    [Tooltip("Dźwięk lekkiego zamachu mieczem")]
+    public EventReference lightSwingSound;
+    [Tooltip("Dźwięk ciężkiego zamachu mieczem")]
+    public EventReference heavySwingSound;
+    [Tooltip("Dźwięk ataku ze sprintu")]
+    public EventReference sprintSwingSound;
+    // ----------------------------------------------
+
     private int comboStep = 0;
     private bool isAttacking = false;
     private bool inputQueued = false;
@@ -40,13 +51,13 @@ public class PlayerCombat : MonoBehaviour
     private InputSystem_Actions inputActions;
     public bool IsAttacking => isAttacking;
     public bool IsPerformingSprintAttack => isAttacking && currentAttackWasSprintAttack;
-    
+
     [Header("Movement Settings")]
-    [SerializeField] private float movementReEnableDelay = 0.5f; 
-    private Coroutine movementDelayCoroutine; 
-    
+    [SerializeField] private float movementReEnableDelay = 0.5f;
+    private Coroutine movementDelayCoroutine;
+
     [Header("Execution Settings")]
-    public float maxExecutionDistance = 3.0f; 
+    public float maxExecutionDistance = 3.0f;
 
     private void Awake()
     {
@@ -101,17 +112,16 @@ public class PlayerCombat : MonoBehaviour
     private void PerformAttack()
     {
         if (movementDelayCoroutine != null) StopCoroutine(movementDelayCoroutine);
-        
+
         bool isLocked = lockOnBehaviour != null && lockOnBehaviour.IsLocked;
         bool isSprintingInput = playerMovement != null && playerMovement.IsSprinting;
         bool hasSprintSpeed = HasSprintAttackSpeed();
-        
+
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
         bool isInFightSprint = stateInfo.IsName("Fight_Sprint");
         bool isInFreeSprint = stateInfo.IsName("Sprint");
         bool transitioningToFightSprint = animator.IsInTransition(0) && animator.GetNextAnimatorStateInfo(0).IsName("Fight_Sprint");
         bool transitioningToFreeSprint = animator.IsInTransition(0) && animator.GetNextAnimatorStateInfo(0).IsName("Sprint");
-
 
         if (!isLocked && isSprintingInput && isInFightSprint && !transitioningToFreeSprint)
         {
@@ -151,6 +161,7 @@ public class PlayerCombat : MonoBehaviour
 
         float currentDamage = shouldDoSprintAttack ? sprintAttackDamage : (nextAttackIsHeavy ? heavyAttackDamage : lightAttackDamage);
         ApplyWeaponDamage(currentDamage);
+
 
         if (shouldDoSprintAttack)
         {
@@ -199,13 +210,30 @@ public class PlayerCombat : MonoBehaviour
         }
     }
 
+    public void PlayAnimEvent_LightSwing()
+    {
+        if (!lightSwingSound.IsNull && AudioManager.Instance != null)
+            AudioManager.Instance.PlaySFX(lightSwingSound, transform.position);
+    }
+
+    public void PlayAnimEvent_HeavySwing()
+    {
+        if (!heavySwingSound.IsNull && AudioManager.Instance != null)
+            AudioManager.Instance.PlaySFX(heavySwingSound, transform.position);
+    }
+
+    public void PlayAnimEvent_SprintSwing()
+    {
+        if (!sprintSwingSound.IsNull && AudioManager.Instance != null)
+            AudioManager.Instance.PlaySFX(sprintSwingSound, transform.position);
+    }
+
     private string ResolveSprintAttackTrigger(AnimatorStateInfo stateInfo, bool isLocked)
     {
         if (stateInfo.IsName("Fight_Sprint")) return "FightSprintAttack";
         if (stateInfo.IsName("Sprint")) return "SprintAttack";
         return isLocked ? "FightSprintAttack" : "SprintAttack";
     }
-
 
     private void BufferUnlockSprintAttack(bool heavy)
     {

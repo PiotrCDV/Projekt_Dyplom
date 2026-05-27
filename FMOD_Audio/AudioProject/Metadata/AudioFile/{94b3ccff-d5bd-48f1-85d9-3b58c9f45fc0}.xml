@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{94b3ccff-d5bd-48f1-85d9-3b58c9f45fc0}">
+		<property name="assetPath">
+			<value>zamach1.mp3</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.83999999999999997</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{a7893954-a3d1-403e-86a3-9413058f499d}</destination>
+		</relationship>
+	</object>
+</objects>

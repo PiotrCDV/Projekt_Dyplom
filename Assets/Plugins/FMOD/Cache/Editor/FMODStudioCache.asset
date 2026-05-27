@@ -1,5 +1,32 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7513637393215969362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/light_attack_player
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/light_attack_player
+  Guid:
+    Data1: 311870860
+    Data2: 1106498647
+    Data3: 441698973
+    Data4: -687940989
+  Banks:
+  - {fileID: 1492542366039740032}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-3947747029841028902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76,13 +103,15 @@ MonoBehaviour:
   - {fileID: 9177003185578583771}
   - {fileID: 6294637952885202481}
   - {fileID: -3947747029841028902}
+  - {fileID: -7513637393215969362}
+  - {fileID: 1183584837184230174}
   EditorParameters: []
   MasterBanks:
   - {fileID: 1492542366039740032}
   StringsBanks:
   - {fileID: 3883775779756134354}
   cacheVersion: 131859
-  cacheTime: 639154871971133295
+  cacheTime: 639154910989678961
   SerializableEventsDict:
   - key: event:/Damaging
     index: 0
@@ -96,6 +125,37 @@ MonoBehaviour:
     index: 4
   - key: event:/gate_sound
     index: 5
+  - key: event:/light_attack_player
+    index: 6
+  - key: event:/buttonsound
+    index: 7
+--- !u!114 &1183584837184230174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/buttonsound
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/buttonsound
+  Guid:
+    Data1: -375885676
+    Data2: 1328991603
+    Data3: -1883997824
+    Data4: -16590832
+  Banks:
+  - {fileID: 1492542366039740032}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &1492542366039740032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,10 +171,10 @@ MonoBehaviour:
   Path: FMOD_Audio/AudioProject/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639154871971053430
+  lastModified: 639154910989668224
   FileSizes:
   - Name: Desktop
-    Value: 4302656
+    Value: 4316320
   Exists: 1
 --- !u!114 &3721231662220001572
 MonoBehaviour:
@@ -158,10 +218,10 @@ MonoBehaviour:
   Path: FMOD_Audio/AudioProject/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639154871971133295
+  lastModified: 639154910989678961
   FileSizes:
   - Name: Desktop
-    Value: 1064
+    Value: 1156
   Exists: 1
 --- !u!114 &5480156081436841916
 MonoBehaviour:

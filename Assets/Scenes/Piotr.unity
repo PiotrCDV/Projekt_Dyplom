@@ -6282,6 +6282,7 @@ GameObject:
   - component: {fileID: 719416661}
   - component: {fileID: 719416660}
   - component: {fileID: 719416659}
+  - component: {fileID: 719416662}
   m_Layer: 5
   m_Name: Back Button
   m_TagString: Untagged
@@ -6365,6 +6366,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 719416662}
+        m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &719416660
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6403,6 +6416,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 719416656}
   m_CullTransparentMesh: 1
+--- !u!114 &719416662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 719416656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -375885676
+      Data2: 1328991603
+      Data3: -1883997824
+      Data4: -16590832
+    Path: event:/buttonsound
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1001 &732328559
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11593,6 +11637,22 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -0.9262543
       objectReference: {fileID: 0}
+    - target: {fileID: 46112868729701874, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.98743683
+      objectReference: {fileID: 0}
+    - target: {fileID: 46112868729701874, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.15795897
+      objectReference: {fileID: 0}
+    - target: {fileID: 46112868729701874, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.004129148
+      objectReference: {fileID: 0}
+    - target: {fileID: 46112868729701874, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.0006605344
+      objectReference: {fileID: 0}
     - target: {fileID: 558345095296806604, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
       propertyPath: sprintStaminaCost
       value: 9
@@ -11641,6 +11701,22 @@ PrefabInstance:
       propertyPath: m_RenderPostProcessing
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2390115697546364137, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.98743695
+      objectReference: {fileID: 0}
+    - target: {fileID: 2390115697546364137, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.15795839
+      objectReference: {fileID: 0}
+    - target: {fileID: 2390115697546364137, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.0041291486
+      objectReference: {fileID: 0}
+    - target: {fileID: 2390115697546364137, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.00066053186
+      objectReference: {fileID: 0}
     - target: {fileID: 3639915503974793807, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
       propertyPath: startingPoint
       value: 
@@ -11671,11 +11747,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7302813476444378984, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.97614133
+      value: 0.9761414
       objectReference: {fileID: 0}
     - target: {fileID: 7302813476444378984, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.15755644
+      value: -0.15755643
       objectReference: {fileID: 0}
     - target: {fileID: 7302813476444378984, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
       propertyPath: m_LocalRotation.y
@@ -11683,7 +11759,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7302813476444378984, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.023808146
+      value: 0.023808135
       objectReference: {fileID: 0}
     - target: {fileID: 7816838684190353340, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11750,6 +11826,18 @@ PrefabInstance:
       value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 9025023005841588370, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: heavySwingSound.Path
+      value: event:/light_attack_player
+      objectReference: {fileID: 0}
+    - target: {fileID: 9025023005841588370, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: lightSwingSound.Path
+      value: event:/light_attack_player
+      objectReference: {fileID: 0}
+    - target: {fileID: 9025023005841588370, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: sprintSwingSound.Path
+      value: event:/light_attack_player
+      objectReference: {fileID: 0}
+    - target: {fileID: 9025023005841588370, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
       propertyPath: heavyAttackStaminaCost
       value: 30
       objectReference: {fileID: 0}
@@ -11760,6 +11848,54 @@ PrefabInstance:
     - target: {fileID: 9025023005841588370, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
       propertyPath: sprintAttackStaminaCost
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 9025023005841588370, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: heavySwingSound.Guid.Data1
+      value: 311870860
+      objectReference: {fileID: 0}
+    - target: {fileID: 9025023005841588370, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: heavySwingSound.Guid.Data2
+      value: 1106498647
+      objectReference: {fileID: 0}
+    - target: {fileID: 9025023005841588370, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: heavySwingSound.Guid.Data3
+      value: 441698973
+      objectReference: {fileID: 0}
+    - target: {fileID: 9025023005841588370, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: heavySwingSound.Guid.Data4
+      value: -687940989
+      objectReference: {fileID: 0}
+    - target: {fileID: 9025023005841588370, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: lightSwingSound.Guid.Data1
+      value: 311870860
+      objectReference: {fileID: 0}
+    - target: {fileID: 9025023005841588370, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: lightSwingSound.Guid.Data2
+      value: 1106498647
+      objectReference: {fileID: 0}
+    - target: {fileID: 9025023005841588370, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: lightSwingSound.Guid.Data3
+      value: 441698973
+      objectReference: {fileID: 0}
+    - target: {fileID: 9025023005841588370, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: lightSwingSound.Guid.Data4
+      value: -687940989
+      objectReference: {fileID: 0}
+    - target: {fileID: 9025023005841588370, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: sprintSwingSound.Guid.Data1
+      value: 311870860
+      objectReference: {fileID: 0}
+    - target: {fileID: 9025023005841588370, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: sprintSwingSound.Guid.Data2
+      value: 1106498647
+      objectReference: {fileID: 0}
+    - target: {fileID: 9025023005841588370, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: sprintSwingSound.Guid.Data3
+      value: 441698973
+      objectReference: {fileID: 0}
+    - target: {fileID: 9025023005841588370, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: sprintSwingSound.Guid.Data4
+      value: -687940989
       objectReference: {fileID: 0}
     - target: {fileID: 9207611066143767671, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
       propertyPath: healAmount
@@ -14449,6 +14585,7 @@ GameObject:
   - component: {fileID: 1439526772}
   - component: {fileID: 1439526771}
   - component: {fileID: 1439526770}
+  - component: {fileID: 1439526773}
   m_Layer: 5
   m_Name: Resume Game Button
   m_TagString: Untagged
@@ -14532,6 +14669,18 @@ MonoBehaviour:
           m_StringArgument: Piotr
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1439526773}
+        m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1439526771
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14570,6 +14719,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1439526768}
   m_CullTransparentMesh: 1
+--- !u!114 &1439526773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1439526768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -375885676
+      Data2: 1328991603
+      Data3: -1883997824
+      Data4: -16590832
+    Path: event:/buttonsound
+  Event: 
+  EventPlayTrigger: 0
+  EventStopTrigger: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &1440044971
 GameObject:
   m_ObjectHideFlags: 0
