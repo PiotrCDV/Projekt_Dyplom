@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using FMODUnity;
 
 public class BossGateController : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class BossGateController : MonoBehaviour
     public GameObject linkedObject;
 
     [Header("UI Interakcji (World Space)")]
-    [Tooltip("Przeci�gnij tutaj obiekt Canvas unocz�cy si� nad bram�")]
+    [Tooltip("Przeciągnij tutaj obiekt Canvas unoszący się nad bramą")]
     public GameObject interactUI;
     [Tooltip("Ikona dla myszy/klawiatury (LPM)")]
     public Sprite mouseIcon;
@@ -26,6 +27,12 @@ public class BossGateController : MonoBehaviour
     public KeyCode interactKey = KeyCode.F;
     public string dissolveParam = "_DissolveAmount";
     public float fadeDuration = 1.5f;
+
+    [Header("Audio (FMOD)")]
+    [Tooltip("Dźwięk odtwarzany przy otwieraniu/przenikaniu przez portal")]
+    public EventReference openGateSound;
+    [Tooltip("Dźwięk odtwarzany, gdy brama zamyka się za graczem (opcjonalnie)")]
+    public EventReference closeGateSound;
 
     private Material gateMaterial;
     private bool isOpened = false;
@@ -123,6 +130,12 @@ public class BossGateController : MonoBehaviour
         isOpened = true;
         if (interactUI != null) interactUI.SetActive(false);
         if (linkedObject != null) linkedObject.SetActive(false);
+
+        if (!openGateSound.IsNull)
+        {
+            AudioManager.Instance.PlaySFX(openGateSound, transform.position);
+        }
+
         StartCoroutine(FadeDissolve(0f, 1f));
         if (blockingCollider != null) blockingCollider.enabled = false;
     }
@@ -137,6 +150,12 @@ public class BossGateController : MonoBehaviour
         playerInRange = false;
         if (interactUI != null) interactUI.SetActive(false);
         if (linkedObject != null) linkedObject.SetActive(true);
+
+        if (!closeGateSound.IsNull)
+        {
+            AudioManager.Instance.PlaySFX(closeGateSound, transform.position);
+        }
+
         StartCoroutine(FadeDissolve(1f, 0f));
         if (blockingCollider != null) blockingCollider.enabled = true;
 
