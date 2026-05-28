@@ -38,13 +38,13 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _DistorationScale: 20
+    - _DistorationScale: 23.25
     - _NoisePower: 3.5
-    - _NoiseScale: 10
+    - _NoiseScale: 10.83
     - _QueueControl: 0
     - _QueueOffset: 0
     - _TwirlStrenght: 2
-    - _WorldUvScale: 0.012
+    - _WorldUvScale: 0.031
     m_Colors:
     - _BaseColor: {r: 0, g: 0, b: 0, a: 1}
     - _LavaColor: {r: 1.8373696, g: 8.47419, b: 0, a: 1}
