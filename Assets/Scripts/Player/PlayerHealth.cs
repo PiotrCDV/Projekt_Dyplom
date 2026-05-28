@@ -25,8 +25,11 @@ public class PlayerHealth : MonoBehaviour
     [Header("Visual Effects")]
     [SerializeField] private float trailDelayTime = 1.0f;
     [SerializeField] private float trailDrainSpeed = 0.5f;
+    [SerializeField] private float healFillDuration = 0.25f;
 
     private Coroutine trailCoroutine;
+    private Coroutine healCoroutine;
+    private bool isHealing;
     private Animator animator;
 
     [Header("Audio")]
@@ -138,9 +141,89 @@ public class PlayerHealth : MonoBehaviour
     public void Heal(float amount)
     {
         if (isDead) return;
-        currentHP += amount;
-        currentHP = Mathf.Min(currentHP, maxHP); 
-        UpdateHealthBar();
-        if (takenDamageFill != null) takenDamageFill.fillAmount = currentHP / maxHP;
+
+        if (amount <= 0f) return;
+
+        if (trailCoroutine != null)
+        {
+            StopCoroutine(trailCoroutine);
+            trailCoroutine = null;
+        }
+
+        InterruptHealing();
+
+        float targetHP = Mathf.Min(currentHP + amount, maxHP);
+
+        if (Mathf.Approximately(currentHP, targetHP))
+        {
+            UpdateHealthBar();
+            if (takenDamageFill != null) takenDamageFill.fillAmount = currentHP / maxHP;
+            return;
+        }
+
+        if (healFillDuration <= 0f)
+        {
+            currentHP = targetHP;
+            UpdateHealthBar();
+            if (takenDamageFill != null) takenDamageFill.fillAmount = currentHP / maxHP;
+            return;
+        }
+
+        healCoroutine = StartCoroutine(HealRoutine(targetHP));
     }
+
+    private IEnumerator HealRoutine(float targetHP)
+    {
+        isHealing = true;
+        float startHP = currentHP;
+        float elapsed = 0f;
+        float startFill = startHP / maxHP;
+        float targetFill = targetHP / maxHP;
+
+        if (healthFillImage != null)
+            healthFillImage.fillAmount = startFill;
+
+        if (takenDamageFill != null)
+            takenDamageFill.fillAmount = startFill;
+
+        while (elapsed < healFillDuration)
+        {
+            if (!isHealing) yield break;
+
+            elapsed += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsed / healFillDuration);
+            float currentFill = Mathf.Lerp(startFill, targetFill, t);
+            currentHP = Mathf.Lerp(startHP, targetHP, t);
+
+            if (healthFillImage != null)
+                healthFillImage.fillAmount = currentFill;
+
+            if (takenDamageFill != null)
+                takenDamageFill.fillAmount = currentFill;
+
+            yield return null;
+        }
+
+        if (healthFillImage != null)
+            healthFillImage.fillAmount = targetFill;
+
+        if (takenDamageFill != null)
+            takenDamageFill.fillAmount = targetFill;
+
+        currentHP = targetHP;
+        isHealing = false;
+        healCoroutine = null;
+    }
+
+    private void InterruptHealing()
+    {
+        isHealing = false;
+
+        if (healCoroutine != null)
+        {
+            StopCoroutine(healCoroutine);
+            healCoroutine = null;
+        }
+    }
+
 }
