@@ -2326,6 +2326,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7610587498247628111, guid: 2d1ca096de1d3554da9115cb616f4cea, type: 3}
   m_PrefabInstance: {fileID: 290741429}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &296069655
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 95428261185221031, guid: 61d054c195e00b6449461e39fa8036a5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.00589
+      objectReference: {fileID: 0}
+    - target: {fileID: 95428261185221031, guid: 61d054c195e00b6449461e39fa8036a5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 95428261185221031, guid: 61d054c195e00b6449461e39fa8036a5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.76642
+      objectReference: {fileID: 0}
+    - target: {fileID: 95428261185221031, guid: 61d054c195e00b6449461e39fa8036a5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 95428261185221031, guid: 61d054c195e00b6449461e39fa8036a5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 95428261185221031, guid: 61d054c195e00b6449461e39fa8036a5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 95428261185221031, guid: 61d054c195e00b6449461e39fa8036a5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 95428261185221031, guid: 61d054c195e00b6449461e39fa8036a5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 95428261185221031, guid: 61d054c195e00b6449461e39fa8036a5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 95428261185221031, guid: 61d054c195e00b6449461e39fa8036a5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 532853536626994445, guid: 61d054c195e00b6449461e39fa8036a5, type: 3}
+      propertyPath: m_Name
+      value: audiomanager_to_delete
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 61d054c195e00b6449461e39fa8036a5, type: 3}
 --- !u!114 &298868179 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8754568064445752292, guid: 9d3607c1d3c303b44911daf2cd8ea934, type: 3}
@@ -10102,15 +10159,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 46112868729701874, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.15795897
+      value: 0.15795898
       objectReference: {fileID: 0}
     - target: {fileID: 46112868729701874, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.004129148
+      value: -0.0041291257
       objectReference: {fileID: 0}
     - target: {fileID: 46112868729701874, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0006605344
+      value: 0.00066053093
       objectReference: {fileID: 0}
     - target: {fileID: 558345095296806604, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
       propertyPath: sprintStaminaCost
@@ -10170,15 +10227,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2390115697546364137, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.15795839
+      value: 0.1579584
       objectReference: {fileID: 0}
     - target: {fileID: 2390115697546364137, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.0041291486
+      value: -0.0041291257
       objectReference: {fileID: 0}
     - target: {fileID: 2390115697546364137, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.00066053186
+      value: 0.0006605258
       objectReference: {fileID: 0}
     - target: {fileID: 3639915503974793807, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
       propertyPath: maxHP
@@ -10213,12 +10270,32 @@ PrefabInstance:
       value: 1.6
       objectReference: {fileID: 0}
     - target: {fileID: 6100778997673328114, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: dodgeSound.Path
+      value: event:/Roll
+      objectReference: {fileID: 0}
+    - target: {fileID: 6100778997673328114, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
       propertyPath: dodgeStaminaCost
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 6100778997673328114, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: dodgeSound.Guid.Data1
+      value: -161432908
+      objectReference: {fileID: 0}
+    - target: {fileID: 6100778997673328114, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: dodgeSound.Guid.Data2
+      value: 1100888383
+      objectReference: {fileID: 0}
+    - target: {fileID: 6100778997673328114, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: dodgeSound.Guid.Data3
+      value: -19933510
+      objectReference: {fileID: 0}
+    - target: {fileID: 6100778997673328114, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: dodgeSound.Guid.Data4
+      value: -1031919456
+      objectReference: {fileID: 0}
     - target: {fileID: 7302813476444378984, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9761414
+      value: 0.97614133
       objectReference: {fileID: 0}
     - target: {fileID: 7302813476444378984, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
       propertyPath: m_LocalRotation.x
@@ -10226,11 +10303,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7302813476444378984, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.14750344
+      value: 0.14750347
       objectReference: {fileID: 0}
     - target: {fileID: 7302813476444378984, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.023808135
+      value: 0.02380815
       objectReference: {fileID: 0}
     - target: {fileID: 7816838684190353340, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10381,9 +10458,29 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 9207611066143767671, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: drinkSound.Path
+      value: event:/Estus
+      objectReference: {fileID: 0}
+    - target: {fileID: 9207611066143767671, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
       propertyPath: potionCountText
       value: 
       objectReference: {fileID: 99643897}
+    - target: {fileID: 9207611066143767671, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: drinkSound.Guid.Data1
+      value: 1320329703
+      objectReference: {fileID: 0}
+    - target: {fileID: 9207611066143767671, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: drinkSound.Guid.Data2
+      value: 1203845197
+      objectReference: {fileID: 0}
+    - target: {fileID: 9207611066143767671, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: drinkSound.Guid.Data3
+      value: -1646609227
+      objectReference: {fileID: 0}
+    - target: {fileID: 9207611066143767671, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: drinkSound.Guid.Data4
+      value: 1025996822
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -16622,3 +16719,4 @@ SceneRoots:
   - {fileID: 172881906}
   - {fileID: 1225225973}
   - {fileID: 832850227}
+  - {fileID: 296069655}

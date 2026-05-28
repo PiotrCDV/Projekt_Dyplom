@@ -105,13 +105,15 @@ MonoBehaviour:
   - {fileID: -3947747029841028902}
   - {fileID: -7513637393215969362}
   - {fileID: 1183584837184230174}
+  - {fileID: 5611697154091319819}
+  - {fileID: 2525540467735391833}
   EditorParameters: []
   MasterBanks:
   - {fileID: 1492542366039740032}
   StringsBanks:
   - {fileID: 3883775779756134354}
   cacheVersion: 131859
-  cacheTime: 639154910989678961
+  cacheTime: 639155820824303826
   SerializableEventsDict:
   - key: event:/Damaging
     index: 0
@@ -129,6 +131,10 @@ MonoBehaviour:
     index: 6
   - key: event:/buttonsound
     index: 7
+  - key: event:/Roll
+    index: 8
+  - key: event:/Estus
+    index: 9
 --- !u!114 &1183584837184230174
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,11 +177,38 @@ MonoBehaviour:
   Path: FMOD_Audio/AudioProject/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639154910989668224
+  lastModified: 639155820824293559
   FileSizes:
   - Name: Desktop
-    Value: 4316320
+    Value: 4352224
   Exists: 1
+--- !u!114 &2525540467735391833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Estus
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Estus
+  Guid:
+    Data1: 1320329703
+    Data2: 1203845197
+    Data3: -1646609227
+    Data4: 1025996822
+  Banks:
+  - {fileID: 1492542366039740032}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &3721231662220001572
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -218,10 +251,10 @@ MonoBehaviour:
   Path: FMOD_Audio/AudioProject/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639154910989678961
+  lastModified: 639155820824303826
   FileSizes:
   - Name: Desktop
-    Value: 1156
+    Value: 1228
   Exists: 1
 --- !u!114 &5480156081436841916
 MonoBehaviour:
@@ -241,6 +274,33 @@ MonoBehaviour:
     Data2: 1090603679
     Data3: 546949795
     Data4: -1908349570
+  Banks:
+  - {fileID: 1492542366039740032}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &5611697154091319819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Roll
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/Roll
+  Guid:
+    Data1: -161432908
+    Data2: 1100888383
+    Data3: -19933510
+    Data4: -1031919456
   Banks:
   - {fileID: 1492542366039740032}
   IsStream: 0

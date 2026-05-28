@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using FMODUnity;
 
 public class PlayerDodge : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class PlayerDodge : MonoBehaviour
     public float dodgeSpeed = 12f;
     public float dodgeStaminaCost = 20f;
 
+    public EventReference dodgeSound;
     public bool IsDodging { get; private set; } = false;
     
     // Nowa właściwość określająca, czy gracz jest aktualnie nieśmiertelny
@@ -85,6 +87,17 @@ public class PlayerDodge : MonoBehaviour
     {
         if (!IsDodging) return;
         EnableInvincibility();
+
+        if (!dodgeSound.IsNull)
+        {
+            FMOD.Studio.EventInstance instance = FMODUnity.RuntimeManager.CreateInstance(dodgeSound);
+
+            FMODUnity.RuntimeManager.AttachInstanceToGameObject(instance, gameObject);
+
+            instance.start();
+
+            instance.release();
+        }
 
         StartCoroutine(DodgeSlideRoutine());
     }

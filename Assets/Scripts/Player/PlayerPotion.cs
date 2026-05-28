@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using TMPro; 
+using TMPro;
+using FMODUnity;
 
 public class PlayerPotion : MonoBehaviour
 {
@@ -12,6 +13,9 @@ public class PlayerPotion : MonoBehaviour
 
     [Header("UI References")]
     [SerializeField] private TextMeshProUGUI potionCountText;
+
+    [Header("Audio (FMOD)")]
+    public EventReference drinkSound;
 
     [Header("References")]
     private Animator animator;
@@ -86,6 +90,14 @@ public class PlayerPotion : MonoBehaviour
         if (playerHealth != null)
         {
             playerHealth.Heal(healAmount);
+        }
+
+        if (!drinkSound.IsNull)
+        {
+            FMOD.Studio.EventInstance instance = FMODUnity.RuntimeManager.CreateInstance(drinkSound);
+            FMODUnity.RuntimeManager.AttachInstanceToGameObject(instance, gameObject);
+            instance.start();
+            instance.release();
         }
     }
 
