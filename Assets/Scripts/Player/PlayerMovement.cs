@@ -53,11 +53,17 @@ public class PlayerMovement : MonoBehaviour
     private float keepLockOnTimer = 0f;
     private const float keepLockOnDuration = 0.4f;
     private bool wasCombatSprinting = false;
+    
+    [Header("LockOn Settings")]
+    [Tooltip("Minimalny odstęp czasu (s) pomiędzy kolejnymi próbami lock/unlock kamery")]
+    public float lockToggleCooldown = 1.0f;
+    private float lastLockToggleTime = -999f;
 
     private bool IsCameraToggleBlocked()
     {
         return (playerPotion != null && playerPotion.IsDrinking)
-            || (dodgeScript != null && dodgeScript.IsDodging);
+            || (dodgeScript != null && dodgeScript.IsDodging)
+            || (playerCombat != null && playerCombat.IsAttacking);
     }
 
     private void Awake()
@@ -197,6 +203,9 @@ public class PlayerMovement : MonoBehaviour
         if (IsCameraToggleBlocked())
             return;
 
+        if (Time.time - lastLockToggleTime < lockToggleCooldown)
+            return;
+
         bool wasLocked = lockOnBehaviour.IsLocked;
         if (!wasLocked && playerCombat != null && playerCombat.IsPerformingSprintAttack)
         {
@@ -204,6 +213,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         lockOnBehaviour.ToggleLockOn();
+        lastLockToggleTime = Time.time;
         if (wasLocked && !lockOnBehaviour.IsLocked)
         {
             keepLockOnRotation = true;
@@ -295,7 +305,7 @@ public class PlayerMovement : MonoBehaviour
             if (inputMagnitude >= 0.6f)
             {
                 // 2. TRYB BIEGU (Run)
-                finalAnimMultiplier = inputMagnitude * 0.9f;
+                finalAnimMultiplier = inputMagnitude * 1.1f;
             }
             else
             {
@@ -338,8 +348,12 @@ public class PlayerMovement : MonoBehaviour
         if (IsCameraToggleBlocked())
             return;
 
+        if (Time.time - lastLockToggleTime < lockToggleCooldown)
+            return;
+
         if (lockOnBehaviour != null && lockOnBehaviour.IsLocked) return;
         isCloseCamera = !isCloseCamera;
+        lastLockToggleTime = Time.time;
         if (animator != null) animator.SetBool("CameraClose", isCloseCamera);
     }
 
