@@ -217,8 +217,36 @@ public class BossCombatManager : MonoBehaviour
         dashCoroutine = null;
     }
 
-    public void EnableMainHitbox() { if (currentAttack?.hitbox != null) { currentAttack.hitbox.SetDamage(currentAttack.damage); currentAttack.hitbox.EnableDamage(); } }
-    public void EnableSecondHitbox() { if (currentAttack?.secondHitbox != null) { currentAttack.secondHitbox.SetDamage(currentAttack.damage); currentAttack.secondHitbox.EnableDamage(); } }
+    public void EnableMainHitbox() 
+    { 
+        if (currentAttack?.hitbox != null) 
+        { 
+            currentAttack.hitbox.SetDamage(currentAttack.damage); currentAttack.hitbox.EnableDamage(); 
+        }
+
+        if (!currentAttack.swingSound.IsNull)
+        {
+            FMOD.Studio.EventInstance swingInstance = RuntimeManager.CreateInstance(currentAttack.swingSound);
+            RuntimeManager.AttachInstanceToGameObject(swingInstance, gameObject);
+            swingInstance.start();
+            swingInstance.release();
+        }
+    }
+    public void EnableSecondHitbox() 
+    { 
+        if (currentAttack?.secondHitbox != null) 
+        { 
+            currentAttack.secondHitbox.SetDamage(currentAttack.damage); currentAttack.secondHitbox.EnableDamage(); 
+        }
+
+        if (!currentAttack.swingSound.IsNull)
+        {
+            FMOD.Studio.EventInstance swingInstance = RuntimeManager.CreateInstance(currentAttack.swingSound);
+            RuntimeManager.AttachInstanceToGameObject(swingInstance, gameObject);
+            swingInstance.start();
+            swingInstance.release();
+        }
+    }
     public void DisableAllHitboxes() { currentAttack?.hitbox?.DisableDamage(); currentAttack?.secondHitbox?.DisableDamage(); }
 
     public void OnAttackAnimationEnd()
@@ -256,4 +284,5 @@ public class BossAttack
 
     public EventReference executeSound;
     public EventReference prepSound;
+    public EventReference swingSound;
 }

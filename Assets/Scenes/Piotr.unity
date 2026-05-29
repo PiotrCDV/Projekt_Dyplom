@@ -1289,6 +1289,14 @@ PrefabInstance:
       value: event:/werewolf_prepare
       objectReference: {fileID: 0}
     - target: {fileID: 271457569651477700, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
+      propertyPath: availableAttacks.Array.data[0].swingSound.Path
+      value: event:/werewolf_swing
+      objectReference: {fileID: 0}
+    - target: {fileID: 271457569651477700, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
+      propertyPath: availableAttacks.Array.data[2].swingSound.Path
+      value: event:/werewolf_swing
+      objectReference: {fileID: 0}
+    - target: {fileID: 271457569651477700, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
       propertyPath: availableAttacks.Array.data[0].executeSound.Path
       value: 
       objectReference: {fileID: 0}
@@ -1327,6 +1335,38 @@ PrefabInstance:
     - target: {fileID: 271457569651477700, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
       propertyPath: availableAttacks.Array.data[1].prepSound.Guid.Data4
       value: 2013774708
+      objectReference: {fileID: 0}
+    - target: {fileID: 271457569651477700, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
+      propertyPath: availableAttacks.Array.data[0].swingSound.Guid.Data1
+      value: -1597131374
+      objectReference: {fileID: 0}
+    - target: {fileID: 271457569651477700, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
+      propertyPath: availableAttacks.Array.data[0].swingSound.Guid.Data2
+      value: 1118941882
+      objectReference: {fileID: 0}
+    - target: {fileID: 271457569651477700, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
+      propertyPath: availableAttacks.Array.data[0].swingSound.Guid.Data3
+      value: 804655492
+      objectReference: {fileID: 0}
+    - target: {fileID: 271457569651477700, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
+      propertyPath: availableAttacks.Array.data[0].swingSound.Guid.Data4
+      value: 135799696
+      objectReference: {fileID: 0}
+    - target: {fileID: 271457569651477700, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
+      propertyPath: availableAttacks.Array.data[2].swingSound.Guid.Data1
+      value: -1597131374
+      objectReference: {fileID: 0}
+    - target: {fileID: 271457569651477700, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
+      propertyPath: availableAttacks.Array.data[2].swingSound.Guid.Data2
+      value: 1118941882
+      objectReference: {fileID: 0}
+    - target: {fileID: 271457569651477700, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
+      propertyPath: availableAttacks.Array.data[2].swingSound.Guid.Data3
+      value: 804655492
+      objectReference: {fileID: 0}
+    - target: {fileID: 271457569651477700, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
+      propertyPath: availableAttacks.Array.data[2].swingSound.Guid.Data4
+      value: 135799696
       objectReference: {fileID: 0}
     - target: {fileID: 271457569651477700, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
       propertyPath: availableAttacks.Array.data[0].executeSound.Guid.Data1
