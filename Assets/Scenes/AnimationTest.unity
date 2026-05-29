@@ -137,7 +137,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &86652044
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -316,8 +316,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 271011726}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.101811446, y: 0.8386924, z: -0.50946337, w: 0.16332957}
-  m_LocalPosition: {x: 16.85954, y: 3.3006327, z: 13.547405}
+  m_LocalRotation: {x: -0.06694931, y: -0.83757836, z: 0.104947664, w: -0.5319459}
+  m_LocalPosition: {x: 19.729427, y: 3.0564642, z: 6.93156}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -803,6 +803,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
+--- !u!1001 &1162720253093665427
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5653561402416250683, guid: 2fcc3f5a0b37ac647acf5ec3dfab7c95, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 24.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5653561402416250683, guid: 2fcc3f5a0b37ac647acf5ec3dfab7c95, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.26
+      objectReference: {fileID: 0}
+    - target: {fileID: 5653561402416250683, guid: 2fcc3f5a0b37ac647acf5ec3dfab7c95, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 5.29
+      objectReference: {fileID: 0}
+    - target: {fileID: 5653561402416250683, guid: 2fcc3f5a0b37ac647acf5ec3dfab7c95, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.71837413
+      objectReference: {fileID: 0}
+    - target: {fileID: 5653561402416250683, guid: 2fcc3f5a0b37ac647acf5ec3dfab7c95, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5653561402416250683, guid: 2fcc3f5a0b37ac647acf5ec3dfab7c95, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.695657
+      objectReference: {fileID: 0}
+    - target: {fileID: 5653561402416250683, guid: 2fcc3f5a0b37ac647acf5ec3dfab7c95, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5653561402416250683, guid: 2fcc3f5a0b37ac647acf5ec3dfab7c95, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5653561402416250683, guid: 2fcc3f5a0b37ac647acf5ec3dfab7c95, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -88.159
+      objectReference: {fileID: 0}
+    - target: {fileID: 5653561402416250683, guid: 2fcc3f5a0b37ac647acf5ec3dfab7c95, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5966439739122693958, guid: 2fcc3f5a0b37ac647acf5ec3dfab7c95, type: 3}
+      propertyPath: m_Name
+      value: Blood
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2fcc3f5a0b37ac647acf5ec3dfab7c95, type: 3}
 --- !u!1 &1349167232670560407
 GameObject:
   m_ObjectHideFlags: 0
@@ -820,7 +877,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1869808444817320493
 Transform:
   m_ObjectHideFlags: 0
@@ -847,6 +904,10 @@ PrefabInstance:
     - target: {fileID: 1447173923410916418, guid: 6be6feacae1d4c84f86499ef5e89dd3b, type: 3}
       propertyPath: m_Name
       value: CampfireNew
+      objectReference: {fileID: 0}
+    - target: {fileID: 1447173923410916418, guid: 6be6feacae1d4c84f86499ef5e89dd3b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6783338108947447359, guid: 6be6feacae1d4c84f86499ef5e89dd3b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1331,3 +1392,4 @@ SceneRoots:
   - {fileID: 1869808444817320493}
   - {fileID: 86652047}
   - {fileID: 1899029713696515034}
+  - {fileID: 1162720253093665427}

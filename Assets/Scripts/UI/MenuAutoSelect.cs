@@ -9,11 +9,9 @@ public class MenuAutoSelect : MonoBehaviour
 
     private void OnEnable()
     {
-        // Odpala siê automatycznie, gdy panel jest w³¹czany
         ForceSelectButton();
     }
 
-    // Dodana publiczna funkcja, któr¹ mo¿emy podpi¹æ pod inne przyciski!
     public void ForceSelectButton()
     {
         if (gameObject.activeInHierarchy)

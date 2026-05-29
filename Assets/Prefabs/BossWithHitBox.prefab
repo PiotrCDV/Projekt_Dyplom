@@ -1905,6 +1905,7 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 128
+  bloodParticlePrefab: {fileID: 0}
 --- !u!135 &1845033720847355725
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -3355,6 +3356,7 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 128
+  bloodParticlePrefab: {fileID: 5966439739122693958, guid: 2fcc3f5a0b37ac647acf5ec3dfab7c95, type: 3}
 --- !u!135 &1054175552091123013
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -7464,6 +7466,7 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 128
+  bloodParticlePrefab: {fileID: 5966439739122693958, guid: 2fcc3f5a0b37ac647acf5ec3dfab7c95, type: 3}
 --- !u!135 &428560143688032659
 SphereCollider:
   m_ObjectHideFlags: 0

@@ -7,6 +7,9 @@ public class SwordDamage : MonoBehaviour
     [SerializeField] private float damageAmount = 20f;
     public Collider swordCollider;
 
+    [Header("Visual Effects")]
+    [SerializeField] private GameObject bloodParticlePrefab;
+
     private List<IDamageable> hitTargets = new List<IDamageable>();
 
     private void Awake()
@@ -15,12 +18,11 @@ public class SwordDamage : MonoBehaviour
             swordCollider = GetComponent<Collider>();
 
         swordCollider.enabled = false;
-        swordCollider.isTrigger = true; 
+        swordCollider.isTrigger = true;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-  
         IDamageable target = other.GetComponent<IDamageable>();
 
         if (target == null)
@@ -33,7 +35,16 @@ public class SwordDamage : MonoBehaviour
             target.TakeDamage(damageAmount);
             hitTargets.Add(target);
 
- 
+            // --- SYSTEM KRWI ---
+            if (bloodParticlePrefab != null)
+            {
+                Vector3 hitPoint = other.ClosestPoint(transform.position);
+                Vector3 hitDirection = (transform.position - hitPoint).normalized;
+                if (hitDirection == Vector3.zero) hitDirection = Vector3.up;
+                Quaternion bloodRotation = Quaternion.LookRotation(hitDirection);
+                GameObject blood = Instantiate(bloodParticlePrefab, hitPoint, bloodRotation);
+                Destroy(blood, 2f);
+            }
         }
     }
 
@@ -44,7 +55,7 @@ public class SwordDamage : MonoBehaviour
 
     public void EnableDamage()
     {
-        hitTargets.Clear(); 
+        hitTargets.Clear();
         swordCollider.enabled = true;
     }
 

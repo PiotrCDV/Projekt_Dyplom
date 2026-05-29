@@ -21,8 +21,6 @@ public class GameMessageUI : MonoBehaviour
         if (Instance == null) Instance = this;
         else { Destroy(gameObject); return; }
 
-        // Na starcie ukrywamy tylko przezroczystoœci¹ i wy³¹czamy obrazki.
-        // NIE WY£¥CZAMY ca³ego GameObjectu, bo skrypt musi dzia³aæ w tle!
         if (canvasGroup != null)
         {
             canvasGroup.alpha = 0f;

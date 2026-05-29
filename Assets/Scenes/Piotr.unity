@@ -1332,6 +1332,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5497579241748811511, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
+      propertyPath: bloodParticlePrefab
+      value: 
+      objectReference: {fileID: 6435600711303384040, guid: b667e6cad16fb304ea4f0ef91827880e, type: 3}
     - target: {fileID: 6257530152200430688, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
       propertyPath: managedReferences[4651023333483348056].m_Value
       value: 
@@ -1444,6 +1448,10 @@ PrefabInstance:
       propertyPath: healthBarContainer
       value: 
       objectReference: {fileID: 1764499225}
+    - target: {fileID: 7512152855405496655, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
+      propertyPath: bloodParticlePrefab
+      value: 
+      objectReference: {fileID: 6435600711303384040, guid: b667e6cad16fb304ea4f0ef91827880e, type: 3}
     m_RemovedComponents:
     - {fileID: 428560143688032659, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
     - {fileID: 1054175552091123013, guid: 8d38799657e62734989f3b8e540e728e, type: 3}
@@ -10221,6 +10229,10 @@ PrefabInstance:
       propertyPath: m_RenderPostProcessing
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2300444443712169514, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
+      propertyPath: bloodParticlePrefab
+      value: 
+      objectReference: {fileID: 5966439739122693958, guid: 9090d48c92f125b45b00da26a79f5228, type: 3}
     - target: {fileID: 2390115697546364137, guid: 10ac191bcc3b5c74bbb1f7c8cbc3b638, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.98743695
