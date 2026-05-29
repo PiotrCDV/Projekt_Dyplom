@@ -1,5 +1,32 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7614935398762931795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/werewolf_prepare
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/werewolf_prepare
+  Guid:
+    Data1: 104123307
+    Data2: 1303749891
+    Data3: 2110250167
+    Data4: 2013774708
+  Banks:
+  - {fileID: 1492542366039740032}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-7513637393215969362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107,13 +134,15 @@ MonoBehaviour:
   - {fileID: 1183584837184230174}
   - {fileID: 5611697154091319819}
   - {fileID: 2525540467735391833}
+  - {fileID: -7614935398762931795}
+  - {fileID: 4746298628952787975}
   EditorParameters: []
   MasterBanks:
   - {fileID: 1492542366039740032}
   StringsBanks:
   - {fileID: 3883775779756134354}
   cacheVersion: 131859
-  cacheTime: 639155820824303826
+  cacheTime: 639156579237581673
   SerializableEventsDict:
   - key: event:/Damaging
     index: 0
@@ -135,6 +164,10 @@ MonoBehaviour:
     index: 8
   - key: event:/Estus
     index: 9
+  - key: event:/werewolf_prepare
+    index: 10
+  - key: event:/werewolf_jumpattack
+    index: 11
 --- !u!114 &1183584837184230174
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,10 +210,10 @@ MonoBehaviour:
   Path: FMOD_Audio/AudioProject/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639155820824293559
+  lastModified: 639156579237571512
   FileSizes:
   - Name: Desktop
-    Value: 4352224
+    Value: 4377120
   Exists: 1
 --- !u!114 &2525540467735391833
 MonoBehaviour:
@@ -251,11 +284,38 @@ MonoBehaviour:
   Path: FMOD_Audio/AudioProject/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639155820824303826
+  lastModified: 639156579237581673
   FileSizes:
   - Name: Desktop
-    Value: 1228
+    Value: 1318
   Exists: 1
+--- !u!114 &4746298628952787975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/werewolf_jumpattack
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/werewolf_jumpattack
+  Guid:
+    Data1: 1557322343
+    Data2: 1322747815
+    Data3: 1421365434
+    Data4: -1553106445
+  Banks:
+  - {fileID: 1492542366039740032}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &5480156081436841916
 MonoBehaviour:
   m_ObjectHideFlags: 0

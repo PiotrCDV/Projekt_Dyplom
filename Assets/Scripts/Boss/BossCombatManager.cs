@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
 using System.Collections.Generic;
+using FMODUnity;
 
 public class BossCombatManager : MonoBehaviour
 {
@@ -170,6 +171,14 @@ public class BossCombatManager : MonoBehaviour
         if (logSelection) 
             Debug.Log($"[BossAI] Wybrano: {attack.attackName} | Dystans: {Vector3.Distance(transform.position, currentTarget.transform.position):F1}");
 
+        if (attack.isDashAttack && !attack.prepSound.IsNull)
+        {
+            FMOD.Studio.EventInstance prepInstance = RuntimeManager.CreateInstance(attack.prepSound);
+            RuntimeManager.AttachInstanceToGameObject(prepInstance, gameObject);
+            prepInstance.start();
+            prepInstance.release();
+        }
+
         if (animator != null)
         {
             animator.SetTrigger(attack.animationTrigger);
@@ -180,6 +189,14 @@ public class BossCombatManager : MonoBehaviour
     {
         if (currentAttack != null && currentAttack.isDashAttack)
         {
+            if (!currentAttack.executeSound.IsNull)
+            {
+                FMOD.Studio.EventInstance executeInstance = RuntimeManager.CreateInstance(currentAttack.executeSound);
+                RuntimeManager.AttachInstanceToGameObject(executeInstance, gameObject);
+                executeInstance.start();
+                executeInstance.release();
+            }
+
             if (dashCoroutine != null) StopCoroutine(dashCoroutine);
             dashCoroutine = StartCoroutine(DashRoutine(currentAttack.dashDistance, currentAttack.dashDuration));
         }
@@ -236,4 +253,7 @@ public class BossAttack
     public bool isDashAttack;
     public float dashDistance;
     public float dashDuration;
+
+    public EventReference executeSound;
+    public EventReference prepSound;
 }
