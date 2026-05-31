@@ -42,6 +42,7 @@ public class BossHealth : MonoBehaviour, IDamageable
     [SerializeField] private Sprite gamepadIcon;           // PNG dla przycisku pada
 
     private Camera mainCamera;
+    public FMODUnity.EventReference levelAmbientMusic;
 
     private void Awake()
     {
@@ -184,6 +185,15 @@ public class BossHealth : MonoBehaviour, IDamageable
         if (executionUIParent != null)
         {
             executionUIParent.SetActive(true);
+        }
+
+        if (!levelAmbientMusic.IsNull && AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlayMusic(levelAmbientMusic);
+        }
+        else if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.StopMusic();
         }
 
         if (animator != null)

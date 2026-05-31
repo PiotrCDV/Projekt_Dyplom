@@ -81,6 +81,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-3568527917388827176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/bossfight
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/bossfight
+  Guid:
+    Data1: -1415652560
+    Data2: 1184715729
+    Data3: -1846813794
+    Data4: 1722955610
+  Banks:
+  - {fileID: 1492542366039740032}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 96024
 --- !u!114 &-1839719526748285547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -137,13 +164,14 @@ MonoBehaviour:
   - {fileID: -7614935398762931795}
   - {fileID: 4746298628952787975}
   - {fileID: 3867086171769077623}
+  - {fileID: -3568527917388827176}
   EditorParameters: []
   MasterBanks:
   - {fileID: 1492542366039740032}
   StringsBanks:
   - {fileID: 3883775779756134354}
   cacheVersion: 131859
-  cacheTime: 639156601662371117
+  cacheTime: 639158231012064538
   SerializableEventsDict:
   - key: event:/Damaging
     index: 0
@@ -171,6 +199,8 @@ MonoBehaviour:
     index: 11
   - key: event:/werewolf_swing
     index: 12
+  - key: event:/bossfight
+    index: 13
 --- !u!114 &1183584837184230174
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -213,10 +243,10 @@ MonoBehaviour:
   Path: FMOD_Audio/AudioProject/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639156601662355820
+  lastModified: 639158231012048693
   FileSizes:
   - Name: Desktop
-    Value: 4381984
+    Value: 5811072
   Exists: 1
 --- !u!114 &2525540467735391833
 MonoBehaviour:
@@ -314,10 +344,10 @@ MonoBehaviour:
   Path: FMOD_Audio/AudioProject/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639156601662371117
+  lastModified: 639158231012064538
   FileSizes:
   - Name: Desktop
-    Value: 1366
+    Value: 1416
   Exists: 1
 --- !u!114 &4746298628952787975
 MonoBehaviour:

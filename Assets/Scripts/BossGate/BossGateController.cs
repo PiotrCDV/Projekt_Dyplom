@@ -29,10 +29,9 @@ public class BossGateController : MonoBehaviour
     public float fadeDuration = 1.5f;
 
     [Header("Audio (FMOD)")]
-    [Tooltip("Dźwięk odtwarzany przy otwieraniu/przenikaniu przez portal")]
     public EventReference openGateSound;
-    [Tooltip("Dźwięk odtwarzany, gdy brama zamyka się za graczem (opcjonalnie)")]
     public EventReference closeGateSound;
+    public EventReference bossMusic;
 
     private Material gateMaterial;
     private bool isOpened = false;
@@ -155,12 +154,25 @@ public class BossGateController : MonoBehaviour
             AudioManager.Instance.PlaySFX(closeGateSound, transform.position);
         }
 
+        if (!bossMusic.IsNull && AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlayMusic(bossMusic);
+        }
+
         StartCoroutine(FadeDissolve(1f, 0f));
         if (blockingCollider != null) blockingCollider.enabled = true;
 
         if (BossHealth.Instance != null)
         {
             BossHealth.Instance.ShowHealthBar();
+        }
+    }
+
+    public void StopBossMusic()
+    {
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.StopMusic();
         }
     }
 
