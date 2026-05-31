@@ -121,7 +121,6 @@ public class BossGateController : MonoBehaviour
     private bool IsInteractPressedThisFrame()
     {
         return Input.GetKeyDown(interactKey)
-            || Input.GetMouseButtonDown(0)
             || (Gamepad.current != null && Gamepad.current.buttonSouth.wasPressedThisFrame);
     }
 
