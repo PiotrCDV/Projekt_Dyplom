@@ -12,13 +12,21 @@ public class ControlsTutorial : MonoBehaviour
 
     [Header("Settings")]
     public float displayDuration = 30f;
-    [Tooltip("Minimalne wychylenie analoga (0-1), aby wykryæ pada. Zapobiega przypadkowemu prze³¹czaniu.")]
+    [Tooltip("Minimalne wychylenie analoga (0-1), aby wykryï¿½ pada. Zapobiega przypadkowemu przeï¿½ï¿½czaniu.")]
     public float analogThreshold = 0.2f;
 
     private bool isUsingGamepad = false;
+    private static bool tutorialAlreadyShown = false;
 
     private void Start()
     {
+        if (tutorialAlreadyShown)
+        {
+            if (tutorialPanel != null) tutorialPanel.SetActive(false);
+            this.enabled = false;
+            return;
+        }
+
         if (tutorialPanel != null) tutorialPanel.SetActive(true);
         UpdateUI();
         StartCoroutine(HidePanelAfterTime());
@@ -77,6 +85,7 @@ public class ControlsTutorial : MonoBehaviour
     {
         yield return new WaitForSeconds(displayDuration);
         if (tutorialPanel != null) tutorialPanel.SetActive(false);
+        tutorialAlreadyShown = true;
         this.enabled = false;
     }
 }
