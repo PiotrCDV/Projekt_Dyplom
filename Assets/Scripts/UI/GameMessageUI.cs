@@ -32,10 +32,10 @@ public class GameMessageUI : MonoBehaviour
         if (deathImage != null) deathImage.gameObject.SetActive(false);
     }
 
-    public void ShowVictory() => StartCoroutine(FadeRoutine(victoryImage));
-    public void ShowDeath() => StartCoroutine(FadeRoutine(deathImage));
+    public void ShowVictory() => StartCoroutine(FadeRoutine(victoryImage, true));
+    public void ShowDeath() => StartCoroutine(FadeRoutine(deathImage, false));
 
-    private IEnumerator FadeRoutine(Image targetImage)
+    private IEnumerator FadeRoutine(Image targetImage, bool isVictory)
     {
         if (victoryImage != null) victoryImage.gameObject.SetActive(false);
         if (deathImage != null) deathImage.gameObject.SetActive(false);
@@ -61,7 +61,11 @@ public class GameMessageUI : MonoBehaviour
             yield return null;
         }
         canvasGroup.alpha = 0f;
-
         targetImage.gameObject.SetActive(false);
+
+        if (isVictory && BlackScreen.Instance != null)
+        {
+            BlackScreen.Instance.FadeToBlackAndShowButton(2f);
+        }
     }
 }
