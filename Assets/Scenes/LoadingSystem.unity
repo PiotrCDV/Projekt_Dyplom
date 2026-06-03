@@ -208,19 +208,7 @@ MonoBehaviour:
   m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1824847896}
-        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
-        m_MethodName: SetMusicVolume
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 1
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &52038284
 GameObject:
   m_ObjectHideFlags: 0
@@ -1829,6 +1817,7 @@ GameObject:
   - component: {fileID: 475532011}
   - component: {fileID: 475532010}
   - component: {fileID: 475532009}
+  - component: {fileID: 475532012}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1922,6 +1911,20 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &475532012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 475532007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c69f71f1d3b14d148a18a148b4d46473, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MenuVolumeController
+  musicSlider: {fileID: 2874097}
+  sfxSlider: {fileID: 1153343793}
 --- !u!1 &504038915
 GameObject:
   m_ObjectHideFlags: 0
@@ -3539,19 +3542,7 @@ MonoBehaviour:
   m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1824847896}
-        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
-        m_MethodName: SetSFXVolume
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &1162313815
 GameObject:
   m_ObjectHideFlags: 0
@@ -5831,17 +5822,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4eb032605b0be144baf2d3fe8472ba62, type: 3}
---- !u!114 &1824847896 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 851438652840250527, guid: 4eb032605b0be144baf2d3fe8472ba62, type: 3}
-  m_PrefabInstance: {fileID: 1824847895}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d07f4153b752be4d94f58208d7e7591, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AudioManager
 --- !u!1 &1886022324
 GameObject:
   m_ObjectHideFlags: 0
