@@ -7767,8 +7767,8 @@ MonoBehaviour:
   thickEndDistance: 5
   fadeToThickSpeed: 2
   fadeToNormalSpeed: 0.5
-  message: "Zbyt g\u0119sta mg\u0142a... Zgubi\u0119 drog\u0119, je\u015Bli p\xF3jd\u0119
-    dalej. Musz\u0119 zawr\xF3ci\u0107."
+  message: The fog is too thick... I'll lose my way if I go any further. I have to
+    turn back
   messageDuration: 4
   messageCooldown: 8
 --- !u!1001 &794944047
@@ -9511,6 +9511,10 @@ PrefabInstance:
         Roll\r\nB Hold       Sprint\r\nLS            Movement\r\nRS           Camera
         Control\r\nPress Y \_ Camera Lock\nHold Y \_  Camera Mode"
       objectReference: {fileID: 0}
+    - target: {fileID: 1232265474937138766, guid: 9d3607c1d3c303b44911daf2cd8ea934, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1368664189447756019, guid: 9d3607c1d3c303b44911daf2cd8ea934, type: 3}
       propertyPath: m_Name
       value: Canvas
@@ -9657,11 +9661,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3744957923565140117, guid: 9d3607c1d3c303b44911daf2cd8ea934, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -8.8917
+      value: -8.891724
       objectReference: {fileID: 0}
     - target: {fileID: 3744957923565140117, guid: 9d3607c1d3c303b44911daf2cd8ea934, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -3.5567
+      value: -3.5567017
       objectReference: {fileID: 0}
     - target: {fileID: 4479666454544611168, guid: 9d3607c1d3c303b44911daf2cd8ea934, type: 3}
       propertyPath: m_IsActive
@@ -9938,6 +9942,18 @@ PrefabInstance:
     - target: {fileID: 7036241372615851511, guid: 9d3607c1d3c303b44911daf2cd8ea934, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7039244820381769968, guid: 9d3607c1d3c303b44911daf2cd8ea934, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 087a736552a3d5340a4f8cb7a0687c16, type: 2}
+    - target: {fileID: 7039244820381769968, guid: 9d3607c1d3c303b44911daf2cd8ea934, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -2763988034481883400, guid: 087a736552a3d5340a4f8cb7a0687c16, type: 2}
+    - target: {fileID: 7039244820381769968, guid: 9d3607c1d3c303b44911daf2cd8ea934, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7716053735108527025, guid: 9d3607c1d3c303b44911daf2cd8ea934, type: 3}
       propertyPath: m_AnchorMax.x
@@ -11263,7 +11279,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1060149378}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
@@ -16023,7 +16039,7 @@ Transform:
   m_GameObject: {fileID: 1594281965}
   serializedVersion: 2
   m_LocalRotation: {x: -0.0039495225, y: 0.98784965, z: -0.14971066, w: -0.041522842}
-  m_LocalPosition: {x: 8.748169, y: 0.65374804, z: -45.51422}
+  m_LocalPosition: {x: -52.923, y: 19.218, z: 69.038}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
