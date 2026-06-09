@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using FMODUnity;
 using UnityEngine.UI;
-using UnityEngine.InputSystem; // WA�NE: Dodano Input System
+using UnityEngine.InputSystem;
 using System.Collections;
 
 public class BossHealth : MonoBehaviour, IDamageable
@@ -24,8 +24,10 @@ public class BossHealth : MonoBehaviour, IDamageable
     [Header("Visual Effects & Timing")]
     [SerializeField] private float trailDelayTime = 1.0f;
     [SerializeField] private float trailDrainSpeed = 0.5f;
-    [SerializeField] private float executionWindowTime = 5.0f; // Ile sekund gracz ma na wci�ni�cie ataku zeby aktywowa� egzekucj�
-    [SerializeField] private float timeBeforeDisable = 5.0f;   // Ile czasu po ostatecznej �mierci boss znika
+    [SerializeField] private float executionWindowTime = 5.0f;
+    [SerializeField] private float timeBeforeDisable = 5.0f;
+
+    [SerializeField] private float executionAnimationLength = 4f;
 
     private Coroutine trailCoroutine;
     private NavMeshAgent navMeshAgent;
@@ -36,10 +38,10 @@ public class BossHealth : MonoBehaviour, IDamageable
     [SerializeField] private EventReference damageSound;
 
     [Header("Execution UI")]
-    [SerializeField] private GameObject executionUIParent; // Rodzic ikon (ExecutionUI)
-    [SerializeField] private Image buttonPromptImage;      // Obrazek, kt�ry si� zmienia
-    [SerializeField] private Sprite mouseIcon;             // PNG dla LPM
-    [SerializeField] private Sprite gamepadIcon;           // PNG dla przycisku pada
+    [SerializeField] private GameObject executionUIParent;
+    [SerializeField] private Image buttonPromptImage;
+    [SerializeField] private Sprite mouseIcon;
+    [SerializeField] private Sprite gamepadIcon;
 
     private Camera mainCamera;
     public FMODUnity.EventReference levelAmbientMusic;
@@ -187,15 +189,6 @@ public class BossHealth : MonoBehaviour, IDamageable
             executionUIParent.SetActive(true);
         }
 
-        if (!levelAmbientMusic.IsNull && AudioManager.Instance != null)
-        {
-            AudioManager.Instance.PlayMusic(levelAmbientMusic);
-        }
-        else if (AudioManager.Instance != null)
-        {
-            AudioManager.Instance.StopMusic();
-        }
-
         if (animator != null)
         {
             animator.SetTrigger("BossDowned");
@@ -225,6 +218,7 @@ public class BossHealth : MonoBehaviour, IDamageable
             {
                 executionUIParent.SetActive(false);
             }
+            TriggerMusicTransition();
 
             if (animator != null)
             {
@@ -263,7 +257,7 @@ public class BossHealth : MonoBehaviour, IDamageable
         {
             animator.SetTrigger("BossDeath");
         }
-
+        StartCoroutine(HandleExecutionEndingRoutine());
         StartCoroutine(DisableAfterExecutionRoutine());
     }
 
@@ -280,5 +274,30 @@ public class BossHealth : MonoBehaviour, IDamageable
         gameObject.SetActive(false);
 
         HideHealthBar();
+    }
+    private void TriggerMusicTransition()
+    {
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.StopMusic();
+        }
+
+        StartCoroutine(PlayAmbientMusicWithDelay(3.0f));
+    }
+    private IEnumerator PlayAmbientMusicWithDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        if (!levelAmbientMusic.IsNull && AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlayMusic(levelAmbientMusic);
+        }
+    }
+
+    private IEnumerator HandleExecutionEndingRoutine()
+    {
+        yield return new WaitForSeconds(executionAnimationLength);
+
+        TriggerMusicTransition();
     }
 }

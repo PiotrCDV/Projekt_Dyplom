@@ -10,11 +10,10 @@ public class BlackScreen : MonoBehaviour
     private Image blackScreen;
 
     [Header("Ustawienia Startowe")]
-    [Tooltip("Ile sekund zajmie rozjaœnianie ekranu na pocz¹tku gry?")]
     public float fadeDuration = 3f;
 
     public GameObject backToMenuButton;
-    public string mainMenuSceneName = "MainMenu";
+    public string mainMenuSceneName = "LoadingSystem";
 
     private void Awake()
     {
